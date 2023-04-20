@@ -1,0 +1,2 @@
+D:\develop\code\VS\program\x64\Debug\program.exe
+C:\develop\code\VS\program\x64\Debug\program.exe
