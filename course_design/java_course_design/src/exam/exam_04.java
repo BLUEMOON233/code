@@ -67,7 +67,7 @@ public class exam_04 {
         public void paint(Graphics graph) {
             if (end_flag) {
                 graph.setColor(Color.red);
-                graph.setFont(new Font("Times", Font.CENTER_BASELINE, 30));
+                graph.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 30));
                 graph.drawString("GAME OVER", 50, 200);
             } else {
                 graph.setColor(Color.BLACK);
