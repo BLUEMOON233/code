@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="DataStructProgram">
+    <file>true.png</file>
+    <file>false.png</file>
+  </qresource>
+</RCC>
