@@ -1,0 +1,398 @@
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
+    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
+    QStackedWidget, QVBoxLayout, QWidget)
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        if not MainWindow.objectName():
+            MainWindow.setObjectName(u"MainWindow")
+        MainWindow.resize(500, 700)
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
+        MainWindow.setSizePolicy(sizePolicy)
+        MainWindow.setMinimumSize(QSize(500, 700))
+        MainWindow.setMaximumSize(QSize(500, 700))
+        self.centralwidget = QWidget(MainWindow)
+        self.centralwidget.setObjectName(u"centralwidget")
+        sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
+        self.centralwidget.setSizePolicy(sizePolicy)
+        self.centralwidget.setMinimumSize(QSize(500, 700))
+        self.centralwidget.setMaximumSize(QSize(500, 700))
+        self.verticalLayoutWidget = QWidget(self.centralwidget)
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(30, 110, 311, 391))
+        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.label = QLabel(self.verticalLayoutWidget)
+        self.label.setObjectName(u"label")
+        font = QFont()
+        font.setFamilies([u"Microsoft YaHei UI"])
+        font.setPointSize(14)
+        font.setBold(True)
+        self.label.setFont(font)
+
+        self.horizontalLayout.addWidget(self.label)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.lineEdit_epoch = QLineEdit(self.verticalLayoutWidget)
+        self.lineEdit_epoch.setObjectName(u"lineEdit_epoch")
+
+        self.horizontalLayout.addWidget(self.lineEdit_epoch)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.label_2 = QLabel(self.verticalLayoutWidget)
+        self.label_2.setObjectName(u"label_2")
+        font1 = QFont()
+        font1.setPointSize(14)
+        font1.setBold(True)
+        self.label_2.setFont(font1)
+
+        self.horizontalLayout_2.addWidget(self.label_2)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
+
+        self.lineEdit_epsilon0 = QLineEdit(self.verticalLayoutWidget)
+        self.lineEdit_epsilon0.setObjectName(u"lineEdit_epsilon0")
+
+        self.horizontalLayout_2.addWidget(self.lineEdit_epsilon0)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.label_3 = QLabel(self.verticalLayoutWidget)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setFont(font1)
+
+        self.horizontalLayout_3.addWidget(self.label_3)
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_3)
+
+        self.lineEdit_alpha = QLineEdit(self.verticalLayoutWidget)
+        self.lineEdit_alpha.setObjectName(u"lineEdit_alpha")
+
+        self.horizontalLayout_3.addWidget(self.lineEdit_alpha)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
+
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.label_4 = QLabel(self.verticalLayoutWidget)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setFont(font1)
+
+        self.horizontalLayout_4.addWidget(self.label_4)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_4.addItem(self.horizontalSpacer_4)
+
+        self.lineEdit_gamma = QLineEdit(self.verticalLayoutWidget)
+        self.lineEdit_gamma.setObjectName(u"lineEdit_gamma")
+
+        self.horizontalLayout_4.addWidget(self.lineEdit_gamma)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
+
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.label_5 = QLabel(self.verticalLayoutWidget)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setFont(font1)
+
+        self.horizontalLayout_5.addWidget(self.label_5)
+
+        self.lineEdit_mazeLon = QLineEdit(self.verticalLayoutWidget)
+        self.lineEdit_mazeLon.setObjectName(u"lineEdit_mazeLon")
+
+        self.horizontalLayout_5.addWidget(self.lineEdit_mazeLon)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_5)
+
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.label_6 = QLabel(self.verticalLayoutWidget)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setFont(font1)
+
+        self.horizontalLayout_7.addWidget(self.label_6)
+
+        self.lineEdit_mazeWid = QLineEdit(self.verticalLayoutWidget)
+        self.lineEdit_mazeWid.setObjectName(u"lineEdit_mazeWid")
+
+        self.horizontalLayout_7.addWidget(self.lineEdit_mazeWid)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_7)
+
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.label_7 = QLabel(self.verticalLayoutWidget)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setFont(font1)
+
+        self.horizontalLayout_8.addWidget(self.label_7)
+
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_5)
+
+        self.lineEdit_trapNumber = QLineEdit(self.verticalLayoutWidget)
+        self.lineEdit_trapNumber.setObjectName(u"lineEdit_trapNumber")
+
+        self.horizontalLayout_8.addWidget(self.lineEdit_trapNumber)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_8)
+
+        self.PB_start = QPushButton(self.centralwidget)
+        self.PB_start.setObjectName(u"PB_start")
+        self.PB_start.setGeometry(QRect(270, 610, 181, 61))
+        palette = QPalette()
+        brush = QBrush(QColor(0, 0, 0, 255))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        brush1 = QBrush(QColor(170, 255, 255, 255))
+        brush1.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.Button, brush1)
+        brush2 = QBrush(QColor(255, 255, 255, 255))
+        brush2.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.Light, brush2)
+        brush3 = QBrush(QColor(212, 255, 255, 255))
+        brush3.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.Midlight, brush3)
+        brush4 = QBrush(QColor(85, 127, 127, 255))
+        brush4.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.Dark, brush4)
+        brush5 = QBrush(QColor(113, 170, 170, 255))
+        brush5.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.Mid, brush5)
+        palette.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette.setBrush(QPalette.Active, QPalette.BrightText, brush2)
+        palette.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        palette.setBrush(QPalette.Active, QPalette.Base, brush2)
+        palette.setBrush(QPalette.Active, QPalette.Window, brush1)
+        palette.setBrush(QPalette.Active, QPalette.Shadow, brush)
+        palette.setBrush(QPalette.Active, QPalette.AlternateBase, brush3)
+        brush6 = QBrush(QColor(255, 255, 220, 255))
+        brush6.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.ToolTipBase, brush6)
+        palette.setBrush(QPalette.Active, QPalette.ToolTipText, brush)
+        brush7 = QBrush(QColor(0, 0, 0, 127))
+        brush7.setStyle(Qt.SolidPattern)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush7)
+#endif
+        palette.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        brush8 = QBrush(QColor(240, 240, 240, 255))
+        brush8.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Inactive, QPalette.Button, brush8)
+        palette.setBrush(QPalette.Inactive, QPalette.Light, brush2)
+        brush9 = QBrush(QColor(227, 227, 227, 255))
+        brush9.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Inactive, QPalette.Midlight, brush9)
+        brush10 = QBrush(QColor(160, 160, 160, 255))
+        brush10.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Inactive, QPalette.Dark, brush10)
+        palette.setBrush(QPalette.Inactive, QPalette.Mid, brush10)
+        palette.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.BrightText, brush2)
+        palette.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.Base, brush2)
+        palette.setBrush(QPalette.Inactive, QPalette.Window, brush8)
+        brush11 = QBrush(QColor(105, 105, 105, 255))
+        brush11.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Inactive, QPalette.Shadow, brush11)
+        brush12 = QBrush(QColor(245, 245, 245, 255))
+        brush12.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Inactive, QPalette.AlternateBase, brush12)
+        palette.setBrush(QPalette.Inactive, QPalette.ToolTipBase, brush6)
+        palette.setBrush(QPalette.Inactive, QPalette.ToolTipText, brush)
+        brush13 = QBrush(QColor(0, 0, 0, 128))
+        brush13.setStyle(Qt.SolidPattern)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush13)
+#endif
+        palette.setBrush(QPalette.Disabled, QPalette.WindowText, brush4)
+        palette.setBrush(QPalette.Disabled, QPalette.Button, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Light, brush2)
+        palette.setBrush(QPalette.Disabled, QPalette.Midlight, brush3)
+        palette.setBrush(QPalette.Disabled, QPalette.Dark, brush4)
+        palette.setBrush(QPalette.Disabled, QPalette.Mid, brush5)
+        palette.setBrush(QPalette.Disabled, QPalette.Text, brush4)
+        palette.setBrush(QPalette.Disabled, QPalette.BrightText, brush2)
+        palette.setBrush(QPalette.Disabled, QPalette.ButtonText, brush4)
+        palette.setBrush(QPalette.Disabled, QPalette.Base, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Window, brush1)
+        palette.setBrush(QPalette.Disabled, QPalette.Shadow, brush)
+        palette.setBrush(QPalette.Disabled, QPalette.AlternateBase, brush12)
+        palette.setBrush(QPalette.Disabled, QPalette.ToolTipBase, brush6)
+        palette.setBrush(QPalette.Disabled, QPalette.ToolTipText, brush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush13)
+#endif
+        self.PB_start.setPalette(palette)
+        self.PB_start.setFont(font1)
+        self.label_8 = QLabel(self.centralwidget)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setGeometry(QRect(30, 30, 461, 51))
+        font2 = QFont()
+        font2.setPointSize(24)
+        font2.setBold(True)
+        self.label_8.setFont(font2)
+        self.PB_change = QPushButton(self.centralwidget)
+        self.PB_change.setObjectName(u"PB_change")
+        self.PB_change.setGeometry(QRect(40, 610, 181, 61))
+        palette1 = QPalette()
+        palette1.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        palette1.setBrush(QPalette.Active, QPalette.Button, brush1)
+        palette1.setBrush(QPalette.Active, QPalette.Light, brush2)
+        palette1.setBrush(QPalette.Active, QPalette.Midlight, brush3)
+        palette1.setBrush(QPalette.Active, QPalette.Dark, brush4)
+        palette1.setBrush(QPalette.Active, QPalette.Mid, brush5)
+        palette1.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette1.setBrush(QPalette.Active, QPalette.BrightText, brush2)
+        palette1.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        palette1.setBrush(QPalette.Active, QPalette.Base, brush2)
+        palette1.setBrush(QPalette.Active, QPalette.Window, brush1)
+        palette1.setBrush(QPalette.Active, QPalette.Shadow, brush)
+        palette1.setBrush(QPalette.Active, QPalette.AlternateBase, brush3)
+        palette1.setBrush(QPalette.Active, QPalette.ToolTipBase, brush6)
+        palette1.setBrush(QPalette.Active, QPalette.ToolTipText, brush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Active, QPalette.PlaceholderText, brush7)
+#endif
+        palette1.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette1.setBrush(QPalette.Inactive, QPalette.Button, brush8)
+        palette1.setBrush(QPalette.Inactive, QPalette.Light, brush2)
+        palette1.setBrush(QPalette.Inactive, QPalette.Midlight, brush9)
+        palette1.setBrush(QPalette.Inactive, QPalette.Dark, brush10)
+        palette1.setBrush(QPalette.Inactive, QPalette.Mid, brush10)
+        palette1.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette1.setBrush(QPalette.Inactive, QPalette.BrightText, brush2)
+        palette1.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        palette1.setBrush(QPalette.Inactive, QPalette.Base, brush2)
+        palette1.setBrush(QPalette.Inactive, QPalette.Window, brush8)
+        palette1.setBrush(QPalette.Inactive, QPalette.Shadow, brush11)
+        palette1.setBrush(QPalette.Inactive, QPalette.AlternateBase, brush12)
+        palette1.setBrush(QPalette.Inactive, QPalette.ToolTipBase, brush6)
+        palette1.setBrush(QPalette.Inactive, QPalette.ToolTipText, brush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush13)
+#endif
+        palette1.setBrush(QPalette.Disabled, QPalette.WindowText, brush4)
+        palette1.setBrush(QPalette.Disabled, QPalette.Button, brush1)
+        palette1.setBrush(QPalette.Disabled, QPalette.Light, brush2)
+        palette1.setBrush(QPalette.Disabled, QPalette.Midlight, brush3)
+        palette1.setBrush(QPalette.Disabled, QPalette.Dark, brush4)
+        palette1.setBrush(QPalette.Disabled, QPalette.Mid, brush5)
+        palette1.setBrush(QPalette.Disabled, QPalette.Text, brush4)
+        palette1.setBrush(QPalette.Disabled, QPalette.BrightText, brush2)
+        palette1.setBrush(QPalette.Disabled, QPalette.ButtonText, brush4)
+        palette1.setBrush(QPalette.Disabled, QPalette.Base, brush1)
+        palette1.setBrush(QPalette.Disabled, QPalette.Window, brush1)
+        palette1.setBrush(QPalette.Disabled, QPalette.Shadow, brush)
+        palette1.setBrush(QPalette.Disabled, QPalette.AlternateBase, brush12)
+        palette1.setBrush(QPalette.Disabled, QPalette.ToolTipBase, brush6)
+        palette1.setBrush(QPalette.Disabled, QPalette.ToolTipText, brush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush13)
+#endif
+        self.PB_change.setPalette(palette1)
+        self.PB_change.setFont(font1)
+        self.label_9 = QLabel(self.centralwidget)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setGeometry(QRect(30, 530, 95, 48))
+        self.label_9.setFont(font1)
+        self.stackedWidget = QStackedWidget(self.centralwidget)
+        self.stackedWidget.setObjectName(u"stackedWidget")
+        self.stackedWidget.setGeometry(QRect(120, 520, 111, 71))
+        self.page = QWidget()
+        self.page.setObjectName(u"page")
+        self.label_10 = QLabel(self.page)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setGeometry(QRect(10, 10, 71, 48))
+        font3 = QFont()
+        font3.setFamilies([u"\u5fae\u8f6f\u96c5\u9ed1"])
+        font3.setPointSize(20)
+        font3.setBold(False)
+        self.label_10.setFont(font3)
+        self.stackedWidget.addWidget(self.page)
+        self.page_2 = QWidget()
+        self.page_2.setObjectName(u"page_2")
+        self.label_11 = QLabel(self.page_2)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setGeometry(QRect(10, 10, 71, 48))
+        self.label_11.setFont(font3)
+        self.stackedWidget.addWidget(self.page_2)
+        self.page_3 = QWidget()
+        self.page_3.setObjectName(u"page_3")
+        self.label_12 = QLabel(self.page_3)
+        self.label_12.setObjectName(u"label_12")
+        self.label_12.setGeometry(QRect(10, 10, 71, 48))
+        self.label_12.setFont(font3)
+        self.stackedWidget.addWidget(self.page_3)
+        MainWindow.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(MainWindow)
+
+        self.stackedWidget.setCurrentIndex(0)
+
+        self.lineEdit_epoch.setText("25")
+        self.lineEdit_epsilon0.setText("0.5")
+        self.lineEdit_alpha.setText("0.5")
+        self.lineEdit_gamma.setText("0.9")
+        self.lineEdit_mazeLon.setText("7")
+        self.lineEdit_mazeWid.setText("7")
+        self.lineEdit_trapNumber.setText("1")
+        self.PB_start.clicked.connect(MainWindow.startTraining)
+        self.PB_change.clicked.connect(MainWindow.changeDifficulty)
+
+        QMetaObject.connectSlotsByName(MainWindow)
+    # setupUi
+
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"\u8bad\u7ec3\u8f6e\u6570\uff1a", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u63a2\u7d22\u6982\u7387\uff1a", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"alpha\uff1a", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"gamma\uff1a", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u5730\u56fe\u5927\u5c0f\uff08\u957f\u5ea6\uff09\uff1a", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"\u5730\u56fe\u5927\u5c0f\uff08\u5bbd\u5ea6\uff09\uff1a", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"\u9677\u9631\u4e2a\u6570\uff1a", None))
+        self.PB_start.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u8bad\u7ec3", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"\u57fa\u4e8e\u5f3a\u5316\u5b66\u4e60\u7684\u8ff7\u5bab\u6e38\u620fAI\u8bad\u7ec3", None))
+        self.PB_change.setText(QCoreApplication.translate("MainWindow", u"\u5207\u6362\u96be\u5ea6", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"\u5f53\u524d\u96be\u5ea6\uff1a", None))
+        self.label_10.setText(QCoreApplication.translate("MainWindow", u"\u7b80\u5355", None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"\u4e2d\u7b49", None))
+        self.label_12.setText(QCoreApplication.translate("MainWindow", u"\u56f0\u96be", None))
+    # retranslateUi
+
