@@ -61,6 +61,6 @@ int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	// cin >> T;
+	cin >> T;
 	while (T--) solve();
 }

@@ -41,17 +41,28 @@ inline void write(T x) {
 //#define read() read<LL>()
 //#define write(tmp) write<LL>(tmp);
 //#define read() read<__int128>()
-//#define write(tmp) write<__int128>(tmp);
 
 const int N = 1;
 
 inline void solve() {
+	int n, k;
+	cin >> n >> k;
+	vector<LL> a(n + 1, 0);
+	rep(i, 1, n) cin >> a[i];
+	set<LL> st;
+	st.insert(0);
+	rep(i, 1, k) {
+		LL it = *st.begin();
+		st.erase(it);
+		rep(j, 1, n) st.insert(it + a[j]);
+	}
+	cout << *st.begin() << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }
