@@ -454,9 +454,9 @@ void build(int u, int l, int r) {
 		pushup(u);
 	}
 }
-void modify(int u, int l, int r, int v) {
+void modify(int u, int l, int r, LL v) {
 	if (l <= tr[u].l && tr[u].r <= r) {
-		tr[u].sum += (tr[u].r - tr[u].l + 1) * v;
+		tr[u].sum += (LL)(tr[u].r - tr[u].l + 1) * v;
 		tr[u].add += v;
 	} else {
 		pushdown(u);
