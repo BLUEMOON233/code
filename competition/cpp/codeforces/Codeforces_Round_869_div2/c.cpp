@@ -46,12 +46,39 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
+	int n, q;
+	cin >> n >> q;
+	vector<int> a(n + 1), b(n + 1);
+	rep(i, 1, n) cin >> a[i];
+	b[1] = 1;
+	rep(i, 2, n) {
+		if (a[i] > a[i - 1]) b[i] = b[i - 1] + 1;
+		else if (a[i] <= a[i - 1] && a[i - 1] > a[i - 2]) b[i] = b[i - 1] + 1;
+		else b[i] = b[i - 1];
+	}
+	while (q--) {
+		int l, r;
+		cin >> l >> r;
+		if (l == 1) {
+			cout << b[r] << "\n";
+			continue;
+		}
+		if (l == r) {
+			cout << "1\n";
+			continue;
+		}
+		int rs = b[r] - b[l - 1];
+		if (a[l - 2] >= a[l - 1] && a[l - 1] >= a[l] && a[l] >= a[l + 1]) rs += 2;
+		else if (a[l - 2] >= a[l - 1] && a[l - 1] >= a[l]) rs++;
+		else if (a[l - 1] >= a[l] && a[l] >= a[l + 1]) rs++;
+		cout << rs << "\n";
+	}
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }
