@@ -55,8 +55,9 @@ bool dfs(vector<vector<int> > &g, int k) {
 		stk.pop();
 		for (auto j : g[i]) {
 			if (st[j]) continue;
+			// cout << i << ' ' << j << '\n';
 			if (depth + 1 == 4) return false;
-			stk.push({j, depth + 1});
+			stk.push({j, depth + 1}), st[j] = true;
 		}
 	}
 	return true;
@@ -71,7 +72,7 @@ inline void solve() {
 		g[v].push_back(u);
 	}
 	rep(k, 1, n) if (dfs(g, k)) {
-		cout << g[k].size() << ' ' << g[g[k][0]].size() << '\n';
+		cout << g[k].size() << ' ' << g[g[k][0]].size() - 1 << '\n';
 		return;
 	}
 }
