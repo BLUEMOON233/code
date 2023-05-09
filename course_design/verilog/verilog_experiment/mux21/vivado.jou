@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2022.2.2 (64-bit)
+# SW Build 3788238 on Tue Feb 21 20:00:34 MST 2023
+# IP Build 3783773 on Tue Feb 21 23:41:56 MST 2023
+# Start of session at: Wed May 10 00:06:34 2023
+# Process ID: 18092
+# Current directory: D:/develop/code/course_design/verilog/verilog_experiment/mux21
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent18604 D:\develop\code\course_design\verilog\verilog_experiment\mux21\mux21.xpr
+# Log file: D:/develop/code/course_design/verilog/verilog_experiment/mux21/vivado.log
+# Journal file: D:/develop/code/course_design/verilog/verilog_experiment/mux21\vivado.jou
+# Running On: MSI, OS: Windows, CPU Frequency: 2208 MHz, CPU Physical cores: 8, Host memory: 34241 MB
+#-----------------------------------------------------------
+start_gui
+open_project D:/develop/code/course_design/verilog/verilog_experiment/mux21/mux21.xpr
+update_compile_order -fileset sources_1

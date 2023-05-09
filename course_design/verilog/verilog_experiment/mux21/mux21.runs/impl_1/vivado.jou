@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.2.2 (64-bit)
+# SW Build 3788238 on Tue Feb 21 20:00:34 MST 2023
+# IP Build 3783773 on Tue Feb 21 23:41:56 MST 2023
+# Start of session at: Tue May  9 22:09:58 2023
+# Process ID: 15676
+# Current directory: D:/develop/code/course_design/verilog/verilog_experiment/mux21/mux21.runs/impl_1
+# Command line: vivado.exe -log mux21topv.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source mux21topv.tcl -notrace
+# Log file: D:/develop/code/course_design/verilog/verilog_experiment/mux21/mux21.runs/impl_1/mux21topv.vdi
+# Journal file: D:/develop/code/course_design/verilog/verilog_experiment/mux21/mux21.runs/impl_1\vivado.jou
+# Running On: MSI, OS: Windows, CPU Frequency: 2208 MHz, CPU Physical cores: 8, Host memory: 34241 MB
+#-----------------------------------------------------------
+source mux21topv.tcl -notrace

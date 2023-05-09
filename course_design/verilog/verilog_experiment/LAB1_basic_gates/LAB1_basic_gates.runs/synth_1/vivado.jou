@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.2.2 (64-bit)
+# SW Build 3788238 on Tue Feb 21 20:00:34 MST 2023
+# IP Build 3783773 on Tue Feb 21 23:41:56 MST 2023
+# Start of session at: Wed May 10 00:22:23 2023
+# Process ID: 20056
+# Current directory: D:/develop/code/course_design/verilog/verilog_experiment/LAB1_basic_gates/LAB1_basic_gates.runs/synth_1
+# Command line: vivado.exe -log basic_gates_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source basic_gates_top.tcl
+# Log file: D:/develop/code/course_design/verilog/verilog_experiment/LAB1_basic_gates/LAB1_basic_gates.runs/synth_1/basic_gates_top.vds
+# Journal file: D:/develop/code/course_design/verilog/verilog_experiment/LAB1_basic_gates/LAB1_basic_gates.runs/synth_1\vivado.jou
+# Running On: MSI, OS: Windows, CPU Frequency: 2208 MHz, CPU Physical cores: 8, Host memory: 34241 MB
+#-----------------------------------------------------------
+source basic_gates_top.tcl -notrace
