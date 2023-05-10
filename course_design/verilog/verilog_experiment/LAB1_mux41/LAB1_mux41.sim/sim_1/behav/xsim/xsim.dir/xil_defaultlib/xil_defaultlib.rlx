@@ -4,4 +4,6 @@ Feb 21 2023
 20:21:35
 D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.sim/sim_1/behav/xsim/glbl.v,1665704903,verilog,,,,glbl,,,,,,,,
 D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/sim_1/new/mux21_simulation.v,1683686443,verilog,,,,mux21_simulation,,,,,,,,
-D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/sources_1/new/mux21.v,1683686413,verilog,,D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/sim_1/new/mux21_simulation.v,,mux21,,,,,,,,
+D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/sim_1/new/mux41_simulation.v,1683686453,verilog,,,,mux41_simulation,,,,,,,,
+D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/sources_1/new/mux21.v,1683686413,verilog,,D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/sources_1/new/mux41.v,,mux21,,,,,,,,
+D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/sources_1/new/mux41.v,1683686431,verilog,,D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/sim_1/new/mux41_simulation.v,,mux41,,,,,,,,

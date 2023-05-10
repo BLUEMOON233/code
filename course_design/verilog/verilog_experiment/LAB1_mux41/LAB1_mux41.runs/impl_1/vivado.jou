@@ -2,8 +2,8 @@
 # Vivado v2022.2.2 (64-bit)
 # SW Build 3788238 on Tue Feb 21 20:00:34 MST 2023
 # IP Build 3783773 on Tue Feb 21 23:41:56 MST 2023
-# Start of session at: Wed May 10 10:52:18 2023
-# Process ID: 11184
+# Start of session at: Wed May 10 12:20:18 2023
+# Process ID: 1628
 # Current directory: D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.runs/impl_1
 # Command line: vivado.exe -log mux41_top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source mux41_top.tcl -notrace
 # Log file: D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.runs/impl_1/mux41_top.vdi

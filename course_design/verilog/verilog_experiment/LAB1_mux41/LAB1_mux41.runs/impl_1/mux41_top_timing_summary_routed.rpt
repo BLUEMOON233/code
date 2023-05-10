@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date         : Wed May 10 10:51:55 2023
+| Date         : Wed May 10 12:21:04 2023
 | Host         : MSI running 64-bit major release  (build 9200)
 | Command      : report_timing_summary -max_paths 10 -report_unconstrained -file mux41_top_timing_summary_routed.rpt -pb mux41_top_timing_summary_routed.pb -rpx mux41_top_timing_summary_routed.rpx -warn_on_violation
 | Design       : mux41_top

@@ -70,7 +70,6 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -103,6 +102,8 @@ read_xdc D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB
 set_property used_in_implementation false [get_files D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/constrs_1/new/mux41_xdc.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental D:/develop/code/course_design/verilog/verilog_experiment/LAB1_mux41/LAB1_mux41.srcs/utils_1/imports/synth_1/mux41_top.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

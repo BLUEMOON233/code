@@ -101,6 +101,8 @@ read_xdc D:/develop/code/course_design/verilog/verilog_experiment/LAB1_basic_gat
 set_property used_in_implementation false [get_files D:/develop/code/course_design/verilog/verilog_experiment/LAB1_basic_gates/LAB1_basic_gates.srcs/constrs_1/new/basic_gates_xdc.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental D:/develop/code/course_design/verilog/verilog_experiment/LAB1_basic_gates/LAB1_basic_gates.srcs/utils_1/imports/synth_1/basic_gates_top.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

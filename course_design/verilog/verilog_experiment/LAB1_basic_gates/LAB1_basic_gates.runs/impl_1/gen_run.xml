@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1683649432">
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1683689554">
   <File Type="ROUTE-PWR" Name="basic_gates_top_power_routed.rpt"/>
   <File Type="PA-TCL" Name="basic_gates_top.tcl"/>
   <File Type="BITSTR-MMI" Name="basic_gates_top.mmi"/>
@@ -115,6 +115,14 @@
   </FileSet>
   <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
     <Filter Type="Utils"/>
+    <File Path="$PSRCDIR/utils_1/imports/synth_1/basic_gates_top.dcp">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedInSteps" Val="synth_1"/>
+        <Attr Name="AutoDcp" Val="1"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="TopAutoSet" Val="TRUE"/>
     </Config>

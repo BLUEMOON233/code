@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date         : Wed May 10 10:51:31 2023
+| Date         : Wed May 10 12:20:42 2023
 | Host         : MSI running 64-bit major release  (build 9200)
 | Command      : report_drc -file mux41_top_drc_opted.rpt -pb mux41_top_drc_opted.pb -rpx mux41_top_drc_opted.rpx
 | Design       : mux41_top
