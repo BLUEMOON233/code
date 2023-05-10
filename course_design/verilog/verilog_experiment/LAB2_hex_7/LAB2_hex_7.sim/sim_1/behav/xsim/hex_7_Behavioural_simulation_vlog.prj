@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../LAB2_hex_7.srcs/sources_1/new/hex_7_Behavioural.v" \
+"../../../../LAB2_hex_7.srcs/sim_1/new/hex_7_Behavioural_simulation.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

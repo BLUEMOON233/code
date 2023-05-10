@@ -1,0 +1,7 @@
+Running: xsim.dir/hex_7_Dataflow_simulation_behav/xsimk.exe -simmode gui -wdb hex_7_Dataflow_simulation_behav.wdb -simrunnum 0 -socket 8491
+Design successfully loaded
+Design Loading Memory Usage: 9036 KB (Peak: 9036 KB)
+Design Loading CPU Usage: 31 ms
+Simulation completed
+Simulation Memory Usage: 9616 KB (Peak: 9616 KB)
+Simulation CPU Usage: 31 ms
