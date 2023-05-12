@@ -1,0 +1,236 @@
+
+*** Running vivado
+    with args -log mux41_hex7_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source mux41_hex7_top.tcl
+
+
+
+****** Vivado v2022.2.2 (64-bit)
+  **** SW Build 3788238 on Tue Feb 21 20:00:34 MST 2023
+  **** IP Build 3783773 on Tue Feb 21 23:41:56 MST 2023
+    ** Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
+
+source mux41_hex7_top.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/utils_1/imports/synth_1/mux41_hex7_top.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/utils_1/imports/synth_1/mux41_hex7_top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top mux41_hex7_top -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 22292
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [D:/develop/Vivado/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1209.641 ; gain = 409.691
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'mux41_hex7_top' [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/mux41_hex7_top.v:23]
+INFO: [Synth 8-6157] synthesizing module 'mux41_hex7' [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/mux41_hex7.v:23]
+INFO: [Synth 8-6157] synthesizing module 'priority_encoder_42' [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/priority_encoder_42.v:23]
+INFO: [Synth 8-155] case statement is not full and has no default [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/priority_encoder_42.v:32]
+INFO: [Synth 8-6155] done synthesizing module 'priority_encoder_42' (0#1) [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/priority_encoder_42.v:23]
+INFO: [Synth 8-6157] synthesizing module 'decoder_24' [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/decoder_24.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'decoder_24' (0#1) [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/decoder_24.v:23]
+INFO: [Synth 8-6157] synthesizing module 'mux41' [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/mux41.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'mux41' (0#1) [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/mux41.v:23]
+INFO: [Synth 8-6157] synthesizing module 'hex_7' [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/hex_7.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'hex_7' (0#1) [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/hex_7.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'mux41_hex7' (0#1) [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/mux41_hex7.v:23]
+INFO: [Synth 8-6155] done synthesizing module 'mux41_hex7_top' (0#1) [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/mux41_hex7_top.v:23]
+WARNING: [Synth 8-3917] design mux41_hex7_top has port dp driven by constant 1
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1300.098 ; gain = 500.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1300.098 ; gain = 500.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1300.098 ; gain = 500.148
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1300.098 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/constrs_1/new/mux41_hex7_xdc.xdc]
+Finished Parsing XDC File [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/constrs_1/new/mux41_hex7_xdc.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/constrs_1/new/mux41_hex7_xdc.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/mux41_hex7_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/mux41_hex7_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1300.098 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1300.098 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [D:/develop/Vivado/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1300.098 ; gain = 500.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1300.098 ; gain = 500.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1300.098 ; gain = 500.148
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-327] inferring latch for variable 'Y_reg' [D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.srcs/sources_1/new/priority_encoder_42.v:33]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1300.098 ; gain = 500.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input    4 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 2     
+	   5 Input    2 Bit        Muxes := 1     
+	   5 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3917] design mux41_hex7_top has port dp driven by constant 1
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 1300.098 ; gain = 500.148
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 1300.340 ; gain = 500.391
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 1300.340 ; gain = 500.391
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 1319.441 ; gain = 519.492
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1324.219 ; gain = 524.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1324.219 ; gain = 524.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1324.219 ; gain = 524.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1324.219 ; gain = 524.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1324.219 ; gain = 524.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1324.219 ; gain = 524.270
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |LUT2 |     1|
+|2     |LUT3 |     1|
+|3     |LUT4 |     8|
+|4     |LUT6 |     8|
+|5     |LD   |     2|
+|6     |IBUF |    20|
+|7     |OBUF |    12|
++------+-----+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1324.219 ; gain = 524.270
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 3 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:26 . Memory (MB): peak = 1324.219 ; gain = 524.270
+Synthesis Optimization Complete : Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 1324.219 ; gain = 524.270
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1336.301 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 2 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1343.922 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 2 instances were transformed.
+  LD => LDCE: 2 instances
+
+Synth Design complete, checksum: fd682f88
+INFO: [Common 17-83] Releasing license: Synthesis
+36 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1343.922 ; gain = 922.758
+INFO: [Common 17-1381] The checkpoint 'D:/develop/code/course_design/verilog/verilog_experiment/LAB2_mux41_hex7/LAB2_mux41_hex7.runs/synth_1/mux41_hex7_top.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file mux41_hex7_top_utilization_synth.rpt -pb mux41_hex7_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri May 12 17:41:44 2023...
