@@ -43,32 +43,34 @@ inline void write(T x) {
 //#define read() read<__int128>()
 //#define write(tmp) write<__int128>(tmp);
 
-const int N = 1, mod = 1e9 + 7;
+const int N = 1;
 
 inline void solve() {
-	LL n, rs = 0;
-	cin >> n;
-	vector<LL> a(n + 1, 0);
-	rep(i, 1, n) cin >> a[i];
-	rep(i, 1, n) {
-		stack<LL> stk;
-		rep(j, i, n) {
-			LL now = a[j];
-			while (!stk.empty() && stk.top() > a[j]) {
-				now = max(now, stk.top());
-				stk.pop();
-			}
-			stk.push(now);
-			rs += j - i + 1 - stk.size();
+	string ss, tt;
+	cin >> ss >> tt;
+	map<char, int> s, t;
+	for (char x : ss) s[x]++;
+	for (char x : tt) t[x]++;
+	int dis = abs(s['@'] + t['@']);
+	rep(i, 'a', 'z') if (s[i] != t[i]) {
+		if (i == 'a' || i == 't' || i == 'c' || i == 'o' || i == 'd' || i == 'e' || i == 'r') {
+			dis -= abs(s[i] - t[i]);
+		} else {
+			No;
+			return;
 		}
 	}
-	cout << rs << '\n';
+	if (dis < 0) {
+		No;
+		return;
+	}
+	Yes;
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }
