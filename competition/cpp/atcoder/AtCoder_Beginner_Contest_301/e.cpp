@@ -43,39 +43,43 @@ inline void write(T x) {
 //#define read() read<__int128>()
 //#define write(tmp) write<__int128>(tmp);
 
-const int N = 1;
-
 inline void solve() {
 	int h, w, t;
 	cin >> h >> w >> t;
-	pair<int, int> goal, start;
-	vector<vector<char> > a(h + 2, vector<char>(w + 2, '#'));
-	vector<vector<bool> > st(h + 2, vector<bool>(w + 2, '#'));
-	vector<vector<PII> > fa(h + 1, vector<PII>(w + 1));
-	vector<PII> paths;
-	rep(i, 1, h) rep(j, 1, w) cin >> a[i][j];
-	rep(i, 1, h) rep(j, 1, w) if (a[i][j] == 'G') {goal = {i, j}; break;}
-	queue<tuple<int, int, int>> q;
-	rep(i, 1, h) rep(j, 1, w) if (a[i][j] == 'S') {q.push({i, j, 0}); start = {i, j}; break;}
-	while (!q.empty()) {
-		int x = get<0>(q.front()), y = get<1>(q.front()), path = get<2>(q.front());
-		q.pop();
-		if (x == goal.first && y == goal.second) {
-			while (x != start.first && y != start.second) {
-				paths.push_back({x, y});
-				PII tmp = fa[x][y];
-				x = tmp.first, y = tmp.second;
-			}
-			paths.push_back(start);
-			reverse(paths.begin(), paths.end());
-			return;
+	vector g(h + 2, vector<char>(w + 2, '#'));
+	rep(i, 1, h) rep(j, 1, w) cin >> g[i][j];
+	vector<pair<int, int> > p;
+	rep(i, 1, h) rep(j, 1, w) if (g[i][j] == 'S') p.push_back({i, j});
+	rep(i, 1, h) rep(j, 1, w) if (g[i][j] == 'o') p.push_back({i, j});
+	rep(i, 1, h) rep(j, 1, w) if (g[i][j] == 'G') p.push_back({i, j});
+	int N = p.size();
+	vector dis(N, vector<int>(N, -1));
+	rep(i, 0, N - 1) {
+		queue<pair<int, int> > q;
+		vector d(h + 2, vector<int>(w + 2, -1));
+		q.push(p[i]);
+		d[p[i].first][p[i].second] = 0;
+		while (!q.empty()) {
+			auto [x, y] = q.front();
+			q.pop();
+			if (d[x + 1][y] == -1 && g[x + 1][y] != '#') {d[x + 1][y] = d[x][y] + 1; q.push({x + 1, y});}
+			if (d[x - 1][y] == -1 && g[x - 1][y] != '#') {d[x - 1][y] = d[x][y] + 1; q.push({x - 1, y});}
+			if (d[x][y + 1] == -1 && g[x][y + 1] != '#') {d[x][y + 1] = d[x][y] + 1; q.push({x, y + 1});}
+			if (d[x][y - 1] == -1 && g[x][y - 1] != '#') {d[x][y - 1] = d[x][y] + 1; q.push({x, y - 1});}
 		}
-		if (path == t) continue;
-		if (a[x + 1][y] != '#' && !st[x + 1][y]) q.push({x + 1, y, path + 1}), fa[x + 1][y] = {x, y};
-		if (a[x][y + 1] != '#' && !st[x][y + 1]) q.push({x, y + 1, path + 1}), fa[x][y + 1] = {x, y};
-		if (a[x - 1][y] != '#' && !st[x - 1][y]) q.push({x - 1, y, path + 1}), fa[x - 1][y] = {x, y};
-		if (a[x][y - 1] != '#' && !st[x][y - 1]) q.push({x, y - 1, path + 1}), fa[x][y + 1] = {x, y};
+		rep(j, 0, N - 1) dis[i][j] = d[p[j].first][p[j].second];
 	}
+	vector dp(1 << N, vector(N, t + 1));
+	dp[1][0] = 0;
+	LL rs = -1;
+	for (int s = 1; s < (1 << N); s += 2)
+		rep(i, 0, N - 1) if (s >> i & 1) rep(j, 0, N - 1)
+			if ((~s >> j & 1) && dis[i][j] != -1)
+				dp[s | 1 << j][j] = min(dp[s | 1 << j][j], dp[s][i] + dis[i][j]);
+	for (int s = 1; s < (1 << N); s += 2)
+		if (dp[s][N - 1] <= t)
+			rs = max(rs, __builtin_popcount(s) - 2LL);
+	cout << rs << '\n';
 }
 
 int main() {
