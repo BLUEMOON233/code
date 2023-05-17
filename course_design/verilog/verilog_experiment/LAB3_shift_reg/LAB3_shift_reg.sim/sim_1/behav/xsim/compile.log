@@ -1,0 +1,6 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/develop/code/course_design/verilog/verilog_experiment/LAB3_shift_reg/LAB3_shift_reg.srcs/sources_1/new/shift_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module shift_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/develop/code/course_design/verilog/verilog_experiment/LAB3_shift_reg/LAB3_shift_reg.srcs/sim_1/new/shift_reg_simulation.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module shift_reg_simulation
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/develop/code/course_design/verilog/verilog_experiment/LAB3_shift_reg/LAB3_shift_reg.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

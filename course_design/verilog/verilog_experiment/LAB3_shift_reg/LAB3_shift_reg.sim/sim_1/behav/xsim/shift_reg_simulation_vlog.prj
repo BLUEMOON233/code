@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../LAB3_shift_reg.srcs/sources_1/new/shift_reg.v" \
+"../../../../LAB3_shift_reg.srcs/sim_1/new/shift_reg_simulation.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
