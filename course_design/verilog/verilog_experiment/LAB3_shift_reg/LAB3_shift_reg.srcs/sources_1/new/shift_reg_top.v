@@ -31,7 +31,7 @@ module shift_reg_top(
     reg clk_div = 0;
 
 	always @(posedge clk) begin
-		if(clk_count == clk_number) begin
+		if(clk_count == clk_number - 1) begin
 			clk_count <= 0;
 			clk_div <= ~clk_div;
 		end

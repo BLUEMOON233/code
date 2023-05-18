@@ -1,0 +1,69 @@
+Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
+| Date         : Thu May 18 12:11:51 2023
+| Host         : MSI running 64-bit major release  (build 9200)
+| Command      : report_drc -file stopwatch_top_drc_opted.rpt -pb stopwatch_top_drc_opted.pb -rpx stopwatch_top_drc_opted.rpx
+| Design       : stopwatch_top
+| Device       : xc7a35tcpg236-1
+| Speed File   : -1
+| Design State : Synthesized
+------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 2
++-------------+----------+-------------------------------------------------------------+------------+
+| Rule        | Severity | Description                                                 | Violations |
++-------------+----------+-------------------------------------------------------------+------------+
+| CFGBVS-1    | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties         | 1          |
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 1          |
++-------------+----------+-------------------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+CFGBVS-1#1 Warning
+Missing CFGBVS and CONFIG_VOLTAGE Design Properties  
+Neither the CFGBVS nor CONFIG_VOLTAGE voltage property is set in the current_design.  Configuration bank voltage select (CFGBVS) must be set to VCCO or GND, and CONFIG_VOLTAGE must be set to the correct configuration voltage, in order to determine the I/O voltage support for the pins in bank 0.  It is suggested to specify these either using the 'Edit Device Properties' function in the GUI or directly in the XDC file using the following syntax:
+
+ set_property CFGBVS value1 [current_design]
+ #where value1 is either VCCO or GND
+
+ set_property CONFIG_VOLTAGE value2 [current_design]
+ #where value2 is the voltage provided to configuration bank 0
+
+Refer to the device configuration user guide for more information.
+Related violations: <none>
+
+PLHOLDVIO-2#1 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT nolabel_line33/nolabel_line33/d0_next[3]_i_3 is driving clock pin of 15 cells. This could lead to large hold time violations. Involved cells are:
+nolabel_line33/nolabel_line33/d0_next_reg[0],
+nolabel_line33/nolabel_line33/d0_next_reg[1],
+nolabel_line33/nolabel_line33/d0_next_reg[2],
+nolabel_line33/nolabel_line33/d0_next_reg[3],
+nolabel_line33/nolabel_line33/d1_next_reg[0],
+nolabel_line33/nolabel_line33/d1_next_reg[1],
+nolabel_line33/nolabel_line33/d1_next_reg[2],
+nolabel_line33/nolabel_line33/d1_next_reg[3],
+nolabel_line33/nolabel_line33/d2_next_reg[0],
+nolabel_line33/nolabel_line33/d2_next_reg[1],
+nolabel_line33/nolabel_line33/d2_next_reg[2],
+nolabel_line33/nolabel_line33/d3_next_reg[0],
+nolabel_line33/nolabel_line33/d3_next_reg[1]
+nolabel_line33/nolabel_line33/d3_next_reg[2]
+Related violations: <none>
+
+

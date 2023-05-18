@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2023/05/18 00:41:33
+// Create Date: 2023/05/18 10:29:24
 // Design Name: 
-// Module Name: counter_mod10_top
+// Module Name: stopwatch_top
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,36 +20,21 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module counter_mod10_top(
-    input [1: 0] sw,
+module stopwatch_top(
     input clk,
+    input [1: 0] sw,
     output [0: 6] seg,
     output [3: 0] an,
     output dp
     );
 
     assign dp = 1;
-    assign an = 4'b0000;
-    parameter clk_number = 19'd500000;
-	reg [18: 0] clk_count = 0;
-    reg clk_div = 0;
 
-	always @(posedge clk) begin
-		if(clk_count == clk_number - 1) begin
-			clk_count <= 0;
-			clk_div <= ~clk_div;
-		end
-        else clk_count <= clk_count + 1;
-	end
-
-    wire [3: 0] D;
-
-    counter_mod10(
-        .clk(clk_div),
+    stopwatch(
+        .clk(clk),
         .clr(sw[0]),
         .en(sw[1]),
-        .D(D)
+        .seg(seg),
+        .an(an)
     );
-    hex7(.D(D), .seg(seg));
-
 endmodule
