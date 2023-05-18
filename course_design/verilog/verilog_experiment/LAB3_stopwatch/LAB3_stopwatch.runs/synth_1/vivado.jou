@@ -2,8 +2,8 @@
 # Vivado v2022.2.2 (64-bit)
 # SW Build 3788238 on Tue Feb 21 20:00:34 MST 2023
 # IP Build 3783773 on Tue Feb 21 23:41:56 MST 2023
-# Start of session at: Thu May 18 12:10:32 2023
-# Process ID: 15876
+# Start of session at: Thu May 18 20:15:47 2023
+# Process ID: 9116
 # Current directory: D:/develop/code/course_design/verilog/verilog_experiment/LAB3_stopwatch/LAB3_stopwatch.runs/synth_1
 # Command line: vivado.exe -log stopwatch_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source stopwatch_top.tcl
 # Log file: D:/develop/code/course_design/verilog/verilog_experiment/LAB3_stopwatch/LAB3_stopwatch.runs/synth_1/stopwatch_top.vds

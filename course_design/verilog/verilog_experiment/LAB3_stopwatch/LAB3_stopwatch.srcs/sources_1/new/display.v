@@ -24,26 +24,36 @@ module display(
     input [3: 0] d0, d1, d2, d3,
     input [1: 0] sel,
     output reg [6: 0] seg,
-    output reg [3: 0] an
+    output reg [3: 0] an,
+    output reg dp
     );
     
     reg [3: 0] D;
 
     always @(*) begin
         case (sel)
-            2'b 00: an = 4'b1110;
-            2'b 01: an = 4'b1101;
-            2'b 10: an = 4'b1011;
-            2'b 11: an = 4'b0111;
+            2'b00: an = 4'b1110;
+            2'b01: an = 4'b1101;
+            2'b10: an = 4'b1011;
+            2'b11: an = 4'b0111;
         endcase
     end
     
     always @(*) begin
         case (sel)
-            2'b 00: D = d0;
-            2'b 01: D = d1;
-            2'b 10: D = d2;
-            2'b 11: D = d3;
+            2'b00: D = d0;
+            2'b01: D = d1;
+            2'b10: D = d2;
+            2'b11: D = d3;
+        endcase
+    end
+
+    always @(*) begin
+        case (sel)
+            2'b00: dp = 1;
+            2'b01: dp = 0;
+            2'b10: dp = 1;
+            2'b11: dp = 0;
         endcase
     end
 

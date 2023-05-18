@@ -28,13 +28,12 @@ module stopwatch_top(
     output dp
     );
 
-    assign dp = 1;
-
     stopwatch(
         .clk(clk),
         .clr(sw[0]),
         .en(sw[1]),
         .seg(seg),
-        .an(an)
+        .an(an),
+        .dp(dp)
     );
 endmodule

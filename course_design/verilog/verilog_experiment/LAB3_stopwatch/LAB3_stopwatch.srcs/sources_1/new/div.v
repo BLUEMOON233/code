@@ -24,7 +24,6 @@ module div(
     input clk,
     output [17: 0] clk_div
     );
-
     reg [17: 0] clk_reg = 0;
     always @(posedge clk) begin
         clk_reg <= clk_reg + 1;

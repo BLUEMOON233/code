@@ -292,3 +292,6 @@ set_property PACKAGE_PIN W4 [get_ports {an[3]}]
 	#set_property IOSTANDARD LVCMOS33 [get_ports {QspiDB[3]}]
 #set_property PACKAGE_PIN K19 [get_ports QspiCSn]					
 	#set_property IOSTANDARD LVCMOS33 [get_ports QspiCSn]
+
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {sw[0]}]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {sw[1]}]
