@@ -26,7 +26,7 @@ module timer(
     );
 
     reg [3: 0] d0_reg, d1_reg, d2_reg, d3_reg;
-    always @(posedge clk) begin
+    always @(posedge clk or posedge clr) begin
         if(clr) begin
             d0_reg = 0;
             d1_reg = 0;

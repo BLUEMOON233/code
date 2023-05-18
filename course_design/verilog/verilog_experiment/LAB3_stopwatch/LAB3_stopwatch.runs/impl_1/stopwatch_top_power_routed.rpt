@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date             : Thu May 18 20:17:30 2023
+| Date             : Thu May 18 22:08:39 2023
 | Host             : MSI running 64-bit major release  (build 9200)
 | Command          : report_power -file stopwatch_top_power_routed.rpt -pb stopwatch_top_power_summary_routed.pb -rpx stopwatch_top_power_routed.rpx
 | Design           : stopwatch_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.083        |
+| Total On-Chip Power (W)  | 0.088        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.011        |
+| Dynamic (W)              | 0.016        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.6         |
@@ -53,15 +53,15 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |      126 |       --- |             --- |
-|   LUT as Logic |    <0.001 |       36 |     20800 |            0.17 |
+| Slice Logic    |    <0.001 |      119 |       --- |             --- |
+|   LUT as Logic |    <0.001 |       32 |     20800 |            0.15 |
 |   CARRY4       |    <0.001 |       11 |      8150 |            0.13 |
 |   Register     |    <0.001 |       57 |     41600 |            0.14 |
-|   Others       |     0.000 |        6 |       --- |             --- |
-| Signals        |    <0.001 |      103 |       --- |             --- |
-| I/O            |     0.010 |       15 |       106 |           14.15 |
+|   Others       |     0.000 |        5 |       --- |             --- |
+| Signals        |    <0.001 |       97 |       --- |             --- |
+| I/O            |     0.015 |       15 |       106 |           14.15 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.083 |          |           |                 |
+| Total          |     0.088 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,8 +72,8 @@ Table of Contents
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Vccint    |       1.000 |     0.011 |       0.001 |      0.010 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     0.004 |       0.003 |      0.001 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.013 |       0.001 |      0.013 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.005 |       0.004 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -140,7 +140,7 @@ Table of Contents
 +------------------+-----------+
 | Name             | Power (W) |
 +------------------+-----------+
-| stopwatch_top    |     0.011 |
+| stopwatch_top    |     0.016 |
 |   nolabel_line31 |     0.001 |
 +------------------+-----------+
 

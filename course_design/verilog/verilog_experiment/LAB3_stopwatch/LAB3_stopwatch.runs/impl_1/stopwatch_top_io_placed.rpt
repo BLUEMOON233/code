@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date                      : Thu May 18 20:17:05 2023
+| Date                      : Thu May 18 22:08:15 2023
 | Host                      : MSI running 64-bit major release  (build 9200)
 | Command                   : report_io -file stopwatch_top_io_placed.rpt
 | Design                    : stopwatch_top
