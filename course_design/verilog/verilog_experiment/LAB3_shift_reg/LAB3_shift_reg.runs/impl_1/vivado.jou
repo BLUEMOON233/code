@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.2.2 (64-bit)
+# SW Build 3788238 on Tue Feb 21 20:00:34 MST 2023
+# IP Build 3783773 on Tue Feb 21 23:41:56 MST 2023
+# Start of session at: Sat May 20 17:51:06 2023
+# Process ID: 12028
+# Current directory: D:/develop/code/course_design/verilog/verilog_experiment/LAB3_shift_reg/LAB3_shift_reg.runs/impl_1
+# Command line: vivado.exe -log shift_reg_top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source shift_reg_top.tcl -notrace
+# Log file: D:/develop/code/course_design/verilog/verilog_experiment/LAB3_shift_reg/LAB3_shift_reg.runs/impl_1/shift_reg_top.vdi
+# Journal file: D:/develop/code/course_design/verilog/verilog_experiment/LAB3_shift_reg/LAB3_shift_reg.runs/impl_1\vivado.jou
+# Running On: MSI, OS: Windows, CPU Frequency: 2208 MHz, CPU Physical cores: 8, Host memory: 34241 MB
+#-----------------------------------------------------------
+source shift_reg_top.tcl -notrace

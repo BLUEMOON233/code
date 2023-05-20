@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date             : Thu May 18 00:57:04 2023
+| Date             : Sat May 20 18:26:54 2023
 | Host             : MSI running 64-bit major release  (build 9200)
 | Command          : report_power -file counter_mod10_top_power_routed.rpt -pb counter_mod10_top_power_summary_routed.pb -rpx counter_mod10_top_power_routed.rpx
 | Design           : counter_mod10_top
@@ -53,12 +53,12 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |       50 |       --- |             --- |
+| Slice Logic    |    <0.001 |       51 |       --- |             --- |
 |   LUT as Logic |    <0.001 |       12 |     20800 |            0.06 |
-|   Register     |    <0.001 |       24 |     41600 |            0.06 |
+|   Register     |    <0.001 |       25 |     41600 |            0.06 |
 |   CARRY4       |    <0.001 |        5 |      8150 |            0.06 |
 |   Others       |     0.000 |        3 |       --- |             --- |
-| Signals        |    <0.001 |       42 |       --- |             --- |
+| Signals        |    <0.001 |       43 |       --- |             --- |
 | I/O            |     0.010 |       15 |       106 |           14.15 |
 | Static Power   |     0.072 |          |           |                 |
 | Total          |     0.082 |          |           |                 |

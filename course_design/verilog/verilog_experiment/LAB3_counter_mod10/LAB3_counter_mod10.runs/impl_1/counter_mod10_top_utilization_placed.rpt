@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date         : Thu May 18 00:56:40 2023
+| Date         : Sat May 20 18:26:30 2023
 | Host         : MSI running 64-bit major release  (build 9200)
 | Command      : report_utilization -file counter_mod10_top_utilization_placed.rpt -pb counter_mod10_top_utilization_placed.pb
 | Design       : counter_mod10_top
@@ -35,8 +35,8 @@ Table of Contents
 | Slice LUTs              |   12 |     0 |          0 |     20800 |  0.06 |
 |   LUT as Logic          |   12 |     0 |          0 |     20800 |  0.06 |
 |   LUT as Memory         |    0 |     0 |          0 |      9600 |  0.00 |
-| Slice Registers         |   24 |     0 |          0 |     41600 |  0.06 |
-|   Register as Flip Flop |   24 |     0 |          0 |     41600 |  0.06 |
+| Slice Registers         |   25 |     0 |          0 |     41600 |  0.06 |
+|   Register as Flip Flop |   25 |     0 |          0 |     41600 |  0.06 |
 |   Register as Latch     |    0 |     0 |          0 |     41600 |  0.00 |
 | F7 Muxes                |    0 |     0 |          0 |     16300 |  0.00 |
 | F8 Muxes                |    0 |     0 |          0 |      8150 |  0.00 |
@@ -59,7 +59,7 @@ Table of Contents
 | 0     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 24    |          Yes |       Reset |            - |
+| 25    |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -79,8 +79,8 @@ Table of Contents
 | LUT as Memory                            |    0 |     0 |          0 |      9600 |  0.00 |
 |   LUT as Distributed RAM                 |    0 |     0 |            |           |       |
 |   LUT as Shift Register                  |    0 |     0 |            |           |       |
-| Slice Registers                          |   24 |     0 |          0 |     41600 |  0.06 |
-|   Register driven from within the Slice  |   24 |       |            |           |       |
+| Slice Registers                          |   25 |     0 |          0 |     41600 |  0.06 |
+|   Register driven from within the Slice  |   25 |       |            |           |       |
 |   Register driven from outside the Slice |    0 |       |            |           |       |
 | Unique Control Sets                      |    3 |       |          0 |      8150 |  0.04 |
 +------------------------------------------+------+-------+------------+-----------+-------+
@@ -177,11 +177,11 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| FDRE     |   24 |        Flop & Latch |
+| FDRE     |   25 |        Flop & Latch |
 | OBUF     |   12 |                  IO |
-| LUT4     |    9 |                 LUT |
+| LUT4     |    8 |                 LUT |
 | CARRY4   |    5 |          CarryLogic |
-| LUT6     |    3 |                 LUT |
+| LUT6     |    4 |                 LUT |
 | LUT5     |    3 |                 LUT |
 | IBUF     |    3 |                  IO |
 | LUT3     |    1 |                 LUT |

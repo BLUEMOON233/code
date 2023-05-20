@@ -30,8 +30,8 @@ module counter_mod10_top(
 
     assign dp = 1;
     assign an = 4'b0000;
-    parameter clk_number = 19'd500000;
-	reg [18: 0] clk_count = 0;
+    parameter clk_number = 20'd1000000;
+	reg [19: 0] clk_count = 0;
     reg clk_div = 0;
 
 	always @(posedge clk) begin

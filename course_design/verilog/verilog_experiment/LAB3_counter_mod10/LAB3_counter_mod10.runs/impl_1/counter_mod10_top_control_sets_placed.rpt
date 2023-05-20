@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date         : Thu May 18 00:56:40 2023
+| Date         : Sat May 20 18:26:30 2023
 | Host         : MSI running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file counter_mod10_top_control_sets_placed.rpt
 | Design       : counter_mod10_top
@@ -27,7 +27,7 @@ Table of Contents
 |    Minimum number of control sets                        |     3 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    16 |
+| Unused register locations in slices containing registers |    15 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -60,7 +60,7 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |               1 |            1 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |              23 |            7 |
+| No           | Yes                   | No                     |              24 |            7 |
 | Yes          | No                    | No                     |               0 |            0 |
 | Yes          | No                    | Yes                    |               0 |            0 |
 | Yes          | Yes                   | No                     |               0 |            0 |
@@ -75,7 +75,7 @@ Table of Contents
 +------------------+---------------+--------------------------+------------------+----------------+--------------+
 |  clk_IBUF_BUFG   |               |                          |                1 |              1 |         1.00 |
 |  clk_div_reg_n_0 |               | nolabel_line47/regN0_n_0 |                1 |              4 |         4.00 |
-|  clk_IBUF_BUFG   |               | clk_div                  |                6 |             19 |         3.17 |
+|  clk_IBUF_BUFG   |               | clk_div                  |                6 |             20 |         3.33 |
 +------------------+---------------+--------------------------+------------------+----------------+--------------+
 
 

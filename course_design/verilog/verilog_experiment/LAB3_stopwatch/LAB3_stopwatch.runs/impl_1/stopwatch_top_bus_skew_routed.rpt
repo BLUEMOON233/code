@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date         : Thu May 18 22:08:39 2023
+| Date         : Sat May 20 17:48:12 2023
 | Host         : MSI running 64-bit major release  (build 9200)
 | Command      : report_bus_skew -warn_on_violation -file stopwatch_top_bus_skew_routed.rpt -pb stopwatch_top_bus_skew_routed.pb -rpx stopwatch_top_bus_skew_routed.rpx
 | Design       : stopwatch_top

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1684342522" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/counter_mod10_top.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1684578308" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/counter_mod10_top.dcp">
   <File Type="PA-TCL" Name="counter_mod10_top.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="counter_mod10_top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="counter_mod10_top_reports.tcl"/>
   <File Type="RDS-RDS" Name="counter_mod10_top.vds"/>
   <File Type="RDS-UTIL" Name="counter_mod10_top_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="counter_mod10_top_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="counter_mod10_top.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="counter_mod10_top_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="counter_mod10_top_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/counter_mod10.v">

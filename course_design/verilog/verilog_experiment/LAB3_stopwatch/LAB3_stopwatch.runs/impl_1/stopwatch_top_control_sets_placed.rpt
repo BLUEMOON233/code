@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date         : Thu May 18 22:08:15 2023
+| Date         : Sat May 20 17:47:47 2023
 | Host         : MSI running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file stopwatch_top_control_sets_placed.rpt
 | Design       : stopwatch_top
@@ -73,8 +73,8 @@ Table of Contents
 +----------------------------------+-------------------------------------------------+----------------------+------------------+----------------+--------------+
 |           Clock Signal           |                  Enable Signal                  |   Set/Reset Signal   | Slice Load Count | Bel Load Count | Bels / Slice |
 +----------------------------------+-------------------------------------------------+----------------------+------------------+----------------+--------------+
-|  nolabel_line31/clk_10HZ_reg_n_0 | nolabel_line31/nolabel_line45/d1_reg[3]_i_1_n_0 | sw_IBUF[0]           |                1 |              4 |         4.00 |
 |  nolabel_line31/clk_10HZ_reg_n_0 | nolabel_line31/nolabel_line45/d3_reg            | sw_IBUF[0]           |                1 |              4 |         4.00 |
+|  nolabel_line31/clk_10HZ_reg_n_0 | nolabel_line31/nolabel_line45/d1_reg[3]_i_1_n_0 | sw_IBUF[0]           |                1 |              4 |         4.00 |
 |  nolabel_line31/clk_10HZ_reg_n_0 |                                                 | sw_IBUF[0]           |                2 |              7 |         3.50 |
 |  clk_IBUF_BUFG                   |                                                 |                      |                6 |             19 |         3.17 |
 |  clk_IBUF_BUFG                   |                                                 | nolabel_line31/clear |                6 |             23 |         3.83 |
