@@ -31,5 +31,5 @@ module counter_mod10(
         else regN <= regN + en;
     end
     assign D = regN;
-    assign out = (regN == 9) ? 1 : 0;
+    assign out = (regN == 4'b0000) ? 1 : 0;
 endmodule

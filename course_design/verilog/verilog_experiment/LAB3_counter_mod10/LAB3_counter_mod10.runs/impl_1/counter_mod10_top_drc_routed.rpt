@@ -1,7 +1,7 @@
 Copyright 1986-2023 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2.2 (win64) Build 3788238 Tue Feb 21 20:00:34 MST 2023
-| Date         : Sat May 20 18:26:53 2023
+| Date         : Tue May 23 11:45:13 2023
 | Host         : MSI running 64-bit major release  (build 9200)
 | Command      : report_drc -file counter_mod10_top_drc_routed.rpt -pb counter_mod10_top_drc_routed.pb -rpx counter_mod10_top_drc_routed.rpx
 | Design       : counter_mod10_top
@@ -24,12 +24,14 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 1
-+----------+----------+-----------------------------------------------------+------------+
-| Rule     | Severity | Description                                         | Violations |
-+----------+----------+-----------------------------------------------------+------------+
-| CFGBVS-1 | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties | 1          |
-+----------+----------+-----------------------------------------------------+------------+
+             Violations found: 7
++-------------+----------+-------------------------------------------------------------+------------+
+| Rule        | Severity | Description                                                 | Violations |
++-------------+----------+-------------------------------------------------------------+------------+
+| CFGBVS-1    | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties         | 1          |
+| PDRC-153    | Warning  | Gated clock check                                           | 3          |
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 3          |
++-------------+----------+-------------------------------------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
@@ -44,6 +46,39 @@ Neither the CFGBVS nor CONFIG_VOLTAGE voltage property is set in the current_des
  #where value2 is the voltage provided to configuration bank 0
 
 Refer to the device configuration user guide for more information.
+Related violations: <none>
+
+PDRC-153#1 Warning
+Gated clock check  
+Net cm1/CLK is a gated clock net sourced by a combinational pin cm1/regN[3]_i_3/O, cell cm1/regN[3]_i_3. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#2 Warning
+Gated clock check  
+Net cm2/CLK is a gated clock net sourced by a combinational pin cm2/regN[3]_i_3__0/O, cell cm2/regN[3]_i_3__0. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#3 Warning
+Gated clock check  
+Net cm3/CLK is a gated clock net sourced by a combinational pin cm3/regN[3]_i_3__1/O, cell cm3/regN[3]_i_3__1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PLHOLDVIO-2#1 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT cm1/regN[3]_i_3 is driving clock pin of 4 cells. This could lead to large hold time violations. Involved cells are:
+cm2/regN_reg[0], cm2/regN_reg[1], cm2/regN_reg[2], cm2/regN_reg[3]
+Related violations: <none>
+
+PLHOLDVIO-2#2 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT cm2/regN[3]_i_3__0 is driving clock pin of 4 cells. This could lead to large hold time violations. Involved cells are:
+cm3/regN_reg[0], cm3/regN_reg[1], cm3/regN_reg[2], cm3/regN_reg[3]
+Related violations: <none>
+
+PLHOLDVIO-2#3 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT cm3/regN[3]_i_3__1 is driving clock pin of 4 cells. This could lead to large hold time violations. Involved cells are:
+cm4/regN_reg[0], cm4/regN_reg[1], cm4/regN_reg[2], cm4/regN_reg[3]
 Related violations: <none>
 
 
