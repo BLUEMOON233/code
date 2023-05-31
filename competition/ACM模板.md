@@ -643,7 +643,7 @@ int find(int x) {
 }
 int kruskal(int n, int m) {
 	int rs = 0, cnt = 0;
-	sort(edges + 1, edges + 1 + n);
+	sort(edges + 1, edges + 1 + m);
 	rep(i, 1, n) p[i] = i;
 	rep(i, 1, m) {
 		int a = find(edges[i].a), b = find(edges[i].b), w = edges[i].w;
