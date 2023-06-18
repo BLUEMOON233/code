@@ -8,7 +8,7 @@
 DataStructProgram::DataStructProgram(QWidget* parent)
 	: QMainWindow(parent), ui(new Ui::DataStructProgramClass)
 {
-	//³õÊ¼»¯²Ù×÷£º
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	ui->setupUi(this);
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -16,7 +16,7 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 	ui->P4_tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui->systemState->setCurrentIndex(0);
 
-	//Ö÷Ò³ÃæÇÐ»»£º
+	//ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½
 	connect(ui->mainPB1, &QPushButton::clicked, [=]()mutable {
 		ui->stackedWidget->setCurrentIndex(0);
 		});
@@ -33,11 +33,11 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 		this->close();
 		});
 
-	//µ¼Èëµ¼³öÎÄ¼þ£º
+	//ï¿½ï¿½ï¿½ëµ¼ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 	connect(ui->systemOpenFile, &QPushButton::clicked, [=]() mutable {
-		QString filePath = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit(std::string("Ñ¡ÔñÎÄ¼þ").data()), QString::fromLocal8Bit(std::string("D:/DataStruct/data").data()));
+		QString filePath = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit(std::string("Ñ¡ï¿½ï¿½ï¿½Ä¼ï¿½").data()), QString::fromLocal8Bit(std::string("D:/DataStruct/data").data()));
 		if (filePath.isEmpty()) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("Â·¾¶Îª¿Õ").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("Â·ï¿½ï¿½Îªï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 
@@ -46,29 +46,29 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 		});
 
 	connect(ui->systemSaveFile, &QPushButton::clicked, [=]()mutable {
-		QString filePath = QFileDialog::getExistingDirectory(this, QString::fromLocal8Bit(std::string("Ñ¡ÔñÎÄ¼þ¼Ð").data()), "D:/DataStruct/data");
+		QString filePath = QFileDialog::getExistingDirectory(this, QString::fromLocal8Bit(std::string("Ñ¡ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½").data()), "D:/DataStruct/data");
 		if (filePath.isEmpty()) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("Â·¾¶Îª¿Õ").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("Â·ï¿½ï¿½Îªï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		DSTS.saveSystem(filePath);
 		});
 
-	//·ÖÁ÷½çÃæ£º
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ£º
 	connect(ui->P2_PBopenFile, &QPushButton::clicked, [=]() mutable {
 		std::string majorName(ui->P2_LEname->text().toLocal8Bit());
 		QString classNumData = ui->P2_LEclassNum->text();
 		QString stuNumData = ui->P2_LEstuNum->text();
 		if (majorName == "") {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("×¨ÒµÃûÎª¿Õ").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("×¨Òµï¿½ï¿½Îªï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		if (classNumData.isEmpty()) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("°à¼¶ÊýÁ¿Îª¿Õ").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("ï¿½à¼¶ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		if (stuNumData.isEmpty()) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("°à¼¶ÈËÊýÎª¿Õ").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("ï¿½à¼¶ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		int classNum = classNumData.toInt();
@@ -77,9 +77,9 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 		ui->P2_LEstuNum->clear();
 		ui->P2_LEname->clear();
 
-		QString filePath = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit(std::string("Ñ¡ÔñÎÄ¼þ").data()), QString::fromLocal8Bit(std::string("D:/DataStruct/data/´óÀà·ÖÁ÷Èí¼þ").data()));
+		QString filePath = QFileDialog::getOpenFileName(this, QString::fromLocal8Bit(std::string("Ñ¡ï¿½ï¿½ï¿½Ä¼ï¿½").data()), QString::fromLocal8Bit(std::string("D:/DataStruct/data/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").data()));
 		if (filePath.isEmpty()) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("Â·¾¶Îª¿Õ").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("Â·ï¿½ï¿½Îªï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		else {
@@ -87,7 +87,7 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 			std::pair<int, int> pairNum = { classNum, stuNum };
 			int nodeNum = this->DSP.addMajorList(std::string(cdata), majorName, pairNum);
 			ui->tableWidget->setColumnCount(4);
-			ui->tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("±àºÅ").data()) << QString::fromLocal8Bit(std::string("Ö¾Ô¸").data()) << QString("GPA") << QString::fromLocal8Bit(std::string("ÅÅÃû").data()));
+			ui->tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½").data()) << QString::fromLocal8Bit(std::string("Ö¾Ô¸").data()) << QString("GPA") << QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()));
 			ui->tableWidget->setRowCount(nodeNum);
 			for (int i = 0, col = 0; i < nodeNum; i++, col = 0) {
 				D_S_Student now = this->DSP.getNodeByPos(this->DSP.getListNum(), i + 1);
@@ -101,13 +101,13 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 
 	connect(ui->P2_PBstartDiver, &QPushButton::clicked, [=]() mutable {
 		if (DSTS.isInit) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("ÒÑÓÐ·ÖÁ÷ºóÊý¾Ý").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		std::vector<double> grade = DSTS.initSystem(DSP);
 		std::vector<int> classNum = DSTS.getClassNum();
 		ui->tableWidget->setColumnCount(3);
-		ui->tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("°à¼¶").data()) << QString::fromLocal8Bit(std::string("GPA¾ùÖµ").data()));
+		ui->tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("ï¿½à¼¶").data()) << QString::fromLocal8Bit(std::string("GPAï¿½ï¿½Öµ").data()));
 		ui->tableWidget->setRowCount(grade.size());
 		for (int i = 0, nowClass = 0; i < classNum.size(); i++) for (int j = 0, col = 0; j < classNum[i]; j++, nowClass++, col = 0) {
 			ui->tableWidget->setItem(nowClass, col++, new QTableWidgetItem(QString::fromLocal8Bit(DSTS.getMajorName(i + 1).data())));
@@ -124,13 +124,13 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 
 	connect(ui->P2_PBQuery, &QPushButton::clicked, [=]() mutable {
 		if (!DSTS.isInit) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("Î´¼ì²âµ½·ÖÁ÷ºóÊý¾Ý").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("Î´ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		int nowID = ui->P2_LE_IDQuery->text().toInt();
 		D_S_StudentPro now = DSTS.getArrayNodeByID(nowID);
 		if (now.ID == -1) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("Î´ÕÒµ½¸ÃÑ§ºÅÑ§Éú").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("Î´ï¿½Òµï¿½ï¿½ï¿½Ñ§ï¿½ï¿½Ñ§ï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		ui->P2_LEmajorModify->setText(QString::fromLocal8Bit(DSTS.getMajorName(now.choice[0].first).data()));
@@ -139,30 +139,30 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 
 	connect(ui->P2_PBModify, &QPushButton::clicked, [=]() mutable {
 		if (!DSTS.isInit) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("Î´¼ì²âµ½·ÖÁ÷ºóÊý¾Ý").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("Î´ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		int nowID = ui->P2_LE_IDQuery->text().toInt();
 		if (nowID == 0) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("Î´ÕÒµ½¸ÃÑ§ºÅÑ§Éú").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("Î´ï¿½Òµï¿½ï¿½ï¿½Ñ§ï¿½ï¿½Ñ§ï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		if (ui->P2_LEmajorModify->text().isEmpty()) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("×¨ÒµÃû²»¿ÉÒÔÎª¿Õ").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("×¨Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		if (ui->P2_LEclassModify->text().isEmpty()) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("°à¼¶²»¿ÉÒÔÎª¿Õ").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("ï¿½à¼¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		int majorPos = DSTS.getMajorPos(std::string(ui->P2_LEmajorModify->text().toLocal8Bit()));
 		if (majorPos == 0) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("×¨ÒµÃûÓÐÎó").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("×¨Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		std::pair<int, int> classPos = DSTS.getMajorClassPos(majorPos);
 		if (ui->P2_LEclassModify->text().toInt() < classPos.first + 1 || ui->P2_LEclassModify->text().toInt() > classPos.first + classPos.second) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("°à¼¶ºÅÓÐÎó").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("ï¿½à¼¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		DSTS.modifyArrayNodeByID(nowID, majorPos, ui->P2_LEclassModify->text().toInt());
@@ -171,17 +171,17 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 		ui->P2_LEclassModify->clear();
 		});
 
-	//Êý¾Ý²é¿´½çÃæ£º
+	//ï¿½ï¿½ï¿½Ý²é¿´ï¿½ï¿½ï¿½æ£º
 	connect(ui->mainPB3, &QPushButton::clicked, [=]() mutable {
 		ui->P3_tableWidget->clear();
 		if (!DSTS.isInit) {
 			ui->P3_tableWidget->setColumnCount(1);
-			ui->P3_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("Î´¼ì²âµ½·ÖÁ÷ºóÑ§ÉúÁÐ±í").data()));
+			ui->P3_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("Î´ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½Ð±ï¿½").data()));
 			return;
 		}
 		std::vector<D_S_StudentPro> DSSarray = DSTS.getArray();
 		ui->P3_tableWidget->setColumnCount(5);
-		ui->P3_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("°à¼¶").data()) << QString::fromLocal8Bit(std::string("ÅÅÃû").data()) << QString::fromLocal8Bit(std::string("Ñ§ºÅ").data()) << QString::fromLocal8Bit(std::string("¼¨µã").data()));
+		ui->P3_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("ï¿½à¼¶").data()) << QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()) << QString::fromLocal8Bit(std::string("Ñ§ï¿½ï¿½").data()) << QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()));
 		ui->P3_tableWidget->setRowCount(DSSarray.size());
 		for (int i = 0, col = 0; i < DSSarray.size(); i++, col = 0) {
 			ui->P3_tableWidget->setItem(i, col++, new QTableWidgetItem(QString::fromLocal8Bit(DSTS.getMajorName(DSSarray[i].choice[0].first).data())));
@@ -195,7 +195,7 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 	connect(ui->P3_PBstartFilt, &QPushButton::clicked, [=]()mutable {
 		if (!DSTS.isInit) {
 			ui->P3_tableWidget->setColumnCount(1);
-			ui->P3_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("Î´¼ì²âµ½·ÖÁ÷ºóÑ§ÉúÁÐ±í").data()));
+			ui->P3_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("Î´ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½Ð±ï¿½").data()));
 			return;
 		}
 		int lmt_major = -1, lmt_class = -1, lmt_ID = -1, lmt_rank = -1, nowRow = 0;
@@ -211,7 +211,7 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 
 		ui->P3_tableWidget->setColumnCount(5);
 		ui->P3_tableWidget->setRowCount(nowRow);
-		ui->P3_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("°à¼¶").data()) << QString::fromLocal8Bit(std::string("ÅÅÃû").data()) << QString::fromLocal8Bit(std::string("Ñ§ºÅ").data()) << QString::fromLocal8Bit(std::string("¼¨µã").data()));
+		ui->P3_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("ï¿½à¼¶").data()) << QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()) << QString::fromLocal8Bit(std::string("Ñ§ï¿½ï¿½").data()) << QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()));
 		for (int i = 0, col = 0; i < DSSarray.size(); i++, col = 0) {
 			if (lmt_major != -1 && lmt_major != DSSarray[i].choice[0].first) continue;
 			if (lmt_class != -1 && lmt_class != DSSarray[i].choice[0].second) continue;
@@ -226,10 +226,10 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 		}
 		});
 
-	//Êý¾Ý·ÖÎö£º
+	//ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ï¿½ï¿½
 	connect(ui->P4_PBanalyse, &QPushButton::clicked, [=]()mutable {
 		if (!DSTS.isInit) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("Î´¼ì²âµ½·ÖÁ÷ºóÊý¾Ý").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("Î´ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		int sumClassNum = 0, nowRow = 0;
@@ -240,7 +240,7 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 		std::string qry_classStr(ui->P4_LEclass->text().toLocal8Bit());
 		std::string qry_majorStr(ui->P4_LEmajor->text().toLocal8Bit());
 		if (!(qry_majorStr.empty() ^ qry_classStr.empty())) {
-			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("´íÎó").data()), QString::fromLocal8Bit(std::string("²éÑ¯ÖµÒì³£").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			QMessageBox::information(NULL, QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()), QString::fromLocal8Bit(std::string("ï¿½ï¿½Ñ¯Öµï¿½ì³£").data()), QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
 		if (!qry_classStr.empty()) {
@@ -248,7 +248,7 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 			std::sort(intVec.begin(), intVec.end());
 			intVec.erase(std::unique(intVec.begin(), intVec.end()), intVec.end());
 			ui->P4_tableWidget->setColumnCount(6);
-			ui->P4_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("°à¼¶").data()) << QString::fromLocal8Bit(std::string("GPA¾ùÖµ").data()) << QString::fromLocal8Bit(std::string("GPA×î´óÖµ").data()) << QString::fromLocal8Bit(std::string("GPA×îÐ¡Öµ").data()) << QString::fromLocal8Bit(std::string("·½²î").data()));
+			ui->P4_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("ï¿½à¼¶").data()) << QString::fromLocal8Bit(std::string("GPAï¿½ï¿½Öµ").data()) << QString::fromLocal8Bit(std::string("GPAï¿½ï¿½ï¿½Öµ").data()) << QString::fromLocal8Bit(std::string("GPAï¿½ï¿½Ð¡Öµ").data()) << QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()));
 			for (auto& x : intVec) {
 				if (x <= 0 || x > sumClassNum) continue;
 				int majorCnt = 0, temp = x;
@@ -272,7 +272,7 @@ DataStructProgram::DataStructProgram(QWidget* parent)
 			std::sort(strVec.begin(), strVec.end());
 			strVec.erase(std::unique(strVec.begin(), strVec.end()), strVec.end());
 			ui->P4_tableWidget->setColumnCount(5);
-			ui->P4_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("GPA¾ùÖµ").data()) << QString::fromLocal8Bit(std::string("GPA×î´óÖµ").data()) << QString::fromLocal8Bit(std::string("GPA×îÐ¡Öµ").data()) << QString::fromLocal8Bit(std::string("·½²î").data()));
+			ui->P4_tableWidget->setHorizontalHeaderLabels(QStringList() << QString::fromLocal8Bit(std::string("×¨Òµ").data()) << QString::fromLocal8Bit(std::string("GPAï¿½ï¿½Öµ").data()) << QString::fromLocal8Bit(std::string("GPAï¿½ï¿½ï¿½Öµ").data()) << QString::fromLocal8Bit(std::string("GPAï¿½ï¿½Ð¡Öµ").data()) << QString::fromLocal8Bit(std::string("ï¿½ï¿½ï¿½ï¿½").data()));
 			for (auto& x : strVec) {
 				int majorPos = DSTS.getMajorPos(x);
 				if (!majorPos) continue;

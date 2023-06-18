@@ -1,0 +1,2 @@
+D:\develop\Projects\Duck_Store\x64\Debug\Duck_Store.exe
+D:\develop\code\course_design\Database_course_design\Duck_Store\x64\Debug\Duck_Store.exe
