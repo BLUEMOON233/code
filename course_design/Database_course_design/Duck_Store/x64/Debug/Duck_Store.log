@@ -1,29 +1,7 @@
-﻿  DataBase.cpp
-  MainWindow.cpp
+﻿  uic MainWindow.ui
   Duck_Store.cpp
+  MainWindow.cpp
   main.cpp
-D:\develop\VisualStudio\IDE\VC\Tools\MSVC\14.36.32532\include\utility(247,16): warning C4244: “初始化”: 从“_Ty”转换到“_Ty1”，可能丢失数据
-          with
-          [
-              _Ty=uint64_t
-          ]
-          and
-          [
-              _Ty1=int
-          ] (编译源文件 DataBase.cpp)
-D:\develop\code\course_design\Database_course_design\Duck_Store\DataBase.cpp(36,9): message : 查看对正在编译的函数 模板 实例化“std::pair<int,int>::pair<uint64_t,unsigned int,0>(_Other1 &&,_Other2 &&) noexcept”的引用
-          with
-          [
-              _Other1=uint64_t,
-              _Other2=unsigned int
-          ]
-D:\develop\code\course_design\Database_course_design\Duck_Store\DataBase.cpp(36,7): message : 请参阅 "DataBase::DB_query" 中对 "std::pair<int,int>::pair" 的第一个引用
-  qrc_Duck_Store.cpp
   moc_Duck_Store.cpp
   moc_MainWindow.cpp
-Qt5AxContainerd.lib(qaxbase.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxContainerd.lib(qaxbase.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
-Qt5AxContainerd.lib(qaxobject.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxContainerd.lib(qaxobject.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
-Qt5AxContainerd.lib(qaxtypes.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxContainerd.lib(qaxtypes.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
-Qt5AxContainerd.lib(qaxutils.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxContainerd.lib(qaxutils.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
-Qt5AxBased.lib(qaxtypefunctions.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxBased.lib(qaxtypefunctions.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
   Duck_Store.vcxproj -> D:\develop\code\course_design\Database_course_design\Duck_Store\x64\Debug\Duck_Store.exe

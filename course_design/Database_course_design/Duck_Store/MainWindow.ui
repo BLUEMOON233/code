@@ -325,7 +325,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Page_Main">
      <widget class="QLabel" name="label_5">
@@ -370,6 +370,11 @@
      </widget>
     </widget>
     <widget class="QWidget" name="Page_Merchandise">
+     <property name="font">
+      <font>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
      <widget class="QTableWidget" name="TB_Mer">
       <property name="geometry">
        <rect>
@@ -378,6 +383,11 @@
         <width>1301</width>
         <height>901</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
       </property>
      </widget>
      <widget class="QPushButton" name="PB_Add_Mer">
@@ -392,7 +402,7 @@
       <property name="font">
        <font>
         <family>幼圆</family>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -411,7 +421,7 @@
       <property name="font">
        <font>
         <family>幼圆</family>
-        <pointsize>16</pointsize>
+        <pointsize>18</pointsize>
        </font>
       </property>
       <property name="text">
@@ -421,9 +431,9 @@
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>0</y>
-        <width>361</width>
+        <width>371</width>
         <height>61</height>
        </rect>
       </property>
@@ -433,7 +443,7 @@
       <widget class="QLineEdit" name="LE_Que_Mer">
        <property name="geometry">
         <rect>
-         <x>80</x>
+         <x>100</x>
          <y>20</y>
          <width>113</width>
          <height>31</height>
@@ -443,7 +453,7 @@
       <widget class="QPushButton" name="PB_Que_Mer">
        <property name="geometry">
         <rect>
-         <x>210</x>
+         <x>230</x>
          <y>0</y>
          <width>131</width>
          <height>61</height>
@@ -452,7 +462,7 @@
        <property name="font">
         <font>
          <family>幼圆</family>
-         <pointsize>16</pointsize>
+         <pointsize>18</pointsize>
         </font>
        </property>
        <property name="text">
@@ -464,14 +474,14 @@
         <rect>
          <x>10</x>
          <y>20</y>
-         <width>71</width>
+         <width>91</width>
          <height>31</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑</family>
-         <pointsize>14</pointsize>
+         <family>幼圆</family>
+         <pointsize>18</pointsize>
         </font>
        </property>
        <property name="text">
@@ -489,6 +499,11 @@
         <width>1301</width>
         <height>901</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
       </property>
      </widget>
      <widget class="QLabel" name="label_3">
@@ -618,6 +633,11 @@
         <height>901</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
      </widget>
      <widget class="QPushButton" name="PB_Add_Purchase">
       <property name="geometry">
@@ -687,6 +707,11 @@
         <height>901</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
      </widget>
      <widget class="QPushButton" name="PB_Add_Sell">
       <property name="geometry">
@@ -755,6 +780,11 @@
         <width>1301</width>
         <height>901</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
       </property>
      </widget>
      <widget class="QPushButton" name="PB_Add_Supplier">
@@ -843,6 +873,11 @@
         <width>1301</width>
         <height>901</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
       </property>
      </widget>
      <widget class="QPushButton" name="PB_Add_Staff">
@@ -955,6 +990,79 @@
         <height>911</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+        <kerning>true</kerning>
+       </font>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>371</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLineEdit" name="LE_Inc_Year">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>10</y>
+         <width>113</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>幼圆</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>61</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>幼圆</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>年份：</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="PB_Que_Inc">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>0</y>
+         <width>131</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>幼圆</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>查询收支</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>

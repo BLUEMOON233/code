@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
 <Qt_DEFINES_>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_AXSERVER_LIB;QAXSERVER;QT_AXCONTAINER_LIB;QT_AXBASE_LIB;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB</Qt_DEFINES_>
-<Qt_INCLUDEPATH_>C:\Users\liuwy\AppData\Local\Temp\joyza3fj.mop;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\ActiveQt;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\QtWidgets;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\QtGui;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\QtANGLE;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\QtCore;C:\Users\liuwy\AppData\Local\Temp\joyza3fj.mop;/include;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
+<Qt_INCLUDEPATH_>C:\Users\liuwy\AppData\Local\Temp\gv2maow5.dph;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\ActiveQt;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\QtWidgets;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\QtGui;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\QtANGLE;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\include\QtCore;C:\Users\liuwy\AppData\Local\Temp\gv2maow5.dph;/include;D:\develop\Qt\Qt_5.14.2\5.14.2\msvc2017_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
 <Qt_STDCPP_></Qt_STDCPP_>
 <Qt_RUNTIME_>MultiThreadedDebugDLL</Qt_RUNTIME_>
 <Qt_CL_OPTIONS_>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus</Qt_CL_OPTIONS_>

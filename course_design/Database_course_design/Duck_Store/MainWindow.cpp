@@ -10,11 +10,13 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 	this->setFixedSize(1500, 1000);
 	ui.stackedWidget->setCurrentIndex(0);
 	ui.TB_Mer->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-	ui.TB_Inventory->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);	
+	ui.TB_Inventory->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui.TB_Purchase->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui.TB_Supplier->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui.TB_Sell->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui.TB_Staff->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui.TB_Income->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	ui.TB_Income->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 	connect(ui.PB_MainPage, &QPushButton::clicked, [=]()mutable {
 		ui.stackedWidget->setCurrentIndex(0);
@@ -40,7 +42,7 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 		else if (db->getRole() == 2)
 			ui.stackedWidget->setCurrentIndex(7);
 		});
-	connect(ui.PB_Supplier, &QPushButton::clicked, [=]()mutable {
+	connect(ui.PB_Income, &QPushButton::clicked, [=]()mutable {
 		ui.stackedWidget->setCurrentIndex(8);
 		});
 
@@ -534,7 +536,74 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 		mysql_free_result(res);
 		});
 
-	
+	connect(ui.PB_Income, &QPushButton::clicked, [=]()mutable {
+		ui.LE_Inc_Year->setText("2023");
+		std::string year = ui.LE_Inc_Year->text().toStdString();
+		ui.TB_Income->setRowCount(13);
+		ui.TB_Income->setColumnCount(4);
+		ui.TB_Income->setHorizontalHeaderLabels(QStringList() << QString::fromUtf8("日期") << QString::fromUtf8("收入") << QString::fromUtf8("支出") << QString::fromUtf8("利润"));
+		double tot_sel = 0.0, tot_pur = 0.0;
+		for (int mon = 1; mon <= 12; mon++) {
+			double sum_sel = 0.0, sum_pur = 0.0;
+			ui.TB_Income->setItem(mon - 1, 0, new QTableWidgetItem(QString::fromStdString(year + "-" + std::to_string(mon))));
+			std::string str = "SELECT sum(price) FROM sell WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
+			db->DB_query(str.c_str(), res, size);
+			if (size != std::pair<int, int>({ 0, 0 })) {
+				QString tmp_sum = mysql_fetch_row(res)[0];
+				sum_sel = tmp_sum.toDouble();
+			}
+			mysql_free_result(res);
+			ui.TB_Income->setItem(mon - 1, 1, new QTableWidgetItem(QString::number(sum_sel)));
+			str = "SELECT sum(price) FROM purchase WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
+			db->DB_query(str.c_str(), res, size);
+			if (size != std::pair<int, int>({ 0, 0 })) {
+				QString tmp_sum = mysql_fetch_row(res)[0];
+				sum_pur = tmp_sum.toDouble();
+			}
+			mysql_free_result(res);
+			ui.TB_Income->setItem(mon - 1, 2, new QTableWidgetItem(QString::number(sum_pur)));
+			ui.TB_Income->setItem(mon - 1, 3, new QTableWidgetItem(QString::number(sum_sel - sum_pur)));
+			tot_sel += sum_sel, tot_pur += sum_pur;
+		}
+		ui.TB_Income->setItem(12, 0, new QTableWidgetItem(QString::fromStdString("全年")));
+		ui.TB_Income->setItem(12, 1, new QTableWidgetItem(QString::number(tot_sel)));
+		ui.TB_Income->setItem(12, 2, new QTableWidgetItem(QString::number(tot_pur)));
+		ui.TB_Income->setItem(12, 3, new QTableWidgetItem(QString::number(tot_sel - tot_pur)));
+		});
+
+	connect(ui.PB_Que_Inc, &QPushButton::clicked, [=]()mutable {
+		std::string year = ui.LE_Inc_Year->text().toStdString();
+		ui.TB_Income->setRowCount(13);
+		ui.TB_Income->setColumnCount(4);
+		ui.TB_Income->setHorizontalHeaderLabels(QStringList() << QString::fromUtf8("日期") << QString::fromUtf8("收入") << QString::fromUtf8("支出") << QString::fromUtf8("利润"));
+		double tot_sel = 0.0, tot_pur = 0.0;
+		for (int mon = 1; mon <= 12; mon++) {
+			double sum_sel = 0.0, sum_pur = 0.0;
+			ui.TB_Income->setItem(mon - 1, 0, new QTableWidgetItem(QString::fromStdString(year + "-" + std::to_string(mon))));
+			std::string str = "SELECT sum(price) FROM sell WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
+			db->DB_query(str.c_str(), res, size);
+			if (size != std::pair<int, int>({ 0, 0 })) {
+				QString tmp_sum = mysql_fetch_row(res)[0];
+				sum_sel = tmp_sum.toDouble();
+			}
+			mysql_free_result(res);
+			ui.TB_Income->setItem(mon - 1, 1, new QTableWidgetItem(QString::number(sum_sel)));
+			str = "SELECT sum(price) FROM purchase WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
+			db->DB_query(str.c_str(), res, size);
+			if (size != std::pair<int, int>({ 0, 0 })) {
+				QString tmp_sum = mysql_fetch_row(res)[0];
+				sum_pur = tmp_sum.toDouble();
+			}
+			mysql_free_result(res);
+			ui.TB_Income->setItem(mon - 1, 2, new QTableWidgetItem(QString::number(sum_pur)));
+			ui.TB_Income->setItem(mon - 1, 3, new QTableWidgetItem(QString::number(sum_sel - sum_pur)));
+			tot_sel += sum_sel, tot_pur += sum_pur;
+		}
+		ui.TB_Income->setItem(12, 0, new QTableWidgetItem(QString::fromStdString("全年")));
+		ui.TB_Income->setItem(12, 1, new QTableWidgetItem(QString::number(tot_sel)));
+		ui.TB_Income->setItem(12, 2, new QTableWidgetItem(QString::number(tot_pur)));
+		ui.TB_Income->setItem(12, 3, new QTableWidgetItem(QString::number(tot_sel - tot_pur)));
+		});
 }
 
 MainWindow::~MainWindow()
