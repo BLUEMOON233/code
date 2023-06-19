@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -61,6 +62,10 @@ public:
     QLineEdit *LE_Que_Mer;
     QPushButton *PB_Que_Mer;
     QLabel *label_2;
+    QGroupBox *groupBox_3;
+    QPushButton *PB_Sel_Mer;
+    QLabel *label_8;
+    QComboBox *CB_merchandise;
     QWidget *Page_Inventory;
     QTableWidget *TB_Inventory;
     QLabel *label_3;
@@ -99,6 +104,7 @@ public:
     QLineEdit *LE_Inc_Year;
     QLabel *label_7;
     QPushButton *PB_Que_Inc;
+    QPushButton *PB_Out_Inc;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
@@ -268,18 +274,35 @@ public:
         PB_Mdf_Mer->setFont(font3);
         groupBox = new QGroupBox(Page_Merchandise);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(0, 0, 371, 61));
+        groupBox->setGeometry(QRect(10, 0, 361, 61));
         LE_Que_Mer = new QLineEdit(groupBox);
         LE_Que_Mer->setObjectName(QString::fromUtf8("LE_Que_Mer"));
         LE_Que_Mer->setGeometry(QRect(100, 20, 113, 31));
         PB_Que_Mer = new QPushButton(groupBox);
         PB_Que_Mer->setObjectName(QString::fromUtf8("PB_Que_Mer"));
-        PB_Que_Mer->setGeometry(QRect(230, 0, 131, 61));
+        PB_Que_Mer->setGeometry(QRect(220, 0, 131, 61));
         PB_Que_Mer->setFont(font3);
         label_2 = new QLabel(groupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(10, 20, 91, 31));
         label_2->setFont(font3);
+        groupBox_3 = new QGroupBox(Page_Merchandise);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        groupBox_3->setGeometry(QRect(380, 0, 341, 61));
+        PB_Sel_Mer = new QPushButton(groupBox_3);
+        PB_Sel_Mer->setObjectName(QString::fromUtf8("PB_Sel_Mer"));
+        PB_Sel_Mer->setGeometry(QRect(200, 0, 131, 61));
+        PB_Sel_Mer->setFont(font3);
+        label_8 = new QLabel(groupBox_3);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setGeometry(QRect(10, 20, 91, 31));
+        label_8->setFont(font3);
+        CB_merchandise = new QComboBox(groupBox_3);
+        CB_merchandise->addItem(QString());
+        CB_merchandise->addItem(QString());
+        CB_merchandise->addItem(QString());
+        CB_merchandise->setObjectName(QString::fromUtf8("CB_merchandise"));
+        CB_merchandise->setGeometry(QRect(80, 20, 101, 31));
         stackedWidget->addWidget(Page_Merchandise);
         Page_Inventory = new QWidget();
         Page_Inventory->setObjectName(QString::fromUtf8("Page_Inventory"));
@@ -438,6 +461,10 @@ public:
         PB_Que_Inc->setObjectName(QString::fromUtf8("PB_Que_Inc"));
         PB_Que_Inc->setGeometry(QRect(230, 0, 131, 51));
         PB_Que_Inc->setFont(font3);
+        PB_Out_Inc = new QPushButton(Page_Income);
+        PB_Out_Inc->setObjectName(QString::fromUtf8("PB_Out_Inc"));
+        PB_Out_Inc->setGeometry(QRect(380, 0, 131, 51));
+        PB_Out_Inc->setFont(font3);
         stackedWidget->addWidget(Page_Income);
         MainWindowClass->setCentralWidget(centralWidget);
 
@@ -467,6 +494,13 @@ public:
         groupBox->setTitle(QString());
         PB_Que_Mer->setText(QCoreApplication::translate("MainWindowClass", "\346\237\245\350\257\242\345\225\206\345\223\201", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindowClass", "\345\225\206\345\223\201\345\220\215\357\274\232", nullptr));
+        groupBox_3->setTitle(QString());
+        PB_Sel_Mer->setText(QCoreApplication::translate("MainWindowClass", "\347\255\233\351\200\211\347\261\273\345\236\213", nullptr));
+        label_8->setText(QCoreApplication::translate("MainWindowClass", "\347\261\273\345\236\213\357\274\232", nullptr));
+        CB_merchandise->setItemText(0, QCoreApplication::translate("MainWindowClass", "\351\243\237\345\223\201\347\261\273", nullptr));
+        CB_merchandise->setItemText(1, QCoreApplication::translate("MainWindowClass", "\351\245\256\345\223\201\347\261\273", nullptr));
+        CB_merchandise->setItemText(2, QCoreApplication::translate("MainWindowClass", "\346\227\245\347\224\250\347\261\273", nullptr));
+
         label_3->setText(QCoreApplication::translate("MainWindowClass", "\351\270\255\351\270\255\344\276\277\345\210\251\345\272\227\345\272\223\345\255\230", nullptr));
         PB_Inv_ID->setText(QCoreApplication::translate("MainWindowClass", "ID\346\216\222\345\272\217", nullptr));
         PB_Inv_Type->setText(QCoreApplication::translate("MainWindowClass", "\347\261\273\345\236\213\346\216\222\345\272\217", nullptr));
@@ -491,6 +525,7 @@ public:
         groupBox_2->setTitle(QString());
         label_7->setText(QCoreApplication::translate("MainWindowClass", "\345\271\264\344\273\275\357\274\232", nullptr));
         PB_Que_Inc->setText(QCoreApplication::translate("MainWindowClass", "\346\237\245\350\257\242\346\224\266\346\224\257", nullptr));
+        PB_Out_Inc->setText(QCoreApplication::translate("MainWindowClass", "\345\257\274\345\207\272\346\212\245\350\241\250", nullptr));
     } // retranslateUi
 
 };

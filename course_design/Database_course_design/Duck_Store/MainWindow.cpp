@@ -46,7 +46,6 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 		ui.stackedWidget->setCurrentIndex(8);
 		});
 
-	//商品页面：
 	connect(ui.PB_Merchandise, &QPushButton::clicked, [=]()mutable {
 		db->DB_query_merchandise(res, size);
 		ui.TB_Mer->setRowCount(size.first);
@@ -85,12 +84,24 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 	connect(ui.PB_Mdf_Mer, &QPushButton::clicked, [=]()mutable {
 		bool flag = false;
 		QString sID = QInputDialog::getText(this, "ID", "<html style = \"font-size:12pt;\">需要修改的商品ID</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sType = QInputDialog::getText(this, "类型", "<html style = \"font-size:12pt;\">请输入修改后类型</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sName = QInputDialog::getText(this, "名称", "<html style = \"font-size:12pt;\">请输入修改后名称</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sNumber = QInputDialog::getText(this, "数量", "<html style = \"font-size:12pt;\">请输入修改后数量</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sPrice = QInputDialog::getText(this, "定价", "<html style = \"font-size:12pt;\">请输入修改后定价</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sDiscount = QInputDialog::getText(this, "折扣", "<html style = \"font-size:12pt;\">请输入修改后折扣</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		db->DB_modify_merchandise(sID.toInt(), sType.toStdString(), sName.toStdString(), sNumber.toInt(), sPrice.toDouble(), sDiscount.toDouble());
+		if (sID.isEmpty()) return;
+		if (!db->DB_query("SELECT * FROM merchandise WHERE ID = " + sID.toStdString(), res, size)) {
+			QMessageBox::information(NULL, "提示", "查询失败!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			return;
+		}
+		auto row_data = mysql_fetch_row(res);
+		QString sType = row_data[1];
+		QString sName = row_data[2];
+		QString sPrice = row_data[4];
+		QString sNumber = row_data[3];
+		QString sDiscount = row_data[5];
+		mysql_free_result(res);
+		sType = QInputDialog::getText(this, "类型", "<html style = \"font-size:12pt;\">请输入修改后类型</html>", QLineEdit::Normal, sType, &flag); if (!flag) return;
+		sName = QInputDialog::getText(this, "名称", "<html style = \"font-size:12pt;\">请输入修改后名称</html>", QLineEdit::Normal, sName, &flag); if (!flag) return;
+		sPrice = QInputDialog::getText(this, "定价", "<html style = \"font-size:12pt;\">请输入修改后定价</html>", QLineEdit::Normal, sPrice, &flag); if (!flag) return;
+		sNumber = QInputDialog::getText(this, "数量", "<html style = \"font-size:12pt;\">请输入修改后数量</html>", QLineEdit::Normal, sNumber, &flag); if (!flag) return;
+		sDiscount = QInputDialog::getText(this, "折扣", "<html style = \"font-size:12pt;\">请输入修改后折扣</html>", QLineEdit::Normal, sDiscount, &flag); if (!flag) return;
+		db->DB_modify_merchandise(sID.toInt(), sType.toStdString(), sName.toStdString(), sPrice.toDouble(), sNumber.toInt(), sDiscount.toDouble());
 		db->DB_query_merchandise(res, size);
 		ui.TB_Mer->setRowCount(size.first);
 		ui.TB_Mer->setColumnCount(size.second);
@@ -106,6 +117,19 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 		QString str = ui.LE_Que_Mer->text();
 		if (str.isEmpty()) db->DB_query_merchandise(res, size);
 		else db->DB_query("SELECT * FROM merchandise WHERE Name = \'" + str.toStdString() + "\';", res, size);
+		ui.TB_Mer->setRowCount(size.first);
+		ui.TB_Mer->setColumnCount(size.second);
+		ui.TB_Mer->setHorizontalHeaderLabels(QStringList() << QString::fromUtf8("ID") << QString::fromUtf8("类型") << QString::fromUtf8("名称") << QString::fromUtf8("价格") << QString::fromUtf8("数目") << QString::fromUtf8("折扣"));
+		for (int row = 0; row < size.first; row++) {
+			auto rowd = mysql_fetch_row(res);
+			for (int col = 0; col < size.second; col++) ui.TB_Mer->setItem(row, col, new QTableWidgetItem(QString::fromUtf8(rowd[col])));
+		}
+		mysql_free_result(res);
+		});
+
+	connect(ui.PB_Sel_Mer, &QPushButton::clicked, [=]()mutable {
+		QString mer = ui.CB_merchandise->currentText();
+		db->DB_query("SELECT * FROM merchandise WHERE type = \'" + mer.toStdString() + "\';", res, size);
 		ui.TB_Mer->setRowCount(size.first);
 		ui.TB_Mer->setColumnCount(size.second);
 		ui.TB_Mer->setHorizontalHeaderLabels(QStringList() << QString::fromUtf8("ID") << QString::fromUtf8("类型") << QString::fromUtf8("名称") << QString::fromUtf8("价格") << QString::fromUtf8("数目") << QString::fromUtf8("折扣"));
@@ -269,14 +293,14 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 			QAxObject* workbook = excel->querySubObject("ActiveWorkBook");
 			QAxObject* worksheets = workbook->querySubObject("Sheets");
 			QAxObject* worksheet = worksheets->querySubObject("Item(int)", 1);
-			int rows = ui.TB_Inventory->rowCount();
-			int cols = ui.TB_Inventory->columnCount();
+			int rows = ui.TB_Purchase->rowCount();
+			int cols = ui.TB_Purchase->columnCount();
 			for (int i = 1; i <= cols; i++) {
 				QAxObject* Range = worksheet->querySubObject("Cells(int,int)", 1, i);
-				Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Inventory->horizontalHeaderItem(i - 1)->text()));
+				Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Purchase->horizontalHeaderItem(i - 1)->text()));
 				for (int j = 2; j < rows + 2; j++) {
 					QAxObject* Range = worksheet->querySubObject("Cells(int,int)", j, i);
-					if (ui.TB_Inventory->item(j - 2, i - 1) != NULL) Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Inventory->item(j - 2, i - 1)->text()));
+					if (ui.TB_Purchase->item(j - 2, i - 1) != NULL) Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Purchase->item(j - 2, i - 1)->text()));
 					else Range->dynamicCall("SetValue(const QString &)", QVariant(""));
 				}
 			}
@@ -339,9 +363,19 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 	connect(ui.PB_Mdf_Supplier, &QPushButton::clicked, [=]()mutable {
 		bool flag = false;
 		QString sID = QInputDialog::getText(this, "ID", "<html style = \"font-size:12pt;\">需要修改的供应商ID</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sName = QInputDialog::getText(this, "姓名", "<html style = \"font-size:12pt;\">请输入修改后姓名</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sAddress = QInputDialog::getText(this, "地址", "<html style = \"font-size:12pt;\">请输入修改后地址</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sInformation = QInputDialog::getText(this, "信息", "<html style = \"font-size:12pt;\">请输入修改后信息</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
+		if (sID.isEmpty()) return;
+		if (!db->DB_query("SELECT * FROM supplier WHERE ID = " + sID.toStdString(), res, size)) {
+			QMessageBox::information(NULL, "提示", "查询失败!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			return;
+		}
+		auto row_data = mysql_fetch_row(res);
+		QString sName = row_data[1];
+		QString sAddress = row_data[2];
+		QString sInformation = row_data[3];
+		mysql_free_result(res);
+		sName = QInputDialog::getText(this, "姓名", "<html style = \"font-size:12pt;\">请输入修改后姓名</html>", QLineEdit::Normal, sName, &flag); if (!flag) return;
+		sAddress = QInputDialog::getText(this, "地址", "<html style = \"font-size:12pt;\">请输入修改后地址</html>", QLineEdit::Normal, sAddress, &flag); if (!flag) return;
+		sInformation = QInputDialog::getText(this, "信息", "<html style = \"font-size:12pt;\">请输入修改后信息</html>", QLineEdit::Normal, sInformation, &flag); if (!flag) return;
 		db->DB_modify_supplier(sID.toInt(), sName.toStdString(), sAddress.toStdString(), sInformation.toStdString());
 		db->DB_query_supplier(res, size);
 		ui.TB_Supplier->setRowCount(size.first);
@@ -366,14 +400,14 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 			QAxObject* workbook = excel->querySubObject("ActiveWorkBook");
 			QAxObject* worksheets = workbook->querySubObject("Sheets");
 			QAxObject* worksheet = worksheets->querySubObject("Item(int)", 1);
-			int rows = ui.TB_Inventory->rowCount();
-			int cols = ui.TB_Inventory->columnCount();
+			int rows = ui.TB_Supplier->rowCount();
+			int cols = ui.TB_Supplier->columnCount();
 			for (int i = 1; i <= cols; i++) {
 				QAxObject* Range = worksheet->querySubObject("Cells(int,int)", 1, i);
-				Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Inventory->horizontalHeaderItem(i - 1)->text()));
+				Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Supplier->horizontalHeaderItem(i - 1)->text()));
 				for (int j = 2; j < rows + 2; j++) {
 					QAxObject* Range = worksheet->querySubObject("Cells(int,int)", j, i);
-					if (ui.TB_Inventory->item(j - 2, i - 1) != NULL) Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Inventory->item(j - 2, i - 1)->text()));
+					if (ui.TB_Supplier->item(j - 2, i - 1) != NULL) Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Supplier->item(j - 2, i - 1)->text()));
 					else Range->dynamicCall("SetValue(const QString &)", QVariant(""));
 				}
 			}
@@ -446,14 +480,14 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 			QAxObject* workbook = excel->querySubObject("ActiveWorkBook");
 			QAxObject* worksheets = workbook->querySubObject("Sheets");
 			QAxObject* worksheet = worksheets->querySubObject("Item(int)", 1);
-			int rows = ui.TB_Inventory->rowCount();
-			int cols = ui.TB_Inventory->columnCount();
+			int rows = ui.TB_Sell->rowCount();
+			int cols = ui.TB_Sell->columnCount();
 			for (int i = 1; i <= cols; i++) {
 				QAxObject* Range = worksheet->querySubObject("Cells(int,int)", 1, i);
-				Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Inventory->horizontalHeaderItem(i - 1)->text()));
+				Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Sell->horizontalHeaderItem(i - 1)->text()));
 				for (int j = 2; j < rows + 2; j++) {
 					QAxObject* Range = worksheet->querySubObject("Cells(int,int)", j, i);
-					if (ui.TB_Inventory->item(j - 2, i - 1) != NULL) Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Inventory->item(j - 2, i - 1)->text()));
+					if (ui.TB_Sell->item(j - 2, i - 1) != NULL) Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Sell->item(j - 2, i - 1)->text()));
 					else Range->dynamicCall("SetValue(const QString &)", QVariant(""));
 				}
 			}
@@ -519,11 +553,24 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 	connect(ui.PB_Mdf_Staff, &QPushButton::clicked, [=]()mutable {
 		bool flag = false;
 		QString sID = QInputDialog::getText(this, "ID", "<html style = \"font-size:12pt;\">需要修改的员工ID</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sName = QInputDialog::getText(this, "姓名", "<html style = \"font-size:12pt;\">输入修改后姓名</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sSex = QInputDialog::getText(this, "性别", "<html style = \"font-size:12pt;\">输入修改后性别</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sAge = QInputDialog::getText(this, "年龄", "<html style = \"font-size:12pt;\">输入修改后年龄</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sSalary = QInputDialog::getText(this, "薪资", "<html style = \"font-size:12pt;\">输入修改后薪资</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
-		QString sInformation = QInputDialog::getText(this, "信息", "<html style = \"font-size:12pt;\">输入修改后信息</html>", QLineEdit::Normal, "", &flag); if (!flag) return;
+		if (sID.isEmpty()) return;
+		if (!db->DB_query("SELECT * FROM staff WHERE ID = " + sID.toStdString(), res, size)) {
+			QMessageBox::information(NULL, "提示", "查询失败!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			return;
+		}
+		auto row_data = mysql_fetch_row(res);
+		QString sName = row_data[1];
+		QString sSex = row_data[2];
+		QString sAge = row_data[3];
+		QString sSalary = row_data[4];
+		QString sInformation = row_data[5];
+		mysql_free_result(res);
+		sID = QInputDialog::getText(this, "ID", "<html style = \"font-size:12pt;\">需要修改的员工ID</html>", QLineEdit::Normal, sID, &flag); if (!flag) return;
+		sName = QInputDialog::getText(this, "姓名", "<html style = \"font-size:12pt;\">输入修改后姓名</html>", QLineEdit::Normal, sName, &flag); if (!flag) return;
+		sSex = QInputDialog::getText(this, "性别", "<html style = \"font-size:12pt;\">输入修改后性别</html>", QLineEdit::Normal, sSex, &flag); if (!flag) return;
+		sAge = QInputDialog::getText(this, "年龄", "<html style = \"font-size:12pt;\">输入修改后年龄</html>", QLineEdit::Normal, sAge, &flag); if (!flag) return;
+		sSalary = QInputDialog::getText(this, "薪资", "<html style = \"font-size:12pt;\">输入修改后薪资</html>", QLineEdit::Normal, sSalary, &flag); if (!flag) return;
+		sInformation = QInputDialog::getText(this, "信息", "<html style = \"font-size:12pt;\">输入修改后信息</html>", QLineEdit::Normal, sInformation, &flag); if (!flag) return;
 		db->DB_modify_staff(sID.toInt(), sName.toStdString(), sSex.toStdString(), sAge.toInt(), sSalary.toDouble(), sInformation.toStdString());
 		db->DB_query_staff(res, size);
 		ui.TB_Staff->setRowCount(size.first);
@@ -603,6 +650,36 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 		ui.TB_Income->setItem(12, 1, new QTableWidgetItem(QString::number(tot_sel)));
 		ui.TB_Income->setItem(12, 2, new QTableWidgetItem(QString::number(tot_pur)));
 		ui.TB_Income->setItem(12, 3, new QTableWidgetItem(QString::number(tot_sel - tot_pur)));
+		});
+
+	connect(ui.PB_Out_Inc, &QPushButton::clicked, [=]()mutable {
+		QString filepath = QFileDialog::getSaveFileName(this, tr("Save"), ".", tr(" (*.xlsx)"));
+		if (!filepath.isEmpty()) {
+			QAxObject* excel = new QAxObject(this);
+			excel->setControl("Excel.Application");
+			excel->dynamicCall("SetVisible (bool Visible)", "false");
+			excel->setProperty("DisplayAlerts", false);
+			QAxObject* workbooks = excel->querySubObject("WorkBooks");
+			workbooks->dynamicCall("Add");
+			QAxObject* workbook = excel->querySubObject("ActiveWorkBook");
+			QAxObject* worksheets = workbook->querySubObject("Sheets");
+			QAxObject* worksheet = worksheets->querySubObject("Item(int)", 1);
+			int rows = ui.TB_Income->rowCount();
+			int cols = ui.TB_Income->columnCount();
+			for (int i = 1; i <= cols; i++) {
+				QAxObject* Range = worksheet->querySubObject("Cells(int,int)", 1, i);
+				Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Income->horizontalHeaderItem(i - 1)->text()));
+				for (int j = 2; j < rows + 2; j++) {
+					QAxObject* Range = worksheet->querySubObject("Cells(int,int)", j, i);
+					if (ui.TB_Income->item(j - 2, i - 1) != NULL) Range->dynamicCall("SetValue(const QString &)", QVariant(ui.TB_Income->item(j - 2, i - 1)->text()));
+					else Range->dynamicCall("SetValue(const QString &)", QVariant(""));
+				}
+			}
+			workbook->dynamicCall("SaveAs(const QString&)", QDir::toNativeSeparators(filepath));
+			workbook->dynamicCall("Close()");
+			excel->dynamicCall("Quit()");
+			delete excel;
+		}
 		});
 }
 

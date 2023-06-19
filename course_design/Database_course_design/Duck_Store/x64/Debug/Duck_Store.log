@@ -1,7 +1,2 @@
-﻿  uic MainWindow.ui
-  Duck_Store.cpp
-  MainWindow.cpp
-  main.cpp
-  moc_Duck_Store.cpp
-  moc_MainWindow.cpp
+﻿  MainWindow.cpp
   Duck_Store.vcxproj -> D:\develop\code\course_design\Database_course_design\Duck_Store\x64\Debug\Duck_Store.exe

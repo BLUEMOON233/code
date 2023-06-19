@@ -325,7 +325,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="Page_Main">
      <widget class="QLabel" name="label_5">
@@ -433,7 +433,7 @@
        <rect>
         <x>10</x>
         <y>0</y>
-        <width>371</width>
+        <width>361</width>
         <height>61</height>
        </rect>
       </property>
@@ -453,7 +453,7 @@
       <widget class="QPushButton" name="PB_Que_Mer">
        <property name="geometry">
         <rect>
-         <x>230</x>
+         <x>220</x>
          <y>0</y>
          <width>131</width>
          <height>61</height>
@@ -487,6 +487,82 @@
        <property name="text">
         <string>商品名：</string>
        </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>0</y>
+        <width>341</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QPushButton" name="PB_Sel_Mer">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>0</y>
+         <width>131</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>幼圆</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>筛选类型</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>幼圆</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>类型：</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="CB_merchandise">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>20</y>
+         <width>101</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>食品类</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>饮品类</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>日用类</string>
+        </property>
+       </item>
       </widget>
      </widget>
     </widget>
@@ -1063,6 +1139,25 @@
         <string>查询收支</string>
        </property>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="PB_Out_Inc">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>0</y>
+        <width>131</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>幼圆</family>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>导出报表</string>
+      </property>
      </widget>
     </widget>
    </widget>
