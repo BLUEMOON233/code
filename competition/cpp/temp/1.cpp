@@ -46,12 +46,13 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
+	rep(i, 0, 127) printf("10'd%d:\nif(x < 128 && charline%03d[x]) pix_data = 12'hf00;\nelse if(x >= 128 && charline%03d[x-128]) pix_data = 12'hf00;\nelse vga_data = 12'h000;\n", i, (i * 2 + 2), (i * 2 + 1));
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Fri Jun 23 14:41:41 2023
+# Process ID: 21756
+# Current directory: D:/develop/code/course_design/verilog/verilog_coursedesign/Eye_Chart/Eye_Chart.runs/impl_1
+# Command line: vivado.exe -log EyeChart_Top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source EyeChart_Top.tcl -notrace
+# Log file: D:/develop/code/course_design/verilog/verilog_coursedesign/Eye_Chart/Eye_Chart.runs/impl_1/EyeChart_Top.vdi
+# Journal file: D:/develop/code/course_design/verilog/verilog_coursedesign/Eye_Chart/Eye_Chart.runs/impl_1\vivado.jou
+# Running On: LAPTOP-KVBO1570, OS: Windows, CPU Frequency: 2495 MHz, CPU Physical cores: 32, Host memory: 33965 MB
+#-----------------------------------------------------------
+source EyeChart_Top.tcl -notrace
