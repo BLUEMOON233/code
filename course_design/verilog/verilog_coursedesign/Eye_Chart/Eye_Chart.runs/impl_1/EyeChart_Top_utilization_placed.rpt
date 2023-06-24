@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-| Date         : Fri Jun 23 14:36:02 2023
+| Date         : Sat Jun 24 14:29:45 2023
 | Host         : LAPTOP-KVBO1570 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file EyeChart_Top_utilization_placed.rpt -pb EyeChart_Top_utilization_placed.pb
 | Design       : EyeChart_Top
@@ -80,10 +80,10 @@ Table of Contents
 |   LUT as Distributed RAM                   |    0 |     0 |            |           |       |
 |   LUT as Shift Register                    |    0 |     0 |            |           |       |
 | Slice Registers                            |  125 |     0 |          0 |     41600 |  0.30 |
-|   Register driven from within the Slice    |  116 |       |            |           |       |
-|   Register driven from outside the Slice   |    9 |       |            |           |       |
+|   Register driven from within the Slice    |  114 |       |            |           |       |
+|   Register driven from outside the Slice   |   11 |       |            |           |       |
 |     LUT in front of the register is unused |    0 |       |            |           |       |
-|     LUT in front of the register is used   |    9 |       |            |           |       |
+|     LUT in front of the register is used   |   11 |       |            |           |       |
 | Unique Control Sets                        |   10 |       |          0 |      8150 |  0.12 |
 +--------------------------------------------+------+-------+------------+-----------+-------+
 * * Note: Available Control Sets calculated as Slice * 1, Review the Control Sets Report for more information regarding control sets.

@@ -23,7 +23,7 @@
 module Vision2Seg(
     input clk,
     input sel_vis,
-    input [2:0] vision, 
+    input [2:0] vision,
     output reg [6:0] seg,
     output reg [3:0] an,
     output reg dp

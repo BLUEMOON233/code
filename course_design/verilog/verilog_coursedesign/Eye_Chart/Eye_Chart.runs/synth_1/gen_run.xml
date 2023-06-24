@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1687502088" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/EyeChart_Top.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1687588097" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/EyeChart_Top.dcp">
   <File Type="PA-TCL" Name="EyeChart_Top.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="EyeChart_Top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="EyeChart_Top_reports.tcl"/>
   <File Type="RDS-RDS" Name="EyeChart_Top.vds"/>
   <File Type="RDS-UTIL" Name="EyeChart_Top_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="EyeChart_Top_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="EyeChart_Top.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="EyeChart_Top_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="EyeChart_Top_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/Data2VGA.v">

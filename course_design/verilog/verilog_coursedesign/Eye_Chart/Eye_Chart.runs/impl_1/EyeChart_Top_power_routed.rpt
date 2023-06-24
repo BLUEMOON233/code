@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-| Date             : Fri Jun 23 14:36:19 2023
+| Date             : Sat Jun 24 14:30:06 2023
 | Host             : LAPTOP-KVBO1570 running 64-bit major release  (build 9200)
 | Command          : report_power -file EyeChart_Top_power_routed.rpt -pb EyeChart_Top_power_summary_routed.pb -rpx EyeChart_Top_power_routed.rpx
 | Design           : EyeChart_Top
@@ -59,7 +59,7 @@ Table of Contents
 |   Register     |    <0.001 |      125 |     41600 |            0.30 |
 |   F7/F8 Muxes  |    <0.001 |       26 |     32600 |            0.08 |
 |   Others       |     0.000 |       15 |       --- |             --- |
-| Signals        |     0.004 |     1567 |       --- |             --- |
+| Signals        |     0.004 |     1568 |       --- |             --- |
 | MMCM           |     0.115 |        1 |         5 |           20.00 |
 | I/O            |     0.008 |       39 |       106 |           36.79 |
 | Static Power   |     0.072 |          |           |                 |
