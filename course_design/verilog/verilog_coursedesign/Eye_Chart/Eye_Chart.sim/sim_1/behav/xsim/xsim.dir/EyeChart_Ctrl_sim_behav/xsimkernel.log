@@ -1,0 +1,7 @@
+Running: xsim.dir/EyeChart_Ctrl_sim_behav/xsimk.exe -simmode gui -wdb EyeChart_Ctrl_sim_behav.wdb -simrunnum 0 -socket 12454
+Design successfully loaded
+Design Loading Memory Usage: 8360 KB (Peak: 8360 KB)
+Design Loading CPU Usage: 0 ms
+Simulation completed
+Simulation Memory Usage: 8896 KB (Peak: 8896 KB)
+Simulation CPU Usage: 0 ms

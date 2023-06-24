@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../Eye_Chart.ip_user_files/ipstatic" \
+"../../../../Eye_Chart.srcs/sources_1/new/EyeChart_Control.v" \
+"../../../../Eye_Chart.srcs/sim_1/new/EyeChart_Ctrl_sim.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

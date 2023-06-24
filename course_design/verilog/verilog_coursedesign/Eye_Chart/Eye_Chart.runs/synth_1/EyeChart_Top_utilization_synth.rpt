@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-| Date         : Sat Jun 24 14:29:13 2023
+| Date         : Sun Jun 25 03:44:26 2023
 | Host         : LAPTOP-KVBO1570 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file EyeChart_Top_utilization_synth.rpt -pb EyeChart_Top_utilization_synth.pb
 | Design       : EyeChart_Top
@@ -151,9 +151,9 @@ Warning! LUT value is adjusted to account for LUT combining.
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     |  623 |                 LUT |
-| LUT4     |  530 |                 LUT |
-| LUT3     |  512 |                 LUT |
+| LUT6     |  622 |                 LUT |
+| LUT4     |  532 |                 LUT |
+| LUT3     |  511 |                 LUT |
 | LUT5     |  424 |                 LUT |
 | CARRY4   |  284 |          CarryLogic |
 | LUT1     |  143 |                 LUT |

@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "unisims_ver" -L "unimacro_ver" -L "secureip" -L "xpm" --snapshot "Data2VGA_sim_behav" "xil_defaultlib.Data2VGA_sim" "xil_defaultlib.glbl" -log "elaborate.log" 

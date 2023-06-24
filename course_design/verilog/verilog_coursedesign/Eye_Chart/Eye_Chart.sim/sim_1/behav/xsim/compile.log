@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/develop/code/course_design/verilog/verilog_coursedesign/Eye_Chart/Eye_Chart.srcs/sources_1/new/EyeChart_Control.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module EyeChart_Control
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/develop/code/course_design/verilog/verilog_coursedesign/Eye_Chart/Eye_Chart.srcs/sim_1/new/EyeChart_Ctrl_sim.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module EyeChart_Ctrl_sim

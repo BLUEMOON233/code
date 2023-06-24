@@ -27,9 +27,9 @@ module EyeChart_Control(
     output [1:0] rst
     );
     
-    reg [1:0] sel_cnt;
-    reg [1:0] sel_reg;
-    reg [1:0] rst_reg;
+    reg [1:0] sel_cnt = 2'd0;
+    reg [1:0] sel_reg = 2'd0;
+    reg [1:0] rst_reg = 2'd0;
     reg [25:0] reg_cnt = 26'd0;
     assign sel = sel_reg;
     assign rst = rst_reg;
@@ -43,7 +43,7 @@ module EyeChart_Control(
                 else rst_reg <= 2'd2;
             end
         end else begin
-            if(reg_cnt == 50000000) begin
+            if(reg_cnt == 50000000 - 1) begin
                 rst_reg <= 2'd0;
                 reg_cnt <= 26'd0;
                 sel_reg <= sel_cnt;

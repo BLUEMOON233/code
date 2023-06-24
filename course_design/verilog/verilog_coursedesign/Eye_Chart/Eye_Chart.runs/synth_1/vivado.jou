@@ -3,8 +3,8 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Sat Jun 24 14:28:22 2023
-# Process ID: 9172
+# Start of session at: Sun Jun 25 03:43:47 2023
+# Process ID: 24272
 # Current directory: D:/develop/code/course_design/verilog/verilog_coursedesign/Eye_Chart/Eye_Chart.runs/synth_1
 # Command line: vivado.exe -log EyeChart_Top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source EyeChart_Top.tcl
 # Log file: D:/develop/code/course_design/verilog/verilog_coursedesign/Eye_Chart/Eye_Chart.runs/synth_1/EyeChart_Top.vds

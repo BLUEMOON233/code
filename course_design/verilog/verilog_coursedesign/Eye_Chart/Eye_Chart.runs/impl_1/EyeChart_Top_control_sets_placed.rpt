@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
-| Date         : Sat Jun 24 14:29:45 2023
+| Date         : Sun Jun 25 03:44:53 2023
 | Host         : LAPTOP-KVBO1570 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file EyeChart_Top_control_sets_placed.rpt
 | Design       : EyeChart_Top
@@ -60,10 +60,10 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |              39 |           14 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |              39 |           12 |
-| Yes          | No                    | No                     |               7 |            4 |
+| No           | Yes                   | No                     |              39 |           14 |
+| Yes          | No                    | No                     |               7 |            2 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |              40 |           13 |
+| Yes          | Yes                   | No                     |              40 |           14 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -75,11 +75,11 @@ Table of Contents
 +--------------------------+----------------------------------------+--------------------------------------+------------------+----------------+--------------+
 |  nolabel_line120/clk_div |                                        | nolabel_line120/clr_cnt[3]_i_1_n_0   |                1 |              4 |         4.00 |
 |  clk_IBUF_BUFG           | nolabel_line120/pix_data[10]_i_1_n_0   | nolabel_line120/pix_data[11]_i_1_n_0 |                2 |              5 |         2.50 |
-|  clk_IBUF_BUFG           | nolabel_line120/pix_data[10]_i_1_n_0   |                                      |                4 |              7 |         1.75 |
-|  cw0/inst/clk_out        |                                        |                                      |                2 |              8 |         4.00 |
-|  cw0/inst/clk_out        |                                        | d2v/p_0_in                           |                4 |             10 |         2.50 |
-|  cw0/inst/clk_out        | d2v/p_0_in                             | d2v/y_cnt0                           |                4 |             10 |         2.50 |
-|  ec_c/E[0]               |                                        |                                      |                6 |             12 |         2.00 |
+|  clk_IBUF_BUFG           | nolabel_line120/pix_data[10]_i_1_n_0   |                                      |                2 |              7 |         3.50 |
+|  cw0/inst/clk_out        |                                        |                                      |                3 |              8 |         2.67 |
+|  cw0/inst/clk_out        |                                        | d2v/p_0_in                           |                6 |             10 |         1.67 |
+|  cw0/inst/clk_out        | d2v/p_0_in                             | d2v/y_cnt0                           |                5 |             10 |         2.00 |
+|  ec_c/E[0]               |                                        |                                      |                5 |             12 |         2.40 |
 |  clk_IBUF_BUFG           |                                        |                                      |                6 |             19 |         3.17 |
 |  clk_IBUF_BUFG           |                                        | nolabel_line120/clk_div_0            |                7 |             25 |         3.57 |
 |  cw0/inst/clk_out        | ec_c/FSM_onehot_rst_reg_reg[0]_inv_n_0 | ec_c/reg_cnt[25]_i_1_n_0             |                7 |             25 |         3.57 |
