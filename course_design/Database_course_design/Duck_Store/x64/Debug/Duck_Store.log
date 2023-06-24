@@ -1,2 +1,8 @@
-﻿  MainWindow.cpp
+﻿Qt5AxContainerd.lib(qaxbase.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxContainerd.lib(qaxbase.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+Qt5AxContainerd.lib(qaxobject.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxContainerd.lib(qaxobject.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+Qt5AxContainerd.lib(qaxtypes.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxContainerd.lib(qaxtypes.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+Qt5AxContainerd.lib(qaxutils.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxContainerd.lib(qaxutils.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+Qt5AxBased.lib(qaxtypefunctions.obj) : warning LNK4099: 未找到 PDB“”(使用“Qt5AxBased.lib(qaxtypefunctions.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+qtmain.lib(qtmain_win.obj) : warning LNK4099: 未找到 PDB“”(使用“qtmain.lib(qtmain_win.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
+MSVCRTD.lib(initializers.obj) : warning LNK4098: 默认库“msvcrt.lib”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
   Duck_Store.vcxproj -> D:\develop\code\course_design\Database_course_design\Duck_Store\x64\Debug\Duck_Store.exe

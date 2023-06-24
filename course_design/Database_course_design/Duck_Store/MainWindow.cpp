@@ -89,11 +89,15 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 			QMessageBox::information(NULL, "提示", "查询失败!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
+		if (size.first == 0) {
+			QMessageBox::information(NULL, "提示", "未找到该商品!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			return;
+		}
 		auto row_data = mysql_fetch_row(res);
 		QString sType = row_data[1];
 		QString sName = row_data[2];
-		QString sPrice = row_data[4];
-		QString sNumber = row_data[3];
+		QString sPrice = row_data[3];
+		QString sNumber = row_data[4];
 		QString sDiscount = row_data[5];
 		mysql_free_result(res);
 		sType = QInputDialog::getText(this, "类型", "<html style = \"font-size:12pt;\">请输入修改后类型</html>", QLineEdit::Normal, sType, &flag); if (!flag) return;
@@ -368,6 +372,10 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 			QMessageBox::information(NULL, "提示", "查询失败!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
+		if (size.first == 0) {
+			QMessageBox::information(NULL, "提示", "未找到该供应商!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			return;
+		}
 		auto row_data = mysql_fetch_row(res);
 		QString sName = row_data[1];
 		QString sAddress = row_data[2];
@@ -558,6 +566,10 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 			QMessageBox::information(NULL, "提示", "查询失败!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
 			return;
 		}
+		if (size.first == 0) {
+			QMessageBox::information(NULL, "提示", "未找到该员工!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			return;
+		}
 		auto row_data = mysql_fetch_row(res);
 		QString sName = row_data[1];
 		QString sSex = row_data[2];
@@ -565,13 +577,15 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 		QString sSalary = row_data[4];
 		QString sInformation = row_data[5];
 		mysql_free_result(res);
-		sID = QInputDialog::getText(this, "ID", "<html style = \"font-size:12pt;\">需要修改的员工ID</html>", QLineEdit::Normal, sID, &flag); if (!flag) return;
 		sName = QInputDialog::getText(this, "姓名", "<html style = \"font-size:12pt;\">输入修改后姓名</html>", QLineEdit::Normal, sName, &flag); if (!flag) return;
 		sSex = QInputDialog::getText(this, "性别", "<html style = \"font-size:12pt;\">输入修改后性别</html>", QLineEdit::Normal, sSex, &flag); if (!flag) return;
 		sAge = QInputDialog::getText(this, "年龄", "<html style = \"font-size:12pt;\">输入修改后年龄</html>", QLineEdit::Normal, sAge, &flag); if (!flag) return;
 		sSalary = QInputDialog::getText(this, "薪资", "<html style = \"font-size:12pt;\">输入修改后薪资</html>", QLineEdit::Normal, sSalary, &flag); if (!flag) return;
 		sInformation = QInputDialog::getText(this, "信息", "<html style = \"font-size:12pt;\">输入修改后信息</html>", QLineEdit::Normal, sInformation, &flag); if (!flag) return;
-		db->DB_modify_staff(sID.toInt(), sName.toStdString(), sSex.toStdString(), sAge.toInt(), sSalary.toDouble(), sInformation.toStdString());
+		if (!db->DB_modify_staff(sID.toInt(), sName.toStdString(), sSex.toStdString(), sAge.toInt(), sSalary.toDouble(), sInformation.toStdString())) {
+			QMessageBox::information(NULL, "提示", "修改失败!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			return;
+		}
 		db->DB_query_staff(res, size);
 		ui.TB_Staff->setRowCount(size.first);
 		ui.TB_Staff->setColumnCount(size.second);
@@ -593,19 +607,25 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 		for (int mon = 1; mon <= 12; mon++) {
 			double sum_sel = 0.0, sum_pur = 0.0;
 			ui.TB_Income->setItem(mon - 1, 0, new QTableWidgetItem(QString::fromStdString(year + "-" + std::to_string(mon))));
-			std::string str = "SELECT sum(price) FROM sell WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
+			std::string str = "SELECT price, number FROM sell WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
 			db->DB_query(str.c_str(), res, size);
 			if (size != std::pair<int, int>({ 0, 0 })) {
-				QString tmp_sum = mysql_fetch_row(res)[0];
-				sum_sel = tmp_sum.toDouble();
+				for (int i = 0; i < size.first; i++) {
+					auto rowd = mysql_fetch_row(res);
+					QString prc = rowd[0], num = rowd[1];
+					sum_sel += prc.toDouble() * num.toInt();
+				}
 			}
 			mysql_free_result(res);
 			ui.TB_Income->setItem(mon - 1, 1, new QTableWidgetItem(QString::number(sum_sel)));
-			str = "SELECT sum(price) FROM purchase WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
+			str = "SELECT price, number FROM purchase WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
 			db->DB_query(str.c_str(), res, size);
 			if (size != std::pair<int, int>({ 0, 0 })) {
-				QString tmp_sum = mysql_fetch_row(res)[0];
-				sum_pur = tmp_sum.toDouble();
+				for (int i = 0; i < size.first; i++) {
+					auto rowd = mysql_fetch_row(res);
+					QString prc = rowd[0], num = rowd[1];
+					sum_pur += prc.toDouble() * num.toInt();
+				}
 			}
 			mysql_free_result(res);
 			ui.TB_Income->setItem(mon - 1, 2, new QTableWidgetItem(QString::number(sum_pur)));
@@ -627,19 +647,25 @@ MainWindow::MainWindow(QWidget* parent, DataBase* db)
 		for (int mon = 1; mon <= 12; mon++) {
 			double sum_sel = 0.0, sum_pur = 0.0;
 			ui.TB_Income->setItem(mon - 1, 0, new QTableWidgetItem(QString::fromStdString(year + "-" + std::to_string(mon))));
-			std::string str = "SELECT sum(price) FROM sell WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
+			std::string str = "SELECT price, number FROM sell WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
 			db->DB_query(str.c_str(), res, size);
 			if (size != std::pair<int, int>({ 0, 0 })) {
-				QString tmp_sum = mysql_fetch_row(res)[0];
-				sum_sel = tmp_sum.toDouble();
+				for (int i = 0; i < size.first; i++) {
+					auto rowd = mysql_fetch_row(res);
+					QString prc = rowd[0], num = rowd[1];
+					sum_sel += prc.toDouble() * num.toInt();
+				}
 			}
 			mysql_free_result(res);
 			ui.TB_Income->setItem(mon - 1, 1, new QTableWidgetItem(QString::number(sum_sel)));
-			str = "SELECT sum(price) FROM purchase WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
+			str = "SELECT price, number FROM purchase WHERE month(date) = " + std::to_string(mon) + " and year(date) = " + year + ";";
 			db->DB_query(str.c_str(), res, size);
 			if (size != std::pair<int, int>({ 0, 0 })) {
-				QString tmp_sum = mysql_fetch_row(res)[0];
-				sum_pur = tmp_sum.toDouble();
+				for (int i = 0; i < size.first; i++) {
+					auto rowd = mysql_fetch_row(res);
+					QString prc = rowd[0], num = rowd[1];
+					sum_pur += prc.toDouble() * num.toInt();
+				}
 			}
 			mysql_free_result(res);
 			ui.TB_Income->setItem(mon - 1, 2, new QTableWidgetItem(QString::number(sum_pur)));

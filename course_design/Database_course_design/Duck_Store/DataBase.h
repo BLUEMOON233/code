@@ -19,7 +19,7 @@ public:
 	//对于商品关系模式的操作：
 	bool DB_insert_merchandise(int ID, std::string Type, std::string Name, double Price, double Discount = 1.0);
 	bool DB_delete_merchandise(int ID);
-	bool DB_modify_merchandise(int ID, std::string Type, std::string Name, int Number, double Price, double Discount);
+	bool DB_modify_merchandise(int ID, std::string Type, std::string Name, double Price, int Number, double Discount);
 	bool DB_query_merchandise(MYSQL_RES*& res, std::pair<int, int>& size);
 	//对于供应商关系模式的操作：
 	bool DB_insert_supplier(int ID, std::string Name, std::string Address, std::string Information);

@@ -55,7 +55,7 @@ bool DataBase::DB_delete_merchandise(int ID) {
 	return true;
 }
 
-bool DataBase::DB_modify_merchandise(int ID, std::string Type, std::string Name, int Number, double Price, double Discount) {
+bool DataBase::DB_modify_merchandise(int ID, std::string Type, std::string Name, double Price, int Number, double Discount) {
 	std::string str = "UPDATE merchandise SET Type = \'" + Type + "\', Name = \'" + Name + "\', Number = " + std::to_string(Number) + ", Price = " + std::to_string(Price) +
 		", Discount = " + std::to_string(Discount) + "WHERE ID = " + std::to_string(ID) + ";";
 	if (mysql_query(&mysql, str.c_str())) {
