@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/Duck_Store">
+        <file>image/MainPage.png</file>
+        <file>image/duck.jpg</file>
+        <file>image/NoPermission.png</file>
+    </qresource>
+</RCC>
