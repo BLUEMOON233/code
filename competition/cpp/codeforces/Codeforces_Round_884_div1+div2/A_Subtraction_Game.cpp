@@ -52,7 +52,7 @@ inline void solve() {
     rs[n / 2 + 1] = 1;
     rep(i, 1, n / 2) rs[i] = i * 2;
     per(i, n, n / 2 + 1) rs[i] = (n - i + 1) * 2 + 1;
-    debug1(rs, n);
+    debug1(rs, n + 1);
 }
 
 int main() {
