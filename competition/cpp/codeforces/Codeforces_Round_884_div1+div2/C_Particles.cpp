@@ -17,24 +17,24 @@ typedef pair<int, int> PII;
 #define No cout << "No\n"
 template<class T>
 inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
+    T x = 0, f = 1;
+    char ch = getchar();
+    while (!isdigit(ch)) {
+        if (ch == '-') f = -1;
+        ch = getchar();
+    }
+    while (isdigit(ch)) {
+        x = (x << 1) + (x << 3) + (ch ^ 48);
+        ch = getchar();
+    }
+    return x * f;
 }
 template<class T>
 inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
+    if (x < 0) putchar('-'), x = -x;
+    if (x > 9) write(x / 10);
+    putchar(x % 10 + '0');
+    return;
 }
 #define read() read<int>()
 #define write(tmp) write<int>(tmp);
@@ -46,13 +46,31 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-	
+    int n;
+    cin >> n;
+    vector<LL> a(n + 1);
+    bool f = true;
+    rep(i, 1, n) cin >> a[i];
+    rep(i, 1, n) if (a[i] >= 0) {
+        f = false;
+        break;
+    }
+    if (f) {
+        LL rs = -0x3f3f3f3f;
+        rep(i, 1, n) rs = max(rs, a[i]);
+        cout << rs << '\n';
+        return;
+    }
+    LL rs = 0, rss = 0;
+    for (int i = 1; i <= n; i += 2) if (a[i] > 0) rs += a[i];
+    for (int i = 2; i <= n; i += 2) if (a[i] > 0) rss += a[i];
+    cout << max(rss, rs) << '\n';
 }
 
 int main() {
-	fast();
-	int T = 1;
-	//	T = read();
-	cin >> T;
-	while (T--) solve();
+    fast();
+    int T = 1;
+    //	T = read();
+    cin >> T;
+    while (T--) solve();
 }
