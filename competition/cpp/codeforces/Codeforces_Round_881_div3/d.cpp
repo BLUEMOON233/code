@@ -1,0 +1,103 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+typedef unsigned int UI;
+typedef pair<int, int> PII;
+#define endl '\n'
+#define rep(i,j,k) for(int i=int(j);i<=int(k);i++)
+#define per(i,j,k) for(int i=int(j);i>=int(k);i--)
+#define mes(tmp, data) memset(tmp, data, sizeof tmp)
+#define debug(x) cerr << "(" << __LINE__ << ")" << #x << " = " << x << endl;
+#define debug0(tmp, Size) rep(i, 0, Size - 1) cout<<tmp[i]<<" \n"[i == Size - 1]
+#define debug1(tmp, Size) rep(i, 1, Size) cout<<tmp[i]<<" \n"[i == Size]
+#define fast() ios::sync_with_stdio(false); cin.tie(nullptr)
+#define YES cout << "YES\n"
+#define NO cout << "NO\n"
+#define Yes cout << "Yes\n"
+#define No cout << "No\n"
+template<class T>
+inline T read() {
+	T x = 0, f = 1;
+	char ch = getchar();
+	while (!isdigit(ch)) {
+		if (ch == '-') f = -1;
+		ch = getchar();
+	}
+	while (isdigit(ch)) {
+		x = (x << 1) + (x << 3) + (ch ^ 48);
+		ch = getchar();
+	}
+	return x * f;
+}
+template<class T>
+inline void write(T x) {
+	if (x < 0) putchar('-'), x = -x;
+	if (x > 9) write(x / 10);
+	putchar(x % 10 + '0');
+	return;
+}
+#define read() read<int>()
+#define write(tmp) write<int>(tmp);
+//#define read() read<LL>()
+//#define write(tmp) write<LL>(tmp);
+//#define read() read<__int128>()
+//#define write(tmp) write<__int128>(tmp);
+
+const int N = 2e5 + 7;
+
+int e[N << 1], ne[N << 1], h[N], idx = 0;
+LL sz[N];
+inline void add(int a, int b) {
+	e[++idx] = b, ne[idx] = h[a], h[a] = idx;
+}
+
+void dfs(int now, int fa) {
+	bool f = true;
+	for (int i = h[now]; i; i = ne[i]) {
+		int j = e[i];
+		if (j != fa) {
+			f = false;
+			break;
+		}
+	}
+	if (f)  {
+		sz[now] = 1;
+	}
+	for (int i = h[now]; i; i = ne[i]) {
+		int j = e[i];
+		if (j != fa) {
+			dfs(j, now);
+			sz[now] += sz[j];
+		}
+	}
+}
+
+
+inline void solve() {
+	idx = 0;
+	int n;
+	cin >> n;
+	rep(i, 1, n) h[i] = 0;
+	rep(i, 1, n) sz[i] = 0;
+	rep(i, 1, n - 1) {
+		int a, b;
+		cin >> a >> b;
+		add(a, b), add(b, a);
+	}
+	dfs(1, 0);
+	int q;
+	cin >> q;
+	while (q--) {
+		int x, y;
+		cin >> x >> y;
+		cout << sz[x] * sz[y] << '\n';
+	}
+}
+
+int main() {
+	fast();
+	int T = 1;
+	//	T = read();
+	cin >> T;
+	while (T--) solve();
+}

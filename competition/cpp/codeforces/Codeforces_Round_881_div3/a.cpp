@@ -46,6 +46,14 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
+	int n;
+	cin >> n;
+	vector<int> a(n + 1, 0);
+	rep(i, 1, n) cin >> a[i];
+	sort(a.begin() + 1, a.end());
+	LL rs = 0;
+	rep(i, 1, n / 2) rs += a[n - i + 1] - a[i];
+	cout << rs << '\n';
 }
 
 int main() {
