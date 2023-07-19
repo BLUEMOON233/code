@@ -241,20 +241,41 @@ LL quickPow(LL a, LL mod) {
 若 $a$, $b$ 是整数,且 $gcd(a,b)=d$，那么对于任意的整数 $x,\ y,\ ax+by$ 都一定是 $d$ 的倍数，特别地，一定存在整数 $x$, $y$，使 $ax+by=d$ 成立。
 它的一个重要推论是: $a$, $b$ 互质的充分必要条件是存在整数 $x$, $y$ 使 $ax+by=1$。
 对于 $ax + by = gcd(a, b)$ 其通解为 $x = x_0 + (b/gcd)*k,\ y = y_0 – (a/gcd)*k\ \ (k∈Z)$
+对于 $ax + by = c$ ，我们令 $gcd(a, b) = d,\ X = x/c*d,\ Y = x/c*d$，则原式化为 $aX + bY=d$，其有解条件为$c\ \%\ gcd(a,b)=0$
 
 ```C++
 LL exgcd(LL a, LL b, LL &x, LL &y) {
-    if (b == 0) {
-        x = 1, y = 0;
-        return a;
-    }
-    LL g = exgcd(b, a % b, y, x);
-    y -= a / b * x;
-    return g;
+	if (b == 0) {
+		x = 1, y = 0;
+		return a;
+	}
+	LL g = exgcd(b, a % b, y, x);
+	y -= a / b * x;
+	return g;
 } //g means gcd(a, b), {x, y} was a special solution of the equation "ax + by = gcd(a, b)";
+void exgcd(LL a, LL b, LL c, LL &x, LL &y) {
+	LL X, Y;
+	LL d = exgcd(a, b, X, Y);
+	if (c % d) {
+		cout << "No solution\n";
+		return;
+	}
+	X *= c / d, b /= d;
+	if (b < 0) b = -b;
+	x = X % b;
+	// 取零暴力：
+	while (x < 0) x += b;
+	// // 取零二分：
+	// LL l = 0, r = 1e14 / b;
+	// while (l < r) {
+	// 	LL mid = (l + r) >> 1;
+	// 	if (x + b * mid >= 0) r = mid;
+	// 	else l = mid + 1;
+	// }
+	// x += l * b;
+	y = (c - a * x) / (b * d);
+}
 ```
-
-
 
 
 
