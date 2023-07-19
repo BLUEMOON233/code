@@ -45,8 +45,23 @@ inline void write(T x) {
 
 const int N = 1;
 
+void merge(vector<PII> &segs) {
+	vector<PII> rs;
+	int l = -2e9, r = -2e9;
+	sort(segs.begin(), segs.end());
+	for (auto [i, j] : segs) {
+		if (r < i) {
+			if (l != -2e9) rs.push_back({l, r});
+			l = i, r = j;
+		}
+		else r = max(r, j);
+	}
+	if (l != -2e9) rs.push_back({l, r});
+	segs = rs;
+}
+
 inline void solve() {
-	
+
 }
 
 int main() {
