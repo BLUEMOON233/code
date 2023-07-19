@@ -926,4 +926,26 @@ void manacher(string data) {
 }
 ```
 
-****
+### 循环字符串的最小表示法
+
+**最小表示法：** 对于一个字符串S，求S的循环的同构字符串中字典序最小的一个。
+
+```C++
+string minCycStr(string &str) {
+	int i = 0, j = 1, k = 0;
+	int len = str.size();
+	while (i < len && j < len && k < len) {
+		int t = str[(i + k) % len] - str[(j + k) % len];
+		if (t == 0) k++;
+		else {
+			if (t > 0) i += k + 1;
+			else j += k + 1;
+			if (i == j) j++;
+			k = 0;
+		}
+	}
+	int minPos = i < j ? i : j;
+	return str.substr(minPos, len - minPos) + str.substr(0, minPos);
+}
+```
+

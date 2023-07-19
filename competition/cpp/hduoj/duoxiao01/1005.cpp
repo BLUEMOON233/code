@@ -45,7 +45,35 @@ inline void write(T x) {
 
 const int N = 1;
 
+string minCycStr(string &str) {
+	int i = 0, j = 1, k = 0;
+	int len = str.size();
+	while (i < len && j < len && k < len) {
+		int t = str[(i + k) % len] - str[(j + k) % len];
+		if (t == 0) k++;
+		else {
+			if (t > 0) i += k + 1;
+			else j += k + 1;
+			if (i == j) j++;
+			k = 0;
+		}
+	}
+	int minPos = i < j ? i : j;
+	return str.substr(minPos, len - minPos) + str.substr(0, minPos);
+}
+
 inline void solve() {
+	int n, m, q;
+	cin >> n >> m;
+	vector<string> str(n + 1);
+	rep(i, 1, n) cin >> str[i];
+	rep(i, 1, n) str[i] = minCycStr(str[i]);
+	cin >> q;
+	while (q--) {
+		int x, y;
+		cin >> x >> y;
+		cout << ((str[x] == str[y]) ? "Yes\n" : "No\n");
+	}
 }
 
 int main() {
