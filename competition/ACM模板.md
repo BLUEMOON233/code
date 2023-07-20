@@ -442,6 +442,38 @@ LL getInversion () {
 }
 ```
 
+```C++
+template <class T>
+struct Fenwick {
+	int n;
+	std::vector<T> a;
+	Fenwick(int n) {init(n);}
+	void init(int n) { this->n = n; a.assign(n + 1, T());}
+
+	void add(int x, T v) {
+		for (int i = x; i <= n; i += i & -i) a[i] += v;
+	}
+	T sum(int x) {
+		auto rs = T();
+		for (int i = x; i; i -= i & -i) rs += a[i];
+		return rs;
+	}
+	T rangeSum(int l, int r) {
+		return sum(r) - sum(l - 1);
+	}
+	int kth(T k) {
+		int x = 0;
+		for (int i = 1 << int(log2(n)); i; i /= 2) {
+			if (x + i < n && k > a[x + i]) {
+				x += i;
+				k -= a[x];
+			}
+		}
+		return x + 1;
+	}
+};
+```
+
 ### 分块
 
 **操作：**区间修改、区间查询、处理不满足区间可加性这种情况（优雅的暴力）
