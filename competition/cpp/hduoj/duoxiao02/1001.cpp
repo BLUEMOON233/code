@@ -15,37 +15,34 @@ typedef pair<int, int> PII;
 #define NO cout << "NO\n"
 #define Yes cout << "Yes\n"
 #define No cout << "No\n"
-template<class T>
-inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
-}
-template<class T>
-inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
-}
-#define read() read<int>()
-#define write(tmp) write<int>(tmp);
-//#define read() read<LL>()
-//#define write(tmp) write<LL>(tmp);
-//#define read() read<__int128>()
-//#define write(tmp) write<__int128>(tmp);
 
 const int N = 1;
 
 inline void solve() {
+	LL n, k;
+	cin >> k >> n;
+	if (n == 0) {
+		cout << "Bob\n";
+		return;
+	}
+	// LL now = k + 1;
+	// vector<LL> lose;
+	// while (now <= n) {
+	// 	lose.push_back(now);
+	// 	for (auto x : lose) if (x + now + k <= n) lose.push_back(x + now + k);
+	// }
+	// map<int, bool> mp;
+	LL now = 1;
+	while ((now * 2 - 1) * k + now <= n) {
+		if (n == (now * 2 - 1) * k + now) {
+			cout << "Bob\n";
+			return;
+		}
+		now++;
+	}
+	cout << "Alice\n";
+	// if (mp[n]) cout << "Bob\n";
+	// else cout << "Alice\n";
 }
 
 int main() {
