@@ -45,7 +45,43 @@ inline void write(T x) {
 
 const int N = 1;
 
+bool isPrime(LL x) {
+	rep(i, 2, x / i) {
+		if (x % i == 0) {
+			return false;
+		}
+	}
+	return true;
+}
+
 inline void solve() {
+	int n;
+	cin >> n;
+	vector<int> a(n + 1);
+	if (n == 1) {
+		int t;
+		cin >> t;
+		if (isPrime(t)) Yes;
+		else No;
+		return;
+	}
+	if (n == 2) {
+		int x, y;
+		cin >> x >> y;
+		if ((x + y) % 2 == 1) {
+			if (isPrime(x + y - 2)) Yes;
+			else No;
+		}
+		else {
+			Yes;
+		}
+		return;
+	}
+	LL sum = 0;
+	rep(i, 1, n) cin >> a[i];
+	rep(i, 1, n) sum += a[i];
+	if (sum >= 2LL * n) Yes;
+	else No;
 }
 
 int main() {
