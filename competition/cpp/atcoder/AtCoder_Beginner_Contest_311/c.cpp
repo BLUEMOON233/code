@@ -44,15 +44,35 @@ inline void write(T x) {
 //#define write(tmp) write<__int128>(tmp);
 
 const int N = 1;
+vector<int> g;
+vector<bool> st;
 
 inline void solve() {
-	
+	int n;
+	cin >> n;
+	g.resize(n + 1);
+	st.resize(n + 1, false);
+	rep(i, 1, n) cin >> g[i];
+	int now = 1;
+	while (!st[now]) {
+		st[now] = true;
+		now = g[now];
+	}
+	vector<int> rs;
+	while (st[now]) {
+		st[now] = false;
+		rs.emplace_back(now);
+		now = g[now];
+	}
+	cout << rs.size() << '\n';
+	for (auto x : rs) cout << x << ' ';
+	cout << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

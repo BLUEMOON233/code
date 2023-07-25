@@ -46,13 +46,27 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-	
+	int n, d;
+	cin >> n >> d;
+	vector<string> s(n + 1);
+	rep(i, 1, n) cin >> s[i];
+	vector<bool> st(d + 1, true);
+	rep(i, 1, n) {
+		rep(j, 0, d - 1) if (s[i][j] == 'x') st[j + 1] = false;
+	}
+	int len = 0, rs = 0;
+	rep(i, 1, d) {
+		if (st[i]) len++;
+		else rs = max(rs, len), len = 0;
+	}
+	rs = max(rs, len), len = 0;
+	cout << rs << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

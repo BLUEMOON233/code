@@ -15,44 +15,40 @@ typedef pair<int, int> PII;
 #define NO cout << "NO\n"
 #define Yes cout << "Yes\n"
 #define No cout << "No\n"
-template<class T>
-inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
-}
-template<class T>
-inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
-}
-#define read() read<int>()
-#define write(tmp) write<int>(tmp);
-//#define read() read<LL>()
-//#define write(tmp) write<LL>(tmp);
-//#define read() read<__int128>()
-//#define write(tmp) write<__int128>(tmp);
 
 const int N = 1;
+LL n, k;
+
+bool check(LL x, vector<LL> &a) {
+    LL r = n;
+    rep(i, 1, k) {
+        while(r > 0 && a[r] > x) r--;
+        x -= r;
+    }
+    return x >= 1;
+}
 
 inline void solve() {
-	
+    cin >> n >> k;
+    vector<LL> a(n + 1);
+    rep(i, 1, n) cin >> a[i];
+    if (a[1] > 1) {
+        cout << 1 << '\n';
+        return;
+    }
+    LL l = 1, r = 1e18;
+    while (l < r) {
+        LL mid = (l + r) >> 1;
+        if (check(mid, a)) r = mid;
+        else l = mid + 1;
+    }
+    cout << l << '\n';
 }
 
 int main() {
-	fast();
-	int T = 1;
-	//	T = read();
-	cin >> T;
-	while (T--) solve();
+    fast();
+    int T = 1;
+    //	T = read();
+    cin >> T;
+    while (T--) solve();
 }

@@ -46,13 +46,26 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-	
+	int n;
+	cin >> n;
+	string s;
+	cin >> s;
+	map<char, int> mp;
+	rep(i, 0, n - 1) {
+		mp[s[i]]++;
+		bool f = true;
+		rep(c, 'A', 'C') if (mp[char(c)] == 0) f = false;
+		if (f) {
+			cout << i + 1 << '\n';
+			return;
+		}
+	}
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }
