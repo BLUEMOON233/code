@@ -58,31 +58,22 @@ inline void solve() {
 	__int128 n, x;
 	n = read();
 	x = read();
-	// debug1(euler, 100);
-	// x %= mod;
+	x %= mod;
 	if (x == 1) {
-		// cout << quickPow(2, n + 1, mod) << '\n';
-		__int128 rs = quickPow(2, (n + 1) % 402653184, mod - 1);
+		__int128 rs = quickPow(2, n + 1, mod);
 		write(rs);
 		putchar('\n');
 		return;
 	}
-
-// 	__int128 xxx = quickPow(998244352, mod - 2, mod);
-	__int128 c = quickPow(2, (n + 1) % 402653184, mod - 1);
-	__int128 xx = quickPow(x - 1 + mod, mod - 2, mod);
-	__int128 rs = (quickPow(x, c, mod) - 1 + mod) % mod * xx % mod;
-	// __int128 rs = (quickPow(x, c, mod) - 1 + mod) % mod % ((x - 1) * mod) / (x - 1);
-	// cout << rs << '\n';
+	__int128 e = quickPow(2, (n + 1) % (mod - 1), mod);
+	__int128 xx = quickPow(x - 1, mod - 2, mod);
+	__int128 rs = (quickPow(x, e, mod) - 1 + mod) % mod * xx % mod;
 	write(rs);
 	putchar('\n');
 }
 
 int main() {
-	// fast();
+	fast();
 	int T = 1;
-	// Euler();
-// 	T = read();
-	// cin >> T;
 	while (T--) solve();
 }
