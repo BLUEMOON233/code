@@ -36,44 +36,41 @@ inline void write(T x) {
 	putchar(x % 10 + '0');
 	return;
 }
-// #define read() read<int>()
-// #define write(tmp) write<int>(tmp);
+#define read() read<int>()
+#define write(tmp) write<int>(tmp);
 //#define read() read<LL>()
 //#define write(tmp) write<LL>(tmp);
-#define read() read<__int128>()
-#define write(tmp) write<__int128>(tmp);
+//#define read() read<__int128>()
+//#define write(tmp) write<__int128>(tmp);
 
-const __int128 mod = 998244353;
-
-__int128  quickPow(__int128 a, __int128 b, __int128 mod) {
-	__int128 rs = 1;
-	while (b) {
-		if (b & 1) rs = rs * a % mod;
-		b >>= 1, a = a * a % mod;
-	}
-	return rs % mod;
-}
+const int N = 1, mod = 998244353;
 
 inline void solve() {
-	__int128 n, x;
-	n = read();
-	x = read(); 
-	x %= mod;
-	if (x == 1) {
-		__int128 rs = quickPow(2, n + 1, mod);
-		write(rs);
-		putchar('\n');
-		return;
+	int n, m;
+	cin >> n >> m;
+	vector<int> dp(2 * m + 1, 1);
+	rep(i, 2, n) {
+		vector<int> g(2 * m + 1);
+		rep(j, 0, 2 * m) {
+			if (j < m) { // 为负数
+				g[m] = (g[m] + dp[j]);
+				g[m + j + 1] = (g[m + j + 1] - dp[j] + mod) % mod;
+			} else {
+				g[2 * m - j] = (g[2 * m - j] + dp[j]) % mod;
+			}
+		}
+		rep(j, 1, 2 * m) g[j] = (g[j] + g[j - 1]) % mod;
+		swap(dp, g);
 	}
-	__int128 e = quickPow(2, (n + 1) % (mod - 1), mod);
-	__int128 xx = quickPow(x - 1, mod - 2, mod);
-	__int128 rs = (quickPow(x, e, mod) - 1 + mod) % mod * xx % mod;
-	write(rs);
-	putchar('\n');
+	LL rs = 0;
+	rep(i, 0, 2 * m) rs = (rs + dp[i]) % mod;
+	cout << rs << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
+	//	T = read();
+	// cin >> T;
 	while (T--) solve();
 }
