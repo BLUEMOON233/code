@@ -51,24 +51,23 @@ inline void solve() {
 	string str;
 	cin >> str;
 	str = '@' + str;
-	int cnt = 1;
-	vector<int> flag(n + 1, 0);
+	vector<int> l0(n + 1, -1), r1(n + 2, n + 1);
 	rep(i, 1, n) {
-		if (str[i] == '0' && str[i - 1] != '0') cnt++;
-		flag[i] = cnt;
+		if (str[i] == '0') l0[i] = i;
+		else l0[i] = l0[i - 1];
 	}
-	debug1(flag, n);
-	map<PII, bool> mp;
-	LL rs = 0;
+	per(i, n, 1) {
+		if (str[i] == '1') r1[i] = i;
+		else r1[i] = r1[i + 1];
+	}
+	set<PII> st;
 	while (m--) {
-		int l, r;
-		cin >> l >> r;
-		if (flag[l] == flag[r]) continue;
-		if (mp[ {l, r}]) continue;
-		rs ++;
-		mp[ {l, r}] = true;
+		int x, y;
+		cin >> x >> y;
+		if (r1[x] > l0[y]) st.insert({0, 0});
+		else st.insert({r1[x], l0[y]});
 	}
-	cout << rs << '\n';
+	cout << st.size() << '\n';
 }
 
 int main() {
