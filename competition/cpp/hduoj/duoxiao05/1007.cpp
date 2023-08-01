@@ -43,9 +43,45 @@ inline void write(T x) {
 //#define read() read<__int128>()
 //#define write(tmp) write<__int128>(tmp);
 
-const int N = 1;
+const int N = 1, mod = 998244353;
+
+LL quickPow(LL a, LL b, LL mod) {
+	LL rs = 1;
+	while (b) {
+		if (b & 1) rs = rs * a % mod;
+		b >>= 1, a = a * a % mod;
+	}
+	return rs % mod;
+}
 
 inline void solve() {
+	LL n, m, a, b;
+	cin >> n >> m >> a >> b;
+	LL bb = quickPow(b, mod - 2, mod);
+	LL A = a * bb % mod;
+	LL B = (b - a + mod) % mod * bb % mod;
+	LL BB = quickPow(B, mod - 2, mod);
+	LL nowA = 1;
+	LL nowB = quickPow(B, n, mod);
+	LL pre = 0, C;
+	LL rs = 0;
+	rep(i, 1, n) {
+		LL now = quickPow(i, m, mod);
+		pre = (pre + now) % mod;
+		// C / i * i + 1
+		if (i == 1) {
+			C = n;
+		} else {
+			LL t = quickPow(i, mod - 2, mod);
+			C = C * t % mod;
+			C = C * (n - i + 1) % mod;
+		}
+		nowA = nowA * A % mod;
+		nowB = nowB * BB % mod;
+		LL trs = C * nowA % mod * nowB % mod * pre % mod;
+		rs = (rs + trs) % mod;
+	}
+	cout << rs << '\n';
 }
 
 int main() {
