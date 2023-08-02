@@ -43,9 +43,36 @@ inline void write(T x) {
 //#define read() read<__int128>()
 //#define write(tmp) write<__int128>(tmp);
 
-const int N = 1;
+const int N = 1e6 + 7;
+int e[N << 1], ne[N << 1], h[N], idx = 0;
+inline void add(int a, int b) {
+	e[++idx] = b, ne[idx] = h[a], h[a] = idx;
+}
+int out[N], in[N];
+LL rs[N];
+
+void dfs(int now) {
+	bool f = false;
+	if (rs[now]) f = true;
+	for (int i = h[now]; i; i = ne[i]) {
+		int j = e[i];
+		if (f) continue;
+		rs[now] += out[j];
+		dfs(j);
+	}
+}
 
 inline void solve() {
+	int n, m;
+	cin >> n >> m;
+	while (m--) {
+		int x, y;
+		cin >> x >> y;
+		add(x, y);
+		out[x]++, in[y]++;
+	}
+	rep(i, 1, n) if (in[i] == 0) dfs(i);
+	rep(i, 1, n) cout << rs[i] << " \n"[i == n];
 }
 
 int main() {
