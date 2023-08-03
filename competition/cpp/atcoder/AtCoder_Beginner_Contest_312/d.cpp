@@ -1,70 +1,112 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long LL;
-typedef unsigned int UI;
+typedef long long i64;
 typedef pair<int, int> PII;
 #define endl '\n'
 #define rep(i,j,k) for(int i=int(j);i<=int(k);i++)
 #define per(i,j,k) for(int i=int(j);i>=int(k);i--)
-#define mes(tmp, data) memset(tmp, data, sizeof tmp)
-#define debug(x) cerr << "(" << __LINE__ << ")" << #x << " = " << x << endl;
-#define debug0(tmp, Size) rep(i, 0, Size - 1) cout<<tmp[i]<<" \n"[i == Size - 1]
-#define debug1(tmp, Size) rep(i, 1, Size) cout<<tmp[i]<<" \n"[i == Size]
 #define fast() ios::sync_with_stdio(false); cin.tie(nullptr)
-#define YES cout << "YES\n"
-#define NO cout << "NO\n"
-#define Yes cout << "Yes\n"
-#define No cout << "No\n"
-template<class T>
-inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
+constexpr int P = 998244353;
+using i64 = long long;
+// assume -P <= x < 2P
+int norm(int x) {
+	if (x < 0) {
+		x += P;
 	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
+	if (x >= P) {
+		x -= P;
 	}
-	return x * f;
+	return x;
 }
 template<class T>
-inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
-}
-#define read() read<int>()
-#define write(tmp) write<int>(tmp);
-//#define read() read<LL>()
-//#define write(tmp) write<LL>(tmp);
-//#define read() read<__int128>()
-//#define write(tmp) write<__int128>(tmp);
-
-const int N = 1, mod = 998244353;
-
-LL quickPow(LL a, LL b, LL mod) {
-	LL rs = 1;
-	while (b) {
-		if (b & 1) rs = rs * a % mod;
-		b >>= 1, a = a * a % mod;
+T power(T a, i64 b) {
+	T res = 1;
+	for (; b; b /= 2, a *= a) {
+		if (b % 2) {
+			res *= a;
+		}
 	}
-	return rs % mod;
+	return res;
 }
+struct Z {
+	int x;
+	Z(int x = 0) : x(norm(x)) {}
+	Z(i64 x) : x(norm(x % P)) {}
+	int val() const {
+		return x;
+	}
+	Z operator-() const {
+		return Z(norm(P - x));
+	}
+	Z inv() const {
+		assert(x != 0);
+		return power(*this, P - 2);
+	}
+	Z &operator*=(const Z &rhs) {
+		x = i64(x) * rhs.x % P;
+		return *this;
+	}
+	Z &operator+=(const Z &rhs) {
+		x = norm(x + rhs.x);
+		return *this;
+	}
+	Z &operator-=(const Z &rhs) {
+		x = norm(x - rhs.x);
+		return *this;
+	}
+	Z &operator/=(const Z &rhs) {
+		return *this *= rhs.inv();
+	}
+	friend Z operator*(const Z &lhs, const Z &rhs) {
+		Z res = lhs;
+		res *= rhs;
+		return res;
+	}
+	friend Z operator+(const Z &lhs, const Z &rhs) {
+		Z res = lhs;
+		res += rhs;
+		return res;
+	}
+	friend Z operator-(const Z &lhs, const Z &rhs) {
+		Z res = lhs;
+		res -= rhs;
+		return res;
+	}
+	friend Z operator/(const Z &lhs, const Z &rhs) {
+		Z res = lhs;
+		res /= rhs;
+		return res;
+	}
+	friend std::istream &operator>>(std::istream &is, Z &a) {
+		i64 v;
+		is >> v;
+		a = Z(v);
+		return is;
+	}
+	friend std::ostream &operator<<(std::ostream &os, const Z &a) {
+		return os << a.val();
+	}
+};
 
 inline void solve() {
 	string str;
 	cin >> str;
 	int n = str.size();
 	str = '@' + str;
-	int cntl = 0, cntr = 0, cnta = 0;
-	rep(i, 1, n) if (str[i] == ')') {
-		cntl++;
-		int dis = cntl - cntr;
-
+	vector<vector<Z> > dp(n + 2, vector<Z>(n + 2, 0));
+	dp[0][0] = 1;
+	rep(i, 1, n) {
+		if (str[i] == '?') dp[i][0] += dp[i - 1][1];
+		if (str[i] == '?') dp[i][n] += dp[i - 1][n - 1];
+		if (str[i] == ')') dp[i][0] += dp[i - 1][1];
+		if (str[i] == '(') dp[i][n] += dp[i - 1][n - 1];
+		rep(j, 1, n - 1) {
+			if (str[i] == '(') dp[i][j] += dp[i - 1][j - 1];
+			else if (str[i] == ')') dp[i][j] += dp[i - 1][j + 1];
+			else dp[i][j] += dp[i - 1][j - 1] + dp[i - 1][j + 1];
+		}
 	}
+	cout << dp[n][0] << '\n';
 }
 
 int main() {

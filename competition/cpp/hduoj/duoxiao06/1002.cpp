@@ -43,15 +43,56 @@ inline void write(T x) {
 //#define read() read<__int128>()
 //#define write(tmp) write<__int128>(tmp);
 
-const int N = 1;
+const int N = 1e5 + 7, mod = 998244353;
+vector<int> num;
+
+void init() {
+	rep(i, 1, sqrt(2e5)) {
+		num.push_back(i * i);
+	}
+}
+
 
 inline void solve() {
+	int n;
+	cin >> n;
+	vector<int> p(n + 1);
+	vector<int> prel(n + 2), prer(n + 2);
+	unordered_map<int, int> mp;
+	rep(i, 1, n) cin >> p[i];
+	rep(i, 1, n) mp[p[i]] = i;
+
+	vector<PII> bug;
+	rep(i, 1, n) for (auto x : num) {
+		int l = i, r = mp[x - p[i]];
+		if (mp[x - p[i]] == 0) continue;
+		if (l >= r) continue;
+		// cout << l << ' ' << r << '\n';
+		bug.emplace_back(l, r);
+	}
+	cout << bug.size() << '\n';
+	sort(bug.begin(), bug.end(), [](PII & a, PII & b) {
+		if (a.second - a.first == b.second - b.first) return a.first < b.first;
+		return a.second - a.first < b.second - b.first;
+	});
+	for (auto [x, y] : bug) cout << x << ' ' << y << '\n';
+	// YES;
+	// debug1(prel, n);
+	int q;
+	cin >> q;
+	while (q--) {
+		int l, r;
+		cin >> l >> r;
+		// cout << query(1, l, r) << '\n';
+		// cout << min(prel[l], prer[r]) << '\n';
+	}
 }
 
 int main() {
-	fast();
+	// fast();
 	int T = 1;
 	//	T = read();
+	init();
 	cin >> T;
 	while (T--) solve();
 }

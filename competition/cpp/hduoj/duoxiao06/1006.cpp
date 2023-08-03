@@ -43,14 +43,34 @@ inline void write(T x) {
 //#define read() read<__int128>()
 //#define write(tmp) write<__int128>(tmp);
 
-const int N = 1;
+const int N = 1, mod = 998244353;
+
+// vector<int> num;
+unordered_map<int, bool> mp;
+void init() {
+	rep(i, 1, 300) {
+		mp[i * i] = true;
+	}
+}
 
 inline void solve() {
+	int n;
+	cin >> n;
+	vector<int> a(n + 1);
+	rep(i, 1, n) cin >> a[i];
+	vector<LL> pre(n + 1);
+	rep(i, 1, n) pre[i] = pre[i - 1] + a[i];
+	LL rs = 0;
+	rep(l, 1, n) rep(r, 1, n) {
+		if (mp[pre[r] - pre[l - 1]]) rs++;
+	}
+	cout << rs << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
+	init();
 	//	T = read();
 	cin >> T;
 	while (T--) solve();

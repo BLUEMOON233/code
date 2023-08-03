@@ -234,9 +234,43 @@ LL quickPow(LL a, LL mod) {
 }
 ```
 
+### 组合数
+
+ ```C++
+ const int mod = 1e9 + 7;
+ struct Comb {
+ 	const int N;
+ 	vector<LL> fac, invfac;
+ 	Comb(int n) : N(n), fac(n + 2), invfac(n + 2) { init(); };
+ 	LL qpow(LL x, LL p) {
+ 		LL res = 1 % mod; x %= mod;
+ 		for (; p; p >>= 1, x = x * x % mod)
+ 			if (p & 1) res = res * x % mod;
+ 		return res;
+ 	}
+ 	LL inv(LL x) { return qpow(x, mod - 2); };
+ 	void init() {
+ 		fac[0] = 1;
+ 		for (int i = 1; i <= N; ++i) fac[i] = fac[i - 1] * i % mod;
+ 		invfac[N] = inv(fac[N]);
+ 		for (int i = N - 1; i >= 0; --i) invfac[i] = (invfac[i + 1] * (i + 1)) % mod;
+ 	}
+ 	LL C(int n, int m) {
+ 		if (n < m || m < 0) return 0;
+ 		return fac[n] * invfac[m] % mod * invfac[n - m] % mod;
+ 	}
+ 	LL A(int n, int m) {
+ 		if (n < m || m < 0) return 0;
+ 		return fac[n] * invfac[n - m] % mod;
+ 	}
+ };
+ ```
+
+
+
 ### 扩展欧几里得（Exgcd）
 
-#### 裴蜀定理
+#### 裴蜀定理œ
 
 若 $a$, $b$ 是整数,且 $gcd(a,b)=d$，那么对于任意的整数 $x,\ y,\ ax+by$ 都一定是 $d$ 的倍数，特别地，一定存在整数 $x$, $y$，使 $ax+by=d$ 成立。
 它的一个重要推论是: $a$, $b$ 互质的充分必要条件是存在整数 $x$, $y$ 使 $ax+by=1$。
