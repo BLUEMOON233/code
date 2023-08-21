@@ -46,13 +46,21 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-
+	int n;
+	cin >> n;
+	vector<double> a(n + 1);
+	rep(i, 1, n) cin >> a[i];
+	double l = 0, r = 0;
+	sort(a.begin() + 1, a.end());
+	rep(i, 1, n - 1) l += a[i];
+	rep(i, 2, n) r += a[i];
+	cout << fixed << setprecision(6) << l / (n - 1) << ' ' << r / (n - 1) << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

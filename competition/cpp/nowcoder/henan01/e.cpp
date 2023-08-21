@@ -46,13 +46,24 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-
+	int n, m;
+	cin >> n >> m;
+	vector<LL> a(n + 1);
+	rep(i, 1, n) cin >> a[i];
+	LL pre = 0, rs = 0;
+	unordered_map<LL, int> mp;
+	rep(i, 1, n) {
+		pre += a[i];
+		rs += mp[pre - m];
+		mp[pre]++;
+	}
+	cout << rs << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

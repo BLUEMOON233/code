@@ -46,13 +46,12 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

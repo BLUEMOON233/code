@@ -46,13 +46,29 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-
+	int n;
+	cin >> n;
+	string str;
+	cin >> str;
+	str += '0';
+	vector<int> rs;
+	int l = 0;
+	for (auto c : str)
+		if (c == '1') l++;
+		else {
+			if (l) rs.emplace_back(l);
+			l = 0;
+		}
+	sort(rs.begin(), rs.end());
+	LL ans = 0;
+	per(i, rs.size() - 1, max(int(rs.size() - 2), 0)) ans += rs[i];
+	cout << ans << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }
