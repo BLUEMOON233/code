@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long LL;
 typedef unsigned int UI;
@@ -46,41 +46,7 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-	string s;
-	cin >> s;
-	LL a = 0, b = 0, c = 0, d = 0;
-	int p = 0;
-	while (p < s.length() && !isdigit(s[p])) {
-		a *= 26;
-		a += s[p] - 'A' + 1;
-		p++;
-	}
-	while (p < s.length() && isdigit(s[p])) {
-		b *= 10;
-		b += s[p] - '0';
-		p++;
-	}
-	while (p < s.length() && !isdigit(s[p])) {
-		c *= 26;
-		c += s[p] - 'A' + 1;
-		p++;
-	}
-	while (p < s.length() && isdigit(s[p])) {
-		d *= 10;
-		d += s[p] - '0';
-		p++;
-	}
-	if (a == 18 && c == 3) {
-		string rs = "";
-		while (d) {
-			rs += 'A' + (d - 1) % 26;
-			d = (d - 1) / 26;
-		}
-		reverse(rs.begin(), rs.end());
-		cout << rs << b << '\n';
-	} else {
-		cout << 'R' << b << 'C' << a << '\n';
-	}
+    
 }
 
 int main() {
