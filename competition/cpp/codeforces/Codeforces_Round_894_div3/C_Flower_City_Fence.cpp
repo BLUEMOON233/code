@@ -46,40 +46,27 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-    int n, m;
-    cin >> n >> m;
-    int p = 1;
-    vector<vector<char>> g(n + 1, vector<char>(m + 1));
-    rep(i, 1, n) rep(j, 1, m) cin >> g[i][j];
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'v') f = true;
-        if (f) break;
-        p++;
+    int n;
+    cin >> n;
+    vector<LL> a(n + 1);
+    rep(i, 1, n) cin >> a[i];
+    if (a[1] > n) {
+        NO;
+        return;
     }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'i') f = true;
-        if (f) break;
-        p++;
+    reverse(a.begin() + 1, a.end());
+    vector<int> rs;
+    rs.emplace_back(0);
+    rep(i, 1, n) {
+        rs.emplace_back(a.end() - lower_bound(a.begin() + 1, a.end(), i));
     }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'k') f = true;
-        if (f) break;
-        p++;
+    reverse(a.begin() + 1, a.end());
+    // debug1(rs, n);
+    rep(i, 1, n) if (a[i] != rs[i]) {
+        NO;
+        return;
     }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'a') f = true;
-        if (f) break;
-        p++;
-    }
-    if(p <= m) YES;
-    else NO;
+    YES;
 }
 
 int main() {

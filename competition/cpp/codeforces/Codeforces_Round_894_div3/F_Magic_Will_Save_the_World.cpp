@@ -46,40 +46,24 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-    int n, m;
-    cin >> n >> m;
-    int p = 1;
-    vector<vector<char>> g(n + 1, vector<char>(m + 1));
-    rep(i, 1, n) rep(j, 1, m) cin >> g[i][j];
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'v') f = true;
-        if (f) break;
-        p++;
+    int w, f;
+    cin >> w >> f;
+    int n, sum = 0;
+    cin >> n;
+    vector<int> s(n + 1);
+    rep(i, 1, n) cin >> s[i];
+    rep(i, 1, n) sum += s[i];
+    vector<bool> st(sum + 1, false);
+    st[0] = true;
+    rep(i, 1, n) per(j, sum, s[i]) st[j] = st[j] || st[j - s[i]];
+    LL rs = sum;
+    rep(i, 0, sum) if (st[i]) {
+        LL a = i, b = sum - i;
+        a = (a + w - 1) / w;
+        b = (b + f - 1) / f;
+        rs = min(rs, max(a, b));
     }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'i') f = true;
-        if (f) break;
-        p++;
-    }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'k') f = true;
-        if (f) break;
-        p++;
-    }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'a') f = true;
-        if (f) break;
-        p++;
-    }
-    if(p <= m) YES;
-    else NO;
+    cout << rs << '\n';
 }
 
 int main() {

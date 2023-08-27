@@ -46,40 +46,45 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-    int n, m;
-    cin >> n >> m;
-    int p = 1;
-    vector<vector<char>> g(n + 1, vector<char>(m + 1));
-    rep(i, 1, n) rep(j, 1, m) cin >> g[i][j];
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'v') f = true;
-        if (f) break;
-        p++;
+    int n;
+    cin >> n;
+    vector<LL> a(n + 1);
+    rep(i, 1, n) cin >> a[i];
+    multiset<LL> s, d;
+    rep(i, 1, n) s.insert(a[i]);
+    for (auto it = s.begin(); it != s.end(); it++) {
+        if (it == s.begin()) continue;
+        d.insert(*it - *prev(it));
     }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'i') f = true;
-        if (f) break;
-        p++;
+    // for (auto it = s.begin(); it != s.end(); it++) cout << *it << ' ';
+    // cout << '\n';
+    int q;
+    cin >> q;
+    while (q--) {
+        LL p, x;
+        cin >> p >> x;
+        if (n == 1) {
+            a[p] = x;
+            cout << a[1] << ' ';
+            continue;
+        }
+        s.erase(s.lower_bound(a[p]));
+        auto it = s.lower_bound(a[p]);
+        if (it != s.end()) d.erase(d.lower_bound(*it - a[p]));
+        if (it != s.begin()) d.erase(d.lower_bound(a[p] - *prev(it)));
+        if (it != s.end() && it != s.begin()) d.insert(*it - *prev(it));
+        a[p] = x;
+        it = s.lower_bound(a[p]);
+        if (it != s.end()) d.insert(*it - a[p]);
+        if (it != s.begin()) d.insert(a[p] - *prev(it));
+        if (it != s.end() && it != s.begin()) d.erase(d.lower_bound(*it - *prev(it)));
+        s.insert(a[p]);
+        // cout << "\ntest:\n";
+        // for (auto it = d.begin(); it != d.end(); it++) cout << *it << ' ';
+        // cout << '\n';
+        cout << *prev(s.end()) + *prev(d.end()) << ' ';
     }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'k') f = true;
-        if (f) break;
-        p++;
-    }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'a') f = true;
-        if (f) break;
-        p++;
-    }
-    if(p <= m) YES;
-    else NO;
+    cout << '\n';
 }
 
 int main() {

@@ -46,40 +46,15 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-    int n, m;
-    cin >> n >> m;
-    int p = 1;
-    vector<vector<char>> g(n + 1, vector<char>(m + 1));
-    rep(i, 1, n) rep(j, 1, m) cin >> g[i][j];
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'v') f = true;
-        if (f) break;
-        p++;
+    LL n;
+    cin >> n;
+    LL l = 1, r = 2e10;
+    while (l < r) {
+        LL mid = l + r + 1 >> 1;
+        if (mid * (mid - 1) / 2LL > n) r = mid - 1;
+        else l = mid;
     }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'i') f = true;
-        if (f) break;
-        p++;
-    }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'k') f = true;
-        if (f) break;
-        p++;
-    }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'a') f = true;
-        if (f) break;
-        p++;
-    }
-    if(p <= m) YES;
-    else NO;
+    cout << l + (n - (l * (l - 1) / 2LL)) << '\n';
 }
 
 int main() {

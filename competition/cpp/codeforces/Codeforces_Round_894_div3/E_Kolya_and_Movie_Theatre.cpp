@@ -46,40 +46,26 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-    int n, m;
-    cin >> n >> m;
-    int p = 1;
-    vector<vector<char>> g(n + 1, vector<char>(m + 1));
-    rep(i, 1, n) rep(j, 1, m) cin >> g[i][j];
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'v') f = true;
-        if (f) break;
-        p++;
+    int n, m, d;
+    cin >> n >> m >> d;
+    vector<int> a(n + 1, 0);
+    rep(i, 1, n) cin >> a[i];
+    LL rs = 0;
+    priority_queue<int, vector<int>, greater<int>> pq;
+    LL now = 0;
+    rep(i, 1, n) {
+        if (a[i] > 0 && pq.size() < m) {
+            now += a[i];
+            pq.push(a[i]);
+        }
+        else if (a[i] > 0 && a[i] > pq.top()) {
+            now = now - pq.top() + a[i];
+            pq.pop();
+            pq.push(a[i]);
+        }
+        rs = max(rs, now - (LL)d * i);
     }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'i') f = true;
-        if (f) break;
-        p++;
-    }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'k') f = true;
-        if (f) break;
-        p++;
-    }
-    p++;
-    while (p <= m) {
-        bool f = false;
-        rep(i, 1, n) if (g[i][p] == 'a') f = true;
-        if (f) break;
-        p++;
-    }
-    if(p <= m) YES;
-    else NO;
+    cout << rs << '\n';
 }
 
 int main() {
