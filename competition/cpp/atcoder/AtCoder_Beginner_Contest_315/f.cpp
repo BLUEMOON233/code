@@ -43,16 +43,51 @@ inline void write(T x) {
 //#define read() read<__int128>()
 //#define write(tmp) write<__int128>(tmp);
 
-const int N = 1;
+const int N = 1e4 + 7, M = 31;
+double dp[N][M];
+
+struct Node {
+	double x, y;
+};
+
+vector<Node> a;
+
+double dis(int i, int j) {
+	double x = a[i].x - a[j].x;
+	double y = a[i].y - a[j].y;
+	return sqrt(x * x + y * y);
+}
+
+double val(int C) {
+	if (C == 0) return 0;
+	else return pow(2, C - 1);
+}
 
 inline void solve() {
-
+	int n;
+	cin >> n;
+	a.resize(n + 1);
+	rep(i, 1, n) cin >> a[i].x >> a[i].y;
+	rep(i, 2, n) rep(j, 0, 30) dp[i][j] = 1e10;
+	rep(i, 2, n) {
+		rep(j, 0, 30) {
+			rep(k, 0, j) {
+				if (i - k - 1 >= 1)
+					dp[i][j] = min(dp[i][j], dp[i - k - 1][j - k] + dis(i, i - k - 1) + val(j) - val(j - k));
+			}
+		}
+	}
+	double rs = 1e10;
+	rep(j, 0, 30) {
+		rs = min(rs, dp[n][j]);
+	}
+	cout << fixed << setprecision(12) << rs << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

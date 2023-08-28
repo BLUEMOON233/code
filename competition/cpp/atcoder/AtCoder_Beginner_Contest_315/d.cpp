@@ -46,13 +46,57 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-
+	int n, m;
+	cin >> n >> m;
+	vector<vector<char>> g(n + 1, vector<char>(m + 1));
+	rep(i, 1, n) rep(j, 1, m) cin >> g[i][j];
+	vector<vector<int>> r(n + 1, vector<int>(26, 0)), c(m + 1, vector<int>(26, 0));
+	rep(i, 1, n) rep(j, 1, m) r[i][g[i][j] - 'a']++, c[j][g[i][j] - 'a']++;
+	bool f = true;
+	while (f) {
+		f = false;
+		vector<PII> dr, dc;
+		rep(i, 1, n) {
+			int cnt = 0;
+			int del = 0;
+			rep(j, 0, 25) if (r[i][j]) cnt++, del = j;
+			if (cnt == 1 && r[i][del] >= 2) {
+				f = true;
+				dr.emplace_back(i, del);
+				// r[i][del] = 0;
+				// rep(i, 1, m) if (c[i][del]) c[i][del]--;
+			}
+		}
+		rep(i, 1, m) {
+			int cnt = 0;
+			int del = 0;
+			rep(j, 0, 25) if (c[i][j]) cnt++, del = j;
+			if (cnt == 1 && c[i][del] >= 2) {
+				f = true;
+				dc.emplace_back(i, del);
+				// c[i][del] = 0;
+				// rep(i, 1, n) if (r[i][del]) r[i][del]--;
+			}
+		}
+		for (auto [i, del] : dr) {
+			r[i][del] = 0;
+			rep(i, 1, m) if (c[i][del]) c[i][del]--;
+		}
+		for (auto [i, del] : dc) {
+			c[i][del] = 0;
+			rep(i, 1, n) if (r[i][del]) r[i][del]--;
+		}
+		// rep(i, 1, n) rep(j, 0, 25) cout << r[i][j] << " \n"[j == 25];
+	}
+	LL rs = 0;
+	rep(i, 1, n) rep(j, 0, 25) rs += r[i][j];
+	cout << rs << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

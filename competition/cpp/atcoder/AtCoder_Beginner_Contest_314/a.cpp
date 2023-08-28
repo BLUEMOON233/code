@@ -46,13 +46,17 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-
+	string pi = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679";
+	int n;
+	cin >> n;
+	rep(i, 0, n + 1) cout << pi[i];
+	cout << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

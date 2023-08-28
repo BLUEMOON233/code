@@ -46,13 +46,39 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-
+	int n;
+	cin >> n;
+	vector<set<int>> a(n + 1);
+	rep(i, 1, n) {
+		int sz, t;
+		cin >> sz;
+		rep(j, 1, sz) {
+			cin >> t;
+			a[i].insert(t);
+		}
+	}
+	vector<PII> rs;
+	int x;
+	cin >> x;
+	rep(i, 1, n) if (a[i].count(x)) {
+		rs.emplace_back(a[i].size(), i);
+	}
+	stable_sort(rs.begin(), rs.end());
+	if (rs.size() == 0) {
+		cout << 0 << '\n' << '\n';
+		return;
+	}
+	vector<int> ans;
+	for (auto [p, q] : rs) if (p == rs[0].first) ans.emplace_back(q);
+	cout << ans.size() << '\n';
+	for (auto as : ans) cout << as << ' ';
+	cout << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

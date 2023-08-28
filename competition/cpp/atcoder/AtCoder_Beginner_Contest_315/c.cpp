@@ -46,13 +46,34 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-
+	int n;
+	cin >> n;
+	vector<multiset<int>> s(n + 1);
+	rep(i, 1, n) {
+		int f, d;
+		cin >> f >> d;
+		s[f].insert(d);
+	}
+	vector<int> rs;
+	rep(i, 1, n) if (s[i].size()) rs.emplace_back(*s[i].rbegin());
+	sort(rs.begin(), rs.end());
+	LL rs1 = 0;
+	if (rs.size() > 1) rs1 = rs[rs.size() - 1] + rs[rs.size() - 2];
+	LL rs2 = 0;
+	rep(i, 1, n) if (s[i].size() >= 2) {
+		auto it = s[i].rbegin();
+		LL t = *it;
+		it++;
+		t += (*it) / 2;
+		rs2 = max(rs2, t);
+	}
+	cout << max(rs1, rs2) << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

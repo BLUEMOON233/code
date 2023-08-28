@@ -43,16 +43,47 @@ inline void write(T x) {
 //#define read() read<__int128>()
 //#define write(tmp) write<__int128>(tmp);
 
-const int N = 1;
+const int N = 2e5 + 7;
+// int h[N], e[N], ne[N], idx = 0;
+// inline void add(int a, int b) {
+// 	e[++idx] = b, ne[idx] = h[a], h[a] = idx;
+// }
+vector<vector<int>> g;
+vector<bool> st;
+vector<int> rs;
+
+void dfs(int now) {
+	for (int nxt : g[now]) {
+		if (!st[now]) dfs(nxt);
+	}
+	if (!st[now]) {
+		rs.emplace_back(now);
+		st[now] = true;
+	}
+}
 
 inline void solve() {
-
+	int n;
+	cin >> n;
+	g.resize(n + 1);
+	st.resize(n + 1);
+	rep(i, 1, n) {
+		int sz, t;
+		cin >> sz;
+		rep(j, 1, sz) {
+			cin >> t;
+			g[i].emplace_back(t);
+		}
+	}
+	dfs(1);
+	for (auto r : rs) if (r != 1) cout << r << ' ';
+	cout << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }

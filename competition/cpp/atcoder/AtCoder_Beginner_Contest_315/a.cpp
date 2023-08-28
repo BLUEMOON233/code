@@ -46,13 +46,18 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
-
+	string s;
+	cin >> s;
+	for (auto c : s) if (c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u') {
+			cout << c;
+		}
+	cout << '\n';
 }
 
 int main() {
 	fast();
 	int T = 1;
 	//	T = read();
-	cin >> T;
+	// cin >> T;
 	while (T--) solve();
 }
