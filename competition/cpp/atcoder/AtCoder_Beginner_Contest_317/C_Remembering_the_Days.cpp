@@ -15,43 +15,39 @@ typedef pair<int, int> PII;
 #define NO cout << "NO\n"
 #define Yes cout << "Yes\n"
 #define No cout << "No\n"
-template<class T>
-inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
-}
-template<class T>
-inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
-}
-#define read() read<int>()
-#define write(tmp) write<int>(tmp);
-//#define read() read<LL>()
-//#define write(tmp) write<LL>(tmp);
-//#define read() read<__int128>()
-//#define write(tmp) write<__int128>(tmp);
 
 const int N = 1;
+int n, m;
+vector<vector<PII>> g;
+LL rs = 0;
+
+void dfs(int now, string st, LL d) {
+    st[now] = '1';
+    rs = max(rs, d);
+    for (auto [j, w] : g[now]) {
+        if (st[j] == '1') continue;
+        dfs(j, st, d + w);
+    }
+}
 
 inline void solve() {
+    cin >> n >> m;
+    g.resize(n + 1);
+    rep(i, 1, m) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        g[a].emplace_back(b, c);
+        g[b].emplace_back(a, c);
+    }
+    string s(n + 1, '0');
+    rep(i, 1, n) dfs(i, s, 0);
+    cout << rs << '\n';
 }
 
 int main() {
-	fast();
-	int T = 1;
-	//	T = read();
-	cin >> T;
-	while (T--) solve();
+    fast();
+    int T = 1;
+    //	T = read();
+    // cin >> T;
+    while (T--) solve();
 }

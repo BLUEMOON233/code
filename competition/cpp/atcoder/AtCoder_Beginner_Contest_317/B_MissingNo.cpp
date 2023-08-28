@@ -15,43 +15,33 @@ typedef pair<int, int> PII;
 #define NO cout << "NO\n"
 #define Yes cout << "Yes\n"
 #define No cout << "No\n"
-template<class T>
-inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
-}
-template<class T>
-inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
-}
-#define read() read<int>()
-#define write(tmp) write<int>(tmp);
-//#define read() read<LL>()
-//#define write(tmp) write<LL>(tmp);
-//#define read() read<__int128>()
-//#define write(tmp) write<__int128>(tmp);
 
 const int N = 1;
 
 inline void solve() {
+    set<int> st;
+    int n, t;
+    cin >> n;
+    rep(i, 1, n) {
+        cin >> t;
+        st.insert(t);
+    }
+    int lst = 0;
+    for (auto it = st.begin(); it != st.end(); it++) {
+        if (lst != 0 && lst + 1 != *it) {
+            cout << lst + 1 << '\n';
+            return;
+        }
+        else {
+            lst = *it;
+        }
+    }
 }
 
 int main() {
-	fast();
-	int T = 1;
-	//	T = read();
-	cin >> T;
-	while (T--) solve();
+    fast();
+    int T = 1;
+    //	T = read();
+    // cin >> T;
+    while (T--) solve();
 }

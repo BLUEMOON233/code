@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 typedef long long LL;
 typedef unsigned int UI;
@@ -15,43 +15,43 @@ typedef pair<int, int> PII;
 #define NO cout << "NO\n"
 #define Yes cout << "Yes\n"
 #define No cout << "No\n"
-template<class T>
-inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
-}
-template<class T>
-inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
-}
-#define read() read<int>()
-#define write(tmp) write<int>(tmp);
-//#define read() read<LL>()
-//#define write(tmp) write<LL>(tmp);
-//#define read() read<__int128>()
-//#define write(tmp) write<__int128>(tmp);
 
-const int N = 1;
+const int N = 1, mod = 1e9 + 7;
+
+LL quickPow(LL a, LL b, LL mod) {
+    LL rs = 1;
+    while (b) {
+        if (b & 1) rs = rs * a % mod;
+        b >>= 1, a = a * a % mod;
+    }
+    return rs % mod;
+}
+
+LL mult(LL x) {
+    LL rs = 1;
+    rep(i, 1, x) rs = (rs * i) % mod;
+    return rs;
+}
+
+LL mult2(LL n, LL k) {
+    LL rs = 1;
+    rep(i, 2, n) {
+        if ((i - 1) <= k) rs = (rs * (i - 1)) % mod;
+        else rs = (rs * k) % mod;
+    }
+    return rs;
+}
 
 inline void solve() {
+    LL n, k;
+    cin >> n >> k;
+    cout << mult(n) * mult2(n, k) % mod << '\n';
 }
 
 int main() {
-	fast();
-	int T = 1;
-	//	T = read();
-	cin >> T;
-	while (T--) solve();
+    fast();
+    int T = 1;
+    //	T = read();
+    cin >> T;
+    while (T--) solve();
 }

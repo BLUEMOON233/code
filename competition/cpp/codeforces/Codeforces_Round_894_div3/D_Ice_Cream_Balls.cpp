@@ -17,24 +17,24 @@ typedef pair<int, int> PII;
 #define No cout << "No\n"
 template<class T>
 inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
+    T x = 0, f = 1;
+    char ch = getchar();
+    while (!isdigit(ch)) {
+        if (ch == '-') f = -1;
+        ch = getchar();
+    }
+    while (isdigit(ch)) {
+        x = (x << 1) + (x << 3) + (ch ^ 48);
+        ch = getchar();
+    }
+    return x * f;
 }
 template<class T>
 inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
+    if (x < 0) putchar('-'), x = -x;
+    if (x > 9) write(x / 10);
+    putchar(x % 10 + '0');
+    return;
 }
 #define read() read<int>()
 #define write(tmp) write<int>(tmp);
@@ -46,12 +46,21 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
+    LL n;
+    cin >> n;
+    LL l = 1, r = 2e10;
+    while (l < r) {
+        LL mid = l + r + 1 >> 1;
+        if (mid * (mid - 1) / 2LL > n) r = mid - 1;
+        else l = mid;
+    }
+    cout << l + (n - (l * (l - 1) / 2LL)) << '\n';
 }
 
 int main() {
-	fast();
-	int T = 1;
-	//	T = read();
-	cin >> T;
-	while (T--) solve();
+    fast();
+    int T = 1;
+    //	T = read();
+    cin >> T;
+    while (T--) solve();
 }

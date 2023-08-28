@@ -17,24 +17,24 @@ typedef pair<int, int> PII;
 #define No cout << "No\n"
 template<class T>
 inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
+    T x = 0, f = 1;
+    char ch = getchar();
+    while (!isdigit(ch)) {
+        if (ch == '-') f = -1;
+        ch = getchar();
+    }
+    while (isdigit(ch)) {
+        x = (x << 1) + (x << 3) + (ch ^ 48);
+        ch = getchar();
+    }
+    return x * f;
 }
 template<class T>
 inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
+    if (x < 0) putchar('-'), x = -x;
+    if (x > 9) write(x / 10);
+    putchar(x % 10 + '0');
+    return;
 }
 #define read() read<int>()
 #define write(tmp) write<int>(tmp);
@@ -46,12 +46,33 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
+    int n;
+    cin >> n;
+    vector<LL> a(n + 1);
+    rep(i, 1, n) cin >> a[i];
+    if (a[1] > n) {
+        NO;
+        return;
+    }
+    reverse(a.begin() + 1, a.end());
+    vector<int> rs;
+    rs.emplace_back(0);
+    rep(i, 1, n) {
+        rs.emplace_back(a.end() - lower_bound(a.begin() + 1, a.end(), i));
+    }
+    reverse(a.begin() + 1, a.end());
+    // debug1(rs, n);
+    rep(i, 1, n) if (a[i] != rs[i]) {
+        NO;
+        return;
+    }
+    YES;
 }
 
 int main() {
-	fast();
-	int T = 1;
-	//	T = read();
-	cin >> T;
-	while (T--) solve();
+    fast();
+    int T = 1;
+    //	T = read();
+    cin >> T;
+    while (T--) solve();
 }

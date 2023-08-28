@@ -15,43 +15,36 @@ typedef pair<int, int> PII;
 #define NO cout << "NO\n"
 #define Yes cout << "Yes\n"
 #define No cout << "No\n"
-template<class T>
-inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
-}
-template<class T>
-inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
-}
-#define read() read<int>()
-#define write(tmp) write<int>(tmp);
-//#define read() read<LL>()
-//#define write(tmp) write<LL>(tmp);
-//#define read() read<__int128>()
-//#define write(tmp) write<__int128>(tmp);
 
 const int N = 1;
 
 inline void solve() {
+    int n;
+    cin >> n;
+    vector<PII> s(n + 1);
+    LL sum = 0;
+    rep(i, 1, n) {
+        LL a, b, c;
+        cin >> a >> b >> c;
+        LL cost = (a + b + 1) / 2 - a;
+        cost = max(cost, 0LL);
+        s[i] = { cost, c };
+        sum += c;
+    }
+    vector<LL> dp(sum + 1, 1e18 + 7);
+    dp[0] = 0;
+    rep(i, 1, n) per(j, sum, s[i].second) {
+        dp[j] = min(dp[j], dp[j - s[i].second] + s[i].first);
+    }
+    LL rs = 1e18 + 7;
+    rep(i, sum / 2 + 1, sum) rs = min(rs, dp[i]);
+    cout << rs << '\n';
 }
 
 int main() {
-	fast();
-	int T = 1;
-	//	T = read();
-	cin >> T;
-	while (T--) solve();
+    fast();
+    int T = 1;
+    //	T = read();
+    // cin >> T;
+    while (T--) solve();
 }

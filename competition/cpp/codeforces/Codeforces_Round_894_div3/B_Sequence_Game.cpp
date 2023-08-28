@@ -17,24 +17,24 @@ typedef pair<int, int> PII;
 #define No cout << "No\n"
 template<class T>
 inline T read() {
-	T x = 0, f = 1;
-	char ch = getchar();
-	while (!isdigit(ch)) {
-		if (ch == '-') f = -1;
-		ch = getchar();
-	}
-	while (isdigit(ch)) {
-		x = (x << 1) + (x << 3) + (ch ^ 48);
-		ch = getchar();
-	}
-	return x * f;
+    T x = 0, f = 1;
+    char ch = getchar();
+    while (!isdigit(ch)) {
+        if (ch == '-') f = -1;
+        ch = getchar();
+    }
+    while (isdigit(ch)) {
+        x = (x << 1) + (x << 3) + (ch ^ 48);
+        ch = getchar();
+    }
+    return x * f;
 }
 template<class T>
 inline void write(T x) {
-	if (x < 0) putchar('-'), x = -x;
-	if (x > 9) write(x / 10);
-	putchar(x % 10 + '0');
-	return;
+    if (x < 0) putchar('-'), x = -x;
+    if (x > 9) write(x / 10);
+    putchar(x % 10 + '0');
+    return;
 }
 #define read() read<int>()
 #define write(tmp) write<int>(tmp);
@@ -46,12 +46,23 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
+    int n;
+    cin >> n;
+    vector<int> a(n + 1);
+    rep(i, 1, n) cin >> a[i];
+    vector<int> rs;
+    rs.emplace_back(a[1]);
+    rep(i, 2, n) if (a[i] >= a[i - 1]) rs.emplace_back(a[i]);
+    else { rs.emplace_back(a[i]);rs.emplace_back(a[i]); }
+    cout << rs.size() << '\n';
+    for(auto x : rs) cout << x << ' ';
+    cout << '\n';
 }
 
 int main() {
-	fast();
-	int T = 1;
-	//	T = read();
-	cin >> T;
-	while (T--) solve();
+    fast();
+    int T = 1;
+    //	T = read();
+    cin >> T;
+    while (T--) solve();
 }
