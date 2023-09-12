@@ -7,52 +7,24 @@ typedef long long LL;
 void solve() {
     int n;
     cin >> n;
-    vector<int> row(n + 1, 0);
-    vector<int> inv(n + 1, 0);
-    int rs = 0;
+    vector<vector<int>> a(n + 2, vector<int>(n + 1, 0)), b(n + 2, vector<int>(n + 1, 0));
     rep(i, 1, n) {
-        vector<int> nxt(n + 1, 0);
-        rep(j, 1, n) {char t; cin >> t; row[j] = t - '0';}
-        rep(j, 1, n) if (inv[j]) row[j] = 1 - row[j];
-        rep(j, 1, n) cout << inv[j] << " \n"[j == n];
-        rep(j, 1, n) if (row[j]) {
-            rs++;
-            if (j - 1 >= 1) {
-                if (nxt[j - 1] == 0) nxt[j - 1] = 1;
-                else nxt[j - 1] = 0;
-            }
-            if (j + 1 <= n) {
-                if (nxt[j + 1] == 0) nxt[j + 1] = 3;
-                else nxt[j + 1] = 0;
-            }
-            if (nxt[j] == 0) nxt[j] = 2;
-            else nxt[j] = 0;
+        string s; cin >> s;
+        rep(j, 1, n) a[i][j] = s[j - 1] - '0';
+    }
+    int rs = 0;
+    rep(i, 1, n) rep(j, 1, n) {
+        a[i][j] ^= b[i][j];
+        rs += a[i][j];
+        b[i][j] ^= a[i][j];
+        if (b[i][j]) {
+            a[i + 1][j] ^= b[i][j];
+            if (j - 1 >= 1) b[i + 1][j - 1] ^= b[i][j];
+            else if (i + 2 <= n) b[i + 2][j] ^= b[i][j];
+            if (j + 1 <= n)  b[i + 1][j + 1] ^= b[i][j];
+            else if (i + 2 <= n)  b[i + 2][j] ^= b[i][j];
+            if (i + 2 <= n) b[i + 2][j] ^= b[i][j];
         }
-        rep(j, 1, n) {
-            if (inv[j] == 1) {
-                if (j - 1 >= 1) {
-                    if (nxt[j - 1] == 0) nxt[j - 1] = 1;
-                    else nxt[j - 1] = 0;
-                }
-            } else if (inv[j] == 2) {
-                if (j - 1 >= 1) {
-                    if (nxt[j - 1] == 0) nxt[j - 1] = 1;
-                    else nxt[j - 1] = 0;
-                }
-                if (j + 1 <= n) {
-                    if (nxt[j + 1] == 0) nxt[j + 1] = 3;
-                    else nxt[j + 1] = 0;
-                }
-                if (nxt[j] == 0) nxt[j] = 2;
-                else nxt[j] = 0;
-            } else if (inv[j] == 3) {
-                if (j + 1 <= n) {
-                    if (nxt[j + 1] == 0) nxt[j + 1] = 3;
-                    else nxt[j + 1] = 0;
-                }
-            }
-        }
-        inv = nxt;
     }
     cout << rs << '\n';
 }
