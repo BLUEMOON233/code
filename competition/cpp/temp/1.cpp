@@ -46,6 +46,7 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
+	
 }
 
 int main() {
