@@ -11,34 +11,79 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>opencv_exp_1_qt</string>
+   <string>OPENCV-用户交互窗口(with QT)</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLabel" name="image_label">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>10</y>
-      <width>361</width>
+      <width>301</width>
       <height>321</height>
      </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="lineWidth">
+     <number>3</number>
     </property>
     <property name="text">
      <string/>
     </property>
    </widget>
-   <widget class="QSlider" name="brightnessSlider">
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>40</y>
-      <width>160</width>
-      <height>22</height>
+      <x>370</x>
+      <y>10</y>
+      <width>191</width>
+      <height>51</height>
      </rect>
     </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
+    <property name="title">
+     <string>亮度</string>
     </property>
+    <widget class="QSlider" name="brightness_slider">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>171</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>70</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>模糊</string>
+    </property>
+    <widget class="QSlider" name="blur_slider">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>171</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
