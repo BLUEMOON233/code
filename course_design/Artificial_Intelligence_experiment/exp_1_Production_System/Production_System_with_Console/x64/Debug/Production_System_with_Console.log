@@ -1,7 +1,2 @@
-﻿  ProductionSystem.cpp
-D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(40,10): warning C4244: “初始化”: 从“uint64_t”转换到“int”，可能丢失数据
-D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(52,10): warning C4244: “初始化”: 从“uint64_t”转换到“int”，可能丢失数据
-D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(64,10): warning C4244: “初始化”: 从“uint64_t”转换到“int”，可能丢失数据
-D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(81,10): warning C4244: “初始化”: 从“uint64_t”转换到“int”，可能丢失数据
+﻿  main.cpp
   Production_System_with_Console.vcxproj -> D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\x64\Debug\Production_System_with_Console.exe

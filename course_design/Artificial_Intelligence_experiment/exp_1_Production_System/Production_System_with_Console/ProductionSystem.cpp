@@ -3,19 +3,60 @@
 std::string Rule::toStr() {
 	std::string ret = "";
 	if (logic == "Non") {
-		ret = pre_1 + " -> " + result;
+		ret = pre[0] + " -> " + result;
 	}
 	else {
-		ret += pre_1;
-		if (pre_2 != "NULL") {
-			ret += ' ' + logic + ' ' + pre_2;
-		}
-		if (pre_3 != "NULL") {
-			ret += ' ' + logic + ' ' + pre_3;
+		ret += pre[0];
+		for (int i = 1; i < pre.size(); i++) if (pre[i] != "NULL") {
+			ret += ' ' + logic + ' ' + pre[i];
 		}
 		ret += " -> " + result;
 	}
 	return ret;
+}
+
+Rule::Rule(MYSQL* mysql, MYSQL_ROW data) {
+	id = atoi(data[0]);
+	logic = data[1];
+	for (int i = 2; i <= 4; i++) pre.emplace_back(data[i]);
+	if (std::string(data[5]).substr(0, 5) != "LINK_") {
+		result = data[5];
+		return;
+	}
+
+	std::string query = "SELECT * FROM rules_linklist WHERE Id = ";
+	while (std::string(data[5]).substr(0, 5) == "LINK_") {
+		std::string ptr = std::string(data[5]).substr(5, strlen(data[5]) - 5).c_str();
+		mysql_query(mysql, (query + ptr).c_str());
+		MYSQL_RES* res = mysql_store_result(mysql);
+		data = mysql_fetch_row(res);
+		for (int i = 2; i <= 4; i++) pre.emplace_back(data[i]);
+		if (std::string(data[5]).substr(0, 5) != "LINK_") {
+			result = data[5];
+			return;
+		}
+	}
+}
+
+bool Rule::check(MYSQL* mysql) {
+	if (logic != "Or") {
+		std::string query = "SELECT * FROM facts_set WHERE fact LIKE ";
+		for (int i = 0; i < pre.size(); i++) if (pre[i] != "NULL") {
+			mysql_query(mysql, (query + '\"' + pre[i] + '\"').c_str());
+			MYSQL_RES* res = mysql_store_result(mysql);
+			if (mysql_num_rows(res) == 0) return false;
+		}
+		return true;
+	}
+	else {
+		std::string query = "SELECT * FROM facts_set WHERE fact LIKE ";
+		for (int i = 0; i < pre.size(); i++) if (pre[i] != "NULL") {
+			mysql_query(mysql, (query + '\"' + pre[i] + '\"').c_str());
+			MYSQL_RES* res = mysql_store_result(mysql);
+			if (mysql_num_rows(res) != 0) return true;
+		}
+		return false;
+	}
 }
 
 DataBase::DataBase() {
@@ -66,10 +107,12 @@ void DataBase::show_rules() {
 	std::cout << "现有的规则库内容:\n";
 	for (int i = 0; i < row; i++) {
 		MYSQL_ROW row_data = mysql_fetch_row(res);
-		rules.emplace_back(Rule{ row_data[1], row_data[2], row_data[3], row_data[4], row_data[5] });
+		Rule new_rule(mysql, row_data);
+		rules.emplace_back(new_rule);
 	}
-	for (auto rule : rules) {
+	for (auto& rule : rules) {
 		std::cout << rule.toStr() << '\n';
+		std::cout << rule.check(mysql) << '\n';
 	}
 	std::cout << '\n';
 }
@@ -83,9 +126,10 @@ void DataBase::show_rules_set() {
 	std::cout << "推理机中规则库内容:\n";
 	for (int i = 0; i < row; i++) {
 		MYSQL_ROW row_data = mysql_fetch_row(res);
-		rules.emplace_back(Rule{ row_data[1], row_data[2], row_data[3], row_data[4], row_data[5] });
+		Rule new_rule(mysql, row_data);
+		rules.emplace_back(new_rule);
 	}
-	for (auto rule : rules) {
+	for (auto& rule : rules) {
 		std::cout << rule.toStr() << '\n';
 	}
 	std::cout << '\n';
@@ -106,4 +150,54 @@ void DataBase::facts_set_select(std::vector<int> sel) {
 	}
 	query += ')';
 	mysql_query(mysql, query.c_str());
+}
+
+
+Rule DataBase::inference_engine() {
+	Rule rule_selected;
+	//AND || Non part:
+	std::string And_query =
+		R"(SELECT DISTINCT rs.* 
+		FROM rules_set rs
+		INNER JOIN facts_set fs1 ON(fs1.fact = rs.pre_1 OR rs.pre_1 LIKE "NULL")
+		INNER JOIN facts_set fs2 ON(fs2.fact = rs.pre_2 OR rs.pre_2 LIKE "NULL")
+		INNER JOIN facts_set fs3 ON(fs3.fact = rs.pre_3 OR rs.pre_3 LIKE "NULL")
+		WHERE rs.logic = 'And' OR rs.logic = 'Non')";
+
+	mysql_query(mysql, And_query.c_str());
+	MYSQL_RES* res = mysql_store_result(mysql);
+	int row = mysql_num_rows(res);
+
+	//std::vector<Rule> rules;
+	for (int i = 0; i < row; i++) {
+		MYSQL_ROW row_data = mysql_fetch_row(res);
+		Rule new_rule(mysql, row_data);
+		//rules.emplace_back(new_rule);
+		if (new_rule.pre.size() > rule_selected.pre.size()) {
+			rule_selected = new_rule;
+		}
+	}
+	if (rule_selected.id) return rule_selected;
+
+	std::string Or_query =
+		R"(SELECT rs.*
+		FROM rules_set rs
+		INNER JOIN facts_set fs ON (
+		fs.fact = rs.pre_1 OR
+		fs.fact = rs.pre_2 OR
+		fs.fact = rs.pre_3
+		)
+		WHERE rs.logic = "Or")";
+	mysql_query(mysql, And_query.c_str());
+	MYSQL_RES* res = mysql_store_result(mysql);
+	int row = mysql_num_rows(res);
+	for (int i = 0; i < row; i++) {
+		MYSQL_ROW row_data = mysql_fetch_row(res);
+		Rule new_rule(mysql, row_data);
+		//rules.emplace_back(new_rule);
+		if (new_rule.pre.size() > rule_selected.pre.size()) {
+			rule_selected = new_rule;
+		}
+	}
+	return rule_selected;
 }
