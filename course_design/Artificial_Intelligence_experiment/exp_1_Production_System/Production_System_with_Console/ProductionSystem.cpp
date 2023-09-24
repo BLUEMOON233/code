@@ -86,16 +86,19 @@ void DataBase::show_facts() {
 	std::cout << '\n';
 }
 
-void DataBase::show_facts_set() {
+std::vector<std::string> DataBase::show_facts_set() {
+	std::vector<std::string> ret;
 	mysql_query(mysql, "SELECT * FROM facts_set");
 	MYSQL_RES* res = mysql_store_result(mysql);
 	int row = mysql_num_rows(res);
 	std::cout << "推理机中事实库内容:\n";
 	for (int i = 0; i < row; i++) {
 		MYSQL_ROW row_data = mysql_fetch_row(res);
-		std::cout << row_data[0] << ' ' << row_data[1] << '\n';
+		std::cout << row_data[0] << '\n';
+		ret.emplace_back(row_data[0]);
 	}
 	std::cout << '\n';
+	return ret;
 }
 
 void DataBase::show_rules() {
@@ -117,7 +120,7 @@ void DataBase::show_rules() {
 	std::cout << '\n';
 }
 
-void DataBase::show_rules_set() {
+std::vector<Rule> DataBase::show_rules_set() {
 	mysql_query(mysql, "SELECT * FROM rules_set");
 	MYSQL_RES* res = mysql_store_result(mysql);
 	int row = mysql_num_rows(res);
@@ -133,6 +136,7 @@ void DataBase::show_rules_set() {
 		std::cout << rule.toStr() << '\n';
 	}
 	std::cout << '\n';
+	return rules;
 }
 
 
@@ -153,7 +157,7 @@ void DataBase::facts_set_select(std::vector<int> sel) {
 }
 
 
-Rule DataBase::inference_engine() {
+Rule DataBase::select_rule() {
 	Rule rule_selected;
 	//AND || Non part:
 	std::string And_query =
@@ -173,6 +177,9 @@ Rule DataBase::inference_engine() {
 		MYSQL_ROW row_data = mysql_fetch_row(res);
 		Rule new_rule(mysql, row_data);
 		//rules.emplace_back(new_rule);
+		if (new_rule.pre.size() > 3) {
+			if (!new_rule.check(mysql)) continue;
+		}
 		if (new_rule.pre.size() > rule_selected.pre.size()) {
 			rule_selected = new_rule;
 		}
@@ -189,15 +196,47 @@ Rule DataBase::inference_engine() {
 		)
 		WHERE rs.logic = "Or")";
 	mysql_query(mysql, And_query.c_str());
-	MYSQL_RES* res = mysql_store_result(mysql);
-	int row = mysql_num_rows(res);
+	res = mysql_store_result(mysql);
+	row = mysql_num_rows(res);
 	for (int i = 0; i < row; i++) {
 		MYSQL_ROW row_data = mysql_fetch_row(res);
 		Rule new_rule(mysql, row_data);
 		//rules.emplace_back(new_rule);
+		if (new_rule.pre.size() > 3) {
+			if (!new_rule.check(mysql)) continue;
+		}
 		if (new_rule.pre.size() > rule_selected.pre.size()) {
 			rule_selected = new_rule;
 		}
 	}
 	return rule_selected;
+}
+
+void DataBase::delete_rule(Rule rule_selected) {
+	std::string query = "DELETE FROM rules_set WHERE id = " + std::to_string(rule_selected.id);
+	mysql_query(mysql, query.c_str());
+}
+
+bool DataBase::inference_engine() {
+	std::vector<Rule> rules_list;
+	bool flag_end = true;
+	while (flag_end) {
+		Rule rule_selected = select_rule();
+		if (rule_selected.id == 0) {
+			return false;
+		}
+		rules_list.emplace_back(rule_selected);
+		delete_rule(rule_selected);
+		std::string check = "SELECT * FROM results WHERE result LIKE \"" + rule_selected.result + '\"';
+		mysql_query(mysql, check.c_str());
+		MYSQL_RES* res = mysql_store_result(mysql);
+		if (mysql_num_rows(res) != 0) flag_end = false;
+		else {
+			std::string ins = "INSERT INTO facts_set VALUES (\"" + rule_selected.result + "\")";
+			mysql_query(mysql, ins.c_str());
+		}
+	}
+	for (auto& rule : rules_list) {
+		std::cout << rule.toStr() << '\n';
+	}
 }

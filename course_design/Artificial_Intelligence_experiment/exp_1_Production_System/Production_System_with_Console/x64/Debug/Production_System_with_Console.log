@@ -1,2 +1,10 @@
-﻿  main.cpp
+﻿  ProductionSystem.cpp
+D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(80,10): warning C4244: “初始化”: 从“uint64_t”转换到“int”，可能丢失数据
+D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(93,10): warning C4244: “初始化”: 从“uint64_t”转换到“int”，可能丢失数据
+D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(107,10): warning C4244: “初始化”: 从“uint64_t”转换到“int”，可能丢失数据
+D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(126,10): warning C4244: “初始化”: 从“uint64_t”转换到“int”，可能丢失数据
+D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(173,10): warning C4244: “初始化”: 从“uint64_t”转换到“int”，可能丢失数据
+D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(200,22): warning C4244: “=”: 从“uint64_t”转换到“int”，可能丢失数据
+D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\ProductionSystem.cpp(242): warning C4715: “DataBase::inference_engine”: 不是所有的控件路径都返回值
   Production_System_with_Console.vcxproj -> D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_Console\x64\Debug\Production_System_with_Console.exe
