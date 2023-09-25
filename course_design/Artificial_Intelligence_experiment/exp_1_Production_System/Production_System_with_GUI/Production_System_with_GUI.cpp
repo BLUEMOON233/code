@@ -5,6 +5,7 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 {
 	db = new DataBase();
 	ui.setupUi(this);
+	int hsz = 4;
 	//init option:
 	ui.TB_rules->verticalHeader()->hide();
 	ui.TB_rules->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -33,8 +34,8 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 		for (Rule& r : process) fact_selected.insert({ db->get_fact_id(r.result), r.result });
 
 		ui.TB_facts_selected->clear();
-		ui.TB_facts_selected->setRowCount(fact_selected.size() / 5 + bool(fact_selected.size() % 5));
-		ui.TB_facts_selected->setColumnCount(10);
+		ui.TB_facts_selected->setRowCount(fact_selected.size() / hsz + bool(fact_selected.size() % hsz));
+		ui.TB_facts_selected->setColumnCount(hsz << 1);
 		ui.TB_facts_selected->setHorizontalHeaderLabels(QStringList() << QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
@@ -42,7 +43,7 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实"));
 		int row = 0;
 		for (auto it = fact_selected.begin(); it != fact_selected.end(); it++, row++) {
-			int i = row / 5, j = row % 5;
+			int i = row / hsz, j = row % hsz;
 			ui.TB_facts_selected->setItem(i, j * 2, new QTableWidgetItem(QString::number(it->first)));
 			ui.TB_facts_selected->setItem(i, j * 2 + 1, new QTableWidgetItem(QString::fromStdString(it->second)));
 		}
@@ -55,8 +56,12 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 			ui.TB_process->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(process[row].toStr())));
 		}
 		if (!flag) {
+			ui.LB_result->setText(QString::fromUtf8("推理失败!"));
 			QMessageBox::information(NULL, "错误", "推理失败!", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+			return;
 		}
+		if (ret.second.size()) ui.LB_result->setText(QString::fromStdString(ret.second.back().result));
+		else ui.LB_result->setText(QString::fromStdString(fact_selected.rbegin()->second));
 		});
 
 	connect(ui.TB_facts, &QTableWidget::itemDoubleClicked, this, [=](QTableWidgetItem* item)mutable {
@@ -67,8 +72,8 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 		else fact_selected.insert({ db->get_fact_id(itemText.toStdString()), itemText.toStdString() });
 
 		ui.TB_facts_selected->clear();
-		ui.TB_facts_selected->setRowCount(fact_selected.size() / 5 + bool(fact_selected.size() % 5));
-		ui.TB_facts_selected->setColumnCount(10);
+		ui.TB_facts_selected->setRowCount(fact_selected.size() / hsz + bool(fact_selected.size() % hsz));
+		ui.TB_facts_selected->setColumnCount(hsz << 1);
 		ui.TB_facts_selected->setHorizontalHeaderLabels(QStringList() << QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
@@ -76,7 +81,7 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实"));
 		int row = 0;
 		for (auto it = fact_selected.begin(); it != fact_selected.end(); it++, row++) {
-			int i = row / 5, j = row % 5;
+			int i = row / hsz, j = row % hsz;
 			ui.TB_facts_selected->setItem(i, j * 2, new QTableWidgetItem(QString::number(it->first)));
 			ui.TB_facts_selected->setItem(i, j * 2 + 1, new QTableWidgetItem(QString::fromStdString(it->second)));
 		}
@@ -86,12 +91,16 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 		QString itemText = item->text();
 		bool isNumber = false;
 		int intValue = itemText.toInt(&isNumber);
-		if (isNumber) fact_selected.erase({ intValue, db->get_id_fact(intValue) });
-		else fact_selected.erase({ db->get_fact_id(itemText.toStdString()), itemText.toStdString() });
+		if (isNumber) {
+			fact_selected.erase({ intValue, db->get_id_fact(intValue) });
+		}
+		else {
+			fact_selected.erase({ db->get_fact_id(itemText.toStdString()), itemText.toStdString() });
+		}
 
 		ui.TB_facts_selected->clear();
-		ui.TB_facts_selected->setRowCount(fact_selected.size() / 5 + bool(fact_selected.size() % 5));
-		ui.TB_facts_selected->setColumnCount(10);
+		ui.TB_facts_selected->setRowCount(fact_selected.size() / hsz + bool(fact_selected.size() % hsz));
+		ui.TB_facts_selected->setColumnCount(hsz << 1);
 		ui.TB_facts_selected->setHorizontalHeaderLabels(QStringList() << QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
@@ -99,7 +108,7 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实"));
 		int row = 0;
 		for (auto it = fact_selected.begin(); it != fact_selected.end(); it++, row++) {
-			int i = row / 5, j = row % 5;
+			int i = row / hsz, j = row % hsz;
 			ui.TB_facts_selected->setItem(i, j * 2, new QTableWidgetItem(QString::number(it->first)));
 			ui.TB_facts_selected->setItem(i, j * 2 + 1, new QTableWidgetItem(QString::fromStdString(it->second)));
 		}
@@ -118,7 +127,29 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 		init_ui();
 		});
 
+	connect(ui.PB_clear_process, &QPushButton::clicked, [=]()mutable {
+		ui.TB_process->clear();
+		ui.TB_process->setRowCount(0);
+		ui.TB_process->setColumnCount(0);
+		});
 
+	connect(ui.PB_clear_fact_sel, &QPushButton::clicked, [=]()mutable {
+		fact_selected.clear();
+		ui.TB_facts_selected->clear();
+		ui.TB_facts_selected->setRowCount(fact_selected.size() / hsz + bool(fact_selected.size() % hsz));
+		ui.TB_facts_selected->setColumnCount(hsz << 1);
+		ui.TB_facts_selected->setHorizontalHeaderLabels(QStringList() << QString::fromUtf8("ID") << QString::fromUtf8("事实")
+			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
+			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
+			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
+			<< QString::fromUtf8("ID") << QString::fromUtf8("事实"));
+		int row = 0;
+		for (auto it = fact_selected.begin(); it != fact_selected.end(); it++, row++) {
+			int i = row / hsz, j = row % hsz;
+			ui.TB_facts_selected->setItem(i, j * 2, new QTableWidgetItem(QString::number(it->first)));
+			ui.TB_facts_selected->setItem(i, j * 2 + 1, new QTableWidgetItem(QString::fromStdString(it->second)));
+		}
+		});
 }
 
 Production_System_with_GUI::~Production_System_with_GUI() {
@@ -126,6 +157,7 @@ Production_System_with_GUI::~Production_System_with_GUI() {
 }
 
 void Production_System_with_GUI::init_ui() {
+	int hsz = 4;
 	//rules:
 	do {
 		std::vector<Rule> rules = db->show_rules();
@@ -141,20 +173,20 @@ void Production_System_with_GUI::init_ui() {
 	do {
 		std::vector < std::pair<int, std::string>> facts = db->show_facts();
 		std::vector < std::pair<int, std::string>> results = db->show_results();
-		ui.TB_facts->setRowCount((facts.size() + results.size()) / 5 + bool((facts.size() + results.size()) % 5));
-		ui.TB_facts->setColumnCount(10);
+		ui.TB_facts->setRowCount((facts.size() + results.size()) / hsz + bool((facts.size() + results.size()) % hsz));
+		ui.TB_facts->setColumnCount(hsz << 1);
 		ui.TB_facts->setHorizontalHeaderLabels(QStringList() << QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实")
 			<< QString::fromUtf8("ID") << QString::fromUtf8("事实"));
 		for (int row = 0; row < facts.size(); row++) {
-			int i = row / 5, j = row % 5;
+			int i = row / hsz, j = row % hsz;
 			ui.TB_facts->setItem(i, j * 2, new QTableWidgetItem(QString::number(facts[row].first)));
 			ui.TB_facts->setItem(i, j * 2 + 1, new QTableWidgetItem(QString::fromStdString(facts[row].second)));
 		}
 		for (int row = 0; row < results.size(); row++) {
-			int i = (row + facts.size()) / 5, j = (row + facts.size()) % 5;
+			int i = (row + facts.size()) / hsz, j = (row + facts.size()) % hsz;
 			ui.TB_facts->setItem(i, j * 2, new QTableWidgetItem(QString::number(results[row].first + facts.size())));
 			ui.TB_facts->setItem(i, j * 2 + 1, new QTableWidgetItem(QString::fromStdString(results[row].second)));
 		}

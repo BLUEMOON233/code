@@ -97,12 +97,22 @@ public:
         PB_add = new QPushButton(Dialog);
         PB_add->setObjectName(QString::fromUtf8("PB_add"));
         PB_add->setGeometry(QRect(440, 290, 101, 41));
+        QFont font3;
+        font3.setFamily(QString::fromUtf8("\345\271\274\345\234\206"));
+        font3.setPointSize(14);
+        font3.setBold(true);
+        font3.setWeight(75);
+        PB_add->setFont(font3);
         PB_cancel = new QPushButton(Dialog);
         PB_cancel->setObjectName(QString::fromUtf8("PB_cancel"));
         PB_cancel->setGeometry(QRect(440, 340, 101, 41));
+        PB_cancel->setFont(font3);
         TB_rule_added = new QTableWidget(Dialog);
         TB_rule_added->setObjectName(QString::fromUtf8("TB_rule_added"));
         TB_rule_added->setGeometry(QRect(10, 10, 411, 371));
+        QFont font4;
+        font4.setPointSize(14);
+        TB_rule_added->setFont(font4);
 
         retranslateUi(Dialog);
         QObject::connect(PB_cancel, SIGNAL(clicked()), Dialog, SLOT(reject()));

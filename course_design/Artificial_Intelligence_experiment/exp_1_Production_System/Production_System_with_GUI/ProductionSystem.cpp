@@ -193,14 +193,29 @@ void DataBase::rules_set_init() {
 }
 
 void DataBase::facts_set_select(std::vector<int> sel) {
+	std::string str = "SELECT MAX(id) FROM facts WHERE 1";
+	mysql_query(mysql, str.c_str());
+	MYSQL_RES* res = mysql_store_result(mysql);
+	int id_max = atoi(mysql_fetch_row(res)[0]);
+
 	mysql_query(mysql, "DELETE FROM facts_set WHERE 1");
 	std::string query = "INSERT INTO facts_set SELECT fact FROM facts f WHERE f.Id in (";
-	for (int i = 0; i < sel.size(); i++) {
+	std::string query_result = "INSERT INTO facts_set SELECT result FROM results f WHERE f.Id in (";
+	bool f1 = false, f2 = false;
+	for (int i = 0; i < sel.size(); i++) if (sel[i] <= id_max) {
+		if (f1) query += ',';
 		query += std::to_string(sel[i]);
-		if (i != sel.size() - 1) query += ',';
+		f1 = true;
+	}
+	else {
+		if (f2) query_result += ',';
+		query_result += std::to_string(sel[i] - id_max);
+		f2 = true;
 	}
 	query += ')';
+	query_result += ')';
 	mysql_query(mysql, query.c_str());
+	mysql_query(mysql, query_result.c_str());
 }
 
 
@@ -275,7 +290,7 @@ void DataBase::add_rule(Rule rule) {
 	std::string check = "SELECT * FROM results WHERE result LIKE \"" + rule.result + '\"';
 	mysql_query(mysql, check.c_str());
 	res = mysql_store_result(mysql);
-	if (mysql_fetch_row(res) == 0) {
+	if (mysql_num_rows(res) == 0) {
 		std::string ins = "INSERT INTO results VALUES (" + std::to_string(id_new) + ", \"" + rule.result + "\")";
 		std::cout << ins << '\n';
 		mysql_query(mysql, ins.c_str());
@@ -288,7 +303,7 @@ void DataBase::add_rule(Rule rule) {
 		std::string check = "SELECT * FROM facts WHERE fact LIKE \"" + rule.pre[i] + '\"';
 		mysql_query(mysql, check.c_str());
 		res = mysql_store_result(mysql);
-		if (mysql_fetch_row(res) == 0) {
+		if (mysql_num_rows(res) == 0) {
 			std::string ins = "INSERT INTO facts VALUES (" + std::to_string(id_new) + ", \"" + rule.pre[i] + "\")";
 			std::cout << ins << '\n';
 			mysql_query(mysql, ins.c_str());
@@ -346,23 +361,23 @@ void DataBase::add_rule(Rule rule) {
 
 std::pair<bool, std::vector<Rule>> DataBase::inference_engine() {
 	std::vector<Rule> rules_list;
-	bool flag_end = true;
-	while (flag_end) {
+	while (true) {
+		std::string check = "SELECT * FROM results, facts_set WHERE result LIKE facts_set.fact";
+		mysql_query(mysql, check.c_str());
+		MYSQL_RES* res = mysql_store_result(mysql);
+		if (mysql_num_rows(res) != 0) return { true, rules_list };
+		std::cout << "YES\n";
 		Rule rule_selected = select_rule();
 		if (rule_selected.id == 0) {
 			return { false, rules_list };
 		}
 		std::cout << rule_selected.toStr() << '\n';
+
+		std::string ins = "INSERT INTO facts_set VALUES (\"" + rule_selected.result + "\")";
+		mysql_query(mysql, ins.c_str());
+
 		rules_list.emplace_back(rule_selected);
 		delete_rule(rule_selected);
-		std::string check = "SELECT * FROM results WHERE result LIKE \"" + rule_selected.result + '\"';
-		mysql_query(mysql, check.c_str());
-		MYSQL_RES* res = mysql_store_result(mysql);
-		if (mysql_fetch_row(res) != 0) flag_end = false;
-		else {
-			std::string ins = "INSERT INTO facts_set VALUES (\"" + rule_selected.result + "\")";
-			mysql_query(mysql, ins.c_str());
-		}
 	}
 	return { true, rules_list };
 }
