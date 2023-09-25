@@ -120,13 +120,15 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 	connect(ui.PB_add_rule, &QPushButton::clicked, [=]()mutable {
 		DialogButtonBottom* dialog = new DialogButtonBottom(this);
 		Rule new_rule;
-		connect(dialog, &DialogButtonBottom::data_ret, this, [&](Rule data) {
+		bool flag = false;
+		connect(dialog, &DialogButtonBottom::data_ret, this, [&](Rule data, bool f) {
 			new_rule = data;
+			flag = f;
 			});
 		dialog->exec();
 		if (new_rule.pre.size() == 0) return;
 		std::cout << new_rule.toStr() << '\n';
-		db->add_rule(new_rule);
+		db->add_rule(new_rule, flag);
 		init_ui();
 		});
 
@@ -241,7 +243,7 @@ DialogButtonBottom::DialogButtonBottom(QWidget* parent) : QDialog(parent) {
 		else {
 			rule.logic = "Or";
 		}
-		emit data_ret(rule);
+		emit data_ret(rule, ui.CB_result->isChecked());
 		this->accept();
 		});
 }

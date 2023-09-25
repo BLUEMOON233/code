@@ -32,7 +32,7 @@ public:
 	void facts_set_select(std::vector<int> sel);
 	Rule select_rule();
 	void delete_rule(Rule rule_selected);
-	void add_rule(Rule rule);
+	void add_rule(Rule rule, bool flag);
 	std::pair<bool, std::vector<Rule>> inference_engine();
 	bool connect_check();
 

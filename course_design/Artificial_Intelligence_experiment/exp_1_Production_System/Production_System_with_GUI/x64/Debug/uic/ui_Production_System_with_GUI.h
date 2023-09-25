@@ -162,7 +162,7 @@ public:
         label_4->setText(QCoreApplication::translate("Production_System_with_GUIClass", "\351\200\211\346\213\251\344\272\213\345\256\236\345\272\223\357\274\232", nullptr));
         PB_start->setText(QCoreApplication::translate("Production_System_with_GUIClass", "\345\274\200\345\247\213\346\216\250\347\220\206", nullptr));
         PB_add_rule->setText(QCoreApplication::translate("Production_System_with_GUIClass", "\346\267\273\345\212\240\350\247\204\345\210\231", nullptr));
-        PB_clear_fact_sel->setText(QCoreApplication::translate("Production_System_with_GUIClass", "\346\270\205\347\251\272\344\272\213\344\273\266\345\272\223", nullptr));
+        PB_clear_fact_sel->setText(QCoreApplication::translate("Production_System_with_GUIClass", "\346\270\205\347\251\272\344\272\213\345\256\236\345\272\223", nullptr));
         PB_clear_process->setText(QCoreApplication::translate("Production_System_with_GUIClass", "\346\270\205\347\251\272\346\216\250\345\257\274\350\277\207\347\250\213", nullptr));
         label_5->setText(QCoreApplication::translate("Production_System_with_GUIClass", "\346\216\250\345\257\274\347\273\223\346\236\234\357\274\232", nullptr));
         LB_result->setText(QString());

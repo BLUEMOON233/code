@@ -31,7 +31,7 @@ public:
 	~DialogButtonBottom();
 
 signals:
-	void data_ret(const Rule& data);
+	void data_ret(const Rule& data, const bool& flag);
 	
 
 private:

@@ -92,8 +92,8 @@ int Production_System_with_GUI::qt_metacall(QMetaObject::Call _c, int _id, void 
     return _id;
 }
 struct qt_meta_stringdata_DialogButtonBottom_t {
-    QByteArrayData data[5];
-    char stringdata0[39];
+    QByteArrayData data[6];
+    char stringdata0[44];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -106,11 +106,12 @@ QT_MOC_LITERAL(0, 0, 18), // "DialogButtonBottom"
 QT_MOC_LITERAL(1, 19, 8), // "data_ret"
 QT_MOC_LITERAL(2, 28, 0), // ""
 QT_MOC_LITERAL(3, 29, 4), // "Rule"
-QT_MOC_LITERAL(4, 34, 4) // "data"
+QT_MOC_LITERAL(4, 34, 4), // "data"
+QT_MOC_LITERAL(5, 39, 4) // "flag"
 
     },
     "DialogButtonBottom\0data_ret\0\0Rule\0"
-    "data"
+    "data\0flag"
 };
 #undef QT_MOC_LITERAL
 
@@ -128,10 +129,10 @@ static const uint qt_meta_data_DialogButtonBottom[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   19,    2, 0x06 /* Public */,
+       1,    2,   19,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Bool,    4,    5,
 
        0        // eod
 };
@@ -142,13 +143,13 @@ void DialogButtonBottom::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         auto *_t = static_cast<DialogButtonBottom *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->data_ret((*reinterpret_cast< const Rule(*)>(_a[1]))); break;
+        case 0: _t->data_ret((*reinterpret_cast< const Rule(*)>(_a[1])),(*reinterpret_cast< const bool(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (DialogButtonBottom::*)(const Rule & );
+            using _t = void (DialogButtonBottom::*)(const Rule & , const bool & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DialogButtonBottom::data_ret)) {
                 *result = 0;
                 return;
@@ -198,9 +199,9 @@ int DialogButtonBottom::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void DialogButtonBottom::data_ret(const Rule & _t1)
+void DialogButtonBottom::data_ret(const Rule & _t1, const bool & _t2)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP

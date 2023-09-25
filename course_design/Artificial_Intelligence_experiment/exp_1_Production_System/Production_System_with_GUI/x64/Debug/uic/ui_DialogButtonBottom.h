@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
@@ -39,6 +40,7 @@ public:
     QPushButton *PB_add;
     QPushButton *PB_cancel;
     QTableWidget *TB_rule_added;
+    QCheckBox *CB_result;
 
     void setupUi(QDialog *Dialog)
     {
@@ -47,7 +49,7 @@ public:
         Dialog->resize(569, 394);
         groupBox = new QGroupBox(Dialog);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(430, 20, 120, 251));
+        groupBox->setGeometry(QRect(430, 20, 120, 221));
         QFont font;
         font.setPointSize(12);
         font.setBold(true);
@@ -78,7 +80,7 @@ public:
         label_2->setFont(font2);
         layoutWidget = new QWidget(groupBox);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 130, 102, 111));
+        layoutWidget->setGeometry(QRect(10, 130, 102, 81));
         RB_group = new QVBoxLayout(layoutWidget);
         RB_group->setObjectName(QString::fromUtf8("RB_group"));
         RB_group->setContentsMargins(0, 0, 0, 0);
@@ -113,6 +115,14 @@ public:
         QFont font4;
         font4.setPointSize(14);
         TB_rule_added->setFont(font4);
+        CB_result = new QCheckBox(Dialog);
+        CB_result->setObjectName(QString::fromUtf8("CB_result"));
+        CB_result->setGeometry(QRect(430, 250, 121, 31));
+        QFont font5;
+        font5.setPointSize(14);
+        font5.setBold(true);
+        font5.setWeight(75);
+        CB_result->setFont(font5);
 
         retranslateUi(Dialog);
         QObject::connect(PB_cancel, SIGNAL(clicked()), Dialog, SLOT(reject()));
@@ -122,7 +132,7 @@ public:
 
     void retranslateUi(QDialog *Dialog)
     {
-        Dialog->setWindowTitle(QCoreApplication::translate("Dialog", "Dialog", nullptr));
+        Dialog->setWindowTitle(QCoreApplication::translate("Dialog", "\346\226\260\345\242\236\350\247\204\345\210\231", nullptr));
         groupBox->setTitle(QCoreApplication::translate("Dialog", "\345\217\202\346\225\260", nullptr));
         pushButton->setText(QCoreApplication::translate("Dialog", "\347\241\256\345\256\232", nullptr));
         label->setText(QCoreApplication::translate("Dialog", "\345\211\215\344\273\266\346\225\260\351\207\217", nullptr));
@@ -131,6 +141,7 @@ public:
         RB_or->setText(QCoreApplication::translate("Dialog", "\346\210\226", nullptr));
         PB_add->setText(QCoreApplication::translate("Dialog", "\346\267\273\345\212\240", nullptr));
         PB_cancel->setText(QCoreApplication::translate("Dialog", "\345\217\226\346\266\210", nullptr));
+        CB_result->setText(QCoreApplication::translate("Dialog", "\347\273\223\350\256\272\344\270\272\347\233\256\346\240\207", nullptr));
     } // retranslateUi
 
 };

@@ -1,2 +1,4 @@
 ﻿  Production_System_with_GUI.cpp
+  main.cpp
+  moc_Production_System_with_GUI.cpp
   Production_System_with_GUI.vcxproj -> D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_GUI\x64\Debug\Production_System_with_GUI.exe

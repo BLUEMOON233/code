@@ -283,7 +283,7 @@ void DataBase::delete_rule(Rule rule_selected) {
 	mysql_query(mysql, query.c_str());
 }
 
-void DataBase::add_rule(Rule rule) {
+void DataBase::add_rule(Rule rule, bool flag) {
 	std::string get = "SELECT MAX(id) FROM results WHERE 1";
 	mysql_query(mysql, get.c_str());
 	MYSQL_RES* res = mysql_store_result(mysql);
@@ -291,11 +291,24 @@ void DataBase::add_rule(Rule rule) {
 	std::string check = "SELECT * FROM results WHERE result LIKE \"" + rule.result + '\"';
 	mysql_query(mysql, check.c_str());
 	res = mysql_store_result(mysql);
-	if (mysql_num_rows(res) == 0) {
+	if (flag && mysql_num_rows(res) == 0) {
 		std::string ins = "INSERT INTO results VALUES (" + std::to_string(id_new) + ", \"" + rule.result + "\")";
 		std::cout << ins << '\n';
 		mysql_query(mysql, ins.c_str());
 	}
+	get = "SELECT MAX(id) FROM facts WHERE 1";
+	mysql_query(mysql, get.c_str());
+	res = mysql_store_result(mysql);
+	id_new = atoi(mysql_fetch_row(res)[0]) + 1;
+	check = "SELECT * FROM facts WHERE fact LIKE \"" + rule.result + '\"';
+	mysql_query(mysql, check.c_str());
+	res = mysql_store_result(mysql);
+	if (!flag && mysql_num_rows(res) == 0) {
+		std::string ins = "INSERT INTO facts VALUES (" + std::to_string(id_new) + ", \"" + rule.result + "\")";
+		std::cout << ins << '\n';
+		mysql_query(mysql, ins.c_str());
+	}
+
 	for (int i = 0; i < rule.pre.size(); i++) {
 		std::string get = "SELECT MAX(id) FROM facts WHERE 1";
 		mysql_query(mysql, get.c_str());

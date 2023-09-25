@@ -279,7 +279,7 @@
      </font>
     </property>
     <property name="text">
-     <string>清空事件库</string>
+     <string>清空事实库</string>
     </property>
    </widget>
    <widget class="QPushButton" name="PB_clear_process">

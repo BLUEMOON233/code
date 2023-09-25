@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>新增规则</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
@@ -19,7 +19,7 @@
      <x>430</x>
      <y>20</y>
      <width>120</width>
-     <height>251</height>
+     <height>221</height>
     </rect>
    </property>
    <property name="font">
@@ -108,7 +108,7 @@
       <x>10</x>
       <y>130</y>
       <width>102</width>
-      <height>111</height>
+      <height>81</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="RB_group">
@@ -198,6 +198,26 @@
     <font>
      <pointsize>14</pointsize>
     </font>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="CB_result">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>250</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>结论为目标</string>
    </property>
   </widget>
  </widget>
