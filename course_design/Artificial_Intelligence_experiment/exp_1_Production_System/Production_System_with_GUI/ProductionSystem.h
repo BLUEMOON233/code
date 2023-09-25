@@ -34,6 +34,7 @@ public:
 	void delete_rule(Rule rule_selected);
 	void add_rule(Rule rule);
 	std::pair<bool, std::vector<Rule>> inference_engine();
+	bool connect_check();
 
 private:
 	MYSQL* mysql;
@@ -41,4 +42,5 @@ private:
 	const char* password = "123456";
 	const char* db_name = "Production_System_DB";
 	const int port = 3306;
+	bool connected = false;
 };

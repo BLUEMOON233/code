@@ -5,6 +5,9 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 {
 	db = new DataBase();
 	ui.setupUi(this);
+	if (!db->connect_check()) {
+		return;
+	}
 	int hsz = 4;
 	//init option:
 	ui.TB_rules->verticalHeader()->hide();
@@ -131,6 +134,7 @@ Production_System_with_GUI::Production_System_with_GUI(QWidget* parent)
 		ui.TB_process->clear();
 		ui.TB_process->setRowCount(0);
 		ui.TB_process->setColumnCount(0);
+		ui.LB_result->setText("");
 		});
 
 	connect(ui.PB_clear_fact_sel, &QPushButton::clicked, [=]()mutable {

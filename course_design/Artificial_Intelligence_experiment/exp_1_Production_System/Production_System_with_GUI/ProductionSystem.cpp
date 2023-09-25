@@ -67,10 +67,11 @@ DataBase::DataBase() {
 	if (mysql_real_connect(mysql, "localhost", username, password, db_name, port, NULL, 0) == NULL) {
 		std::cout << "" << mysql_error(mysql) << '\n';
 		std::cout << "连接失败\n";
-		exit(-1);
+		connected = false;
 	}
 	else {
 		std::cout << "数据库连接成功！\n\n";
+		connected = true;
 	}
 }
 
@@ -380,4 +381,8 @@ std::pair<bool, std::vector<Rule>> DataBase::inference_engine() {
 		delete_rule(rule_selected);
 	}
 	return { true, rules_list };
+}
+
+bool DataBase::connect_check() {
+	return connected;
 }
