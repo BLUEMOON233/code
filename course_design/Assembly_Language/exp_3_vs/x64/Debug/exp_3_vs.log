@@ -1,0 +1,14 @@
+﻿  Assembling exp_3.asm...
+exp_3.asm(1): error A2008: syntax error : .
+exp_3.asm(2): error A2008: syntax error : .
+D:\masm32\include\windows.inc(9343): error A2008: syntax error : dword
+D:\masm32\include\windows.inc(9695): error A2008: syntax error : frame
+D:\masm32\include\windows.inc(14002): error A2008: syntax error : dword
+D:\masm32\include\windows.inc(21406): error A2042: statement too complex
+D:\masm32\include\winextra.inc(9722): error A2026: constant expected
+D:\masm32\include\winextra.inc(9723): error A2026: constant expected
+exp_3.asm(19): error A2008: syntax error : INVOKE
+exp_3.asm(20): error A2008: syntax error : INVOKE
+exp_3.asm(23): error A2008: syntax error : main
+exp_3.asm(23): error A2088: END directive required at end of file
+D:\develop\VisualStudio\IDE\MSBuild\Microsoft\VC\v170\BuildCustomizations\masm.targets(70,5): error MSB3721: 命令“ml64.exe /c /nologo /Zi /Fo"x64\Debug\exp_3.obj" /Fl"exp_3_vs.lst" /I "D:\masm32\include" /W3 /errorReport:prompt  /Taexp_3.asm”已退出，返回代码为 1。
