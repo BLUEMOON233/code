@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opencv_exp_2", "opencv_exp_2.vcxproj", "{C208871B-BBB4-4639-BBA1-920C42A53633}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C208871B-BBB4-4639-BBA1-920C42A53633}.Debug|x64.ActiveCfg = Debug|x64
+		{C208871B-BBB4-4639-BBA1-920C42A53633}.Debug|x64.Build.0 = Debug|x64
+		{C208871B-BBB4-4639-BBA1-920C42A53633}.Release|x64.ActiveCfg = Release|x64
+		{C208871B-BBB4-4639-BBA1-920C42A53633}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91B84B82-AAA4-4443-A99A-9DD8540C8938}
+	EndGlobalSection
+EndGlobal

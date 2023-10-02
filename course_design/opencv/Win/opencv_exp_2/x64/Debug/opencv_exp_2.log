@@ -1,0 +1,5 @@
+﻿  uic opencv_exp_2.ui
+  main.cpp
+  opencv_exp_2.cpp
+  moc_opencv_exp_2.cpp
+  opencv_exp_2.vcxproj -> D:\develop\code\course_design\opencv\Win\opencv_exp_2\x64\Debug\opencv_exp_2.exe

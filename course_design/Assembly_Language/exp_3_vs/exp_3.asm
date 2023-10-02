@@ -80,7 +80,9 @@ main proc
 
     
     ; 调用子程序判断是否构成三角形
+    push edx
     call IsTriangle
+    pop edx
     cmp ebx, 1
     je yes
     cmp ebx, 0
@@ -89,20 +91,20 @@ main proc
     ; 输出结果
     yes:
     invoke WriteConsole, outhandle, addr isTriangleMsg, sizeof isTriangleMsg - 1, 0, 0
-    jmp    endProgram
+    jmp endProgram
     
     no:
     invoke WriteConsole, outhandle, addr notTriangleMsg, sizeof notTriangleMsg - 1, 0, 0
-    jmp    endProgram
+    jmp endProgram
     
     endProgram:
     ret
 main endp
     
-
 start:
     mov ecx, 10
-    again:
+
+again:
     push ecx
     call main
     pop ecx
