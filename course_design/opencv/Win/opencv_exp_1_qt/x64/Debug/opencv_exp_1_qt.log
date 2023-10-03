@@ -1,2 +1,5 @@
 ﻿  opencv_exp_1_qt.cpp
+  main.cpp
+  qrc_opencv_exp_1_qt.cpp
+  moc_opencv_exp_1_qt.cpp
   opencv_exp_1_qt.vcxproj -> D:\develop\code\course_design\opencv\Win\opencv_exp_1_qt\x64\Debug\opencv_exp_1_qt.exe

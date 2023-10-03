@@ -42,7 +42,7 @@
      <enum>QFrame::Raised</enum>
     </property>
     <property name="lineWidth">
-     <number>10</number>
+     <number>1</number>
     </property>
     <property name="text">
      <string/>
@@ -64,7 +64,7 @@
      <enum>QFrame::Raised</enum>
     </property>
     <property name="lineWidth">
-     <number>10</number>
+     <number>1</number>
     </property>
     <property name="text">
      <string/>

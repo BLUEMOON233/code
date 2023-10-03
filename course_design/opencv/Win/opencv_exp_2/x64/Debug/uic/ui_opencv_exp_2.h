@@ -57,13 +57,13 @@ public:
         LB_ori->setGeometry(QRect(20, 50, 580, 500));
         LB_ori->setFrameShape(QFrame::Box);
         LB_ori->setFrameShadow(QFrame::Raised);
-        LB_ori->setLineWidth(10);
+        LB_ori->setLineWidth(1);
         LB_aft = new QLabel(centralWidget);
         LB_aft->setObjectName(QString::fromUtf8("LB_aft"));
         LB_aft->setGeometry(QRect(680, 50, 580, 500));
         LB_aft->setFrameShape(QFrame::Box);
         LB_aft->setFrameShadow(QFrame::Raised);
-        LB_aft->setLineWidth(10);
+        LB_aft->setLineWidth(1);
         label = new QLabel(centralWidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(30, 10, 121, 21));
