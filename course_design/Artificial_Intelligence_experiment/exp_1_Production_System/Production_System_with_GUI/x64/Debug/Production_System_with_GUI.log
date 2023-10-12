@@ -1,4 +1,4 @@
-﻿  Production_System_with_GUI.cpp
-  main.cpp
-  moc_Production_System_with_GUI.cpp
+﻿  ProductionSystem.cpp
+  Production_System_with_GUI.cpp
+D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_GUI\ProductionSystem.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
   Production_System_with_GUI.vcxproj -> D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_1_Production_System\Production_System_with_GUI\x64\Debug\Production_System_with_GUI.exe

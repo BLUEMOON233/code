@@ -18,5 +18,14 @@
     <MASM Include="exp_3.asm">
       <Filter>源文件</Filter>
     </MASM>
+    <MASM Include="exp_4.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+    <MASM Include="exp_5.asm">
+      <Filter>源文件</Filter>
+    </MASM>
+    <MASM Include="exp_5_disp.asm">
+      <Filter>源文件</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

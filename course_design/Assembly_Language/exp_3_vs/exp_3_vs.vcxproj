@@ -82,6 +82,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\masm32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
     <MASM>
       <IncludePaths>D:\masm32\include</IncludePaths>
@@ -141,6 +142,9 @@
     <MASM Include="exp_3.asm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </MASM>
+    <MASM Include="exp_4.asm" />
+    <MASM Include="exp_5_disp.asm" />
+    <MASM Include="exp_5.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

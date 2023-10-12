@@ -249,6 +249,4 @@ DialogButtonBottom::DialogButtonBottom(QWidget* parent) : QDialog(parent) {
 }
 
 DialogButtonBottom::~DialogButtonBottom() {
-
 }
-

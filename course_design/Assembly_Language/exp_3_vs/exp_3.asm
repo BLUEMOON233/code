@@ -52,7 +52,7 @@ notTriangle:
     
 IsTriangle endp
 
-main proc
+main_1 proc
     ; 获取标准输入句柄
     invoke GetStdHandle, STD_OUTPUT_HANDLE
     mov    outhandle, eax
@@ -99,17 +99,17 @@ main proc
     
     endProgram:
     ret
-main endp
+main_1 endp
     
-start:
+start_3:
     mov ecx, 10
 
 again:
     push ecx
-    call main
+    call main_1
     pop ecx
 
     loop again
 
     invoke ExitProcess, 0
-    end start
+    end start_3
