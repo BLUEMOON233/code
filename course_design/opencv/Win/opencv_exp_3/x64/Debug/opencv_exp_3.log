@@ -1,0 +1,5 @@
+﻿  main.cpp
+D:\develop\code\course_design\opencv\Win\opencv_exp_3\main.cpp(16,11): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+D:\develop\code\course_design\opencv\Win\opencv_exp_3\main.cpp(31,11): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+D:\develop\code\course_design\opencv\Win\opencv_exp_3\main.cpp(57,11): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+  opencv_exp_3.vcxproj -> D:\develop\code\course_design\opencv\Win\opencv_exp_3\x64\Debug\opencv_exp_3.exe
