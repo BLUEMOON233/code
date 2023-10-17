@@ -4,9 +4,10 @@ Eight_Puzzle_Problem::Eight_Puzzle_Problem(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
-    puzzle.DFS();
-    for (Node path : puzzle.paths)
+    puzzle.BFS();
+    for (auto path : puzzle.get_paths()) {
         path.print();
+    }
 }
 
 Eight_Puzzle_Problem::~Eight_Puzzle_Problem()

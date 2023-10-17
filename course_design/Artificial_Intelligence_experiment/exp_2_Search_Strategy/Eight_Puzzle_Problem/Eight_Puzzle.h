@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<stack>
+#include<queue>
 #include<unordered_map>
 
 struct Node {
@@ -14,14 +15,14 @@ struct Node {
 
 class Eight_Puzzle {
 public:
-	void init_puzzle();
+	bool init_puzzle();
+	std::vector<Node> get_paths();
 	void DFS();
-
-	std::vector<Node> paths;
+	void BFS();
 
 private:
 	Node node_start = { "130824765" };
 	Node node_end = { "123804765" };
 	bool target = false;
-	
+	std::vector<Node> paths;
 };
