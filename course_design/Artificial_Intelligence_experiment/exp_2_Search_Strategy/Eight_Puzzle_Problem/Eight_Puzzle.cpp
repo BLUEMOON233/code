@@ -8,60 +8,118 @@ std::vector<Node> Node::transfer() {
 			std::string now = this->state;
 			int tar = (r - 1) * 3 + c;
 			std::swap(now[index], now[tar]);
-			ret.emplace_back(now);
+			ret.emplace_back(now, this->depth + 1);
 		}
 		if (r + 1 < 3) {
 			std::string now = this->state;
 			int tar = (r + 1) * 3 + c;
 			std::swap(now[index], now[tar]);
-			ret.emplace_back(now);
+			ret.emplace_back(now, this->depth + 1);
 		}
 		if (c - 1 >= 0) {
 			std::string now = this->state;
 			int tar = r * 3 + (c - 1);
 			std::swap(now[index], now[tar]);
-			ret.emplace_back(now);
+			ret.emplace_back(now, this->depth + 1);
 		}
 		if (c + 1 < 3) {
 			std::string now = this->state;
 			int tar = r * 3 + (c + 1);
 			std::swap(now[index], now[tar]);
-			ret.emplace_back(now);
+			ret.emplace_back(now, this->depth + 1);
 		}
 	}
 	return ret;
 }
 
-void Node::print() {
-	std::cout << '\n';
+std::string Node::toString() {
+	std::string ret = "\n";
 	for (int r = 0; r < 3; r++) {
 		for (int c = 0; c < 3; c++) {
-			std::cout << this->state[r * 3 + c] << " \n"[c == 2];
+			ret += this->state[r * 3 + c];
+			if (r < 3) ret += " \n"[c == 2];
+			else if (c < 2) ret += ' ';
 		}
 	}
+	return ret;
+}
+
+int Node::get_manhattan_distance(Node tar) {
+	int cost = 0;
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (tar.state[j] == this->state[i]) {
+				int rx = i / 3, cx = i % 3;
+				int ry = j / 3, cy = j % 3;
+				cost += abs(rx - ry) + abs(cx - cy);
+			}
+		}
+	}
+	return cost;
+}
+
+double Node::get_Euclidean_distance(Node tar) {
+	double cost = 0.0;
+	auto get_dis = [](double x1, double y1, double x2, double y2) -> double {
+		double ret = 0.0;
+		ret += (x1 - x2) * (x1 - x2);
+		ret += (y1 - y2) * (y1 - y2);
+		return sqrt(ret);
+		};
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (tar.state[j] == this->state[i]) {
+				int rx = i / 3, cx = i % 3;
+				int ry = j / 3, cy = j % 3;
+				cost += get_dis(rx, cx, ry, cy);
+			}
+		}
+	}
+	return cost;
+}
+
+int Node::get_wrong_position(Node tar) {
+	int cost = 0;
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (tar.state[j] != this->state[i]) {
+				cost++;
+			}
+		}
+	}
+	return cost;
+}
+
+bool Node::operator< (const Node& tar) const {
+	return this->depth < tar.depth;
 }
 
 bool Eight_Puzzle::init_puzzle() {
+	node_cnt = 0;
 	target = false;
 	paths.clear();
 	int flag_start = 0, flag_end = 0;
-	for (int l = 0; l < 9; l++) for (int r = l + 1; r < 9; r++) {
-		if (this->node_start.state[l] > this->node_start.state[r])
-			flag_start++;
-		if (this->node_end.state[l] > this->node_end.state[r])
-			flag_end++;
+	std::vector<char> st, en;
+	for (char ch : node_start.state) if (ch != '0') st.emplace_back(ch);
+	for (char ch : node_end.state) if (ch != '0')  en.emplace_back(ch);
+	for (int l = 0; l < 8; l++) for (int r = l + 1; r < 8; r++) {
+		if (st[l] > st[r]) flag_start++;
+		if (en[l] > en[r]) flag_end++;
 	}
+	target = true;
 	if (flag_start % 2 != flag_end % 2)
-		return false;
-	return true;
+		target = false;
+	return target;
 }
 
 std::vector<Node> Eight_Puzzle::get_paths() {
 	return this->paths;
 }
 
-void Eight_Puzzle::DFS() {
+bool Eight_Puzzle::DFS() {
 	this->init_puzzle();
+	if (!this->target)
+		return false;
 
 	std::stack<Node> table_open;
 	std::unordered_map <std::string, std::string> table_close;
@@ -69,9 +127,9 @@ void Eight_Puzzle::DFS() {
 	while (!table_open.empty()) {
 		Node now = table_open.top();
 		table_open.pop();
+		this->node_cnt++;
 
 		if (now.state == node_end.state) {
-			target = true;
 			std::string now_state = now.state;
 			while (now_state != node_start.state) {
 				this->paths.emplace_back(now_state);
@@ -89,10 +147,13 @@ void Eight_Puzzle::DFS() {
 			table_close[nxt.state] = now.state;
 		}
 	}
+	return true;
 }
 
-void Eight_Puzzle::BFS() {
+bool Eight_Puzzle::BFS() {
 	this->init_puzzle();
+	if (!this->target)
+		return false;
 
 	std::queue<Node> table_open;
 	std::unordered_map <std::string, std::string> table_close;
@@ -100,9 +161,9 @@ void Eight_Puzzle::BFS() {
 	while (!table_open.empty()) {
 		Node now = table_open.front();
 		table_open.pop();
+		this->node_cnt++;
 
 		if (now.state == node_end.state) {
-			target = true;
 			std::string now_state = now.state;
 			while (now_state != node_start.state) {
 				this->paths.emplace_back(now_state);
@@ -120,4 +181,137 @@ void Eight_Puzzle::BFS() {
 			table_close[nxt.state] = now.state;
 		}
 	}
+	return true;
+}
+
+bool Eight_Puzzle::a_star_manhatten() {
+	this->init_puzzle();
+	if (!this->target)
+		return false;
+
+	std::priority_queue<PIN, std::vector<PIN>, std::greater<PIN>> table_open;
+	std::unordered_map <std::string, std::string> table_close;
+	table_open.push({ 0, node_start });
+	while (!table_open.empty()) {
+		auto [cost, now] = table_open.top();
+		table_open.pop();
+		this->node_cnt++;
+
+		if (now.state == node_end.state) {
+			std::string now_state = now.state;
+			while (now_state != node_start.state) {
+				this->paths.emplace_back(now_state);
+				now_state = table_close[now_state];
+			}
+			this->paths.emplace_back(now_state);
+			std::reverse(paths.begin(), paths.end());
+			break;
+		}
+
+		std::vector<Node> next_states = now.transfer();
+		for (Node nxt : next_states) {
+			if (!table_close[nxt.state].empty()) continue;
+			int nxt_cost = nxt.depth + nxt.get_manhattan_distance(node_end);
+			table_open.push({ nxt_cost, nxt });
+			table_close[nxt.state] = now.state;
+		}
+	}
+	return true;
+}
+
+
+bool Eight_Puzzle::a_star_Euclidean() {
+	this->init_puzzle();
+	if (!this->target)
+		return false;
+
+	std::priority_queue<PDN, std::vector<PDN>, std::greater<PDN>> table_open;
+	std::unordered_map <std::string, std::string> table_close;
+	table_open.push({ 0, node_start });
+	while (!table_open.empty()) {
+		auto [cost, now] = table_open.top();
+		table_open.pop();
+		this->node_cnt++;
+
+		if (now.state == node_end.state) {
+			std::string now_state = now.state;
+			while (now_state != node_start.state) {
+				this->paths.emplace_back(now_state);
+				now_state = table_close[now_state];
+			}
+			this->paths.emplace_back(now_state);
+			std::reverse(paths.begin(), paths.end());
+			break;
+		}
+
+		std::vector<Node> next_states = now.transfer();
+		for (Node nxt : next_states) {
+			if (!table_close[nxt.state].empty()) continue;
+			double nxt_cost = nxt.depth + nxt.get_Euclidean_distance(node_end);
+			table_open.push({ nxt_cost, nxt });
+			table_close[nxt.state] = now.state;
+		}
+	}
+	return true;
+}
+
+bool Eight_Puzzle::a_star_wrongpos() {
+	this->init_puzzle();
+	if (!this->target)
+		return false;
+
+	std::priority_queue<PIN, std::vector<PIN>, std::greater<PIN>> table_open;
+	std::unordered_map <std::string, std::string> table_close;
+	table_open.push({ 0, node_start });
+	while (!table_open.empty()) {
+		auto [cost, now] = table_open.top();
+		table_open.pop();
+		this->node_cnt++;
+
+		if (now.state == node_end.state) {
+			std::string now_state = now.state;
+			while (now_state != node_start.state) {
+				this->paths.emplace_back(now_state);
+				now_state = table_close[now_state];
+			}
+			this->paths.emplace_back(now_state);
+			std::reverse(paths.begin(), paths.end());
+			break;
+		}
+
+		std::vector<Node> next_states = now.transfer();
+		for (Node nxt : next_states) {
+			if (!table_close[nxt.state].empty()) continue;
+			int nxt_cost = nxt.depth + nxt.get_wrong_position(node_end);
+			table_open.push({ nxt_cost, nxt });
+			table_close[nxt.state] = now.state;
+		}
+	}
+	return true;
+}
+
+void Eight_Puzzle::set_random_state() {
+	std::vector<int> v(9);
+	std::iota(v.begin(), v.end(), 0);
+	std::shuffle(v.begin(), v.end(), std::mt19937{ std::random_device{}() });
+	for (int i = 0; i < 9; i++) node_start.state[i] = v[i] + '0';
+	std::shuffle(v.begin(), v.end(), std::mt19937{ std::random_device{}() });
+	for (int i = 0; i < 9; i++) node_end.state[i] = v[i] + '0';
+}
+
+std::string Eight_Puzzle::get_start_state() {
+	return this->node_start.state;
+}
+
+std::string Eight_Puzzle::get_end_state() {
+	return this->node_end.state;
+}
+
+int Eight_Puzzle::get_node_cnt() {
+	return this->node_cnt;
+}
+
+bool Eight_Puzzle::check_target() {
+	this->init_puzzle();
+	return this->target;
 }
