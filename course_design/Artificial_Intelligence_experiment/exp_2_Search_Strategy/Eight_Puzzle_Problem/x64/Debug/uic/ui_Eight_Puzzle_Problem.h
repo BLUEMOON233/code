@@ -10,13 +10,16 @@
 #define UI_EIGHT_PUZZLE_PROBLEM_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QWidget>
 
@@ -49,6 +52,9 @@ public:
     QPushButton *PB_random;
     QPushButton *PB_check_solve;
     QFrame *line;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QHBoxLayout *horizontalLayout;
     QGroupBox *groupBox_3;
     QLabel *label;
     QLineEdit *LE_dfs_time;
@@ -99,14 +105,47 @@ public:
     QLineEdit *LE_awor_path;
     QTextBrowser *TB_awor;
     QLabel *label_20;
+    QGroupBox *groupBox_8;
+    QLabel *label_21;
+    QLineEdit *LE_iddfs_time;
+    QPushButton *PB_iddfs;
+    QLabel *label_22;
+    QLineEdit *LE_iddfs_node;
+    QLabel *label_23;
+    QLineEdit *LE_iddfs_path;
+    QTextBrowser *TB_iddfs;
+    QLabel *label_24;
+    QGroupBox *groupBox_9;
+    QLabel *label_25;
+    QLineEdit *LE_ida_time;
+    QPushButton *PB_ida;
+    QLabel *label_26;
+    QLineEdit *LE_ida_node;
+    QLabel *label_27;
+    QLineEdit *LE_ida_path;
+    QTextBrowser *TB_ida;
+    QLabel *label_28;
+    QGroupBox *groupBox_10;
+    QLabel *label_29;
+    QLineEdit *LE_bibfs_time;
+    QPushButton *PB_bibfs;
+    QLabel *label_30;
+    QLineEdit *LE_bibfs_node;
+    QLabel *label_31;
+    QLineEdit *LE_bibfs_path;
+    QTextBrowser *TB_bibfs;
+    QLabel *label_32;
 
     void setupUi(QMainWindow *Eight_Puzzle_ProblemClass)
     {
         if (Eight_Puzzle_ProblemClass->objectName().isEmpty())
             Eight_Puzzle_ProblemClass->setObjectName(QString::fromUtf8("Eight_Puzzle_ProblemClass"));
-        Eight_Puzzle_ProblemClass->resize(1620, 720);
-        Eight_Puzzle_ProblemClass->setMinimumSize(QSize(1620, 720));
-        Eight_Puzzle_ProblemClass->setMaximumSize(QSize(1620, 720));
+        Eight_Puzzle_ProblemClass->resize(1180, 720);
+        Eight_Puzzle_ProblemClass->setMinimumSize(QSize(1180, 720));
+        Eight_Puzzle_ProblemClass->setMaximumSize(QSize(1180, 720));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("C:/Users/liuwy/Desktop/\345\217\257\350\276\276\351\270\255\345\274\202\350\211\262.png"), QSize(), QIcon::Normal, QIcon::Off);
+        Eight_Puzzle_ProblemClass->setWindowIcon(icon);
         centralWidget = new QWidget(Eight_Puzzle_ProblemClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         groupBox = new QGroupBox(centralWidget);
@@ -298,15 +337,30 @@ public:
         line->setFrameShadow(QFrame::Raised);
         line->setLineWidth(3);
         line->setFrameShape(QFrame::VLine);
-        groupBox_3 = new QGroupBox(centralWidget);
+        scrollArea = new QScrollArea(centralWidget);
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setGeometry(QRect(280, 10, 881, 701));
+        scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1748, 699));
+        horizontalLayout = new QHBoxLayout(scrollAreaWidgetContents);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        groupBox_3 = new QGroupBox(scrollAreaWidgetContents);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setGeometry(QRect(300, 20, 211, 681));
+        groupBox_3->setMinimumSize(QSize(211, 681));
         groupBox_3->setFont(font);
         label = new QLabel(groupBox_3);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(10, 30, 101, 21));
         QFont font1;
+        font1.setFamily(QString::fromUtf8("\345\271\274\345\234\206"));
         font1.setPointSize(16);
+        font1.setBold(true);
+        font1.setWeight(75);
         label->setFont(font1);
         LE_dfs_time = new QLineEdit(groupBox_3);
         LE_dfs_time->setObjectName(QString::fromUtf8("LE_dfs_time"));
@@ -341,9 +395,12 @@ public:
         label_7->setObjectName(QString::fromUtf8("label_7"));
         label_7->setGeometry(QRect(10, 310, 101, 21));
         label_7->setFont(font1);
-        groupBox_4 = new QGroupBox(centralWidget);
+
+        horizontalLayout->addWidget(groupBox_3);
+
+        groupBox_4 = new QGroupBox(scrollAreaWidgetContents);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
-        groupBox_4->setGeometry(QRect(520, 20, 211, 681));
+        groupBox_4->setMinimumSize(QSize(211, 681));
         groupBox_4->setFont(font);
         label_4 = new QLabel(groupBox_4);
         label_4->setObjectName(QString::fromUtf8("label_4"));
@@ -377,9 +434,12 @@ public:
         label_8->setObjectName(QString::fromUtf8("label_8"));
         label_8->setGeometry(QRect(10, 310, 101, 21));
         label_8->setFont(font1);
-        groupBox_5 = new QGroupBox(centralWidget);
+
+        horizontalLayout->addWidget(groupBox_4);
+
+        groupBox_5 = new QGroupBox(scrollAreaWidgetContents);
         groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
-        groupBox_5->setGeometry(QRect(740, 20, 211, 681));
+        groupBox_5->setMinimumSize(QSize(211, 681));
         groupBox_5->setFont(font);
         label_10 = new QLabel(groupBox_5);
         label_10->setObjectName(QString::fromUtf8("label_10"));
@@ -413,9 +473,12 @@ public:
         label_9->setObjectName(QString::fromUtf8("label_9"));
         label_9->setGeometry(QRect(10, 310, 101, 21));
         label_9->setFont(font1);
-        groupBox_6 = new QGroupBox(centralWidget);
+
+        horizontalLayout->addWidget(groupBox_5);
+
+        groupBox_6 = new QGroupBox(scrollAreaWidgetContents);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
-        groupBox_6->setGeometry(QRect(960, 20, 211, 681));
+        groupBox_6->setMinimumSize(QSize(211, 681));
         groupBox_6->setFont(font);
         label_13 = new QLabel(groupBox_6);
         label_13->setObjectName(QString::fromUtf8("label_13"));
@@ -449,9 +512,12 @@ public:
         label_16->setObjectName(QString::fromUtf8("label_16"));
         label_16->setGeometry(QRect(10, 310, 101, 21));
         label_16->setFont(font1);
-        groupBox_7 = new QGroupBox(centralWidget);
+
+        horizontalLayout->addWidget(groupBox_6);
+
+        groupBox_7 = new QGroupBox(scrollAreaWidgetContents);
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
-        groupBox_7->setGeometry(QRect(1180, 20, 211, 681));
+        groupBox_7->setMinimumSize(QSize(211, 681));
         groupBox_7->setFont(font);
         label_17 = new QLabel(groupBox_7);
         label_17->setObjectName(QString::fromUtf8("label_17"));
@@ -485,6 +551,129 @@ public:
         label_20->setObjectName(QString::fromUtf8("label_20"));
         label_20->setGeometry(QRect(10, 310, 101, 21));
         label_20->setFont(font1);
+
+        horizontalLayout->addWidget(groupBox_7);
+
+        groupBox_8 = new QGroupBox(scrollAreaWidgetContents);
+        groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
+        groupBox_8->setMinimumSize(QSize(211, 681));
+        groupBox_8->setFont(font);
+        label_21 = new QLabel(groupBox_8);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+        label_21->setGeometry(QRect(10, 30, 101, 21));
+        QFont font3;
+        font3.setPointSize(16);
+        label_21->setFont(font3);
+        LE_iddfs_time = new QLineEdit(groupBox_8);
+        LE_iddfs_time->setObjectName(QString::fromUtf8("LE_iddfs_time"));
+        LE_iddfs_time->setGeometry(QRect(10, 60, 131, 31));
+        PB_iddfs = new QPushButton(groupBox_8);
+        PB_iddfs->setObjectName(QString::fromUtf8("PB_iddfs"));
+        PB_iddfs->setGeometry(QRect(10, 250, 131, 51));
+        PB_iddfs->setFont(font2);
+        label_22 = new QLabel(groupBox_8);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setGeometry(QRect(10, 100, 141, 21));
+        label_22->setFont(font3);
+        LE_iddfs_node = new QLineEdit(groupBox_8);
+        LE_iddfs_node->setObjectName(QString::fromUtf8("LE_iddfs_node"));
+        LE_iddfs_node->setGeometry(QRect(10, 130, 131, 31));
+        label_23 = new QLabel(groupBox_8);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+        label_23->setGeometry(QRect(10, 170, 101, 21));
+        label_23->setFont(font3);
+        LE_iddfs_path = new QLineEdit(groupBox_8);
+        LE_iddfs_path->setObjectName(QString::fromUtf8("LE_iddfs_path"));
+        LE_iddfs_path->setGeometry(QRect(10, 200, 131, 31));
+        TB_iddfs = new QTextBrowser(groupBox_8);
+        TB_iddfs->setObjectName(QString::fromUtf8("TB_iddfs"));
+        TB_iddfs->setGeometry(QRect(10, 340, 191, 331));
+        label_24 = new QLabel(groupBox_8);
+        label_24->setObjectName(QString::fromUtf8("label_24"));
+        label_24->setGeometry(QRect(10, 310, 101, 21));
+        label_24->setFont(font3);
+
+        horizontalLayout->addWidget(groupBox_8);
+
+        groupBox_9 = new QGroupBox(scrollAreaWidgetContents);
+        groupBox_9->setObjectName(QString::fromUtf8("groupBox_9"));
+        groupBox_9->setMinimumSize(QSize(211, 681));
+        groupBox_9->setFont(font);
+        label_25 = new QLabel(groupBox_9);
+        label_25->setObjectName(QString::fromUtf8("label_25"));
+        label_25->setGeometry(QRect(10, 30, 101, 21));
+        label_25->setFont(font3);
+        LE_ida_time = new QLineEdit(groupBox_9);
+        LE_ida_time->setObjectName(QString::fromUtf8("LE_ida_time"));
+        LE_ida_time->setGeometry(QRect(10, 60, 131, 31));
+        PB_ida = new QPushButton(groupBox_9);
+        PB_ida->setObjectName(QString::fromUtf8("PB_ida"));
+        PB_ida->setGeometry(QRect(10, 250, 131, 51));
+        PB_ida->setFont(font2);
+        label_26 = new QLabel(groupBox_9);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
+        label_26->setGeometry(QRect(10, 100, 141, 21));
+        label_26->setFont(font3);
+        LE_ida_node = new QLineEdit(groupBox_9);
+        LE_ida_node->setObjectName(QString::fromUtf8("LE_ida_node"));
+        LE_ida_node->setGeometry(QRect(10, 130, 131, 31));
+        label_27 = new QLabel(groupBox_9);
+        label_27->setObjectName(QString::fromUtf8("label_27"));
+        label_27->setGeometry(QRect(10, 170, 101, 21));
+        label_27->setFont(font3);
+        LE_ida_path = new QLineEdit(groupBox_9);
+        LE_ida_path->setObjectName(QString::fromUtf8("LE_ida_path"));
+        LE_ida_path->setGeometry(QRect(10, 200, 131, 31));
+        TB_ida = new QTextBrowser(groupBox_9);
+        TB_ida->setObjectName(QString::fromUtf8("TB_ida"));
+        TB_ida->setGeometry(QRect(10, 340, 191, 331));
+        label_28 = new QLabel(groupBox_9);
+        label_28->setObjectName(QString::fromUtf8("label_28"));
+        label_28->setGeometry(QRect(10, 310, 101, 21));
+        label_28->setFont(font3);
+
+        horizontalLayout->addWidget(groupBox_9);
+
+        groupBox_10 = new QGroupBox(scrollAreaWidgetContents);
+        groupBox_10->setObjectName(QString::fromUtf8("groupBox_10"));
+        groupBox_10->setMinimumSize(QSize(211, 681));
+        groupBox_10->setFont(font);
+        label_29 = new QLabel(groupBox_10);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+        label_29->setGeometry(QRect(10, 30, 101, 21));
+        label_29->setFont(font3);
+        LE_bibfs_time = new QLineEdit(groupBox_10);
+        LE_bibfs_time->setObjectName(QString::fromUtf8("LE_bibfs_time"));
+        LE_bibfs_time->setGeometry(QRect(10, 60, 131, 31));
+        PB_bibfs = new QPushButton(groupBox_10);
+        PB_bibfs->setObjectName(QString::fromUtf8("PB_bibfs"));
+        PB_bibfs->setGeometry(QRect(10, 250, 131, 51));
+        PB_bibfs->setFont(font2);
+        label_30 = new QLabel(groupBox_10);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+        label_30->setGeometry(QRect(10, 100, 141, 21));
+        label_30->setFont(font3);
+        LE_bibfs_node = new QLineEdit(groupBox_10);
+        LE_bibfs_node->setObjectName(QString::fromUtf8("LE_bibfs_node"));
+        LE_bibfs_node->setGeometry(QRect(10, 130, 131, 31));
+        label_31 = new QLabel(groupBox_10);
+        label_31->setObjectName(QString::fromUtf8("label_31"));
+        label_31->setGeometry(QRect(10, 170, 101, 21));
+        label_31->setFont(font3);
+        LE_bibfs_path = new QLineEdit(groupBox_10);
+        LE_bibfs_path->setObjectName(QString::fromUtf8("LE_bibfs_path"));
+        LE_bibfs_path->setGeometry(QRect(10, 200, 131, 31));
+        TB_bibfs = new QTextBrowser(groupBox_10);
+        TB_bibfs->setObjectName(QString::fromUtf8("TB_bibfs"));
+        TB_bibfs->setGeometry(QRect(10, 340, 191, 331));
+        label_32 = new QLabel(groupBox_10);
+        label_32->setObjectName(QString::fromUtf8("label_32"));
+        label_32->setGeometry(QRect(10, 310, 101, 21));
+        label_32->setFont(font3);
+
+        horizontalLayout->addWidget(groupBox_10);
+
+        scrollArea->setWidget(scrollAreaWidgetContents);
         Eight_Puzzle_ProblemClass->setCentralWidget(centralWidget);
 
         retranslateUi(Eight_Puzzle_ProblemClass);
@@ -547,6 +736,24 @@ public:
         label_18->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\350\212\202\347\202\271\346\225\260\357\274\232", nullptr));
         label_19->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\346\255\245\346\225\260\357\274\232", nullptr));
         label_20->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\350\267\257\345\276\204\357\274\232", nullptr));
+        groupBox_8->setTitle(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "DFS\357\274\210\350\277\255\344\273\243\345\212\240\346\267\261\357\274\211", nullptr));
+        label_21->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\346\227\266\351\227\264\357\274\232", nullptr));
+        PB_iddfs->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\345\274\200\345\247\213\350\277\220\350\241\214", nullptr));
+        label_22->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\350\212\202\347\202\271\346\225\260\357\274\232", nullptr));
+        label_23->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\346\255\245\346\225\260\357\274\232", nullptr));
+        label_24->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\350\267\257\345\276\204\357\274\232", nullptr));
+        groupBox_9->setTitle(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "IDA*", nullptr));
+        label_25->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\346\227\266\351\227\264\357\274\232", nullptr));
+        PB_ida->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\345\274\200\345\247\213\350\277\220\350\241\214", nullptr));
+        label_26->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\350\212\202\347\202\271\346\225\260\357\274\232", nullptr));
+        label_27->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\346\255\245\346\225\260\357\274\232", nullptr));
+        label_28->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\350\267\257\345\276\204\357\274\232", nullptr));
+        groupBox_10->setTitle(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "BIBFS", nullptr));
+        label_29->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\346\227\266\351\227\264\357\274\232", nullptr));
+        PB_bibfs->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\345\274\200\345\247\213\350\277\220\350\241\214", nullptr));
+        label_30->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\350\212\202\347\202\271\346\225\260\357\274\232", nullptr));
+        label_31->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\346\255\245\346\225\260\357\274\232", nullptr));
+        label_32->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\350\267\257\345\276\204\357\274\232", nullptr));
     } // retranslateUi
 
 };

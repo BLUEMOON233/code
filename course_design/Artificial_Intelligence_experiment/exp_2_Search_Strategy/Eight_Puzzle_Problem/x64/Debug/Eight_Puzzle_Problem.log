@@ -1,4 +1,5 @@
-﻿  Eight_Puzzle_Problem.cpp
+﻿  uic Eight_Puzzle_Problem.ui
+  Eight_Puzzle_Problem.cpp
   main.cpp
   moc_Eight_Puzzle_Problem.cpp
   Eight_Puzzle_Problem.vcxproj -> D:\develop\code\course_design\Artificial_Intelligence_experiment\exp_2_Search_Strategy\Eight_Puzzle_Problem\x64\Debug\Eight_Puzzle_Problem.exe

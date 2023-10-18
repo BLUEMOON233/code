@@ -161,6 +161,90 @@ Eight_Puzzle_Problem::Eight_Puzzle_Problem(QWidget* parent)
 		}
 		ui.TB_awor->setText(text);
 		});
+
+	connect(ui.PB_iddfs, &QPushButton::clicked, [=]()mutable {
+		double cost_time = 0;
+		LARGE_INTEGER nFreq;
+		LARGE_INTEGER nBeginTime;
+		LARGE_INTEGER nEndTime;
+		QueryPerformanceFrequency(&nFreq);
+		QueryPerformanceCounter(&nBeginTime);
+		bool tar = puzzle.DFS_iterative_deepening();
+		if (!tar) {
+			QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		}
+		QueryPerformanceCounter(&nEndTime);
+		cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
+		cost_time *= 1000;
+		std::vector<Node> paths = puzzle.get_paths();
+		ui.LE_iddfs_time->setText(QString::number(cost_time));
+		ui.LE_iddfs_path->setText(QString::number(paths.size()));
+		ui.LE_iddfs_node->setText(QString::number(puzzle.get_node_cnt()));
+		QString text = "***********\n";
+		for (int i = max(0, int(paths.size()) - 99); i < paths.size(); i++) {
+			text += "PATH_";
+			text += QString::number(i + 1);
+			text += QString::fromStdString(paths[i].toString());
+			text += "***********\n";
+		}
+		ui.TB_iddfs->setText(text);
+		});
+
+	connect(ui.PB_ida, &QPushButton::clicked, [=]()mutable {
+		double cost_time = 0;
+		LARGE_INTEGER nFreq;
+		LARGE_INTEGER nBeginTime;
+		LARGE_INTEGER nEndTime;
+		QueryPerformanceFrequency(&nFreq);
+		QueryPerformanceCounter(&nBeginTime);
+		bool tar = puzzle.a_star_iterative_deepening();
+		if (!tar) {
+			QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		}
+		QueryPerformanceCounter(&nEndTime);
+		cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
+		cost_time *= 1000;
+		std::vector<Node> paths = puzzle.get_paths();
+		ui.LE_ida_time->setText(QString::number(cost_time));
+		ui.LE_ida_path->setText(QString::number(paths.size()));
+		ui.LE_ida_node->setText(QString::number(puzzle.get_node_cnt()));
+		QString text = "***********\n";
+		for (int i = max(0, int(paths.size()) - 99); i < paths.size(); i++) {
+			text += "PATH_";
+			text += QString::number(i + 1);
+			text += QString::fromStdString(paths[i].toString());
+			text += "***********\n";
+		}
+		ui.TB_ida->setText(text);
+		});
+
+	connect(ui.PB_bibfs, &QPushButton::clicked, [=]()mutable {
+		double cost_time = 0;
+		LARGE_INTEGER nFreq;
+		LARGE_INTEGER nBeginTime;
+		LARGE_INTEGER nEndTime;
+		QueryPerformanceFrequency(&nFreq);
+		QueryPerformanceCounter(&nBeginTime);
+		bool tar = puzzle.biBFS();
+		if (!tar) {
+			QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		}
+		QueryPerformanceCounter(&nEndTime);
+		cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
+		cost_time *= 1000;
+		std::vector<Node> paths = puzzle.get_paths();
+		ui.LE_bibfs_time->setText(QString::number(cost_time));
+		ui.LE_bibfs_path->setText(QString::number(paths.size()));
+		ui.LE_bibfs_node->setText(QString::number(puzzle.get_node_cnt()));
+		QString text = "***********\n";
+		for (int i = max(0, int(paths.size()) - 99); i < paths.size(); i++) {
+			text += "PATH_";
+			text += QString::number(i + 1);
+			text += QString::fromStdString(paths[i].toString());
+			text += "***********\n";
+		}
+		ui.TB_bibfs->setText(text);
+		});
 }
 
 Eight_Puzzle_Problem::~Eight_Puzzle_Problem()

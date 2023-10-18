@@ -290,6 +290,178 @@ bool Eight_Puzzle::a_star_wrongpos() {
 	return true;
 }
 
+bool Eight_Puzzle::DFS_iterative_deepening() {
+	this->init_puzzle();
+	if (!this->target)
+		return false;
+
+	std::stack<Node> table_open;
+	std::unordered_map <std::string, std::string> table_close;
+	std::queue<Node> wait_queue;
+	table_open.push(node_start);
+	int max_depth = 1;
+
+	while (paths.empty()) {
+		while (!wait_queue.empty()) {
+			table_open.push(wait_queue.front());
+			wait_queue.pop();
+		}
+
+		while (!table_open.empty()) {
+			Node now = table_open.top();
+			table_open.pop();
+			this->node_cnt++;
+
+			if (now.depth > max_depth) {
+				wait_queue.push(now);
+				continue;
+			}
+			if (now.state == node_end.state) {
+				std::string now_state = now.state;
+				while (now_state != node_start.state) {
+					this->paths.emplace_back(now_state);
+					now_state = table_close[now_state];
+				}
+				this->paths.emplace_back(now_state);
+				std::reverse(paths.begin(), paths.end());
+				break;
+			}
+
+			std::vector<Node> next_states = now.transfer();
+			for (Node nxt : next_states) {
+				if (!table_close[nxt.state].empty()) continue;
+				table_open.push(nxt);
+
+				table_close[nxt.state] = now.state;
+			}
+		}
+		max_depth <<= 1;
+	}
+	return true;
+}
+
+bool Eight_Puzzle::a_star_iterative_deepening() {
+	this->init_puzzle();
+	if (!this->target)
+		return false;
+
+	std::priority_queue<PIN, std::vector<PIN>, std::greater<PIN>> table_open;
+	std::unordered_map <std::string, std::string> table_close;
+	std::queue<Node> wait_queue;
+	table_open.push({ 0, node_start });
+	int max_cost = 1;
+
+	while (paths.empty()) {
+		while (!wait_queue.empty()) {
+			table_open.push({ 0, wait_queue.front() });
+			wait_queue.pop();
+		}
+
+		while (!table_open.empty()) {
+			auto [cost, now] = table_open.top();
+			table_open.pop();
+			this->node_cnt++;
+
+			if (cost > max_cost) {
+				wait_queue.push(now);
+				continue;
+			}
+
+			if (now.state == node_end.state) {
+				std::string now_state = now.state;
+				while (now_state != node_start.state) {
+					this->paths.emplace_back(now_state);
+					now_state = table_close[now_state];
+				}
+				this->paths.emplace_back(now_state);
+				std::reverse(paths.begin(), paths.end());
+				break;
+			}
+
+			std::vector<Node> next_states = now.transfer();
+			for (Node nxt : next_states) {
+				if (!table_close[nxt.state].empty()) continue;
+				int nxt_cost = nxt.depth + nxt.get_manhattan_distance(node_end);
+				table_open.push({ nxt_cost, nxt });
+				table_close[nxt.state] = now.state;
+			}
+		}
+
+		max_cost <<= 1;
+	}
+	return true;
+}
+
+bool Eight_Puzzle::biBFS() {
+	this->init_puzzle();
+	if (!this->target)
+		return false;
+
+	std::queue<Node> table_open_front, table_open_back;
+	std::unordered_map <std::string, std::string> table_close_front, table_close_back;
+	table_open_front.push(node_start);
+	table_open_back.push(node_end);
+	table_close_front[node_start.state] = "end";
+	table_close_back[node_end.state] = "end";
+	while (!table_open_front.empty() && !table_open_back.empty()) {
+		if (table_open_front.size() <= table_open_back.size()) {
+			Node now = table_open_front.front();
+			table_open_front.pop();
+			this->node_cnt++;
+
+			if (!table_close_back[now.state].empty()) {
+				std::string now_state = now.state;
+				while (now_state != "end") {
+					this->paths.emplace_back(now_state);
+					now_state = table_close_front[now_state];
+				}
+				std::reverse(paths.begin(), paths.end());
+				now_state = now.state;
+				while (now_state != "end") {
+					this->paths.emplace_back(now_state);
+					now_state = table_close_back[now_state];
+				}
+				break;
+			}
+
+			std::vector<Node> next_states = now.transfer();
+			for (Node nxt : next_states) {
+				if (!table_close_front[nxt.state].empty()) continue;
+				table_open_front.push(nxt);
+				table_close_front[nxt.state] = now.state;
+			}
+		}
+		else {
+			Node now = table_open_back.front();
+			table_open_back.pop();
+			this->node_cnt++;
+
+			if (!table_close_front[now.state].empty()) {
+				std::string now_state = now.state;
+				while (now_state != "end") {
+					this->paths.emplace_back(now_state);
+					now_state = table_close_front[now_state];
+				}
+				std::reverse(paths.begin(), paths.end());
+				now_state = now.state;
+				while (now_state != "end") {
+					this->paths.emplace_back(now_state);
+					now_state = table_close_back[now_state];
+				}
+				break;
+			}
+
+			std::vector<Node> next_states = now.transfer();
+			for (Node nxt : next_states) {
+				if (!table_close_back[nxt.state].empty()) continue;
+				table_open_back.push(nxt);
+				table_close_back[nxt.state] = now.state;
+			}
+		}
+	}
+	return true;
+}
+
 void Eight_Puzzle::set_random_state() {
 	std::vector<int> v(9);
 	std::iota(v.begin(), v.end(), 0);

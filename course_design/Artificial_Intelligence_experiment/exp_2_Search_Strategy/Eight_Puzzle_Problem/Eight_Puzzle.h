@@ -9,7 +9,7 @@
 struct Node {
 	Node() {}
 	Node(std::string init_state) : state(init_state), depth(0) {}
-	Node(std::string init_state, int depth) : state(init_state), depth(0) {}
+	Node(std::string init_state, int depth) : state(init_state), depth(depth) {}
 	std::vector<Node> transfer();
 	std::string toString();
 
@@ -36,6 +36,9 @@ public:
 	bool a_star_manhatten();
 	bool a_star_Euclidean();
 	bool a_star_wrongpos();
+	bool DFS_iterative_deepening();
+	bool a_star_iterative_deepening();
+	bool biBFS();
 
 	void set_random_state();
 	std::string get_start_state();
