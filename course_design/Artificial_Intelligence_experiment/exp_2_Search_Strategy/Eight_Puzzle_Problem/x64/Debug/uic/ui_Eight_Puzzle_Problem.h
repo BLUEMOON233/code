@@ -135,6 +135,7 @@ public:
     QLineEdit *LE_bibfs_path;
     QTextBrowser *TB_bibfs;
     QLabel *label_32;
+    QPushButton *PB_all_start;
 
     void setupUi(QMainWindow *Eight_Puzzle_ProblemClass)
     {
@@ -674,6 +675,10 @@ public:
         horizontalLayout->addWidget(groupBox_10);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
+        PB_all_start = new QPushButton(centralWidget);
+        PB_all_start->setObjectName(QString::fromUtf8("PB_all_start"));
+        PB_all_start->setGeometry(QRect(40, 650, 191, 61));
+        PB_all_start->setFont(font);
         Eight_Puzzle_ProblemClass->setCentralWidget(centralWidget);
 
         retranslateUi(Eight_Puzzle_ProblemClass);
@@ -754,6 +759,7 @@ public:
         label_30->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\350\212\202\347\202\271\346\225\260\357\274\232", nullptr));
         label_31->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\346\211\200\347\224\250\346\255\245\346\225\260\357\274\232", nullptr));
         label_32->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\350\267\257\345\276\204\357\274\232", nullptr));
+        PB_all_start->setText(QCoreApplication::translate("Eight_Puzzle_ProblemClass", "\345\205\250\351\203\250\350\277\220\350\241\214", nullptr));
     } // retranslateUi
 
 };

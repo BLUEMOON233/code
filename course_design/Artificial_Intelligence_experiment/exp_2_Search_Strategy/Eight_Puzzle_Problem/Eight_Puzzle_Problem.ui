@@ -2101,6 +2101,27 @@
      </layout>
     </widget>
    </widget>
+   <widget class="QPushButton" name="PB_all_start">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>650</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>幼圆</family>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>全部运行</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
