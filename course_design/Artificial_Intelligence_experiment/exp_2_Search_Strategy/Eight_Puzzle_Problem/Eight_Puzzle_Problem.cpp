@@ -55,7 +55,11 @@ Eight_Puzzle_Problem::Eight_Puzzle_Problem(QWidget* parent)
 		});
 
 	connect(ui.PB_all_start, &QPushButton::clicked, [=]() {
-		this->DFS();
+		bool tar = this->DFS();
+		if (!tar) {
+			return;
+		}
+		//this->DFS();
 		this->BFS();
 		this->a_star_manhatten();
 		this->a_star_Euclidean();
@@ -102,6 +106,7 @@ bool Eight_Puzzle_Problem::DFS() {
 	bool tar = puzzle.DFS();
 	if (!tar) {
 		QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		return false;
 	}
 	QueryPerformanceCounter(&nEndTime);
 	cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
@@ -131,6 +136,7 @@ bool Eight_Puzzle_Problem::BFS() {
 	bool tar = puzzle.BFS();
 	if (!tar) {
 		QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		return false;
 	}
 	QueryPerformanceCounter(&nEndTime);
 	cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
@@ -161,6 +167,7 @@ bool Eight_Puzzle_Problem::a_star_manhatten() {
 	bool tar = puzzle.a_star_manhatten();
 	if (!tar) {
 		QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		return false;
 	}
 	QueryPerformanceCounter(&nEndTime);
 	cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
@@ -190,6 +197,7 @@ bool Eight_Puzzle_Problem::a_star_Euclidean() {
 	bool tar = puzzle.a_star_Euclidean();
 	if (!tar) {
 		QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		return false;
 	}
 	QueryPerformanceCounter(&nEndTime);
 	cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
@@ -219,6 +227,7 @@ bool Eight_Puzzle_Problem::a_star_wrongpos() {
 	bool tar = puzzle.a_star_wrongpos();
 	if (!tar) {
 		QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		return false;
 	}
 	QueryPerformanceCounter(&nEndTime);
 	cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
@@ -248,6 +257,7 @@ bool Eight_Puzzle_Problem::DFS_iterative_deepening() {
 	bool tar = puzzle.DFS_iterative_deepening();
 	if (!tar) {
 		QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		return false;
 	}
 	QueryPerformanceCounter(&nEndTime);
 	cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
@@ -277,6 +287,7 @@ bool Eight_Puzzle_Problem::a_star_iterative_deepening() {
 	bool tar = puzzle.a_star_iterative_deepening();
 	if (!tar) {
 		QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		return false;
 	}
 	QueryPerformanceCounter(&nEndTime);
 	cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;
@@ -306,6 +317,7 @@ bool Eight_Puzzle_Problem::biBFS() {
 	bool tar = puzzle.biBFS();
 	if (!tar) {
 		QMessageBox::information(NULL, "提示", "该问题无解！", QMessageBox::Ok | QMessageBox::Cancel, QMessageBox::Ok);
+		return false;
 	}
 	QueryPerformanceCounter(&nEndTime);
 	cost_time = (double)(nEndTime.QuadPart - nBeginTime.QuadPart) / (double)nFreq.QuadPart;

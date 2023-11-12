@@ -124,10 +124,9 @@ bool Eight_Puzzle::DFS() {
 	std::stack<Node> table_open;
 	std::unordered_map <std::string, std::string> table_close;
 	table_open.push(node_start);
+	this->node_cnt++;
 	while (!table_open.empty()) {
 		Node now = table_open.top();
-		table_open.pop();
-		this->node_cnt++;
 
 		if (now.state == node_end.state) {
 			std::string now_state = now.state;
@@ -140,12 +139,17 @@ bool Eight_Puzzle::DFS() {
 			break;
 		}
 
+		bool isFinished = true;
 		std::vector<Node> next_states = now.transfer();
 		for (Node nxt : next_states) {
 			if (!table_close[nxt.state].empty()) continue;
+			isFinished = false;
 			table_open.push(nxt);
 			table_close[nxt.state] = now.state;
+			this->node_cnt++;
+			break;
 		}
+		if (isFinished) table_open.pop();
 	}
 	return true;
 }
@@ -299,7 +303,9 @@ bool Eight_Puzzle::DFS_iterative_deepening() {
 	std::unordered_map <std::string, std::string> table_close;
 	std::queue<Node> wait_queue;
 	table_open.push(node_start);
+	this->node_cnt++;
 	int max_depth = 1;
+	bool flag = true;
 
 	while (paths.empty()) {
 		while (!wait_queue.empty()) {
@@ -309,11 +315,10 @@ bool Eight_Puzzle::DFS_iterative_deepening() {
 
 		while (!table_open.empty()) {
 			Node now = table_open.top();
-			table_open.pop();
-			this->node_cnt++;
 
 			if (now.depth > max_depth) {
 				wait_queue.push(now);
+				table_open.pop();
 				continue;
 			}
 			if (now.state == node_end.state) {
@@ -327,15 +332,19 @@ bool Eight_Puzzle::DFS_iterative_deepening() {
 				break;
 			}
 
+			bool isFinished = true;
 			std::vector<Node> next_states = now.transfer();
 			for (Node nxt : next_states) {
 				if (!table_close[nxt.state].empty()) continue;
+				isFinished = false;
 				table_open.push(nxt);
-
 				table_close[nxt.state] = now.state;
+				this->node_cnt++;
+				break;
 			}
+			if (isFinished) table_open.pop();
 		}
-		max_depth <<= 1;
+		if (paths.empty()) max_depth <<= 1;
 	}
 	return true;
 }
