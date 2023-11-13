@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 typedef long long LL;
 typedef unsigned int UI;
@@ -46,6 +46,7 @@ inline void write(T x) {
 const int N = 1;
 
 inline void solve() {
+
 }
 
 int main() {
