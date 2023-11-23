@@ -159,21 +159,15 @@ cv::Mat Fatigue_Detection::eye_detection(int index) {
 	for (int i = 0; i < std::min(int(eyes.size()), 2); i++) {
 		int dy = 1.0 / 3 * eyes[i].height;
 		eyes[i].y += dy, eyes[i].height -= dy;
-		//std::cout << cv::countNonZero(ret(eyes[i])) << ' ';
 		if (cv::countNonZero(tmp(eyes[i])) <= 20) flag = true;
 		//cv::rectangle(ret, eyes[i], cv::Scalar(0), 1);
 		cv::rectangle(tmp, eyes[i], cv::Scalar(255), 1);
 	}
-	int val = 0;
-	if (eyes_check && flag) {
-		eyes_check = false;
-		val = 1;
-	}
-	if (!eyes_check && !flag) {
-		eyes_check = true;
-	}
-	blink.push(val);
-	blink_cnt += val;
+	if (flag) eyes_cnt++;
+	else eyes_cnt = 0;
+	if (eyes_cnt == 1) blink.push(1), blink_cnt += 1;
+	else blink.push(0);
+
 	if (blink.size() > 30) {
 		blink_cnt -= blink.front();
 		blink.pop();
@@ -184,7 +178,7 @@ cv::Mat Fatigue_Detection::eye_detection(int index) {
 
 cv::Mat Fatigue_Detection::mouth_detection(int index) {
 	std::vector<cv::Rect> mouths;
-	cv::Rect limit(0, 110, 200, 90);
+	cv::Rect limit(0, 120, 200, 80);
 	cv::Mat face = frames[index].clone();
 	face = face(limit);
 	mouthCascade.detectMultiScale(face, mouths, 1.1, 3, 0 | cv::CASCADE_DO_ROUGH_SEARCH);
@@ -199,13 +193,12 @@ cv::Mat Fatigue_Detection::mouth_detection(int index) {
 
 	cv::threshold(ret, ret, 31, 255, cv::THRESH_BINARY);
 	tmp = 255 - ret;
-	cv::Mat element = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(8, 8));
-	cv::morphologyEx(tmp, tmp, cv::MORPH_OPEN, element);
+	//cv::Mat element = cv::getStructuringElement(cv::MORPH_ELLIPSE, cv::Size(8, 8));
+	//cv::morphologyEx(tmp, tmp, cv::MORPH_OPEN, element);
 	bool flag = false;
-	
 
 	if (mouths.size()) {
-		mouths[0].y += 110;
+		mouths[0].y += 120;
 		if (cv::countNonZero(tmp.clone()(mouths[0])) > mouths[0].area() / 3.0) flag = true;
 		cv::rectangle(ret, mouths[0], cv::Scalar(0), 1);
 	}
@@ -256,6 +249,11 @@ int Fatigue_Detection::get_frameCnt() {
 double Fatigue_Detection::get_duration() {
 	return this->duration;
 }
+
+double Fatigue_Detection::get_blinktime() {
+	return 1.0 / tar_fps * this->eyes_cnt;
+}
+
 double Fatigue_Detection::get_blink_per_second(int index) {
 	if (index != -1) return bps[index];
 	return blink_per_second;

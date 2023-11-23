@@ -47,6 +47,7 @@ Fatigue_Detection_System::Fatigue_Detection_System(QWidget* parent)
 		ui.LB_eye->setPixmap(pixmap_eye);
 		ui.LB_bps->setText(QString::number(fatigue_detection->get_blink_per_second(index / mod), 103, 3));
 		ui.LB_yawn->setText(QString::fromStdString(fatigue_detection->get_is_yawning(index / mod) ? "打了打了" : "没打没打"));
+		ui.LB_blinkcnt->setText(QString::number(fatigue_detection->get_blinktime(), 103, 3));
 		});
 }
 
@@ -79,5 +80,6 @@ void Fatigue_Detection_System::update_frame() {
 	}
 	ui.LB_bps->setText(QString::number(fatigue_detection->get_blink_per_second(), 103, 3));
 	ui.LB_yawn->setText(QString::fromStdString(fatigue_detection->get_is_yawning() ? "打了打了" : "没打没打"));
+	ui.LB_blinkcnt->setText(QString::number(fatigue_detection->get_blinktime(), 103, 3));
 	index_frame++;
 }

@@ -1,0 +1,3 @@
+﻿  Fatigue_Detection.cpp
+D:\develop\code\course_design\Fatigue_Detection_System\Fatigue_Detection.cpp(87): warning C4715: “Fatigue_Detection::get_frame”: 不是所有的控件路径都返回值
+  Fatigue_Detection_System.vcxproj -> D:\develop\code\course_design\Fatigue_Detection_System\x64\Debug\Fatigue_Detection_System.exe

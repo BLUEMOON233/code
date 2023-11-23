@@ -34,6 +34,8 @@ public:
     QLabel *LB_bps;
     QLabel *LB_yawn;
     QSlider *slider;
+    QLabel *word_3;
+    QLabel *LB_blinkcnt;
 
     void setupUi(QMainWindow *Fatigue_Detection_SystemClass)
     {
@@ -111,6 +113,14 @@ public:
         slider->setObjectName(QString::fromUtf8("slider"));
         slider->setGeometry(QRect(90, 920, 1091, 21));
         slider->setOrientation(Qt::Horizontal);
+        word_3 = new QLabel(centralWidget);
+        word_3->setObjectName(QString::fromUtf8("word_3"));
+        word_3->setGeometry(QRect(510, 700, 241, 61));
+        word_3->setFont(font1);
+        LB_blinkcnt = new QLabel(centralWidget);
+        LB_blinkcnt->setObjectName(QString::fromUtf8("LB_blinkcnt"));
+        LB_blinkcnt->setGeometry(QRect(760, 700, 101, 61));
+        LB_blinkcnt->setFont(font2);
         Fatigue_Detection_SystemClass->setCentralWidget(centralWidget);
 
         retranslateUi(Fatigue_Detection_SystemClass);
@@ -131,6 +141,8 @@ public:
         word_2->setText(QCoreApplication::translate("Fatigue_Detection_SystemClass", "\346\230\257\345\220\246\346\211\223\345\223\210\346\254\240\357\274\232", nullptr));
         LB_bps->setText(QCoreApplication::translate("Fatigue_Detection_SystemClass", "0.000", nullptr));
         LB_yawn->setText(QCoreApplication::translate("Fatigue_Detection_SystemClass", "\346\262\241\346\211\223\346\262\241\346\211\223", nullptr));
+        word_3->setText(QCoreApplication::translate("Fatigue_Detection_SystemClass", "\347\234\250\347\234\274\346\214\201\347\273\255\346\227\266\351\227\264\357\274\232", nullptr));
+        LB_blinkcnt->setText(QCoreApplication::translate("Fatigue_Detection_SystemClass", "0.000", nullptr));
     } // retranslateUi
 
 };

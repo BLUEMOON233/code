@@ -26,6 +26,7 @@ public:
 	double get_FPS();
 	int get_frameCnt();
 	double get_duration();
+	double get_blinktime();
 	double get_blink_per_second(int index = -1);
 	bool get_is_yawning(int index = -1);
 
@@ -45,13 +46,11 @@ private:
 	cv::Rect lstMouth = cv::Rect(0, 0, 1, 1);
 	cv::Rect lstEye = cv::Rect(0, 0, 1, 1);
 
-	bool eyes_check = true;
+	int eyes_cnt = 0;
 	int mouth_cnt = 0;
 	/*原始帧，originfps*/
 	std::vector<cv::Mat> frames_ori;
-	/*脸部识别后帧，10fps*/
 	std::vector<cv::Mat> frames;
-
 	std::vector<cv::Mat> frames_mouth;
 	std::vector<cv::Mat> frames_eyes;
 	std::vector<double> bps;
