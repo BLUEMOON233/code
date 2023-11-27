@@ -34,7 +34,7 @@ inline void solve() {
 }
 
 int main() {
-	// fast();
+	fast();
 	int T = 1;
 	//	T = read();
 	cin >> T;
