@@ -6,7 +6,15 @@ typedef unsigned long long ULL;
 using namespace std;
 
 void solve() {
-
+	int n;
+	cin >> n;
+	vector<int> a(n + 1, 0);
+	rep(i, 1, n) cin >> a[i];
+	LL rs = 0;
+	rep(i, 1, n) {
+		if (a[i] > a[i - 1]) rs += a[i] - a[i - 1];
+	}
+	cout << rs << '\n';
 }
 
 int main() {

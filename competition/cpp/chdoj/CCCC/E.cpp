@@ -6,7 +6,20 @@ typedef unsigned long long ULL;
 using namespace std;
 
 void solve() {
-
+	ULL n, k;
+	cin >> n >> k;
+	vector<int> bit;
+	while (k) {
+		bit.emplace_back(k & 1);
+		k >>= 1;
+	}
+	rep(i, bit.size() + 1, n) cout << 0;
+	ULL lst = 0;
+	per(i, bit.size() - 1, 0) {
+		LL now = bit[i];
+		cout << (now ^ lst);
+		lst = now;
+	}
 }
 
 int main() {
