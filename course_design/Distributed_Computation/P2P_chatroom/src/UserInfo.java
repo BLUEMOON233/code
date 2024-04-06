@@ -34,13 +34,13 @@ public class UserInfo {
         return null;
     }
 
-//    public void setOnlineStatus(boolean b){
-//        for (Node node:userNodeList)
-//            node.setOnlineInfo(b);
-//    }
-//    public void setOfflineStatus(boolean b){
-//        for (Node node:userNodeList)
-//            node.setOfflineInfo(b);
-//    }
+    public void setOnlineStatus(boolean b){
+        for (Node node:userNodeList)
+            node.setOnlineInfo(b);
+    }
+    public void setOfflineStatus(boolean b){
+        for (Node node:userNodeList)
+            node.setOfflineInfo(b);
+    }
 
 }
