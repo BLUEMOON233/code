@@ -6,19 +6,19 @@ import java.util.Vector;
 
 public class Server extends JFrame {
     private StringBuilder systemLog = new StringBuilder();       //系统记录
-    private Vector<String> onlinePeople;    //在线用户
+    private Vector<String> onlineUser;    //在线用户
+    private boolean isStop;      //是否关闭服务器---线程关闭
+    public OnlineOfflineMessage onlineMessage;  //上线消息
+    public OnlineOfflineMessage offlineMessage; //下线消息
+    //UI对象
     private JTextArea systemLogTextArea;   //聊天记录组件
     private JTextArea sendMessageTextArea;  //发送消息组件
     private JTextField onlineCountTextFile; //在线人数组件
-    private JList<String> onlinePeopleList;         //在线用户组件
+    private JList<String> onlineUserList;         //在线用户组件
     private JButton sendMessageButton;      //发送消息组件
     private JButton clearMessageButton;     //清空消息组件
     private JButton startServerButton;                //启动服务器组件
     private JButton shutDownServerButton;               //关闭服务器组件
-    private boolean isStop;      //是否关闭服务器---线程关闭
-
-    public OnlineOfflineMessage onlineMessage;  //上线消息
-    public OnlineOfflineMessage offlineMessage; //下线消息
 
     public boolean isStop() {
         return isStop;
@@ -86,12 +86,12 @@ public class Server extends JFrame {
         onlineCountTextFile.setOpaque(true);
         panel.add(onlineCountTextFile);
 
-        onlinePeople = new Vector<>();
-        onlinePeopleList = new JList<>(onlinePeople);
-        onlinePeopleList.setBounds(500, 52, 182, 340);
-        onlinePeopleList.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        onlinePeopleList.setBackground(Color.lightGray);
-        panel.add(onlinePeopleList);
+        onlineUser = new Vector<>();
+        onlineUserList = new JList<>(onlineUser);
+        onlineUserList.setBounds(500, 52, 182, 340);
+        onlineUserList.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        onlineUserList.setBackground(Color.lightGray);
+        panel.add(onlineUserList);
 
         startServerButton = new JButton();
         startServerButton.setText("启动服务器");
@@ -107,31 +107,22 @@ public class Server extends JFrame {
 
     public void eventListener() {
         //发送消息
-        sendMessageButton.addActionListener(e -> {
-            //TODO 可自由发挥，服务器给客户端发送消息等
+        sendMessageButton.addActionListener(event -> {
         });
 
         //清空消息
-        clearMessageButton.addActionListener(e -> sendMessageTextArea.setText(null));
+        clearMessageButton.addActionListener(event -> sendMessageTextArea.setText(null));
 
         //启动服务器
-        startServerButton.addActionListener(e -> {
+        startServerButton.addActionListener(event -> {
             startServer();
         });
 
         //关闭服务器
-        shutDownServerButton.addActionListener(e -> {
+        shutDownServerButton.addActionListener(event -> {
             isStop = true;
             System.exit(0);
         });
-        //右上角关闭窗口按钮
-//        addWindowListener(new WindowAdapter() {
-//            @Override
-//            public void windowClosing(WindowEvent e) {
-//                isStop = true;
-//                dispose();  //会调用windowClosed(WindowEvent e)方法
-//            }
-//        });
     }
 
     public void startServer() {
@@ -139,6 +130,7 @@ public class Server extends JFrame {
             ServerSocket serverSocket = new ServerSocket(1234);      //启动服务器
             systemLog.append("等待连接......" + "\n");
             setSystemLog(systemLog);
+
             startServerButton.setEnabled(false);
             shutDownServerButton.setEnabled(true);
             sendMessageButton.setEnabled(true);
@@ -154,19 +146,20 @@ public class Server extends JFrame {
             systemLog.append("error0");
         }
     }
-    public void updateList(UserInfo userInfo){
+
+    public void updateList(UserInfo userInfo) {
         int count = userInfo.getCount();
-        onlinePeople.clear();
-        if (count>0){
-            for (int i = 0;i<count;i++){
+        onlineUser.clear();
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
                 Node tempNode = userInfo.searchUserByIndex(i);
-                onlinePeople.add(tempNode.username);
+                onlineUser.add(tempNode.username);
             }
-            onlinePeopleList.setListData(onlinePeople);
+            onlineUserList.setListData(onlineUser);
         }
-        //在线人数
+        
         String onlineCount = "在线用户" + count + "人";
         onlineCountTextFile.setText(onlineCount);
-        onlinePeopleList.setListData(onlinePeople);
+        onlineUserList.setListData(onlineUser);
     }
 }

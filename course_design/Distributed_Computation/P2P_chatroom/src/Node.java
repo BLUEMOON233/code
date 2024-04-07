@@ -21,22 +21,18 @@ public class Node implements Serializable {
     public boolean isOnlineInfo() {
         return isOnlineInfo;
     }
-
     public void setOnlineInfo(boolean onlineInfo) {
         isOnlineInfo = onlineInfo;
     }
-
     public boolean isOfflineInfo() {
         return isOfflineInfo;
     }
     public void setOfflineInfo(boolean offlineInfo) {
         isOfflineInfo = offlineInfo;
     }
-
     public boolean isJustOnline() {
         return isJustOnline;
     }
-
     public void setJustOnline(boolean justOnline) {
         isJustOnline = justOnline;
     }
