@@ -30,15 +30,13 @@ public class ComWithServer extends Thread {
     public void run() {
         try {
             Socket socket = new Socket("localhost", 1234);
-            final int timeoutPeriod = 5000;
-            socket.setSoTimeout(timeoutPeriod);
             myStreamSocket = new MyStreamSocket(socket);
             myStreamSocket.sendMessage(node.toString());
             client.setChatRecord(MyTools.getFormatDate(new Date()) + node.username + "与服务器连接成功！");
             while (!isStop) {
                 String originalMessage = myStreamSocket.receiveMessage();
+                System.out.println(originalMessage);
                 String[] userList = originalMessage.split("@@");
-                System.out.println("????");
                 switch (userList[0]) {
                     case "上线通知" -> {
                         String[] onlineUserInfo = userList[1].split("&");

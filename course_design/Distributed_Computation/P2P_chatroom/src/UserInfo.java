@@ -42,5 +42,13 @@ public class UserInfo {
         for (Node node:userNodeList)
             node.setOfflineInfo(b);
     }
-
+    @Override
+    public String toString() {
+        StringBuilder userInfo = new StringBuilder();
+        for (Node n:userNodeList){
+            userInfo.append(n.toString());
+            userInfo.append("$");
+        }
+        return String.valueOf(userInfo.deleteCharAt(userInfo.length()-1));
+    }
 }

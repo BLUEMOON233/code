@@ -1,7 +1,7 @@
-public class ClientTest {
+public class TestClient02 {
     public static void main(String[] args) {
         Thread thread = new Thread(() -> {
-            new Client("P2PChat客户端1");
+            new Client("Client02");
         });
         thread.start();
     }

@@ -42,6 +42,7 @@ public class ServerReceiveThread extends Thread {
                 systemLog.append(userInfo.searchUserByIndex(i).username).append(" ");
             }
             systemLog.append("\n");
+            System.out.println(systemLog);
             server.onlineMessage = new OnlineOfflineMessage(node);
             userInfo.setOnlineStatus(true);
             node.setOnlineInfo(false);  //不给自己发通知，自己需要更新列表
@@ -71,7 +72,7 @@ public class ServerReceiveThread extends Thread {
                         }
                     } else if (node != null && node.isJustOnline()) {
                         userList.append("更新列表@@");
-                        userList.append(userInfo);
+                        userList.append(userInfo.toString());
                         node.setJustOnline(false);
                         try {
                             updateInformation(userList);
