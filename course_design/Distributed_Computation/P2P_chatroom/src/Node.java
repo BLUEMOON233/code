@@ -36,6 +36,7 @@ public class Node implements Serializable {
     public void setJustOnline(boolean justOnline) {
         isJustOnline = justOnline;
     }
+
     @Override
     public String toString() {
         return username + '&' + ip.toString().substring(1) + '&' + port;

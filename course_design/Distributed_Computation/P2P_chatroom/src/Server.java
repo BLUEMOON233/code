@@ -162,4 +162,8 @@ public class Server extends JFrame {
         onlineCountTextFile.setText(onlineCount);
         onlineUserList.setListData(onlineUser);
     }
+
+    public static void main(String[] args) {
+        Server server = new Server("Server");
+    }
 }

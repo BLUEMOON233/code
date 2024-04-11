@@ -38,7 +38,7 @@ public class ComWithServer extends Thread {
                 System.out.println(originalMessage);
                 String[] userList = originalMessage.split("@@");
                 switch (userList[0]) {
-                    case "上线通知" -> {
+                    case "UserLogin" -> {
                         String[] onlineUserInfo = userList[1].split("&");
                         String onlineUserName = onlineUserInfo[0];
                         InetAddress onlineUserIP = InetAddress.getByName(onlineUserInfo[1]);
@@ -50,7 +50,7 @@ public class ComWithServer extends Thread {
                         client.setChatRecord(MyTools.getFormatDate(new Date()) + onlineUserName + "已上线！");
 
                     }
-                    case "下线通知" -> {
+                    case "UserLogout" -> {
                         String[] offlineUserInfo = userList[1].split("&");
                         String offlineUserName = offlineUserInfo[0];
                         InetAddress offlineUserIP = InetAddress.getByName(offlineUserInfo[1]);
@@ -61,7 +61,7 @@ public class ComWithServer extends Thread {
                         System.out.println("下线通知："+node);
                         client.setChatRecord(MyTools.getFormatDate(new Date())+offlineUserName + "已下线！");
                     }
-                    case "更新列表" -> {
+                    case "Initialization" -> {
                         String[] originalUserInfo = userList[1].split("\\$");
                         for (String s : originalUserInfo) {
                             String[] onlineUserInfo = s.split("&");

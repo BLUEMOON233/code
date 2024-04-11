@@ -43,7 +43,6 @@ public class ServerReceiveThread extends Thread {
             systemLog.append("\n");
             server.setSystemLog(systemLog);
             server.updateList(userInfo);
-
 //            System.out.println(systemLog);
             server.onlineMessage = new OnlineOfflineMessage(node);
             userInfo.setOnlineStatus(true); //需要告知所有Node上线
@@ -55,7 +54,7 @@ public class ServerReceiveThread extends Thread {
                     if (node != null) {
                         StringBuilder userList = new StringBuilder();
                         if (node.isOfflineInfo()) {
-                            userList.append("下线通知@@");
+                            userList.append("UserLogout@@");
                             userList.append(server.offlineMessage.node().toString());
                             node.setOfflineInfo(false);
                             try {
@@ -64,7 +63,7 @@ public class ServerReceiveThread extends Thread {
                                 throw new RuntimeException(e);
                             }
                         } else if (node.isOnlineInfo()) {
-                            userList.append("上线通知@@");
+                            userList.append("UserLogoin@@");
                             userList.append(server.onlineMessage.node().toString());
                             node.setOnlineInfo(false);
                             try {
@@ -73,7 +72,7 @@ public class ServerReceiveThread extends Thread {
                                 throw new RuntimeException(e);
                             }
                         } else if (node.isJustOnline()) {
-                            userList.append("更新列表@@");
+                            userList.append("Initialization@@");
                             userList.append(userInfo.toString());
                             node.setJustOnline(false);
                             try {
@@ -100,8 +99,8 @@ public class ServerReceiveThread extends Thread {
                     for (int i = 0; i < userInfo.getCount(); i++) {
                         systemLog.append(userInfo.searchUserByIndex(i).username).append(" ");
                     }
+                    systemLog.append("\n");
                     server.setSystemLog(systemLog);
-
                     server.offlineMessage = new OnlineOfflineMessage(node);
                     userInfo.setOfflineStatus(true);
                     node = null;

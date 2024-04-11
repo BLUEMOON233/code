@@ -224,4 +224,8 @@ public class Client extends JFrame {
         String onlineCount = "在线用户" + count + "人";
         onlineCountTextFile.setText(onlineCount);
     }
+
+    public static void main(String[] args) {
+        Client client = new Client("Client");
+    }
 }
