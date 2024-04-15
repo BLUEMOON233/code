@@ -63,8 +63,8 @@ public class ComWithServer extends Thread {
                     }
                     case "Initialization" -> {
                         String[] originalUserInfo = userList[1].split("\\$");
-                        for (String s : originalUserInfo) {
-                            String[] onlineUserInfo = s.split("&");
+                        for (String node_string : originalUserInfo) {
+                            String[] onlineUserInfo = node_string.split("&");
                             String onlineUserName = onlineUserInfo[0];
                             InetAddress onlineUserIP = InetAddress.getByName(onlineUserInfo[1]);
                             int onlineUserListenPort = Integer.parseInt(onlineUserInfo[2]);

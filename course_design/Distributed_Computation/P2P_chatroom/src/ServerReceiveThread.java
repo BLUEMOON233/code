@@ -63,7 +63,7 @@ public class ServerReceiveThread extends Thread {
                                 throw new RuntimeException(e);
                             }
                         } else if (node.isOnlineInfo()) {
-                            userList.append("UserLogoin@@");
+                            userList.append("UserLogin@@");
                             userList.append(server.onlineMessage.node().toString());
                             node.setOnlineInfo(false);
                             try {
