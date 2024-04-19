@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1624d340-01f4-401d-9100-94cc213ef98f" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client_Student.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client_Student.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client_Student.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_Student.jfd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_Student.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_Student.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_StudentLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_StudentLogin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DatabaseOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabaseOperator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ServerHandleThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerHandleThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UndivertedStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UndivertedStudent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +90,7 @@
       <updated>1713532687449</updated>
       <workItem from="1713532688548" duration="846000" />
       <workItem from="1713533554632" duration="8000" />
-      <workItem from="1713533669894" duration="4513000" />
+      <workItem from="1713533669894" duration="7131000" />
     </task>
     <servers />
   </component>

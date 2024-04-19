@@ -60,6 +60,32 @@ public class DatabaseOperator {
         }
     }
 
+    public UndivertedStudent getUndivertedStudent(int number) {
+        try {
+            String sql = "select * from stu_info_with_fill where number = " + String.valueOf(number) + ";";
+            rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                UndivertedStudent us;
+                String name = rs.getString("name");
+                String gender = rs.getString("gender");
+                double score = rs.getDouble("score");
+                if (rs.getBoolean("is_fill")) {
+                    String major_1 = rs.getString("major_1");
+                    String major_2 = rs.getString("major_2");
+                    String major_3 = rs.getString("major_3");
+                    us = new UndivertedStudent(number, name, gender, score, major_1, major_2, major_3);
+                } else {
+                    us = new UndivertedStudent(number, name, gender, score);
+                }
+                return us;
+            }else {
+                return new UndivertedStudent(-1, "", "", 0.0);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void addUSList(ArrayList<UndivertedStudent> usList) {
         try {
             for (UndivertedStudent us : usList) {
@@ -86,7 +112,7 @@ public class DatabaseOperator {
             if (rs.next()) {
                 String password = rs.getString("password");
                 return password;
-            }else {
+            } else {
                 return "NOT FOUND";
             }
         } catch (SQLException e) {

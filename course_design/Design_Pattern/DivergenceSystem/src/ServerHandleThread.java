@@ -22,7 +22,7 @@ public class ServerHandleThread implements Runnable {
             if (op.number != -2)
                 continue;
             switch (op.name) {
-                case "exit" -> {
+                case "#exit" -> {
                     isStop = true;
                 }
                 case "+singleUS" -> {
@@ -37,6 +37,10 @@ public class ServerHandleThread implements Runnable {
                     UndivertedStudent us = myStreamSocket.receiveObject();
                     String password = serverDO.queryStudentPassword(us.number);
                     UndivertedStudent ret = new UndivertedStudent(-2, (password.equals(us.name)) ? "true" : "false", "", 0.0);
+                    myStreamSocket.sendObject(ret);
+                }
+                case "@getUS" -> {
+                    UndivertedStudent ret = serverDO.getUndivertedStudent(Integer.parseInt(op.gender));
                     myStreamSocket.sendObject(ret);
                 }
             }

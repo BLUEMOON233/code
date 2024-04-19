@@ -16,6 +16,7 @@ public class Client_StudentLogin extends JFrame {
     private Client client = null;
 
     public Client_StudentLogin() throws IOException {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         client = new Client();
         initComponents();
     }
@@ -26,9 +27,13 @@ public class Client_StudentLogin extends JFrame {
         boolean flag = client.loginCheck(number, password);
         if (flag) {
             dispose();
-            new Client_Student().setVisible(true);
+            try {
+                new Client_Student(number).setVisible(true);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         } else {
-
+            System.out.println("登录失败！");
         }
     }
 
