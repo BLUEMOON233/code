@@ -40,9 +40,9 @@ public class DatabaseOperator {
             if (rs.getFetchSize() > 0) return false;
             rs = null;
             if (us.isFill) {
-                sql = "insert into stu_info_with_fill (number, name, gender, is_fill, major_1, major_2, major_3) " + "values (" + String.format("%d, '%s', '%s', %b, '%s', '%s', '%s'", us.number, us.name, us.gender, us.isFill, us.major_1, us.major_2, us.major_3) + ");";
-            }else {
-                sql = "insert into stu_info_with_fill (number, name, gender, is_fill) " + "values (" + String.format("%d, '%s', '%s', %b", us.number, us.name, us.gender, us.isFill) + ");";
+                sql = "insert into stu_info_with_fill (number, name, gender, score, is_fill, major_1, major_2, major_3) " + "values (" + String.format("%d, '%s', '%s', %f, %b, '%s', '%s', '%s'", us.number, us.name, us.gender, us.score, us.isFill, us.major_1, us.major_2, us.major_3) + ");";
+            } else {
+                sql = "insert into stu_info_with_fill (number, name, gender, score, is_fill) " + "values (" + String.format("%d, '%s', '%s', %f, %b", us.number, us.name, us.gender, us.score, us.isFill) + ");";
             }
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
@@ -60,18 +60,17 @@ public class DatabaseOperator {
         }
     }
 
-
     public void addUSList(ArrayList<UndivertedStudent> usList) {
-        try{
-            for(UndivertedStudent us : usList) {
+        try {
+            for (UndivertedStudent us : usList) {
                 String sql = "select number from stu_info_with_fill where number = " + String.valueOf(us.number) + ";";
                 rs = stmt.executeQuery(sql);
                 if (rs.getFetchSize() > 0) continue;
                 rs = null;
                 if (us.isFill) {
-                    sql = "insert into stu_info_with_fill (number, name, gender, is_fill, major_1, major_2, major_3) " + "values (" + String.format("%d, '%s', '%s', %b, '%s', '%s', '%s'", us.number, us.name, us.gender, us.isFill, us.major_1, us.major_2, us.major_3) + ");";
-                }else {
-                    sql = "insert into stu_info_with_fill (number, name, gender, is_fill) " + "values (" + String.format("%d, '%s', '%s', %b", us.number, us.name, us.gender, us.isFill) + ");";
+                    sql = "insert into stu_info_with_fill (number, name, gender, score, is_fill, major_1, major_2, major_3) " + "values (" + String.format("%d, '%s', '%s', %f, %b, '%s', '%s', '%s'", us.number, us.name, us.gender, us.score, us.isFill, us.major_1, us.major_2, us.major_3) + ");";
+                } else {
+                    sql = "insert into stu_info_with_fill (number, name, gender, score, is_fill) " + "values (" + String.format("%d, '%s', '%s', %f, %b", us.number, us.name, us.gender, us.score, us.isFill) + ");";
                 }
                 stmt.executeUpdate(sql);
             }
@@ -80,7 +79,25 @@ public class DatabaseOperator {
         }
     }
 
+    public String queryStudentPassword(int number) {
+        try {
+            String sql = "select password from student_account where number = " + String.valueOf(number) + ";";
+            rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                String password = rs.getString("password");
+                return password;
+            }else {
+                return "NOT FOUND";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public static void main(String[] args) {
+        UndivertedStudent us = new UndivertedStudent(2021902610, "刘文越", "男", 90);
+        DatabaseOperator DO = new DatabaseOperator();
+        DO.addUndivertedStudent(us);
     }
 }

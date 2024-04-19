@@ -17,21 +17,27 @@ public class ServerHandleThread implements Runnable {
 
     @Override
     public void run() {
-        while(!isStop) {
+        while (!isStop) {
             UndivertedStudent op = myStreamSocket.receiveObject();
-            if(op.number != -2)
+            if (op.number != -2)
                 continue;
             switch (op.name) {
-                case "exit" ->{
+                case "exit" -> {
                     isStop = true;
                 }
-                case "+singleUS" ->{
+                case "+singleUS" -> {
                     UndivertedStudent us = myStreamSocket.receiveObject();
                     serverDO.addUndivertedStudent(us);
                 }
-                case  "-singleUS" ->{
+                case "-singleUS" -> {
                     UndivertedStudent us = myStreamSocket.receiveObject();
                     serverDO.delUndivertedStudent(us.number);
+                }
+                case "@checkStudentPassword" -> {
+                    UndivertedStudent us = myStreamSocket.receiveObject();
+                    String password = serverDO.queryStudentPassword(us.number);
+                    UndivertedStudent ret = new UndivertedStudent(-2, (password.equals(us.name)) ? "true" : "false", "", 0.0);
+                    myStreamSocket.sendObject(ret);
                 }
             }
         }

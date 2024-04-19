@@ -6,9 +6,9 @@ public class TestClient {
         Socket socket = new Socket("42.193.107.194", 1234);
 //        Socket socket = new Socket("localhost", 1234);
         MyStreamSocket myStreamSocket = new MyStreamSocket(socket);
-        UndivertedStudent op = new UndivertedStudent(-2, "-singleUS", "");
-        UndivertedStudent us = new UndivertedStudent(1, "zzq", "女");
-        UndivertedStudent exit = new UndivertedStudent(-2, "exit", "");
+        UndivertedStudent op = new UndivertedStudent(-2, "-singleUS", "", 0);
+        UndivertedStudent us = new UndivertedStudent(2021902610, "刘文越", "男", 90);
+        UndivertedStudent exit = new UndivertedStudent(-2, "exit", "", 0);
         myStreamSocket.sendObject(op);
         myStreamSocket.sendObject(us);
         myStreamSocket.sendObject(exit);
