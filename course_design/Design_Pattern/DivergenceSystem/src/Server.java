@@ -2,27 +2,47 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.util.Scanner;
 
 public class Server {
     private ServerSocket serverSocket;
+    private DatabaseOperator serverDO;
+    private boolean isStop = false;
 
     Server() throws IOException {
         serverSocket = new ServerSocket(1234);
+        serverDO = new DatabaseOperator();
     }
 
-    public void startServer() throws IOException {
-        while (true) {
-            Socket socket = serverSocket.accept();
-            Thread serverHandleThread = new Thread(new ServerHandleThread(socket));
-            serverHandleThread.start();
-            InetAddress inetAddress = socket.getInetAddress();
-            System.out.println("IP address: " + inetAddress.getHostAddress());
+    public void startServer() {
+        while (!isStop) {
+            Socket socket = null;
+            Thread serverHandleThread = null;
+            try {
+                socket = serverSocket.accept();
+                serverHandleThread = new Thread(new ServerHandleThread(socket, serverDO));
+                System.out.println("here");
+                serverHandleThread.start();
+                InetAddress inetAddress = socket.getInetAddress();
+                System.out.println("IP address: " + inetAddress.getHostAddress());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
+    public void closeServer() {
+        isStop = true;
+    }
+
+
     public static void main(String[] args) {
+        Server server = null;
         try {
-            Server server = new Server();
+            server = new Server();
+            server.startServer();
+//            server.closeServer();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

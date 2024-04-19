@@ -9,7 +9,7 @@ public class MyStreamSocket extends Socket {
     private ObjectOutputStream oos;
 
     MyStreamSocket(InetAddress acceptorHost, int acceptorPort)
-            throws SocketException, IOException {
+            throws IOException {
         socket = new Socket(acceptorHost, acceptorPort);
         setStreams();
     }
@@ -19,11 +19,16 @@ public class MyStreamSocket extends Socket {
         setStreams();
     }
 
-    private void setStreams() throws IOException {
-        InputStream inputStream = socket.getInputStream();
-        ois = new ObjectInputStream(inputStream);
-        OutputStream outputStream = socket.getOutputStream();
-        oos = new ObjectOutputStream(outputStream);
+    private void setStreams(){
+        InputStream inputStream = null;
+        try {
+            OutputStream outputStream = socket.getOutputStream();
+            oos = new ObjectOutputStream(outputStream);
+            inputStream = socket.getInputStream();
+            ois = new ObjectInputStream(inputStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void sendObject(UndivertedStudent us) {
