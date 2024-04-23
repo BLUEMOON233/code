@@ -43,6 +43,14 @@ public class ServerHandleThread implements Runnable {
                     UndivertedStudent ret = serverDO.getUndivertedStudent(Integer.parseInt(op.gender));
                     myStreamSocket.sendObject(ret);
                 }
+                case "@getMajor" ->{
+                    String sendMessage = serverDO.queryMajor();
+                    myStreamSocket.sendObject(new UndivertedStudent(-2, sendMessage, "", 0.0));
+                }
+                case "@modifyUS" -> {
+                    UndivertedStudent us = myStreamSocket.receiveObject();
+                    serverDO.modifyUndivertedStudent(us);
+                }
             }
         }
         try {

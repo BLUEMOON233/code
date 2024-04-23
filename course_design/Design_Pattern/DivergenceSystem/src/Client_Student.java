@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
@@ -13,6 +14,7 @@ import javax.swing.*;
 public class Client_Student extends JFrame {
     private Client client;
     private int number;
+    private UndivertedStudent us;
 
     public Client_Student(int number) throws IOException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,11 +25,51 @@ public class Client_Student extends JFrame {
     }
 
     private void initInfo() {
-        UndivertedStudent us = client.getUndivertedStudent(number);
+        us = client.getUndivertedStudent(number);
         LB_name.setText(us.name);
         LB_gender.setText(us.gender);
         LB_number.setText(String.valueOf(number));
         LB_isFill.setText(us.isFill ? "是" : "否");
+        comboBox1.removeAllItems();
+        comboBox2.removeAllItems();
+        comboBox3.removeAllItems();
+        comboBox1.addItem("NULL");
+        comboBox2.addItem("NULL");
+        comboBox3.addItem("NULL");
+        String[] majorList = client.getMajorList();
+        for (String major : majorList) {
+            comboBox1.addItem(major);
+            comboBox2.addItem(major);
+            comboBox3.addItem(major);
+        }
+        comboBox1.setSelectedItem("NULL");
+        for (String major : majorList)
+            if (major.equals(us.major_1)) {
+                comboBox1.setSelectedItem(major);
+                break;
+            }
+        comboBox2.setSelectedItem("NULL");
+        for (String major : majorList)
+            if (major.equals(us.major_2)) {
+                comboBox2.setSelectedItem(major);
+                break;
+            }
+        comboBox3.setSelectedItem("NULL");
+        for (String major : majorList)
+            if (major.equals(us.major_3)) {
+                comboBox3.setSelectedItem(major);
+                break;
+            }
+
+    }
+
+    private void button1(ActionEvent e) {
+        us.major_1 = comboBox1.getSelectedItem().toString();
+        us.major_2 = comboBox2.getSelectedItem().toString();
+        us.major_3 = comboBox3.getSelectedItem().toString();
+        us.isFill = !us.major_1.equals("NULL") || !us.major_2.equals("NULL") || !us.major_3.equals("NULL");
+        client.modifyUndivertedStudent(us);
+        initInfo();
     }
 
 
@@ -92,6 +134,7 @@ public class Client_Student extends JFrame {
 
         //---- button1 ----
         button1.setText(bundle.getString("button1.text_2"));
+        button1.addActionListener(e -> button1(e));
         contentPane.add(button1);
         button1.setBounds(340, 505, 145, 60);
         contentPane.add(comboBox1);
@@ -140,7 +183,7 @@ public class Client_Student extends JFrame {
             contentPane.setMinimumSize(preferredSize);
             contentPane.setPreferredSize(preferredSize);
         }
-        pack();
+        setSize(826, 657);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }

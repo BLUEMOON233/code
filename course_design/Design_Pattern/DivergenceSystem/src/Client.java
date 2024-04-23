@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.InetAddress;
 
+
 public class Client {
     private MyStreamSocket myStreamSocket;
 
@@ -21,8 +22,17 @@ public class Client {
 
     public UndivertedStudent getUndivertedStudent(int number) {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@getUS", String.valueOf(number), 0.0));
-        UndivertedStudent us = myStreamSocket.receiveObject();
-        return us;
+        return myStreamSocket.receiveObject();
     }
 
+    public String[] getMajorList() {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@getMajor", "", 0.0));
+        UndivertedStudent us = myStreamSocket.receiveObject();
+        return us.name.split("\\+");
+    }
+
+    public void modifyUndivertedStudent(UndivertedStudent us) {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@modifyUS", "", 0.0));
+        myStreamSocket.sendObject(us);
+    }
 }

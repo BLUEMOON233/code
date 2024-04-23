@@ -78,7 +78,7 @@ public class DatabaseOperator {
                     us = new UndivertedStudent(number, name, gender, score);
                 }
                 return us;
-            }else {
+            } else {
                 return new UndivertedStudent(-1, "", "", 0.0);
             }
         } catch (SQLException e) {
@@ -115,6 +115,37 @@ public class DatabaseOperator {
             } else {
                 return "NOT FOUND";
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String queryMajor() {
+        try {
+            StringBuilder sb = new StringBuilder();
+            String sql = "select name from major;";
+            rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                sb.append(rs.getString("name"));
+                sb.append('+');
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            return sb.toString();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void modifyUndivertedStudent(UndivertedStudent us) {
+        try {
+
+            String sql = String.format("update stu_info_with_fill set is_fill = %b, major_1 = '%s', major_2 = '%s', major_3 = '%s' where number = %d",
+                    us.isFill, us.major_1, us.major_2, us.major_3, us.number);
+            if(!us.isFill) {
+                sql = String.format("update stu_info_with_fill set is_fill = false, major_1 = NULL, major_2 = NULL, major_3 = NULL where number = %d", us.number);
+            }
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
