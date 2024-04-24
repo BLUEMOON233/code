@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseOperator {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -105,9 +106,52 @@ public class DatabaseOperator {
         }
     }
 
+    public List<UndivertedStudent> getUSList () {
+        try{
+            String sql = "select * from stu_info_with_fill";
+            stmt.executeQuery(sql);
+            List<UndivertedStudent> usList = new ArrayList<UndivertedStudent>();
+            while(rs.next()) {
+                UndivertedStudent us;
+                int number = rs.getInt("number");
+                String name = rs.getString("name");
+                String gender = rs.getString("gender");
+                double score = rs.getDouble("score");
+                if (rs.getBoolean("is_fill")) {
+                    String major_1 = rs.getString("major_1");
+                    String major_2 = rs.getString("major_2");
+                    String major_3 = rs.getString("major_3");
+                    us = new UndivertedStudent(number, name, gender, score, major_1, major_2, major_3);
+                } else {
+                    us = new UndivertedStudent(number, name, gender, score);
+                }
+                usList.add(us);
+            }
+            return usList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public String queryStudentPassword(int number) {
         try {
             String sql = "select password from student_account where number = " + String.valueOf(number) + ";";
+            rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                String password = rs.getString("password");
+                return password;
+            } else {
+                return "NOT FOUND";
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String queryAdminPassword(int number) {
+        try {
+            String sql = "select password from admin_account where number = " + String.valueOf(number) + ";";
             rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 String password = rs.getString("password");
@@ -131,6 +175,23 @@ public class DatabaseOperator {
             }
             sb.deleteCharAt(sb.length() - 1);
             return sb.toString();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<UndivertedStudent> getMajorClass() {
+        try {
+            List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
+            String sql = "select * from major;";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+                int code = rs.getInt("code");
+                String name =  rs.getString("name");
+                int class_number = rs.getInt("class");
+                ret.add(new UndivertedStudent(code, name, String.valueOf(class_number), 0.0));
+            }
+            return ret;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

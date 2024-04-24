@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 
 public class ServerHandleThread implements Runnable {
     Socket socket;
@@ -39,13 +40,26 @@ public class ServerHandleThread implements Runnable {
                     UndivertedStudent ret = new UndivertedStudent(-2, (password.equals(us.name)) ? "true" : "false", "", 0.0);
                     myStreamSocket.sendObject(ret);
                 }
+                case "@checkAdminPassword" -> {
+                    UndivertedStudent us = myStreamSocket.receiveObject();
+                    String password = serverDO.queryAdminPassword(us.number);
+                    UndivertedStudent ret = new UndivertedStudent(-2, (password.equals(us.name)) ? "true" : "false", "", 0.0);
+                    myStreamSocket.sendObject(ret);
+                }
                 case "@getUS" -> {
                     UndivertedStudent ret = serverDO.getUndivertedStudent(Integer.parseInt(op.gender));
                     myStreamSocket.sendObject(ret);
                 }
-                case "@getMajor" ->{
+                case "@getMajor" -> {
                     String sendMessage = serverDO.queryMajor();
                     myStreamSocket.sendObject(new UndivertedStudent(-2, sendMessage, "", 0.0));
+                }
+                case "@getMajorClass" -> {
+                    List<UndivertedStudent> majorList = serverDO.getMajorClass();
+                    for(UndivertedStudent major : majorList) {
+                        myStreamSocket.sendObject(major);
+                    }
+                    myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
                 }
                 case "@modifyUS" -> {
                     UndivertedStudent us = myStreamSocket.receiveObject();

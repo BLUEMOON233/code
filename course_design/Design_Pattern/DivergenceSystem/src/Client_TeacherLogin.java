@@ -1,34 +1,32 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.net.Socket;
-import java.util.*;
 import javax.swing.*;
 /*
- * Created by JFormDesigner on Fri Apr 19 21:58:35 CST 2024
+ * Created by JFormDesigner on Wed Apr 24 21:44:39 CST 2024
  */
+
 
 
 /**
  * @author liuwy
  */
-public class Client_StudentLogin extends JFrame {
-    private Client client = null;
-
-    public Client_StudentLogin() throws IOException {
+public class Client_TeacherLogin extends JFrame {
+    Client client = null;
+    public Client_TeacherLogin() throws IOException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         client = new Client();
         initComponents();
     }
 
-    private void button1(ActionEvent e) {
+    private void BT_login(ActionEvent e) {
         int number = Integer.parseInt(textField1.getText());
         String password = new String(passwordField1.getPassword());
-        boolean flag = client.loginCheck(number, password);
+        boolean flag = client.adminLoginCheck(number, password);
         if (flag) {
             dispose();
             try {
-                new Client_Student(number).setVisible(true);
+                new Client_Teacher().setVisible(true);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -39,48 +37,41 @@ public class Client_StudentLogin extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        ResourceBundle bundle = ResourceBundle.getBundle("Client_Student");
+        BT_login = new JButton();
         label1 = new JLabel();
         label2 = new JLabel();
-        label3 = new JLabel();
-        textField1 = new JTextField();
         passwordField1 = new JPasswordField();
-        button1 = new JButton();
-        button2 = new JButton();
+        textField1 = new JTextField();
+        label3 = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(null);
 
+        //---- BT_login ----
+        BT_login.setText("\u767b\u5f55");
+        BT_login.addActionListener(e -> BT_login(e));
+        contentPane.add(BT_login);
+        BT_login.setBounds(190, 250, 130, 55);
+
         //---- label1 ----
-        label1.setText(bundle.getString("label1.text"));
+        label1.setText("\u6559\u5e08\u8d26\u53f7\uff1a");
         contentPane.add(label1);
-        label1.setBounds(new Rectangle(new Point(200, 20), label1.getPreferredSize()));
+        label1.setBounds(45, 70, 85, 50);
 
         //---- label2 ----
-        label2.setText(bundle.getString("label2.text"));
+        label2.setText("\u5bc6       \u7801\uff1a");
         contentPane.add(label2);
-        label2.setBounds(new Rectangle(new Point(65, 100), label2.getPreferredSize()));
+        label2.setBounds(45, 120, 85, 50);
+        contentPane.add(passwordField1);
+        passwordField1.setBounds(145, 130, 185, passwordField1.getPreferredSize().height);
+        contentPane.add(textField1);
+        textField1.setBounds(145, 85, 175, textField1.getPreferredSize().height);
 
         //---- label3 ----
-        label3.setText(bundle.getString("label3.text"));
+        label3.setText("\u6559\u5e08\u7aef\u767b\u5f55");
         contentPane.add(label3);
-        label3.setBounds(new Rectangle(new Point(65, 135), label3.getPreferredSize()));
-        contentPane.add(textField1);
-        textField1.setBounds(120, 85, 235, textField1.getPreferredSize().height);
-        contentPane.add(passwordField1);
-        passwordField1.setBounds(115, 145, 235, passwordField1.getPreferredSize().height);
-
-        //---- button1 ----
-        button1.setText(bundle.getString("button1.text"));
-        button1.addActionListener(e -> button1(e));
-        contentPane.add(button1);
-        button1.setBounds(new Rectangle(new Point(95, 240), button1.getPreferredSize()));
-
-        //---- button2 ----
-        button2.setText(bundle.getString("button2.text"));
-        contentPane.add(button2);
-        button2.setBounds(new Rectangle(new Point(300, 250), button2.getPreferredSize()));
+        label3.setBounds(120, 30, 205, 35);
 
         {
             // compute preferred size
@@ -96,26 +87,25 @@ public class Client_StudentLogin extends JFrame {
             contentPane.setMinimumSize(preferredSize);
             contentPane.setPreferredSize(preferredSize);
         }
-        pack();
+        setSize(500, 375);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    private JButton BT_login;
     private JLabel label1;
     private JLabel label2;
-    private JLabel label3;
-    private JTextField textField1;
     private JPasswordField passwordField1;
-    private JButton button1;
-    private JButton button2;
+    private JTextField textField1;
+    private JLabel label3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         try {
-            new Client_StudentLogin().setVisible(true);
+            new Client_TeacherLogin().setVisible(true);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }

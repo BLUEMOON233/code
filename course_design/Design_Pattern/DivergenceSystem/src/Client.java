@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Client {
@@ -12,6 +14,16 @@ public class Client {
 
     public boolean loginCheck(int number, String password) {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@checkStudentPassword", "", 0.0));
+        myStreamSocket.sendObject(new UndivertedStudent(number, password, "", 0.0));
+        UndivertedStudent us = myStreamSocket.receiveObject();
+        if(us.number == -2) {
+            return us.name.equals("true");
+        }
+        return false;
+    }
+
+    public boolean adminLoginCheck(int number, String password) {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@checkAdminPassword", "", 0.0));
         myStreamSocket.sendObject(new UndivertedStudent(number, password, "", 0.0));
         UndivertedStudent us = myStreamSocket.receiveObject();
         if(us.number == -2) {
@@ -35,4 +47,17 @@ public class Client {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@modifyUS", "", 0.0));
         myStreamSocket.sendObject(us);
     }
+
+    public List<UndivertedStudent> getMajorClass() {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@getMajorClass", "", 0.0));
+        int flag = 0;
+        List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
+        while(flag != -1) {
+            UndivertedStudent us = myStreamSocket.receiveObject();
+            if(us.number != -1) ret.add(us);
+            flag = us.number;
+        }
+        return ret;
+    }
+
 }

@@ -890,81 +890,95 @@ divergencesystem|schema||DivergenceSystem||UPDATE|G</Grants>
       <CollationName>utf8_general_ci</CollationName>
     </schema>
     <user id="276" parent="1" name="DivergenceSystem"/>
-    <table id="277" parent="274" name="major">
+    <table id="277" parent="274" name="admin_account">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="278" parent="274" name="stu_info_with_fill">
+    <table id="278" parent="274" name="major">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="279" parent="274" name="student_account">
+    <table id="279" parent="274" name="stu_info_with_fill">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <column id="280" parent="277" name="code">
+    <table id="280" parent="274" name="student_account">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </table>
+    <column id="281" parent="277" name="number">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="281" parent="277" name="name">
+    <column id="282" parent="277" name="password">
       <DasType>char(40)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="282" parent="278" name="number">
+    <column id="283" parent="278" name="code">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="283" parent="278" name="name">
+    <column id="284" parent="278" name="name">
+      <DasType>char(40)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="285" parent="279" name="number">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="286" parent="279" name="name">
       <DasType>char(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="284" parent="278" name="gender">
+    <column id="287" parent="279" name="gender">
       <DasType>char(8)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="285" parent="278" name="score">
+    <column id="288" parent="279" name="score">
       <DasType>double|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="286" parent="278" name="is_fill">
+    <column id="289" parent="279" name="is_fill">
       <DasType>tinyint(1)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="287" parent="278" name="major_1">
+    <column id="290" parent="279" name="major_1">
       <DasType>char(40)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="288" parent="278" name="major_2">
+    <column id="291" parent="279" name="major_2">
       <DasType>char(40)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="289" parent="278" name="major_3">
+    <column id="292" parent="279" name="major_3">
       <DasType>char(40)|0s</DasType>
       <Position>8</Position>
     </column>
-    <index id="290" parent="278" name="PRIMARY">
+    <index id="293" parent="279" name="PRIMARY">
       <ColNames>number</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="291" parent="278" name="PRIMARY">
+    <key id="294" parent="279" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="292" parent="279" name="number">
+    <column id="295" parent="280" name="number">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="293" parent="279" name="password">
+    <column id="296" parent="280" name="password">
       <DasType>char(30)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
