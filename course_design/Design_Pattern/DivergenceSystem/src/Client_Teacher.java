@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 /*
  * Created by JFormDesigner on Wed Apr 24 22:09:42 CST 2024
  */
@@ -27,10 +29,14 @@ public class Client_Teacher extends JFrame {
 
     void Init() {
         initMajorInfo();
+        initClassInfo();
         tabbedPane1.addChangeListener(e -> {
             int selectedIndex = tabbedPane1.getSelectedIndex();
 //            System.out.println("切换到Tab页: " + tabbedPane1.getTitleAt(selectedIndex));
-            if (selectedIndex == 0) initMajorInfo();
+            if (selectedIndex == 0) {
+                initMajorInfo();
+                initClassInfo();
+            }
         });
 
     }
@@ -44,7 +50,7 @@ public class Client_Teacher extends JFrame {
         for (UndivertedStudent major : majorList) {
 //            System.out.println(major);
             JPanel row = new JPanel(new BorderLayout());
-            row.setSize(100, 30);
+            row.setPreferredSize(new Dimension(100, 50));
             JLabel label = new JLabel(String.valueOf(major.number) + "-" + major.name + ": ");
             row.add(label, BorderLayout.WEST);
             JSpinner spinner = new JSpinner();
@@ -57,7 +63,53 @@ public class Client_Teacher extends JFrame {
     }
 
     public void initClassInfo() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JViewport viewport = classInfo.getViewport();
 
+        List<UndivertedStudent> classList = client.getClassList();
+        for(UndivertedStudent singleClass : classList) {
+            JPanel row = new JPanel(new BorderLayout());
+            JLabel label = new JLabel("班级：" + singleClass.number + "  人数：" + singleClass.name);
+            JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, Integer.parseInt(singleClass.name));
+            slider.setPaintTicks(true);
+            slider.setPaintLabels(true);
+            slider.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    int value = slider.getValue();
+                    label.setText("班级：" + singleClass.number + "  人数：" + value);
+                }
+            });
+            row.add(label, BorderLayout.WEST);
+            row.add(slider, BorderLayout.EAST);
+            panel.add(row);
+        }
+
+        // 创建多个标签和滑动条
+//        for (int i = 0; i < 10; i++) {
+//            JLabel label = new JLabel("0");
+//            JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+//
+//            slider.addChangeListener(new ChangeListener() {
+//                @Override
+//                public void stateChanged(ChangeEvent e) {
+//                    int value = slider.getValue();
+//                    label.setText(String.valueOf(value));
+//                }
+//            });
+//            slider.setPaintTicks(true);
+//            slider.setPaintLabels(true);
+//
+//            JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+//            rowPanel.add(new JLabel("班级" + i + ": "));
+//            rowPanel.add(label);
+//            rowPanel.add(slider);
+//
+//            panel.add(rowPanel);
+//        }
+
+        viewport.add(panel);
     }
 
     private void BT_addMajor(ActionEvent e) {
@@ -150,6 +202,16 @@ public class Client_Teacher extends JFrame {
 
     public static void main(String[] args) {
         try {
+            Thread thread = new Thread(()->{
+                Server server = null;
+                try {
+                    server = new Server();
+                    server.startServer();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            thread.start();
             new Client_Teacher().setVisible(true);
         } catch (IOException e) {
             e.printStackTrace();

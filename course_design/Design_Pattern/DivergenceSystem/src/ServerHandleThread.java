@@ -80,6 +80,13 @@ public class ServerHandleThread implements Runnable {
                 case "@initClass" -> {
                     serverDO.initClass();
                 }
+                case "@getClassList" -> {
+                    List<UndivertedStudent> classList = serverDO.getClassList();
+                    for(UndivertedStudent singleClass : classList) {
+                        myStreamSocket.sendObject(singleClass);
+                    }
+                    myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
+                }
             }
         }
         try {

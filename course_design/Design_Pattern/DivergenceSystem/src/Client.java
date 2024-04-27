@@ -75,4 +75,16 @@ public class Client {
     public void initClass() {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@initClass", "", 0.0));
     }
+
+    public List<UndivertedStudent> getClassList() {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@getClassList", "", 0.0));
+        int flag = 0;
+        List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
+        while(flag != -1) {
+            UndivertedStudent us = myStreamSocket.receiveObject();
+            if(us.number != -1) ret.add(us);
+            flag = us.number;
+        }
+        return ret;
+    }
 }

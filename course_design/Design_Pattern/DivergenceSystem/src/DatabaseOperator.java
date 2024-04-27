@@ -271,6 +271,22 @@ public class DatabaseOperator {
         }
     }
 
+    public List<UndivertedStudent> getClassList() {
+        try {
+            List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
+            String sql = "select code, student_number from class_list;";
+            rs = stmt.executeQuery(sql);
+            while(rs.next()) {
+                int code = rs.getInt("code");
+                int student_number = rs.getInt("student_number");
+                ret.add(new UndivertedStudent(code, String.valueOf(student_number), "", 0.0));
+            }
+            return ret;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public static void main(String[] args) {
         UndivertedStudent us = new UndivertedStudent(2021902610, "刘文越", "男", 90);
