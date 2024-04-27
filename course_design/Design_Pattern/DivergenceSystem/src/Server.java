@@ -22,10 +22,9 @@ public class Server {
             try {
                 socket = serverSocket.accept();
                 serverHandleThread = new Thread(new ServerHandleThread(socket, serverDO));
-                System.out.println("here");
                 serverHandleThread.start();
                 InetAddress inetAddress = socket.getInetAddress();
-                System.out.println("IP address: " + inetAddress.getHostAddress());
+                System.out.println("New Client's IP address: " + inetAddress.getHostAddress());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

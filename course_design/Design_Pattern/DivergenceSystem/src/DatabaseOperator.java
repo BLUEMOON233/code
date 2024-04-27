@@ -133,7 +133,6 @@ public class DatabaseOperator {
         }
     }
 
-
     public String queryStudentPassword(int number) {
         try {
             String sql = "select password from student_account where number = " + String.valueOf(number) + ";";
@@ -197,6 +196,41 @@ public class DatabaseOperator {
         }
     }
 
+    public void addMajor(String majorName) {
+        try {
+            String sql = """
+                SELECT Min(T1.code) + 1 minCode FROM major T1
+                WHERE (T1.code + 1) NOT IN (SELECT T2.code FROM major T2)
+                AND EXISTS (SELECT T3.code FROM major T3 WHERE T3.code = 1)""";
+            rs = stmt.executeQuery(sql);
+            rs.next();
+            int number = rs.getInt("minCode");
+            sql = String.format("insert into major (code, name, class) values (%d, '%s', 0);", number, majorName);
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delMajor(int code) {
+        try {
+            String sql = String.format("delete from major where code = %d;", code);
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void modifyMajor(int code, int class_number) {
+        try {
+            String sql = String.format("update major set class = %d where code = %d;", class_number, code);
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void modifyUndivertedStudent(UndivertedStudent us) {
         try {
 
@@ -207,6 +241,31 @@ public class DatabaseOperator {
             }
             System.out.println(sql);
             stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void initClass() {
+        try {
+            String sql = "delete from class_list;";
+            stmt.executeUpdate(sql);
+            sql = "select code, class from major;";
+            rs = stmt.executeQuery(sql);
+            List<String> sqls = new ArrayList<>();
+            while(rs.next()) {
+                int code = rs.getInt("code");
+                int class_number = rs.getInt("class");
+                for(int index = 1; index <= class_number; index++) {
+                    int class_code = 2021240000 + code * 100 + index;
+                    String insert_sql = String.format("insert into class_list (code, major_code, student_number)" +
+                            "values (%d, %d, %d);", class_code, code, 0);
+                    sqls.add(insert_sql);
+                }
+            }
+            for(String insert_sql : sqls) {
+                stmt.executeUpdate(insert_sql);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

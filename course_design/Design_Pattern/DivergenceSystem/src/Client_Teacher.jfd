@@ -18,8 +18,8 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 50
 						"y": 80
-						"width": 435
-						"height": 230
+						"width": 400
+						"height": 195
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_addMajor"
@@ -38,17 +38,26 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 130
 						"height": 55
-						"x": 195
+						"x": 185
 						"y": 20
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_saveMajor"
-						"text": "保存"
+						"text": "保存专业"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_saveMajor", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 335
-						"y": 20
-						"width": 135
+						"width": 130
 						"height": 55
+						"x": 320
+						"y": 20
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "classInfo"
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 50
+						"y": 295
+						"width": 400
+						"height": 400
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "设置"

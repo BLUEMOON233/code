@@ -8,8 +8,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/90da5788-50b1-4a70-aaf9-a5978f508ca8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/90da5788-50b1-4a70-aaf9-a5978f508ca8.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client_StudentLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_StudentLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_Teacher.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_Teacher.jfd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DatabaseOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabaseOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ServerHandleThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerHandleThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +59,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="应用程序.Client_Teacher">
+  <component name="RunManager" selected="应用程序.Server">
     <configuration name="Client_StudentLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client_StudentLogin" />
       <module name="DivergenceSystem" />
@@ -119,6 +121,7 @@
       <workItem from="1713884507259" duration="371000" />
       <workItem from="1713930150443" duration="951000" />
       <workItem from="1713965387057" duration="7164000" />
+      <workItem from="1714050592901" duration="7641000" />
     </task>
     <servers />
   </component>

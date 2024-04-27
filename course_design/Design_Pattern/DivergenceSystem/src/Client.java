@@ -60,4 +60,19 @@ public class Client {
         return ret;
     }
 
+    public void addMajor(String majorName) {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "+addMajor", majorName, 0.0));
+    }
+
+    public void delMajor(int code) {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "-delMajor", String.valueOf(code), 0.0));
+    }
+
+    public void modifyMajor(int code, int class_number) {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@modifyMajor", String.valueOf(code) + '&' + String.valueOf(class_number), 0.0));
+    }
+
+    public void initClass() {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@initClass", "", 0.0));
+    }
 }

@@ -61,9 +61,24 @@ public class ServerHandleThread implements Runnable {
                     }
                     myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
                 }
+                case "+addMajor" -> {
+                    System.out.println(op);
+                    serverDO.addMajor(op.gender);
+                }
+                case "-delMajor" -> {
+                    serverDO.delMajor(Integer.parseInt(op.gender));
+                }
+                case "@modifyMajor" -> {
+                    String[] value = op.gender.split("&");
+                    int code = Integer.parseInt(value[0]), class_number = Integer.parseInt(value[1]);
+                    serverDO.modifyMajor(code, class_number);
+                }
                 case "@modifyUS" -> {
                     UndivertedStudent us = myStreamSocket.receiveObject();
                     serverDO.modifyUndivertedStudent(us);
+                }
+                case "@initClass" -> {
+                    serverDO.initClass();
                 }
             }
         }
