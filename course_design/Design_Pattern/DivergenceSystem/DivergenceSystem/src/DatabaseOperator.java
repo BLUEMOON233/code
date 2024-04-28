@@ -87,7 +87,7 @@ public class DatabaseOperator {
         }
     }
 
-    public void addUSList(ArrayList<UndivertedStudent> usList) {
+    public void addUSList(List<UndivertedStudent> usList) {
         try {
             for (UndivertedStudent us : usList) {
                 String sql = "select number from stu_info_with_fill where number = " + String.valueOf(us.number) + ";";
@@ -106,12 +106,12 @@ public class DatabaseOperator {
         }
     }
 
-    public List<UndivertedStudent> getUSList () {
-        try{
+    public List<UndivertedStudent> getUSList() {
+        try {
             String sql = "select * from stu_info_with_fill";
-            stmt.executeQuery(sql);
+            rs = stmt.executeQuery(sql);
             List<UndivertedStudent> usList = new ArrayList<UndivertedStudent>();
-            while(rs.next()) {
+            while (rs.next()) {
                 UndivertedStudent us;
                 int number = rs.getInt("number");
                 String name = rs.getString("name");
@@ -184,9 +184,9 @@ public class DatabaseOperator {
             List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
             String sql = "select * from major;";
             rs = stmt.executeQuery(sql);
-            while(rs.next()) {
+            while (rs.next()) {
                 int code = rs.getInt("code");
-                String name =  rs.getString("name");
+                String name = rs.getString("name");
                 int class_number = rs.getInt("class");
                 ret.add(new UndivertedStudent(code, name, String.valueOf(class_number), 0.0));
             }
@@ -199,9 +199,9 @@ public class DatabaseOperator {
     public void addMajor(String majorName) {
         try {
             String sql = """
-                SELECT Min(T1.code) + 1 minCode FROM major T1
-                WHERE (T1.code + 1) NOT IN (SELECT T2.code FROM major T2)
-                AND EXISTS (SELECT T3.code FROM major T3 WHERE T3.code = 1)""";
+                    SELECT Min(T1.code) + 1 minCode FROM major T1
+                    WHERE (T1.code + 1) NOT IN (SELECT T2.code FROM major T2)
+                    AND EXISTS (SELECT T3.code FROM major T3 WHERE T3.code = 1)""";
             rs = stmt.executeQuery(sql);
             rs.next();
             int number = rs.getInt("minCode");
@@ -236,7 +236,7 @@ public class DatabaseOperator {
 
             String sql = String.format("update stu_info_with_fill set is_fill = %b, major_1 = '%s', major_2 = '%s', major_3 = '%s' where number = %d",
                     us.isFill, us.major_1, us.major_2, us.major_3, us.number);
-            if(!us.isFill) {
+            if (!us.isFill) {
                 sql = String.format("update stu_info_with_fill set is_fill = false, major_1 = NULL, major_2 = NULL, major_3 = NULL where number = %d", us.number);
             }
             System.out.println(sql);
@@ -253,18 +253,29 @@ public class DatabaseOperator {
             sql = "select code, class from major;";
             rs = stmt.executeQuery(sql);
             List<String> sqls = new ArrayList<>();
-            while(rs.next()) {
+            while (rs.next()) {
                 int code = rs.getInt("code");
                 int class_number = rs.getInt("class");
-                for(int index = 1; index <= class_number; index++) {
+                for (int index = 1; index <= class_number; index++) {
                     int class_code = 2021240000 + code * 100 + index;
                     String insert_sql = String.format("insert into class_list (code, major_code, student_number)" +
                             "values (%d, %d, %d);", class_code, code, 0);
                     sqls.add(insert_sql);
                 }
             }
-            for(String insert_sql : sqls) {
+            for (String insert_sql : sqls) {
                 stmt.executeUpdate(insert_sql);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void modifyClassNumber(List<UndivertedStudent> classNums) {
+        try {
+            for (UndivertedStudent singleClass : classNums) {
+                String sql = String.format("update class_list set student_number = %s where code = %d", singleClass.name, singleClass.number);
+                stmt.executeUpdate(sql);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -276,13 +287,49 @@ public class DatabaseOperator {
             List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
             String sql = "select * from class_list;";
             rs = stmt.executeQuery(sql);
-            while(rs.next()) {
+            while (rs.next()) {
                 int code = rs.getInt("code");
                 int student_number = rs.getInt("student_number");
                 int major_code = rs.getInt("major_code");
                 ret.add(new UndivertedStudent(code, String.valueOf(student_number), String.valueOf(major_code), 0.0));
             }
             return ret;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void clearStuInfoWithFill() {
+        try {
+            String sql = "delete from stu_info_with_fill;";
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void diverge() {
+        try {
+            String sql = "select * from stu_info_with_fill order by score DESC;";
+            rs = stmt.executeQuery(sql);
+            List<UndivertedStudent> usList = new ArrayList<>();
+            while (rs.next()) {
+                UndivertedStudent us;
+                int number = rs.getInt("number");
+                String name = rs.getString("name");
+                String gender = rs.getString("gender");
+                double score = rs.getDouble("score");
+                if (rs.getBoolean("is_fill")) {
+                    String major_1 = rs.getString("major_1");
+                    String major_2 = rs.getString("major_2");
+                    String major_3 = rs.getString("major_3");
+                    us = new UndivertedStudent(number, name, gender, score, major_1, major_2, major_3);
+                } else {
+                    us = new UndivertedStudent(number, name, gender, score);
+                }
+                usList.add(us);
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServerHandleThread implements Runnable {
@@ -33,6 +34,23 @@ public class ServerHandleThread implements Runnable {
                 case "-singleUS" -> {
                     UndivertedStudent us = myStreamSocket.receiveObject();
                     serverDO.delUndivertedStudent(us.number);
+                }
+                case "@getUSList" -> {
+                    List<UndivertedStudent> list = serverDO.getUSList();
+                    for(UndivertedStudent us : list) {
+                        myStreamSocket.sendObject(us);
+                    }
+                    myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
+                }
+                case "+addUSList" -> {
+                    int flag = 0;
+                    List<UndivertedStudent> usList = new ArrayList<UndivertedStudent>();
+                    while(flag != -1) {
+                        UndivertedStudent us = myStreamSocket.receiveObject();
+                        if(us.number != -1) usList.add(us);
+                        flag = us.number;
+                    }
+                    serverDO.addUSList(usList);
                 }
                 case "@checkStudentPassword" -> {
                     UndivertedStudent us = myStreamSocket.receiveObject();
@@ -80,12 +98,25 @@ public class ServerHandleThread implements Runnable {
                 case "@initClass" -> {
                     serverDO.initClass();
                 }
+                case "@modifyClassNumber" -> {
+                    int flag = 0;
+                    List<UndivertedStudent> classNums = new ArrayList<UndivertedStudent>();
+                    while(flag != -1) {
+                        UndivertedStudent us = myStreamSocket.receiveObject();
+                        if(us.number != -1) classNums.add(us);
+                        flag = us.number;
+                    }
+                    serverDO.modifyClassNumber(classNums);
+                }
                 case "@getClassList" -> {
                     List<UndivertedStudent> classList = serverDO.getClassList();
                     for(UndivertedStudent singleClass : classList) {
                         myStreamSocket.sendObject(singleClass);
                     }
                     myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
+                }
+                case "-clearStuInfoWithFill" -> {
+                    serverDO.clearStuInfoWithFill();;
                 }
             }
         }

@@ -37,6 +37,26 @@ public class Client {
         return myStreamSocket.receiveObject();
     }
 
+    public List<UndivertedStudent> getUSList() {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@getUSList", "", 0.0));
+        int flag = 0;
+        List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
+        while(flag != -1) {
+            UndivertedStudent us = myStreamSocket.receiveObject();
+            if(us.number != -1) ret.add(us);
+            flag = us.number;
+        }
+        return ret;
+    }
+
+    public void addUSList(List<UndivertedStudent> usList) {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "+addUSList", "", 0.0));
+        for(UndivertedStudent us : usList) {
+            myStreamSocket.sendObject(us);
+        }
+        myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
+    }
+
     public String[] getMajorList() {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@getMajor", "", 0.0));
         UndivertedStudent us = myStreamSocket.receiveObject();
@@ -76,6 +96,14 @@ public class Client {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@initClass", "", 0.0));
     }
 
+    public void saveClass(List<UndivertedStudent> classNums) {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@modifyClassNumber", "", 0.0));
+        for(UndivertedStudent us : classNums) {
+            myStreamSocket.sendObject(us);
+        }
+        myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
+    }
+
     public List<UndivertedStudent> getClassList() {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@getClassList", "", 0.0));
         int flag = 0;
@@ -86,5 +114,9 @@ public class Client {
             flag = us.number;
         }
         return ret;
+    }
+
+    public void clearStuInfoWithFill() {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "-clearStuInfoWithFill", "", 0.0));
     }
 }
