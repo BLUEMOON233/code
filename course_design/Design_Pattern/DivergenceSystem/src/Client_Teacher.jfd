@@ -7,6 +7,7 @@ new FormModel {
 			"autoSize": false
 		} ) {
 			name: "this"
+			"$sizePolicy": 1
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "tabbedPane1"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
@@ -55,7 +56,7 @@ new FormModel {
 						name: "classInfo"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 50
-						"y": 295
+						"y": 285
 						"width": 400
 						"height": 400
 					} )
@@ -70,12 +71,12 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 35
 				"y": 10
-				"width": 950
-				"height": 770
+				"width": 1130
+				"height": 830
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 80, 50 )
-			"size": new java.awt.Dimension( 820, 660 )
+			"size": new java.awt.Dimension( 960, 721 )
 		} )
 	}
 }

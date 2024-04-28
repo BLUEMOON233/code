@@ -274,12 +274,13 @@ public class DatabaseOperator {
     public List<UndivertedStudent> getClassList() {
         try {
             List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
-            String sql = "select code, student_number from class_list;";
+            String sql = "select * from class_list;";
             rs = stmt.executeQuery(sql);
             while(rs.next()) {
                 int code = rs.getInt("code");
                 int student_number = rs.getInt("student_number");
-                ret.add(new UndivertedStudent(code, String.valueOf(student_number), "", 0.0));
+                int major_code = rs.getInt("major_code");
+                ret.add(new UndivertedStudent(code, String.valueOf(student_number), String.valueOf(major_code), 0.0));
             }
             return ret;
         } catch (SQLException e) {

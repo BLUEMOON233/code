@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +19,15 @@ import javax.swing.event.ChangeListener;
 public class Client_Teacher extends JFrame {
     Client client = null;
     Map<Integer, JSpinner> mapSpinner;
+    Map<Integer, JLabel> mapClassNumLabel;
+    Map<Integer, List<JSlider>> mapMajor2StudentNumber;
 
     public Client_Teacher() throws IOException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         client = new Client();
         mapSpinner = new HashMap<>();
+        mapClassNumLabel = new HashMap<>();
+        mapMajor2StudentNumber = new HashMap<>();
         initComponents();
         Init();
     }
@@ -43,20 +48,40 @@ public class Client_Teacher extends JFrame {
 
     public void initMajorInfo() {
         mapSpinner.clear();
+        mapClassNumLabel.clear();
+        mapMajor2StudentNumber.clear();
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 1));
         JViewport viewport = majorInfo.getViewport();
         List<UndivertedStudent> majorList = client.getMajorClass();
         for (UndivertedStudent major : majorList) {
 //            System.out.println(major);
-            JPanel row = new JPanel(new BorderLayout());
+            JPanel row = new JPanel(new GridBagLayout());
             row.setPreferredSize(new Dimension(100, 50));
-            JLabel label = new JLabel(String.valueOf(major.number) + "-" + major.name + ": ");
-            row.add(label, BorderLayout.WEST);
+            GridBagConstraints gbc = new GridBagConstraints();
+
+            gbc.gridx = 0;
+            gbc.weightx = 1.0;
+            gbc.anchor = GridBagConstraints.WEST;
+            JLabel label = new JLabel(major.number + "-" + major.name + ": ");
+            row.add(label, gbc);
+
+            gbc.gridx = 1;
+            gbc.weightx = 0.5;
+            gbc.anchor = GridBagConstraints.EAST;
+            JLabel classNumLabel = new JLabel("  人数：0");
+            row.add(classNumLabel, gbc);
+            mapClassNumLabel.put(major.number, classNumLabel);
+
+            gbc.gridx = 2;
+            gbc.weightx = 0.3;
+            gbc.anchor = GridBagConstraints.EAST;
             JSpinner spinner = new JSpinner();
             spinner.setValue(Integer.parseInt(major.gender));
             mapSpinner.put(major.number, spinner);
-            row.add(spinner, BorderLayout.EAST);
+            row.add(spinner, gbc);
+
+            mapMajor2StudentNumber.put(major.number, new ArrayList<>());
             panel.add(row);
         }
         viewport.add(panel);
@@ -68,7 +93,7 @@ public class Client_Teacher extends JFrame {
         JViewport viewport = classInfo.getViewport();
 
         List<UndivertedStudent> classList = client.getClassList();
-        for(UndivertedStudent singleClass : classList) {
+        for (UndivertedStudent singleClass : classList) {
             JPanel row = new JPanel(new BorderLayout());
             JLabel label = new JLabel("班级：" + singleClass.number + "  人数：" + singleClass.name);
             JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, Integer.parseInt(singleClass.name));
@@ -77,38 +102,20 @@ public class Client_Teacher extends JFrame {
             slider.addChangeListener(new ChangeListener() {
                 @Override
                 public void stateChanged(ChangeEvent e) {
-                    int value = slider.getValue();
+                    int value = slider.getValue(), sum = 0;
                     label.setText("班级：" + singleClass.number + "  人数：" + value);
+                    for (JSlider slider : mapMajor2StudentNumber.get(Integer.parseInt(singleClass.gender))) {
+                        int val = slider.getValue();
+                        sum += val;
+                    }
+                    mapClassNumLabel.get(Integer.parseInt(singleClass.gender)).setText("  人数：" + String.valueOf(sum));
                 }
             });
+            mapMajor2StudentNumber.get(Integer.parseInt(singleClass.gender)).add(slider);
             row.add(label, BorderLayout.WEST);
             row.add(slider, BorderLayout.EAST);
             panel.add(row);
         }
-
-        // 创建多个标签和滑动条
-//        for (int i = 0; i < 10; i++) {
-//            JLabel label = new JLabel("0");
-//            JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
-//
-//            slider.addChangeListener(new ChangeListener() {
-//                @Override
-//                public void stateChanged(ChangeEvent e) {
-//                    int value = slider.getValue();
-//                    label.setText(String.valueOf(value));
-//                }
-//            });
-//            slider.setPaintTicks(true);
-//            slider.setPaintLabels(true);
-//
-//            JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-//            rowPanel.add(new JLabel("班级" + i + ": "));
-//            rowPanel.add(label);
-//            rowPanel.add(slider);
-//
-//            panel.add(rowPanel);
-//        }
-
         viewport.add(panel);
     }
 
@@ -131,6 +138,7 @@ public class Client_Teacher extends JFrame {
         }
         initMajorInfo();
         client.initClass();
+        initClassInfo();
     }
 
     private void initComponents() {
@@ -175,16 +183,16 @@ public class Client_Teacher extends JFrame {
                 TP_settings.add(BT_saveMajor);
                 BT_saveMajor.setBounds(320, 20, 130, 55);
                 TP_settings.add(classInfo);
-                classInfo.setBounds(50, 295, 400, 400);
+                classInfo.setBounds(50, 285, 400, 400);
             }
             tabbedPane1.addTab("\u8bbe\u7f6e", TP_settings);
             tabbedPane1.addTab("\u5b66\u751f\u586b\u62a5\u4fe1\u606f", TP_filInfo);
         }
         contentPane.add(tabbedPane1);
-        tabbedPane1.setBounds(35, 10, 950, 770);
+        tabbedPane1.setBounds(35, 10, 1130, 830);
 
-        contentPane.setPreferredSize(new Dimension(820, 660));
-        pack();
+        contentPane.setPreferredSize(new Dimension(960, 721));
+        setSize(1200, 901);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
@@ -202,7 +210,7 @@ public class Client_Teacher extends JFrame {
 
     public static void main(String[] args) {
         try {
-            Thread thread = new Thread(()->{
+            Thread thread = new Thread(() -> {
                 Server server = null;
                 try {
                     server = new Server();
