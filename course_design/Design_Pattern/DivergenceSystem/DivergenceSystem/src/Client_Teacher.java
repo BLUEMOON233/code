@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /*
  * Created by JFormDesigner on Wed Apr 24 22:09:42 CST 2024
  */
@@ -19,7 +20,7 @@ import javax.swing.event.ChangeListener;
 public class Client_Teacher extends JFrame {
     Client client = null;
     Map<Integer, JSpinner> mapSpinner;
-    Map<Integer, JLabel> mapClassNumLabel;
+    Map<Integer, JLabel> mapMajorCode2MajorNumber;
     Map<Integer, List<JSlider>> mapMajor2StudentNumber;
     Map<Integer, JSlider> mapClassCode2Number;
 
@@ -27,7 +28,7 @@ public class Client_Teacher extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         client = new Client();
         mapSpinner = new HashMap<>();
-        mapClassNumLabel = new HashMap<>();
+        mapMajorCode2MajorNumber = new HashMap<>();
         mapMajor2StudentNumber = new HashMap<>();
         mapClassCode2Number = new HashMap<>();
         initComponents();
@@ -45,17 +46,29 @@ public class Client_Teacher extends JFrame {
                 initMajorInfo();
                 initClassInfo();
             }
+            if (selectedIndex == 2) {
+                showStuProInfo();
+            }
         });
 
     }
 
     public void initMajorInfo() {
         mapSpinner.clear();
-        mapClassNumLabel.clear();
+        mapMajorCode2MajorNumber.clear();
         mapMajor2StudentNumber.clear();
+
+        List<UndivertedStudent> classList = client.getClassList();
+        Map<Integer, Integer> mapMajorCode2Count = new HashMap<>();
+        for (UndivertedStudent singleClass : classList) {
+            int majorCode = Integer.parseInt(singleClass.gender);
+            mapMajorCode2Count.put(majorCode, mapMajorCode2Count.getOrDefault(majorCode, 0) + Integer.parseInt(singleClass.name));
+        }
+
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 1));
         JViewport viewport = majorInfo.getViewport();
+
         List<UndivertedStudent> majorList = client.getMajorClass();
         for (UndivertedStudent major : majorList) {
 //            System.out.println(major);
@@ -72,9 +85,9 @@ public class Client_Teacher extends JFrame {
             gbc.gridx = 1;
             gbc.weightx = 0.5;
             gbc.anchor = GridBagConstraints.EAST;
-            JLabel classNumLabel = new JLabel("  人数：0");
+            JLabel classNumLabel = new JLabel("  人数：" + String.valueOf(mapMajorCode2Count.getOrDefault(major.number, 0)));
             row.add(classNumLabel, gbc);
-            mapClassNumLabel.put(major.number, classNumLabel);
+            mapMajorCode2MajorNumber.put(major.number, classNumLabel);
 
             gbc.gridx = 2;
             gbc.weightx = 0.3;
@@ -111,7 +124,7 @@ public class Client_Teacher extends JFrame {
                         int val = slider.getValue();
                         sum += val;
                     }
-                    mapClassNumLabel.get(Integer.parseInt(singleClass.gender)).setText("  人数：" + String.valueOf(sum));
+                    mapMajorCode2MajorNumber.get(Integer.parseInt(singleClass.gender)).setText("  人数：" + String.valueOf(sum));
                 }
             });
             mapClassCode2Number.put(singleClass.number, slider);
@@ -147,6 +160,14 @@ public class Client_Teacher extends JFrame {
         fillInfoViewport.add(table2);
     }
 
+    public void showStuProInfo() {
+        List<ProcessedStudent> info = client.getPSList();
+        JTable table1 = new JTable(new ProcessedStudent.DataTableModel(info));
+        // 创建 JScrollPane 组件，并将表格作为视图组件添加到其中
+        JViewport stuFillInfoViewport = TP_result.getViewport();
+        stuFillInfoViewport.add(table1);
+    }
+
     private void BT_addMajor(ActionEvent e) {
         String input = JOptionPane.showInputDialog(null, "请输入专业名称:");
         client.addMajor(input);
@@ -175,7 +196,18 @@ public class Client_Teacher extends JFrame {
     }
 
     private void BT_importData(ActionEvent e) {
-        List<UndivertedStudent> usList = CSVHandler.importCSV("../data.csv");
+        String csvFilePath = "";
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Files", "csv");
+        fileChooser.setFileFilter(filter);
+
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            csvFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        } else {
+            return;
+        }
+        List<UndivertedStudent> usList = CSVHandler.importCSV(csvFilePath);
         client.addUSList(usList);
         showStuFillInfo();
     }
@@ -183,11 +215,26 @@ public class Client_Teacher extends JFrame {
     private void BT_saveClass(ActionEvent e) {
         List<UndivertedStudent> classList = client.getClassList();
         List<UndivertedStudent> classNums = new ArrayList<>();
-        for(UndivertedStudent singleClass : classList) {
+        for (UndivertedStudent singleClass : classList) {
             int val = mapClassCode2Number.get(singleClass.number).getValue();
             classNums.add(new UndivertedStudent(singleClass.number, String.valueOf(val), "", 0.0));
         }
         client.saveClass(classNums);
+    }
+
+    private void BT_start(ActionEvent e) {
+        client.diverge();
+        showStuProInfo();
+    }
+
+    private void BT_delResult(ActionEvent e) {
+        client.clearStuInfoProcessed();
+        showStuProInfo();
+    }
+
+    private void BT_exportResult(ActionEvent e) {
+        List<ProcessedStudent> psList = client.getPSList();
+        CSVHandler.exportCSV("../export_data.csv", psList);
     }
 
     private void initComponents() {
@@ -206,9 +253,10 @@ public class Client_Teacher extends JFrame {
         BT_saveClass = new JButton();
         TP_filInfo = new JScrollPane();
         panel1 = new JPanel();
-        BT_exprortResult = new JButton();
-        BT_result = new JScrollPane();
+        BT_exportResult = new JButton();
+        TP_result = new JScrollPane();
         BT_start = new JButton();
+        BT_delResult = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -275,17 +323,25 @@ public class Client_Teacher extends JFrame {
             {
                 panel1.setLayout(null);
 
-                //---- BT_exprortResult ----
-                BT_exprortResult.setText("\u5bfc\u51fa\u6570\u636e");
-                panel1.add(BT_exprortResult);
-                BT_exprortResult.setBounds(new Rectangle(new Point(155, 15), BT_exprortResult.getPreferredSize()));
-                panel1.add(BT_result);
-                BT_result.setBounds(20, 60, 1100, 710);
+                //---- BT_exportResult ----
+                BT_exportResult.setText("\u5bfc\u51fa\u6570\u636e");
+                BT_exportResult.addActionListener(e -> BT_exportResult(e));
+                panel1.add(BT_exportResult);
+                BT_exportResult.setBounds(new Rectangle(new Point(130, 15), BT_exportResult.getPreferredSize()));
+                panel1.add(TP_result);
+                TP_result.setBounds(20, 60, 1100, 710);
 
                 //---- BT_start ----
                 BT_start.setText("\u5f00\u59cb\u5206\u6d41");
+                BT_start.addActionListener(e -> BT_start(e));
                 panel1.add(BT_start);
-                BT_start.setBounds(new Rectangle(new Point(30, 15), BT_start.getPreferredSize()));
+                BT_start.setBounds(new Rectangle(new Point(20, 15), BT_start.getPreferredSize()));
+
+                //---- BT_delResult ----
+                BT_delResult.setText("\u6e05\u7a7a\u5206\u6d41\u4fe1\u606f");
+                BT_delResult.addActionListener(e -> BT_delResult(e));
+                panel1.add(BT_delResult);
+                BT_delResult.setBounds(new Rectangle(new Point(240, 15), BT_delResult.getPreferredSize()));
             }
             tabbedPane1.addTab("\u5b66\u751f\u5206\u6d41\u4fe1\u606f", panel1);
         }
@@ -313,9 +369,10 @@ public class Client_Teacher extends JFrame {
     private JButton BT_saveClass;
     private JScrollPane TP_filInfo;
     private JPanel panel1;
-    private JButton BT_exprortResult;
-    private JScrollPane BT_result;
+    private JButton BT_exportResult;
+    private JScrollPane TP_result;
     private JButton BT_start;
+    private JButton BT_delResult;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
     public static void main(String[] args) {

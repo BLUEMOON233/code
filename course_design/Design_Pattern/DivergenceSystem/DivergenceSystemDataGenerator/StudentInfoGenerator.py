@@ -19,8 +19,10 @@ def generate_random_data(used_numbers):
     
     return [number, name, gender, score, is_fill, major_1, major_2, major_3]
 
-def generate_csv_file(filename, num_rows):
+def generate_csv_file(filename, accoutnfilename, num_rows):
     used_numbers = set()
+
+    number_list = []
 
     with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
@@ -28,6 +30,16 @@ def generate_csv_file(filename, num_rows):
         writer.writerow(header)
         for _ in range(num_rows):
             row_data = generate_random_data(used_numbers)
+            number_list.append(row_data[0])
             writer.writerow(row_data)
 
-generate_csv_file('data.csv', 100)
+    with open(accoutnfilename, 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
+        header = ['number', 'password']
+        writer.writerow(header)
+        for index in range(num_rows):
+            writer.writerow([number_list[index], '123456']);
+
+
+
+generate_csv_file('data.csv', 'account.csv', 300)

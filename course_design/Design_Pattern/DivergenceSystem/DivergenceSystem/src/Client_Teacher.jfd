@@ -119,14 +119,15 @@ new FormModel {
 				} ) {
 					name: "panel1"
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "BT_exprortResult"
+						name: "BT_exportResult"
 						"text": "导出数据"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_exportResult", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 155
+						"x": 130
 						"y": 15
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-						name: "BT_result"
+						name: "TP_result"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
 						"y": 60
@@ -136,8 +137,17 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_start"
 						"text": "开始分流"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_start", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 30
+						"x": 20
+						"y": 15
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "BT_delResult"
+						"text": "清空分流信息"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_delResult", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 240
 						"y": 15
 					} )
 				}, new FormLayoutConstraints( null ) {

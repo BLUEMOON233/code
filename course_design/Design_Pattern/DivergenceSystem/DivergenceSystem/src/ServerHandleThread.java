@@ -68,10 +68,6 @@ public class ServerHandleThread implements Runnable {
                     UndivertedStudent ret = serverDO.getUndivertedStudent(Integer.parseInt(op.gender));
                     myStreamSocket.sendObject(ret);
                 }
-                case "@getMajor" -> {
-                    String sendMessage = serverDO.queryMajor();
-                    myStreamSocket.sendObject(new UndivertedStudent(-2, sendMessage, "", 0.0));
-                }
                 case "@getMajorClass" -> {
                     List<UndivertedStudent> majorList = serverDO.getMajorClass();
                     for(UndivertedStudent major : majorList) {
@@ -117,6 +113,19 @@ public class ServerHandleThread implements Runnable {
                 }
                 case "-clearStuInfoWithFill" -> {
                     serverDO.clearStuInfoWithFill();;
+                }
+                case "@diverge" -> {
+                    serverDO.diverge();
+                }
+                case "-clearStuInfoProcessed" -> {
+                    serverDO.clearStuInfoProcessed();
+                }
+                case "@getPSList" -> {
+                    List<ProcessedStudent> psList = serverDO.getPSList();
+                    for(ProcessedStudent ps : psList) {
+                        myStreamSocket.sendObject(ps);
+                    }
+                    myStreamSocket.sendObject(new ProcessedStudent(-1, "end", "", 0.0, ""));
                 }
             }
         }

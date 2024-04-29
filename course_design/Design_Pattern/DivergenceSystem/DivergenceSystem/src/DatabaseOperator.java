@@ -1,6 +1,5 @@
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DatabaseOperator {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -163,22 +162,6 @@ public class DatabaseOperator {
         }
     }
 
-    public String queryMajor() {
-        try {
-            StringBuilder sb = new StringBuilder();
-            String sql = "select name from major;";
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                sb.append(rs.getString("name"));
-                sb.append('+');
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            return sb.toString();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public List<UndivertedStudent> getMajorClass() {
         try {
             List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
@@ -233,11 +216,18 @@ public class DatabaseOperator {
 
     public void modifyUndivertedStudent(UndivertedStudent us) {
         try {
-
-            String sql = String.format("update stu_info_with_fill set is_fill = %b, major_1 = '%s', major_2 = '%s', major_3 = '%s' where number = %d",
-                    us.isFill, us.major_1, us.major_2, us.major_3, us.number);
+            String sql = "select code, name from major;";
+            rs = stmt.executeQuery(sql);
+            Map<String, Integer> mapMajorName2Code = new HashMap<>();
+            while (rs.next()) {
+                int code = rs.getInt("code");
+                String name = rs.getString("name");
+                mapMajorName2Code.put(name, code);
+            }
+            sql = String.format("update stu_info_with_fill set is_fill = %b, major_1 = '%d', major_2 = '%d', major_3 = '%d' where number = %d",
+                    us.isFill, mapMajorName2Code.get(us.major_1), mapMajorName2Code.get(us.major_2), mapMajorName2Code.get(us.major_3), us.number);
             if (!us.isFill) {
-                sql = String.format("update stu_info_with_fill set is_fill = false, major_1 = NULL, major_2 = NULL, major_3 = NULL where number = %d", us.number);
+                sql = String.format("update stu_info_with_fill set is_fill = false, major_1 = -1, major_2 = -1, major_3 = -1 where number = %d", us.number);
             }
             System.out.println(sql);
             stmt.executeUpdate(sql);
@@ -310,6 +300,8 @@ public class DatabaseOperator {
 
     public void diverge() {
         try {
+            Random random = new Random();
+
             String sql = "select * from stu_info_with_fill order by score DESC;";
             rs = stmt.executeQuery(sql);
             List<UndivertedStudent> usList = new ArrayList<>();
@@ -329,7 +321,134 @@ public class DatabaseOperator {
                 }
                 usList.add(us);
             }
+            //建立专业代码和名字的映射
+            sql = "select code, name from major;";
+            rs = stmt.executeQuery(sql);
+            Map<Integer, String> mapMajorCode2Name = new HashMap<>();
+            Map<String, Integer> mapMajorName2Code = new HashMap<>();
+            while (rs.next()) {
+                int code = rs.getInt("code");
+                String name = rs.getString("name");
+                mapMajorName2Code.put(name, code);
+                mapMajorCode2Name.put(code, name);
+            }
+            //建立班级和专业的映射
+            sql = "select * from class_list;";
+            rs = stmt.executeQuery(sql);
+            Map<Integer, Integer> mapClassCode2Number = new HashMap<>();
+            Map<Integer, Integer> mapMajorCode2Number = new HashMap<>();
+            Map<Integer, List<ProcessedStudent>> mapClassCode2PSList = new HashMap<>();
+            Map<Integer, List<Integer>> mapMajorCode2ClassList = new HashMap<>();
+            List<Integer> classList = new ArrayList<>();
+            while (rs.next()) {
+                int classCode = rs.getInt("code");
+                int majorCode = rs.getInt("major_code");
+                int student_number = rs.getInt("student_number");
+                classList.add(classCode);
+                mapClassCode2PSList.put(classCode, new ArrayList<>());
+                if (mapMajorCode2ClassList.get(majorCode) == null)
+                    mapMajorCode2ClassList.put(majorCode, new ArrayList<>());
+                mapMajorCode2ClassList.get(majorCode).add(classCode);
+//                mapClassCode2MajorCode.put(classCode, majorCode);
+                mapClassCode2Number.put(classCode, student_number);
+                mapMajorCode2Number.put(majorCode, mapMajorCode2Number.getOrDefault(majorCode, 0) + student_number);
+            }
+            //分流
+            List<ProcessedStudent> psList = new ArrayList<>();
+            for (UndivertedStudent us : usList) {
+                if (!us.isFill) {
+                    ProcessedStudent ps = new ProcessedStudent(us.number, us.name, us.gender, us.score, "NULL");
+                    psList.add(ps);
+                    continue;
+                }
+                int majorCode1 = Integer.parseInt(us.major_1);
+                int majorCode2 = Integer.parseInt(us.major_2);
+                int majorCode3 = Integer.parseInt(us.major_3);
+                ProcessedStudent ps = null;
+                if (mapMajorCode2Number.get(majorCode1) > 0) {
+                    mapMajorCode2Number.put(majorCode1, mapMajorCode2Number.get(majorCode1) - 1);
+                    ps = new ProcessedStudent(us.number, us.name, us.gender, us.score, mapMajorCode2Name.get(majorCode1));
+                } else if (mapMajorCode2Number.get(majorCode2) > 0) {
+                    mapMajorCode2Number.put(majorCode2, mapMajorCode2Number.get(majorCode2) - 1);
+                    ps = new ProcessedStudent(us.number, us.name, us.gender, us.score, mapMajorCode2Name.get(majorCode2));
+                } else if (mapMajorCode2Number.get(majorCode3) > 0) {
+                    mapMajorCode2Number.put(majorCode3, mapMajorCode2Number.get(majorCode3) - 1);
+                    ps = new ProcessedStudent(us.number, us.name, us.gender, us.score, mapMajorCode2Name.get(majorCode3));
+                } else {
+                    ps = new ProcessedStudent(us.number, us.name, us.gender, us.score, "NULL");
+                }
+                psList.add(ps);
+            }
 
+            for (ProcessedStudent ps : psList) {
+                if (ps.major.equals("NULL")) continue;
+                int majorCode = mapMajorName2Code.get(ps.major);
+                List<Integer> myClassList = mapMajorCode2ClassList.get(majorCode);
+                for (int myClass : myClassList)
+                    if (mapClassCode2Number.get(myClass) == 0)
+                        myClassList.remove(myClass);
+                int randIndex = random.nextInt(myClassList.size());
+
+                int myClass = myClassList.get(randIndex);
+                mapClassCode2PSList.get(myClass).add(ps);
+            }
+
+            for (int classCode : classList) {
+                List<ProcessedStudent> classPSList = mapClassCode2PSList.get(classCode);
+                for (ProcessedStudent ps : classPSList) {
+                    ps.classCode = classCode;
+                }
+            }
+
+            for (ProcessedStudent ps : psList) {
+                int majorCode = mapMajorName2Code.getOrDefault(ps.major, -1);
+                sql = "insert into stu_info_processed (number, name, gender, score, major, class_code)\n" +
+                        String.format("values (%d, '%s', '%s', '%f', '%d', %d);", ps.number, ps.name, ps.gender, ps.score, majorCode, ps.classCode);
+                stmt.executeUpdate(sql);
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void clearStuInfoProcessed() {
+        try {
+            String sql = "delete from stu_info_processed;";
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<ProcessedStudent> getPSList() {
+        try {
+            //建立专业代码和名字的映射
+            String sql = "select code, name from major;";
+            rs = stmt.executeQuery(sql);
+            Map<Integer, String> mapMajorCode2Name = new HashMap<>();
+            while (rs.next()) {
+                int code = rs.getInt("code");
+                String name = rs.getString("name");
+                mapMajorCode2Name.put(code, name);
+            }
+
+            sql = "select * from stu_info_processed;";
+            rs = stmt.executeQuery(sql);
+            List<ProcessedStudent> psList = new ArrayList<>();
+            while (rs.next()) {
+                int number = rs.getInt("number");
+                String name = rs.getString("name");
+                String gender = rs.getString("gender");
+                double score = rs.getDouble("score");
+                int major = rs.getInt("major");
+                int classCode = rs.getInt("class_code");
+
+                psList.add(new ProcessedStudent(number, name, gender, score, mapMajorCode2Name.getOrDefault(major, "NULL"), classCode));
+            }
+
+            return psList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

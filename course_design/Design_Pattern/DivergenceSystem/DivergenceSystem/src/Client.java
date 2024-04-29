@@ -16,7 +16,7 @@ public class Client {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@checkStudentPassword", "", 0.0));
         myStreamSocket.sendObject(new UndivertedStudent(number, password, "", 0.0));
         UndivertedStudent us = myStreamSocket.receiveObject();
-        if(us.number == -2) {
+        if (us.number == -2) {
             return us.name.equals("true");
         }
         return false;
@@ -26,7 +26,7 @@ public class Client {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@checkAdminPassword", "", 0.0));
         myStreamSocket.sendObject(new UndivertedStudent(number, password, "", 0.0));
         UndivertedStudent us = myStreamSocket.receiveObject();
-        if(us.number == -2) {
+        if (us.number == -2) {
             return us.name.equals("true");
         }
         return false;
@@ -41,9 +41,9 @@ public class Client {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@getUSList", "", 0.0));
         int flag = 0;
         List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
-        while(flag != -1) {
+        while (flag != -1) {
             UndivertedStudent us = myStreamSocket.receiveObject();
-            if(us.number != -1) ret.add(us);
+            if (us.number != -1) ret.add(us);
             flag = us.number;
         }
         return ret;
@@ -51,16 +51,10 @@ public class Client {
 
     public void addUSList(List<UndivertedStudent> usList) {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "+addUSList", "", 0.0));
-        for(UndivertedStudent us : usList) {
+        for (UndivertedStudent us : usList) {
             myStreamSocket.sendObject(us);
         }
         myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
-    }
-
-    public String[] getMajorList() {
-        myStreamSocket.sendObject(new UndivertedStudent(-2, "@getMajor", "", 0.0));
-        UndivertedStudent us = myStreamSocket.receiveObject();
-        return us.name.split("\\+");
     }
 
     public void modifyUndivertedStudent(UndivertedStudent us) {
@@ -72,9 +66,9 @@ public class Client {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@getMajorClass", "", 0.0));
         int flag = 0;
         List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
-        while(flag != -1) {
+        while (flag != -1) {
             UndivertedStudent us = myStreamSocket.receiveObject();
-            if(us.number != -1) ret.add(us);
+            if (us.number != -1) ret.add(us);
             flag = us.number;
         }
         return ret;
@@ -98,7 +92,7 @@ public class Client {
 
     public void saveClass(List<UndivertedStudent> classNums) {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@modifyClassNumber", "", 0.0));
-        for(UndivertedStudent us : classNums) {
+        for (UndivertedStudent us : classNums) {
             myStreamSocket.sendObject(us);
         }
         myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
@@ -108,9 +102,9 @@ public class Client {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@getClassList", "", 0.0));
         int flag = 0;
         List<UndivertedStudent> ret = new ArrayList<UndivertedStudent>();
-        while(flag != -1) {
+        while (flag != -1) {
             UndivertedStudent us = myStreamSocket.receiveObject();
-            if(us.number != -1) ret.add(us);
+            if (us.number != -1) ret.add(us);
             flag = us.number;
         }
         return ret;
@@ -118,5 +112,25 @@ public class Client {
 
     public void clearStuInfoWithFill() {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "-clearStuInfoWithFill", "", 0.0));
+    }
+
+    public void diverge() {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@diverge", "", 0.0));
+    }
+
+    public void clearStuInfoProcessed() {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "-clearStuInfoProcessed", "", 0.0));
+    }
+
+    public List<ProcessedStudent> getPSList() {
+        myStreamSocket.sendObject(new UndivertedStudent(-2, "@getPSList", "", 0.0));
+        int flag = 0;
+        List<ProcessedStudent> ret = new ArrayList<>();
+        while (flag != -1) {
+            ProcessedStudent us = myStreamSocket.receivePSObject();
+            if (us.number != -1) ret.add(us);
+            flag = us.number;
+        }
+        return ret;
     }
 }

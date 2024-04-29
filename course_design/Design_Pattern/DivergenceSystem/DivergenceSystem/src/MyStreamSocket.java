@@ -48,4 +48,22 @@ public class MyStreamSocket extends Socket {
             throw new RuntimeException(e);
         }
     }
+
+    public void sendObject(ProcessedStudent us) {
+        try {
+            oos.writeObject(us);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ProcessedStudent receivePSObject() {
+        try {
+            return (ProcessedStudent) ois.readObject();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

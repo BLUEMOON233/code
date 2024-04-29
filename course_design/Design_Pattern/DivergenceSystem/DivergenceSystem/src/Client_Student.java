@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 /*
  * Created by JFormDesigner on Fri Apr 19 22:44:35 CST 2024
@@ -36,28 +37,29 @@ public class Client_Student extends JFrame {
         comboBox1.addItem("NULL");
         comboBox2.addItem("NULL");
         comboBox3.addItem("NULL");
-        String[] majorList = client.getMajorList();
-        for (String major : majorList) {
-            comboBox1.addItem(major);
-            comboBox2.addItem(major);
-            comboBox3.addItem(major);
+        List<UndivertedStudent> majorList = client.getMajorClass();
+        for (UndivertedStudent major : majorList) {
+            comboBox1.addItem(major.name);
+            comboBox2.addItem(major.name);
+            comboBox3.addItem(major.name);
         }
+
         comboBox1.setSelectedItem("NULL");
-        for (String major : majorList)
-            if (major.equals(us.major_1)) {
-                comboBox1.setSelectedItem(major);
+        for (UndivertedStudent major : majorList)
+            if (Integer.parseInt(us.major_1) == major.number) {
+                comboBox1.setSelectedItem(major.name);
                 break;
             }
         comboBox2.setSelectedItem("NULL");
-        for (String major : majorList)
-            if (major.equals(us.major_2)) {
-                comboBox2.setSelectedItem(major);
+        for (UndivertedStudent major : majorList)
+            if (Integer.parseInt(us.major_2) == major.number) {
+                comboBox2.setSelectedItem(major.name);
                 break;
             }
         comboBox3.setSelectedItem("NULL");
-        for (String major : majorList)
-            if (major.equals(us.major_3)) {
-                comboBox3.setSelectedItem(major);
+        for (UndivertedStudent major : majorList)
+            if (Integer.parseInt(us.major_3) == major.number) {
+                comboBox3.setSelectedItem(major.name);
                 break;
             }
 

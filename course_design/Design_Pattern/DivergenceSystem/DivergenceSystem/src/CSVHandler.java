@@ -37,7 +37,7 @@ public class CSVHandler {
     }
 
     // 导出CSV文件
-    public static void exportCSV(String csvFilePath, List<UndivertedStudent> usList) {
+    public static void exportCSV(List<UndivertedStudent> usList, String csvFilePath) {
         try {
             CsvWriter csvWriter = new CsvWriter(csvFilePath, ',', StandardCharsets.UTF_8);
             csvWriter.writeRecord(new String[]{"number", "name", "gender", "score", "is_fill", "major_1", "major_2", "major_3"});
@@ -45,6 +45,21 @@ public class CSVHandler {
             for (UndivertedStudent us : usList) {
                 String[] contents = {String.valueOf(us.number), us.name, us.gender, String.valueOf(us.score),
                         String.valueOf(us.isFill ? 1 : 0), String.valueOf(us.isFill ? us.major_1 : -1), String.valueOf(us.isFill ? us.major_2 : -1), String.valueOf(us.isFill ? us.major_3 : -1)};
+                csvWriter.writeRecord(contents);
+            }
+            csvWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void exportCSV(String csvFilePath, List<ProcessedStudent> psList) {
+        try {
+            CsvWriter csvWriter = new CsvWriter(csvFilePath, ',', StandardCharsets.UTF_8);
+            csvWriter.writeRecord(new String[]{"number", "name", "gender", "score", "major", "class_code"});
+
+            for (ProcessedStudent ps : psList) {
+                String[] contents = {String.valueOf(ps.number), ps.name, ps.gender, String.valueOf(ps.score), ps.major, String.valueOf(ps.classCode)};
                 csvWriter.writeRecord(contents);
             }
             csvWriter.close();
