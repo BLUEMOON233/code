@@ -6,12 +6,16 @@ typedef long long LL;
 void solve() {
     LL n, m;
     cin >> n >> m;
-    LL rs = 0;
-    rep(k, 2, max(n, m)) {
-        int a = n, b = m;
-        rs += min(2 * a, b) / k;
-        swap(a, b);
-        rs += min(2 * a, b) / k;
+    LL rs = n;
+    rep(b, 2, m) {
+        if (b > n) break;
+        LL l = 0, r = n;
+        while (l < r) {
+            LL mid = (l + r) >> 1;
+            if (mid * b * b - b > n) r = mid;
+            else l = mid + 1;
+        }
+        rs += l - 1;
     }
     cout << rs << '\n';
 }

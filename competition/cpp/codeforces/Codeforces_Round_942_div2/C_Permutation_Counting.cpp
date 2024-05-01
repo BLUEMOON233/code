@@ -20,10 +20,8 @@ void solve() {
     LL l = 0, r = 1e18;
     while (l < r) {
         LL mid = (l + r) >> 1;
-        if (check(mid))
-            l = mid + 1;
-        else
-            r = mid;
+        if (check(mid)) l = mid + 1;
+        else r = mid;
     }
     int ex = 0;
     rep(i, 1, n) if (a[i] > l - 1) ex++;
