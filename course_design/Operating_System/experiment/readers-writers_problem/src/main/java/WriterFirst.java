@@ -1,3 +1,5 @@
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Semaphore;
 
 public class WriterFirst {
@@ -10,14 +12,30 @@ public class WriterFirst {
     static int readerCount = 0;
     static int writerCount = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         //readers:
-        WriterFirst.Reader reader_1 = new WriterFirst.Reader(3, 5);
-        WriterFirst.Reader reader_2 = new WriterFirst.Reader(5, 2);
-        WriterFirst.Reader reader_3 = new WriterFirst.Reader(6, 5);
+        WriterFirst.Reader reader_1 = new WriterFirst.Reader(0, 5);
+        WriterFirst.Reader reader_2 = new WriterFirst.Reader(2, 2);
+        WriterFirst.Reader reader_3 = new WriterFirst.Reader(3, 5);
         //writers:
-        WriterFirst.Writer writer_1 = new WriterFirst.Writer(4, 5);
-        WriterFirst.Writer writer_2 = new WriterFirst.Writer(5, 3);
+        WriterFirst.Writer writer_1 = new WriterFirst.Writer(1, 5);
+        WriterFirst.Writer writer_2 = new WriterFirst.Writer(2, 3);
+        //timer:
+        final int processEnd = 18;
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int seconds = 0;
+            @Override
+            public void run() {
+                if(seconds == processEnd) {
+                    timer.cancel();
+                }
+                System.out.printf("当前为第%2d秒%n", seconds);
+                seconds++;
+            }
+        }, 0, 1000);
+        Thread.sleep(100);
+
         //process:
         reader_1.start();
         writer_1.start();
