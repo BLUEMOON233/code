@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-// #pragma comment(lib, "ws2_32.lib")
+ #pragma comment(lib, "ws2_32.lib")
 
 #define DEFAULT_PORT 5050
 

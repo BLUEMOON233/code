@@ -3,12 +3,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-// #pragma comment(lib, "ws2_32.lib")
+ #pragma comment(lib, "ws2_32.lib")
 
 #define DEFAULT_PORT 5050
 #define DATA_BUFFER 1024
 
-int main(int argc, char *argv[]) {
+int main() {
 	WSADATA wsaData;
 	SOCKET socketClient;
 	int iPort = DEFAULT_PORT;
@@ -16,10 +16,6 @@ int main(int argc, char *argv[]) {
 	int iLen;
 	char buffer[DATA_BUFFER];
 	struct sockaddr_in serverAddress;
-	if (argc < 2) {
-		printf("Usage:client [server IP address]\n");
-		return 0;
-	}
 	memset(buffer, 0, sizeof(buffer));
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
 		printf("Failed to load Winsock.\n");
@@ -27,7 +23,7 @@ int main(int argc, char *argv[]) {
 	}
 	serverAddress.sin_family = AF_INET;
 	serverAddress.sin_port = htons(iPort);
-	serverAddress.sin_addr.s_addr = inet_addr(argv[1]);
+	serverAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
 	socketClient = socket(AF_INET, SOCK_STREAM, 0);
 	if (socketClient == INVALID_SOCKET) {
 		printf("socket() Failed: %d\n", WSAGetLastError());
