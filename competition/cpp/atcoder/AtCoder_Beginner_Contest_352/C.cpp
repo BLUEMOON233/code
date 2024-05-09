@@ -4,10 +4,15 @@ typedef long long LL;
 #define rep(i, j, k) for(int i = int(j); i <= int(k); i++)
 
 void solve() {
-	int n, x, y, z;
-	cin >> n >> x >> y >> z;
-	if (x > y) swap(x, y);
-	cout << ((x <= z && z <= y) ? "YES\n" : "NO\n");
+	int n;
+	cin >> n;
+	vector<int> a(n + 1), b(n + 1);
+	rep(i, 1, n) cin >> a[i] >> b[i];
+	rep(i, 1, n) b[i] -= a[i];
+	rep(i, 1, n) b[i] = max(b[i], b[i - 1]);
+	LL sum = 0;
+	rep(i, 1, n) sum += a[i];
+	cout << sum + b[n] << '\n';
 }
 
 int main() {
