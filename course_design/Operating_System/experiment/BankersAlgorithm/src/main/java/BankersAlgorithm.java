@@ -1,8 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.function.Function;
+import java.util.Scanner;;
 
 public class BankersAlgorithm {
     int N; //进程数
@@ -48,13 +47,6 @@ public class BankersAlgorithm {
         for (int i = 0; i <= N - 1; i++)
             for (int j = 0; j <= M - 1; j++)
                 need[i][j] = max[i][j] - allocation[i][j];
-
-        System.out.println("输入发出请求向量的进程编号：");
-        requestID = scanner.nextInt();
-
-        System.out.println("输入请求向量：");
-        for (int i = 0; i <= M - 1; i++)
-            request[i] = scanner.nextInt();
         System.out.println("======================");
     }
 
@@ -62,13 +54,16 @@ public class BankersAlgorithm {
         for (int i = 0; i <= M - 1; i++) {
             if (request[i] > need[requestID][i]) {
                 System.out.println("发出请求的进程申请资源量大于该进程宣布的最大值，算法出错");
+                System.out.println("======================");
                 return false;
             }
             if (request[i] > available[i]) {
                 System.out.println("当前无足够资源，需等待");
+                System.out.println("======================");
                 return false;
             }
         }
+        System.out.println("======================");
         return true;
     }
 
@@ -143,8 +138,15 @@ public class BankersAlgorithm {
     }
 
     void run() {
-        if (!checkIsLegal()) {
-            return;
+        boolean flag = false;
+        Scanner scanner = new Scanner(System.in);
+        while (!flag) {
+            System.out.println("输入发出请求向量的进程编号：");
+            requestID = scanner.nextInt();
+            System.out.println("输入请求向量：");
+            for (int i = 0; i <= M - 1; i++)
+                request[i] = scanner.nextInt();
+            flag = checkIsLegal();
         }
         for (int i = 0; i <= M - 1; i++) {
             available[i] -= request[i];
@@ -155,7 +157,7 @@ public class BankersAlgorithm {
     }
 
     public static void main(String[] args) {
-        BankersAlgorithm bankersAlgorithm = new BankersAlgorithm();
+        new BankersAlgorithm();
     }
 }
 
