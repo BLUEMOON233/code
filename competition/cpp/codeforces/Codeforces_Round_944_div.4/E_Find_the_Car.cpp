@@ -19,8 +19,7 @@ void solve() {
             cout << b[p] << ' ';
             continue;
         }
-        double v = ((double)a[p] - a[p - 1]) / (b[p] - b[p - 1]);
-        cout << LL((x - a[p - 1]) / v + b[p - 1]) << ' ';
+        cout << LL((x - a[p - 1]) * (b[p] - b[p - 1]) / (a[p] - a[p - 1]) + b[p - 1]) << ' ';
     }
     cout << '\n';
 }
