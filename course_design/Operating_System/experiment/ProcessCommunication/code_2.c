@@ -6,42 +6,37 @@
 #include<sys/types.h>
 #include<sys/ipc.h>
 #include<sys/msg.h>
+#include<sys/shm.h>
 #include<time.h>
 
 #define KEY 1122
 
 clock_t start, end;
 
-struct msgform {
-	long mtype;
-	char mtext[1024];
-};
-
-
 void server() {
-	int msgqid = msgget(KEY, IPC_CREAT | 0666);
-	struct msgform msg;
+	int shmid = shmget(KEY, 1024, IPC_CREAT | 0666);
+	int *addr = (int *)shmat(shmid, 0, 0);
 	do {
-		msgrcv(msgqid, &msg, sizeof(msg.mtext), 0, 0);
-		printf("(server)received. message: %s\n", msg.mtext);
-	} while (msg.mtype != 1);
-	msgctl(msgqid, IPC_RMID, 0);
+		*addr = -1;
+		while(*addr == -1);
+		printf("(server)received: %d\n", *addr);
+	} while(*addr != 1);
+	shmctl(shmid, IPC_RMID, 0);
 	
 	end = clock();
 	double total_time = (double)(end - start) / CLOCKS_PER_SEC;
-	printf("Total time: %lf\n", total_time);
+	printf("Total time: %f\n", total_time);
 	
 	exit(0);
 }
 
 void client() {
-	int msgqid = msgget(KEY, 0666);
-	for (int i = 10; i >= 1; i--) {
-		struct msgform msg;
-		msg.mtype = i;
-		strcpy(msg.mtext, "hello world!");
-		printf("(client)sent\n");
-		msgsnd(msgqid, &msg, sizeof(msg.mtext), 0);
+	int shmid = shmget(KEY, 1024, 0666);
+	int *addr = (int *)shmat(shmid, 0, 0);
+	for(int i = 10; i >= 1; i--) {
+		while(*addr != -1);
+		printf("(client)sent: %d\n", i);
+		*addr = i;
 	}
 	exit(0);
 }
@@ -58,7 +53,7 @@ int main() {
 		return 0;
 	} else if (pid_1 == 0) {
 		server();
-	} else if (pid_2 == 0) {
+	} else if ( pid_2 == 0) {
 		client();
 	} else {
 		wait(0);
