@@ -34,16 +34,15 @@ public class Client_Student extends JFrame {
         comboBox1.removeAllItems();
         comboBox2.removeAllItems();
         comboBox3.removeAllItems();
-        comboBox1.addItem("NULL");
-        comboBox2.addItem("NULL");
-        comboBox3.addItem("NULL");
+//        comboBox1.addItem("NULL");
+//        comboBox2.addItem("NULL");
+//        comboBox3.addItem("NULL");
         List<UndivertedStudent> majorList = client.getMajorClass();
         for (UndivertedStudent major : majorList) {
             comboBox1.addItem(major.name);
             comboBox2.addItem(major.name);
             comboBox3.addItem(major.name);
         }
-
         comboBox1.setSelectedItem("NULL");
         for (UndivertedStudent major : majorList)
             if (Integer.parseInt(us.major_1) == major.number) {
@@ -101,91 +100,100 @@ public class Client_Student extends JFrame {
 
         //---- label1 ----
         label1.setText(bundle.getString("label1.text_3"));
+        label1.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label1);
-        label1.setBounds(135, 85, 105, 45);
+        label1.setBounds(80, 85, 105, 45);
 
         //---- label2 ----
         label2.setText(bundle.getString("label2.text_3"));
+        label2.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label2);
-        label2.setBounds(135, 130, 105, 45);
+        label2.setBounds(80, 130, 105, 45);
 
         //---- label3 ----
         label3.setText(bundle.getString("label3.text_3"));
+        label3.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label3);
-        label3.setBounds(135, 175, 105, 45);
+        label3.setBounds(80, 175, 105, 45);
 
         //---- label4 ----
         label4.setText(bundle.getString("label4.text"));
+        label4.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label4);
-        label4.setBounds(135, 220, 105, 45);
+        label4.setBounds(80, 220, 165, 45);
 
         //---- label5 ----
         label5.setText(bundle.getString("label5.text"));
+        label5.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label5);
-        label5.setBounds(135, 270, 105, 45);
+        label5.setBounds(80, 270, 105, 45);
 
         //---- label6 ----
         label6.setText(bundle.getString("label6.text"));
+        label6.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label6);
-        label6.setBounds(135, 320, 105, 45);
+        label6.setBounds(80, 320, 105, 45);
 
         //---- label7 ----
         label7.setText(bundle.getString("label7.text"));
+        label7.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label7);
-        label7.setBounds(135, 370, 105, 45);
+        label7.setBounds(80, 370, 105, 45);
 
         //---- button1 ----
         button1.setText(bundle.getString("button1.text_2"));
+        button1.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         button1.addActionListener(e -> button1(e));
         contentPane.add(button1);
-        button1.setBounds(340, 505, 145, 60);
+        button1.setBounds(215, 435, 145, 60);
+
+        //---- comboBox1 ----
+        comboBox1.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(comboBox1);
-        comboBox1.setBounds(225, 275, 240, comboBox1.getPreferredSize().height);
+        comboBox1.setBounds(180, 275, 330, 38);
+
+        //---- comboBox2 ----
+        comboBox2.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(comboBox2);
-        comboBox2.setBounds(225, 325, 240, 38);
+        comboBox2.setBounds(180, 325, 330, 38);
+
+        //---- comboBox3 ----
+        comboBox3.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(comboBox3);
-        comboBox3.setBounds(225, 375, 240, 38);
+        comboBox3.setBounds(180, 375, 330, 38);
 
         //---- label8 ----
         label8.setText(bundle.getString("label8.text"));
+        label8.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", label8.getFont().getStyle(), 25));
         contentPane.add(label8);
-        label8.setBounds(295, 30, 245, 30);
+        label8.setBounds(145, 15, 310, 50);
 
         //---- LB_name ----
         LB_name.setText(bundle.getString("LB_name.text"));
+        LB_name.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(LB_name);
         LB_name.setBounds(285, 90, 190, 40);
 
         //---- LB_number ----
         LB_number.setText(bundle.getString("LB_number.text"));
+        LB_number.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(LB_number);
         LB_number.setBounds(285, 130, 190, 40);
 
         //---- LB_gender ----
         LB_gender.setText(bundle.getString("LB_gender.text"));
+        LB_gender.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(LB_gender);
-        LB_gender.setBounds(280, 175, 190, 40);
+        LB_gender.setBounds(285, 175, 190, 40);
 
         //---- LB_isFill ----
         LB_isFill.setText(bundle.getString("LB_isFill.text"));
+        LB_isFill.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(LB_isFill);
-        LB_isFill.setBounds(275, 220, 190, 40);
+        LB_isFill.setBounds(285, 220, 190, 40);
 
-        {
-            // compute preferred size
-            Dimension preferredSize = new Dimension();
-            for(int i = 0; i < contentPane.getComponentCount(); i++) {
-                Rectangle bounds = contentPane.getComponent(i).getBounds();
-                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-            }
-            Insets insets = contentPane.getInsets();
-            preferredSize.width += insets.right;
-            preferredSize.height += insets.bottom;
-            contentPane.setMinimumSize(preferredSize);
-            contentPane.setPreferredSize(preferredSize);
-        }
-        setSize(826, 657);
+        contentPane.setPreferredSize(new Dimension(466, 460));
+        setSize(582, 575);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }

@@ -8,9 +8,9 @@ public class UndivertedStudent implements Serializable {
     public String gender = null;
     public double score = 0.0;
     public boolean isFill = false;
-    public String major_1 = null;
-    public String major_2 = null;
-    public String major_3 = null;
+    public String major_1 = "-1";
+    public String major_2 = "-1";
+    public String major_3 = "-1";
 
     UndivertedStudent(int number, String name, String gender, double score) {
         this.number = number;

@@ -219,7 +219,7 @@ public class Client_Teacher extends JFrame {
             int val = mapClassCode2Number.get(singleClass.number).getValue();
             classNums.add(new UndivertedStudent(singleClass.number, String.valueOf(val), "", 0.0));
         }
-        client.saveClass(classNums);
+        client.modifyClass(classNums);
     }
 
     private void BT_start(ActionEvent e) {

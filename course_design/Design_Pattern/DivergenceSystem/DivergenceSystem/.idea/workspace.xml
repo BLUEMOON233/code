@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1624d340-01f4-401d-9100-94cc213ef98f" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/90da5788-50b1-4a70-aaf9-a5978f508ca8.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/90da5788-50b1-4a70-aaf9-a5978f508ca8.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_Student.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_Student.jfd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_Student.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_Student.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_StudentLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_StudentLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_StudentLogin.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_StudentLogin.jfd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client_Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client_Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServerHandleThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServerHandleThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UndivertedStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UndivertedStudent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,51 +45,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/develop/code/course_design/Design_Pattern/DivergenceSystem/DivergenceSystem&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;库&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;jformdesigner&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;应用程序.Client_Teacher.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Server.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/develop/code/course_design/Design_Pattern/DivergenceSystem/DivergenceSystem",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "库",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.Client_Teacher.executor": "Run",
+    "应用程序.Server.executor": "Run"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
-  <component name="RunManager" selected="应用程序.Client_Teacher">
-    <configuration name="CSVHandler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CSVHandler" />
-      <module name="DivergenceSystem" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+}]]></component>
+  <component name="RunManager" selected="应用程序.Client_TeacherLogin">
     <configuration name="Client_StudentLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client_StudentLogin" />
-      <module name="DivergenceSystem" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Client_Teacher (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Client_Teacher" />
       <module name="DivergenceSystem" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -91,6 +88,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Client_TeacherLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Client_TeacherLogin" />
+      <module name="DivergenceSystem" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DatabaseOperator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DatabaseOperator" />
       <module name="DivergenceSystem" />
@@ -98,13 +102,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server" />
+      <module name="DivergenceSystem" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.Client_Teacher" />
+        <item itemvalue="应用程序.Client_TeacherLogin" />
+        <item itemvalue="应用程序.Server" />
         <item itemvalue="应用程序.Client_StudentLogin" />
+        <item itemvalue="应用程序.Client_Teacher" />
         <item itemvalue="应用程序.DatabaseOperator" />
-        <item itemvalue="应用程序.CSVHandler" />
-        <item itemvalue="应用程序.Client_Teacher (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -130,6 +141,7 @@
       <workItem from="1714308905271" duration="8582000" />
       <workItem from="1714376075407" duration="14592000" />
       <workItem from="1715000970051" duration="10000" />
+      <workItem from="1715776443990" duration="3290000" />
     </task>
     <servers />
   </component>

@@ -54,49 +54,39 @@ public class Client_StudentLogin extends JFrame {
 
         //---- label1 ----
         label1.setText(bundle.getString("label1.text"));
+        label1.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 25));
         contentPane.add(label1);
-        label1.setBounds(new Rectangle(new Point(200, 20), label1.getPreferredSize()));
+        label1.setBounds(180, 20, 155, 45);
 
         //---- label2 ----
         label2.setText(bundle.getString("label2.text"));
+        label2.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label2);
-        label2.setBounds(new Rectangle(new Point(65, 100), label2.getPreferredSize()));
+        label2.setBounds(110, 90, 70, 30);
 
         //---- label3 ----
         label3.setText(bundle.getString("label3.text"));
+        label3.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label3);
-        label3.setBounds(new Rectangle(new Point(65, 135), label3.getPreferredSize()));
+        label3.setBounds(110, 140, 70, 30);
         contentPane.add(textField1);
-        textField1.setBounds(120, 85, 235, textField1.getPreferredSize().height);
+        textField1.setBounds(195, 85, 235, 40);
         contentPane.add(passwordField1);
-        passwordField1.setBounds(115, 145, 235, passwordField1.getPreferredSize().height);
+        passwordField1.setBounds(195, 140, 235, 40);
 
         //---- button1 ----
         button1.setText(bundle.getString("button1.text"));
         button1.addActionListener(e -> button1(e));
         contentPane.add(button1);
-        button1.setBounds(new Rectangle(new Point(95, 240), button1.getPreferredSize()));
+        button1.setBounds(85, 220, 125, 50);
 
         //---- button2 ----
         button2.setText(bundle.getString("button2.text"));
         contentPane.add(button2);
-        button2.setBounds(new Rectangle(new Point(300, 250), button2.getPreferredSize()));
+        button2.setBounds(265, 220, 125, 50);
 
-        {
-            // compute preferred size
-            Dimension preferredSize = new Dimension();
-            for(int i = 0; i < contentPane.getComponentCount(); i++) {
-                Rectangle bounds = contentPane.getComponent(i).getBounds();
-                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-            }
-            Insets insets = contentPane.getInsets();
-            preferredSize.width += insets.right;
-            preferredSize.height += insets.bottom;
-            contentPane.setMinimumSize(preferredSize);
-            contentPane.setPreferredSize(preferredSize);
-        }
-        pack();
+        contentPane.setPreferredSize(new Dimension(400, 300));
+        setSize(500, 375);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }

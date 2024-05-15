@@ -35,23 +35,7 @@ public class ServerHandleThread implements Runnable {
                     UndivertedStudent us = myStreamSocket.receiveObject();
                     serverDO.delUndivertedStudent(us.number);
                 }
-                case "@getUSList" -> {
-                    List<UndivertedStudent> list = serverDO.getUSList();
-                    for(UndivertedStudent us : list) {
-                        myStreamSocket.sendObject(us);
-                    }
-                    myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
-                }
-                case "+addUSList" -> {
-                    int flag = 0;
-                    List<UndivertedStudent> usList = new ArrayList<UndivertedStudent>();
-                    while(flag != -1) {
-                        UndivertedStudent us = myStreamSocket.receiveObject();
-                        if(us.number != -1) usList.add(us);
-                        flag = us.number;
-                    }
-                    serverDO.addUSList(usList);
-                }
+                // loginCheck:
                 case "@checkStudentPassword" -> {
                     UndivertedStudent us = myStreamSocket.receiveObject();
                     String password = serverDO.queryStudentPassword(us.number);
@@ -64,22 +48,45 @@ public class ServerHandleThread implements Runnable {
                     UndivertedStudent ret = new UndivertedStudent(-2, (password.equals(us.name)) ? "true" : "false", "", 0.0);
                     myStreamSocket.sendObject(ret);
                 }
+                // US: [add del query modify]
                 case "@getUS" -> {
                     UndivertedStudent ret = serverDO.getUndivertedStudent(Integer.parseInt(op.gender));
                     myStreamSocket.sendObject(ret);
                 }
+                case "@getUSList" -> {
+                    List<UndivertedStudent> list = serverDO.getUSList();
+                    for(UndivertedStudent us : list) {
+                        myStreamSocket.sendObject(us);
+                    }
+                    myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
+                }
+                case "@addUSList" -> {
+                    int flag = 0;
+                    List<UndivertedStudent> usList = new ArrayList<UndivertedStudent>();
+                    while(flag != -1) {
+                        UndivertedStudent us = myStreamSocket.receiveObject();
+                        if(us.number != -1) usList.add(us);
+                        flag = us.number;
+                    }
+                    serverDO.addUSList(usList);
+                }
+                case "@modifyUS" -> {
+                    UndivertedStudent us = myStreamSocket.receiveObject();
+                    serverDO.modifyUndivertedStudent(us);
+                }
+                //major table: [add del query modify]
                 case "@getMajorClass" -> {
                     List<UndivertedStudent> majorList = serverDO.getMajorClass();
                     for(UndivertedStudent major : majorList) {
                         myStreamSocket.sendObject(major);
                     }
-                    myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
+                    myStreamSocket.sendObject(new UndivertedStudent(-2, "end", "", 0.0));
                 }
-                case "+addMajor" -> {
+                case "@addMajor" -> {
                     System.out.println(op);
                     serverDO.addMajor(op.gender);
                 }
-                case "-delMajor" -> {
+                case "@delMajor" -> {
                     serverDO.delMajor(Integer.parseInt(op.gender));
                 }
                 case "@modifyMajor" -> {
@@ -87,10 +94,7 @@ public class ServerHandleThread implements Runnable {
                     int code = Integer.parseInt(value[0]), class_number = Integer.parseInt(value[1]);
                     serverDO.modifyMajor(code, class_number);
                 }
-                case "@modifyUS" -> {
-                    UndivertedStudent us = myStreamSocket.receiveObject();
-                    serverDO.modifyUndivertedStudent(us);
-                }
+                //class table: [add del query modify]
                 case "@initClass" -> {
                     serverDO.initClass();
                 }
@@ -111,12 +115,11 @@ public class ServerHandleThread implements Runnable {
                     }
                     myStreamSocket.sendObject(new UndivertedStudent(-1, "end", "", 0.0));
                 }
-                case "-clearStuInfoWithFill" -> {
+                // StuInfoWithFill table
+                case "@clearStuInfoWithFill" -> {
                     serverDO.clearStuInfoWithFill();;
                 }
-                case "@diverge" -> {
-                    serverDO.diverge();
-                }
+                // StuInfoProcessed table
                 case "-clearStuInfoProcessed" -> {
                     serverDO.clearStuInfoProcessed();
                 }
@@ -127,6 +130,12 @@ public class ServerHandleThread implements Runnable {
                     }
                     myStreamSocket.sendObject(new ProcessedStudent(-1, "end", "", 0.0, ""));
                 }
+
+                case "@diverge" -> {
+                    serverDO.diverge();
+                }
+
+
             }
         }
         try {
