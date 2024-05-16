@@ -10,6 +10,7 @@ new FormModel {
 			"$sizePolicy": 1
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "tabbedPane1"
+				"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
 					"autoSize": false
 				} ) {
@@ -17,94 +18,102 @@ new FormModel {
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "majorInfo"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 50
-						"y": 80
+						"x": 30
+						"y": 75
 						"width": 400
 						"height": 195
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_addMajor"
 						"text": "添加专业"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_addMajor", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 50
-						"y": 20
+						"x": 25
+						"y": 15
 						"width": 130
 						"height": 55
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_delMajor"
 						"text": "删除专业"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_delMajor", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 130
 						"height": 55
-						"x": 185
-						"y": 20
+						"x": 160
+						"y": 15
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_saveMajor"
 						"text": "保存专业"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_saveMajor", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"width": 130
 						"height": 55
-						"x": 320
-						"y": 20
+						"x": 300
+						"y": 15
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "classInfo"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 50
-						"y": 285
+						"x": 30
+						"y": 275
 						"width": 400
-						"height": 400
+						"height": 440
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_delData"
 						"text": "清除数据"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_delData", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 155
-						"y": 705
-						"width": 95
-						"height": 45
+						"x": 125
+						"y": 720
+						"width": 90
+						"height": 50
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_importData"
 						"text": "导入数据"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_importData", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 95
-						"height": 45
-						"x": 255
-						"y": 705
+						"width": 90
+						"height": 50
+						"x": 225
+						"y": 720
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_exportData"
 						"text": "导出数据"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"width": 95
-						"height": 45
-						"x": 355
-						"y": 705
+						"width": 90
+						"height": 50
+						"x": 325
+						"y": 720
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "stuFillInfo"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 475
-						"y": 30
-						"width": 635
-						"height": 730
+						"x": 445
+						"y": 20
+						"width": 675
+						"height": 750
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_saveClass"
 						"text": "保存班级"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 14 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_saveClass", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 45
-						"y": 705
-						"height": 45
+						"x": 25
+						"y": 720
+						"height": 50
+						"width": 90
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "设置"
@@ -121,10 +130,13 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_exportResult"
 						"text": "导出数据"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_exportResult", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 130
+						"x": 150
 						"y": 15
+						"width": 120
+						"height": 40
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "TP_result"
@@ -137,18 +149,24 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_start"
 						"text": "开始分流"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_start", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 20
 						"y": 15
+						"width": 120
+						"height": 40
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "BT_delResult"
 						"text": "清空分流信息"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_delResult", true ) )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 240
+						"x": 280
 						"y": 15
+						"width": 160
+						"height": 40
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "学生分流信息"

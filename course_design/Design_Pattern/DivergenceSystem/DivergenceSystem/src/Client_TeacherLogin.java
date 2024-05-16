@@ -1,3 +1,5 @@
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -50,28 +52,32 @@ public class Client_TeacherLogin extends JFrame {
 
         //---- BT_login ----
         BT_login.setText("\u767b\u5f55");
+        BT_login.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         BT_login.addActionListener(e -> BT_login(e));
         contentPane.add(BT_login);
-        BT_login.setBounds(190, 250, 130, 55);
+        BT_login.setBounds(160, 225, 145, 50);
 
         //---- label1 ----
         label1.setText("\u6559\u5e08\u8d26\u53f7\uff1a");
+        label1.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label1);
-        label1.setBounds(45, 70, 85, 50);
+        label1.setBounds(45, 90, 105, 50);
 
         //---- label2 ----
-        label2.setText("\u5bc6       \u7801\uff1a");
+        label2.setText("\u5bc6    \u7801\uff1a");
+        label2.setFont(new Font("\u65b0\u5b8b\u4f53", Font.PLAIN, 20));
         contentPane.add(label2);
-        label2.setBounds(45, 120, 85, 50);
+        label2.setBounds(45, 145, 130, 50);
         contentPane.add(passwordField1);
-        passwordField1.setBounds(145, 130, 185, passwordField1.getPreferredSize().height);
+        passwordField1.setBounds(155, 150, 220, 40);
         contentPane.add(textField1);
-        textField1.setBounds(145, 85, 175, textField1.getPreferredSize().height);
+        textField1.setBounds(155, 95, 220, 40);
 
         //---- label3 ----
         label3.setText("\u6559\u5e08\u7aef\u767b\u5f55");
+        label3.setFont(new Font("\u9ed1\u4f53", Font.PLAIN, 26));
         contentPane.add(label3);
-        label3.setBounds(120, 30, 205, 35);
+        label3.setBounds(175, 35, 150, 35);
 
         {
             // compute preferred size
@@ -103,6 +109,7 @@ public class Client_TeacherLogin extends JFrame {
 
     public static void main(String[] args){
         try {
+            FlatMacLightLaf.setup();
             new Client_TeacherLogin().setVisible(true);
         } catch (IOException e) {
             e.printStackTrace();

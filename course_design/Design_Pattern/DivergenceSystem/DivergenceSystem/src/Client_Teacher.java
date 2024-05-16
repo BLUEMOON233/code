@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 /*
  * Created by JFormDesigner on Wed Apr 24 22:09:42 CST 2024
  */
@@ -71,6 +73,7 @@ public class Client_Teacher extends JFrame {
 
         List<UndivertedStudent> majorList = client.getMajorClass();
         for (UndivertedStudent major : majorList) {
+            if(major.number == -1) continue;
 //            System.out.println(major);
             JPanel row = new JPanel(new GridBagLayout());
             row.setPreferredSize(new Dimension(100, 50));
@@ -233,8 +236,18 @@ public class Client_Teacher extends JFrame {
     }
 
     private void BT_exportResult(ActionEvent e) {
+        String csvFilePath = "";
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            csvFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+        } else {
+            return;
+        }
         List<ProcessedStudent> psList = client.getPSList();
-        CSVHandler.exportCSV("../export_data.csv", psList);
+        CSVHandler.exportCSV(csvFilePath + "\\export_data.csv", psList);
     }
 
     private void initComponents() {
@@ -264,57 +277,65 @@ public class Client_Teacher extends JFrame {
 
         //======== tabbedPane1 ========
         {
+            tabbedPane1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
 
             //======== TP_settings ========
             {
                 TP_settings.setLayout(null);
                 TP_settings.add(majorInfo);
-                majorInfo.setBounds(50, 80, 400, 195);
+                majorInfo.setBounds(30, 75, 400, 195);
 
                 //---- BT_addMajor ----
                 BT_addMajor.setText("\u6dfb\u52a0\u4e13\u4e1a");
+                BT_addMajor.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                 BT_addMajor.addActionListener(e -> BT_addMajor(e));
                 TP_settings.add(BT_addMajor);
-                BT_addMajor.setBounds(50, 20, 130, 55);
+                BT_addMajor.setBounds(25, 15, 130, 55);
 
                 //---- BT_delMajor ----
                 BT_delMajor.setText("\u5220\u9664\u4e13\u4e1a");
+                BT_delMajor.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                 BT_delMajor.addActionListener(e -> BT_delMajor(e));
                 TP_settings.add(BT_delMajor);
-                BT_delMajor.setBounds(185, 20, 130, 55);
+                BT_delMajor.setBounds(160, 15, 130, 55);
 
                 //---- BT_saveMajor ----
                 BT_saveMajor.setText("\u4fdd\u5b58\u4e13\u4e1a");
+                BT_saveMajor.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                 BT_saveMajor.addActionListener(e -> BT_saveMajor(e));
                 TP_settings.add(BT_saveMajor);
-                BT_saveMajor.setBounds(320, 20, 130, 55);
+                BT_saveMajor.setBounds(300, 15, 130, 55);
                 TP_settings.add(classInfo);
-                classInfo.setBounds(50, 285, 400, 400);
+                classInfo.setBounds(30, 275, 400, 440);
 
                 //---- BT_delData ----
                 BT_delData.setText("\u6e05\u9664\u6570\u636e");
+                BT_delData.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
                 BT_delData.addActionListener(e -> BT_delData(e));
                 TP_settings.add(BT_delData);
-                BT_delData.setBounds(155, 705, 95, 45);
+                BT_delData.setBounds(125, 720, 90, 50);
 
                 //---- BT_importData ----
                 BT_importData.setText("\u5bfc\u5165\u6570\u636e");
+                BT_importData.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
                 BT_importData.addActionListener(e -> BT_importData(e));
                 TP_settings.add(BT_importData);
-                BT_importData.setBounds(255, 705, 95, 45);
+                BT_importData.setBounds(225, 720, 90, 50);
 
                 //---- BT_exportData ----
                 BT_exportData.setText("\u5bfc\u51fa\u6570\u636e");
+                BT_exportData.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
                 TP_settings.add(BT_exportData);
-                BT_exportData.setBounds(355, 705, 95, 45);
+                BT_exportData.setBounds(325, 720, 90, 50);
                 TP_settings.add(stuFillInfo);
-                stuFillInfo.setBounds(475, 30, 635, 730);
+                stuFillInfo.setBounds(445, 20, 675, 750);
 
                 //---- BT_saveClass ----
                 BT_saveClass.setText("\u4fdd\u5b58\u73ed\u7ea7");
+                BT_saveClass.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 14));
                 BT_saveClass.addActionListener(e -> BT_saveClass(e));
                 TP_settings.add(BT_saveClass);
-                BT_saveClass.setBounds(45, 705, BT_saveClass.getPreferredSize().width, 45);
+                BT_saveClass.setBounds(25, 720, 90, 50);
             }
             tabbedPane1.addTab("\u8bbe\u7f6e", TP_settings);
             tabbedPane1.addTab("\u5b66\u751f\u586b\u62a5\u4fe1\u606f", TP_filInfo);
@@ -325,23 +346,26 @@ public class Client_Teacher extends JFrame {
 
                 //---- BT_exportResult ----
                 BT_exportResult.setText("\u5bfc\u51fa\u6570\u636e");
+                BT_exportResult.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                 BT_exportResult.addActionListener(e -> BT_exportResult(e));
                 panel1.add(BT_exportResult);
-                BT_exportResult.setBounds(new Rectangle(new Point(130, 15), BT_exportResult.getPreferredSize()));
+                BT_exportResult.setBounds(150, 15, 120, 40);
                 panel1.add(TP_result);
                 TP_result.setBounds(20, 60, 1100, 710);
 
                 //---- BT_start ----
                 BT_start.setText("\u5f00\u59cb\u5206\u6d41");
+                BT_start.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                 BT_start.addActionListener(e -> BT_start(e));
                 panel1.add(BT_start);
-                BT_start.setBounds(new Rectangle(new Point(20, 15), BT_start.getPreferredSize()));
+                BT_start.setBounds(20, 15, 120, 40);
 
                 //---- BT_delResult ----
                 BT_delResult.setText("\u6e05\u7a7a\u5206\u6d41\u4fe1\u606f");
+                BT_delResult.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
                 BT_delResult.addActionListener(e -> BT_delResult(e));
                 panel1.add(BT_delResult);
-                BT_delResult.setBounds(new Rectangle(new Point(240, 15), BT_delResult.getPreferredSize()));
+                BT_delResult.setBounds(280, 15, 160, 40);
             }
             tabbedPane1.addTab("\u5b66\u751f\u5206\u6d41\u4fe1\u606f", panel1);
         }
@@ -377,6 +401,8 @@ public class Client_Teacher extends JFrame {
 
     public static void main(String[] args) {
         try {
+//            FlatArcIJTheme.setup();
+            FlatMacLightLaf.setup();
             Thread thread = new Thread(() -> {
                 Server server = null;
                 try {

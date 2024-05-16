@@ -1,7 +1,8 @@
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.*;
 import javax.swing.*;
 /*
@@ -76,12 +77,14 @@ public class Client_StudentLogin extends JFrame {
 
         //---- button1 ----
         button1.setText(bundle.getString("button1.text"));
+        button1.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
         button1.addActionListener(e -> button1(e));
         contentPane.add(button1);
         button1.setBounds(85, 220, 125, 50);
 
         //---- button2 ----
         button2.setText(bundle.getString("button2.text"));
+        button2.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
         contentPane.add(button2);
         button2.setBounds(265, 220, 125, 50);
 
@@ -103,6 +106,7 @@ public class Client_StudentLogin extends JFrame {
 
     public static void main(String[] args) {
         try {
+            FlatMacLightLaf.setup();
             new Client_StudentLogin().setVisible(true);
         } catch (IOException e) {
             throw new RuntimeException(e);

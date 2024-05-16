@@ -120,7 +120,7 @@ public class ServerHandleThread implements Runnable {
                     serverDO.clearStuInfoWithFill();;
                 }
                 // StuInfoProcessed table
-                case "-clearStuInfoProcessed" -> {
+                case "@clearStuInfoProcessed" -> {
                     serverDO.clearStuInfoProcessed();
                 }
                 case "@getPSList" -> {
