@@ -387,12 +387,15 @@ public class DatabaseOperator {
                 if (ps.major.equals("NULL")) continue;
                 int majorCode = mapMajorName2Code.get(ps.major);
                 List<Integer> myClassList = mapMajorCode2ClassList.get(majorCode);
-                for (int myClass : myClassList)
-                    if (mapClassCode2Number.get(myClass) == 0)
-                        myClassList.remove(myClass);
-                int randIndex = random.nextInt(myClassList.size());
 
-                int myClass = myClassList.get(randIndex);
+                List<Integer> tempClassList = new ArrayList<>();
+                for (int myClass : myClassList)
+                    if (mapClassCode2Number.get(myClass) != 0)
+                        tempClassList.add(myClass);
+                int randIndex = random.nextInt(tempClassList.size());
+
+                int myClass = tempClassList.get(randIndex);
+                mapClassCode2Number.put(myClass, mapClassCode2Number.get(myClass) - 1);
                 mapClassCode2PSList.get(myClass).add(ps);
             }
 
@@ -455,12 +458,5 @@ public class DatabaseOperator {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-    public static void main(String[] args) {
-        UndivertedStudent us = new UndivertedStudent(2021902610, "刘文越", "男", 90);
-        DatabaseOperator DO = new DatabaseOperator();
-        DO.addUndivertedStudent(us);
     }
 }

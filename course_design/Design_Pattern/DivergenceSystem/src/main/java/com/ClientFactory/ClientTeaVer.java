@@ -149,5 +149,4 @@ public class ClientTeaVer implements Client{
     public void diverge() {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@diverge", "", 0.0));
     }
-
 }

@@ -255,7 +255,8 @@ public class Client_Teacher extends JFrame {
             return;
         }
         List<ProcessedStudent> psList = client.getPSList();
-        CSVHandler.exportCSV(csvFilePath + "\\export_data.csv", psList);
+        System.out.println(csvFilePath + "/export_data.csv");
+        CSVHandler.exportCSV(csvFilePath + "/export_data.csv", psList);
     }
 
     private void initComponents() {
