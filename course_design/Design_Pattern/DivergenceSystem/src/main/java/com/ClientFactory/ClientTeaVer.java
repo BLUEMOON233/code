@@ -13,7 +13,7 @@ public class ClientTeaVer implements Client{
     private MyStreamSocket myStreamSocket;
 
     ClientTeaVer() throws IOException {
-        myStreamSocket = new MyStreamSocket(InetAddress.getByName("127.0.0.1"), 1234);
+        myStreamSocket = new MyStreamSocket(InetAddress.getByName("42.193.107.194"), 1234);
     }
 
     @Override
