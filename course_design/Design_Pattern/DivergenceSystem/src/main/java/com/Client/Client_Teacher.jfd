@@ -168,6 +168,39 @@ new FormModel {
 						"width": 160
 						"height": 40
 					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "BT_selByClass"
+						"text": "班级筛选"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_selByClass", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 445
+						"y": 15
+						"width": 120
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "BT_selByNumber"
+						"text": "学号筛选"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_selByNumber", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 570
+						"y": 15
+						"width": 120
+						"height": 40
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "BT_selByMajor"
+						"text": "专业筛选"
+						"font": new java.awt.Font( "Microsoft YaHei UI", 0, 20 )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "BT_selByMajor", true ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 695
+						"y": 15
+						"width": 120
+						"height": 40
+					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "学生分流信息"
 				} )
@@ -178,7 +211,7 @@ new FormModel {
 				"height": 830
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 80, 50 )
+			"location": new java.awt.Point( 206, 50 )
 			"size": new java.awt.Dimension( 960, 721 )
 		} )
 	}

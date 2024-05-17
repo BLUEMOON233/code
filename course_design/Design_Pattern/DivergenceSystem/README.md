@@ -12,3 +12,8 @@ C/S主要使用java中的Socket实现
 - 适配器模式——ServerHandleThread
 - 组合模式——Java Swing
 - 工厂模式——ClientFactory
+
+A: diverge, Server, \[Undiverted/Processed\]Student
+B: Client_Teacher GUI, Socket
+B: Client_Student GUI, DatabaseOperator
+C: ClientFactory, CSV

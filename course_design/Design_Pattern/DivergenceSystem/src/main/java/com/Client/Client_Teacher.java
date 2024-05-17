@@ -57,7 +57,8 @@ public class Client_Teacher extends JFrame {
                 initClassInfo();
             }
             if (selectedIndex == 2) {
-                showStuProInfo();
+                List<ProcessedStudent> info = client.getPSList();
+                showStuProInfo(info);
             }
         });
 
@@ -261,19 +262,7 @@ public class Client_Teacher extends JFrame {
         CSVHandler.exportCSV(csvFilePath + "/export_data.csv", psList);
     }
 
-    private void BT_queryByNumber(ActionEvent e) {
-        String input = JOptionPane.showInputDialog(null, "请输入学号:");
-        int queryNumber = Integer.parseInt(input);
-        List<ProcessedStudent> totalPSList = client.getPSList();
-        List<ProcessedStudent> info = new ArrayList<>();
-        for(ProcessedStudent ps : totalPSList) {
-            if(ps.number == queryNumber)
-                info.add(ps);
-        }
-        showStuProInfo(info);
-    }
-
-    private void BT_queryByClassCode(ActionEvent e) {
+    private void BT_selByClass(ActionEvent e) {
         String input = JOptionPane.showInputDialog(null, "请输入班级号:");
         int queryClassCode = Integer.parseInt(input);
         List<ProcessedStudent> totalPSList = client.getPSList();
@@ -285,7 +274,19 @@ public class Client_Teacher extends JFrame {
         showStuProInfo(info);
     }
 
-    private void BT_queryByMajor(ActionEvent e) {
+    private void BT_selByNumber(ActionEvent e) {
+        String input = JOptionPane.showInputDialog(null, "请输入学号:");
+        int queryNumber = Integer.parseInt(input);
+        List<ProcessedStudent> totalPSList = client.getPSList();
+        List<ProcessedStudent> info = new ArrayList<>();
+        for(ProcessedStudent ps : totalPSList) {
+            if(ps.number == queryNumber)
+                info.add(ps);
+        }
+        showStuProInfo(info);
+    }
+
+    private void BT_selByMajor(ActionEvent e) {
         String queryMajor = JOptionPane.showInputDialog(null, "请输入专业名称:");
         List<ProcessedStudent> totalPSList = client.getPSList();
         List<ProcessedStudent> info = new ArrayList<>();
@@ -316,6 +317,9 @@ public class Client_Teacher extends JFrame {
         TP_result = new JScrollPane();
         BT_start = new JButton();
         BT_delResult = new JButton();
+        BT_selByClass = new JButton();
+        BT_selByNumber = new JButton();
+        BT_selByMajor = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -412,6 +416,27 @@ public class Client_Teacher extends JFrame {
                 BT_delResult.addActionListener(e -> BT_delResult(e));
                 panel1.add(BT_delResult);
                 BT_delResult.setBounds(280, 15, 160, 40);
+
+                //---- BT_selByClass ----
+                BT_selByClass.setText("\u73ed\u7ea7\u7b5b\u9009");
+                BT_selByClass.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                BT_selByClass.addActionListener(e -> BT_selByClass(e));
+                panel1.add(BT_selByClass);
+                BT_selByClass.setBounds(445, 15, 120, 40);
+
+                //---- BT_selByNumber ----
+                BT_selByNumber.setText("\u5b66\u53f7\u7b5b\u9009");
+                BT_selByNumber.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                BT_selByNumber.addActionListener(e -> BT_selByNumber(e));
+                panel1.add(BT_selByNumber);
+                BT_selByNumber.setBounds(570, 15, 120, 40);
+
+                //---- BT_selByMajor ----
+                BT_selByMajor.setText("\u4e13\u4e1a\u7b5b\u9009");
+                BT_selByMajor.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
+                BT_selByMajor.addActionListener(e -> BT_selByMajor(e));
+                panel1.add(BT_selByMajor);
+                BT_selByMajor.setBounds(695, 15, 120, 40);
             }
             tabbedPane1.addTab("\u5b66\u751f\u5206\u6d41\u4fe1\u606f", panel1);
         }
@@ -443,24 +468,8 @@ public class Client_Teacher extends JFrame {
     private JScrollPane TP_result;
     private JButton BT_start;
     private JButton BT_delResult;
+    private JButton BT_selByClass;
+    private JButton BT_selByNumber;
+    private JButton BT_selByMajor;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
-
-    public static void main(String[] args) {
-        try {
-            FlatMacLightLaf.setup();
-            Thread thread = new Thread(() -> {
-                Server server = null;
-                try {
-                    server = new Server();
-                    server.startServer();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            thread.start();
-            new Client_Teacher().setVisible(true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
