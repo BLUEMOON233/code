@@ -14,6 +14,7 @@ public class ClientTeaVer implements Client{
 
     ClientTeaVer() throws IOException {
         myStreamSocket = new MyStreamSocket(InetAddress.getByName("42.193.107.194"), 1234);
+//        myStreamSocket = new MyStreamSocket(InetAddress.getByName("localhost"), 1234);
     }
 
     @Override

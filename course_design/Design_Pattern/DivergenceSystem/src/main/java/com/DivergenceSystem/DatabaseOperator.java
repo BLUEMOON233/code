@@ -355,6 +355,7 @@ public class DatabaseOperator {
                 mapClassCode2Number.put(classCode, student_number);
                 mapMajorCode2Number.put(majorCode, mapMajorCode2Number.getOrDefault(majorCode, 0) + student_number);
             }
+            mapMajorCode2Number.put(-1, 0);
             //分流
             List<ProcessedStudent> psList = new ArrayList<>();
             for (UndivertedStudent us : usList) {
