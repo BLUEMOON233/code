@@ -171,8 +171,8 @@ public class Client_Teacher extends JFrame {
         fillInfoViewport.add(table2);
     }
 
-    public void showStuProInfo() {
-        List<ProcessedStudent> info = client.getPSList();
+    public void showStuProInfo(List<ProcessedStudent> info) {
+//        List<ProcessedStudent> info = client.getPSList();
         JTable table1 = new JTable(new ProcessedStudent.DataTableModel(info));
         // 创建 JScrollPane 组件，并将表格作为视图组件添加到其中
         JViewport stuFillInfoViewport = TP_result.getViewport();
@@ -235,12 +235,14 @@ public class Client_Teacher extends JFrame {
 
     private void BT_start(ActionEvent e) {
         client.diverge();
-        showStuProInfo();
+        List<ProcessedStudent> info = client.getPSList();
+        showStuProInfo(info);
     }
 
     private void BT_delResult(ActionEvent e) {
         client.clearStuInfoProcessed();
-        showStuProInfo();
+        List<ProcessedStudent> info = client.getPSList();
+        showStuProInfo(info);
     }
 
     private void BT_exportResult(ActionEvent e) {
@@ -257,6 +259,41 @@ public class Client_Teacher extends JFrame {
         List<ProcessedStudent> psList = client.getPSList();
         System.out.println(csvFilePath + "/export_data.csv");
         CSVHandler.exportCSV(csvFilePath + "/export_data.csv", psList);
+    }
+
+    private void BT_queryByNumber(ActionEvent e) {
+        String input = JOptionPane.showInputDialog(null, "请输入学号:");
+        int queryNumber = Integer.parseInt(input);
+        List<ProcessedStudent> totalPSList = client.getPSList();
+        List<ProcessedStudent> info = new ArrayList<>();
+        for(ProcessedStudent ps : totalPSList) {
+            if(ps.number == queryNumber)
+                info.add(ps);
+        }
+        showStuProInfo(info);
+    }
+
+    private void BT_queryByClassCode(ActionEvent e) {
+        String input = JOptionPane.showInputDialog(null, "请输入班级号:");
+        int queryClassCode = Integer.parseInt(input);
+        List<ProcessedStudent> totalPSList = client.getPSList();
+        List<ProcessedStudent> info = new ArrayList<>();
+        for(ProcessedStudent ps : totalPSList) {
+            if(ps.classCode == queryClassCode)
+                info.add(ps);
+        }
+        showStuProInfo(info);
+    }
+
+    private void BT_queryByMajor(ActionEvent e) {
+        String queryMajor = JOptionPane.showInputDialog(null, "请输入专业名称:");
+        List<ProcessedStudent> totalPSList = client.getPSList();
+        List<ProcessedStudent> info = new ArrayList<>();
+        for(ProcessedStudent ps : totalPSList) {
+            if(ps.major.equals(queryMajor))
+                info.add(ps);
+        }
+        showStuProInfo(info);
     }
 
     private void initComponents() {

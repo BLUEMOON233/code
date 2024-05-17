@@ -183,7 +183,9 @@ public class DatabaseOperator {
 
     public void addMajor(String majorName) {
         try {
-            String sql = """
+            String sql = "insert into major (code, name, class) values (0, 'temp', 0);";
+            stmt.executeUpdate(sql);
+            sql = """
                     SELECT Min(T1.code) + 1 minCode FROM major T1
                     WHERE (T1.code + 1) NOT IN (SELECT T2.code FROM major T2)
                     AND EXISTS (SELECT T3.code FROM major T3 WHERE T3.code = 1)""";
@@ -191,7 +193,9 @@ public class DatabaseOperator {
             rs.next();
             int number = rs.getInt("minCode");
             sql = String.format("insert into major (code, name, class) values (%d, '%s', 0);", number, majorName);
-            System.out.println(sql);
+//            System.out.println(sql);
+            stmt.executeUpdate(sql);
+            sql = "delete from major where code = 0;";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -405,6 +409,9 @@ public class DatabaseOperator {
                     ps.classCode = classCode;
                 }
             }
+
+            sql = "delete from stu_info_processed where 1;";
+            stmt.executeUpdate(sql);
 
             for (ProcessedStudent ps : psList) {
                 int majorCode = mapMajorName2Code.getOrDefault(ps.major, -1);
