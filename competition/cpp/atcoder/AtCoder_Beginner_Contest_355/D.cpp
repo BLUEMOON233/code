@@ -50,8 +50,8 @@ void solve() {
 	LL rs = 0;
 	rep(i, 1, n) {
 		auto [l, r] = intervals[i];
-		cerr << l << ' ' << r << ": ";
-		cerr << tr_r.getSum(l - 1) << ' ' << tr_l.getSum(m) - tr_l.getSum(r) << '\n';
+		// cerr << l << ' ' << r << ": ";
+		// cerr << tr_r.getSum(l - 1) << ' ' << tr_l.getSum(m) - tr_l.getSum(r) << '\n';
 		rs += (i - 1) - tr_r.getSum(l - 1) - tr_l.getSum(m) + tr_l.getSum(r);
 		tr_r.add(r, 1), tr_l.add(l, 1);
 	}
