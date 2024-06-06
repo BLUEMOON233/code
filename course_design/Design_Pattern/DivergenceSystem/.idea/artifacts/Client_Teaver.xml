@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Client_Teaver">
+    <output-path>$PROJECT_DIR$/out/artifacts/Client_Teaver</output-path>
+    <root id="archive" name="DivergenceSystem.jar">
+      <element id="module-output" name="DivergenceSystem" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/javacsv.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/flatlaf-3.4.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/mysql-connector-j-8.3.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/main/resources/lib/flatlaf-intellij-themes-3.4.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

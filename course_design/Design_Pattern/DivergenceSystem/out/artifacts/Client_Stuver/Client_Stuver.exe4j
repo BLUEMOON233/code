@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="9.0" transformSequenceNumber="3">
+  <directoryPresets config="D:/develop/code/course_design/Design_Pattern/DivergenceSystem/out/artifacts/Client_Stuver" />
+  <application name="Client_Stuver" distributionSourceDir="D:/develop/code/course_design/Design_Pattern/DivergenceSystem/out/artifacts/Client_Stuver" />
+  <executable name="Client_Stuver" wrapperType="embed" executableMode="gui" />
+  <java mainClass="com.Client.Client_StudentLogin" preferredVM="client" minVersion="17" maxVersion="17">
+    <searchSequence>
+      <directory location="./jre" />
+      <registry />
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
+    </searchSequence>
+    <classPath>
+      <archive location="D:/develop/code/course_design/Design_Pattern/DivergenceSystem/out/artifacts/Client_Stuver/DivergenceSystem.jar" failOnError="false" />
+    </classPath>
+  </java>
+</exe4j>

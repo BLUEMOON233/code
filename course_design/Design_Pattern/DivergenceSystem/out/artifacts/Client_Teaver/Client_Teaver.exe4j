@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="9.0" transformSequenceNumber="3">
+  <directoryPresets config="D:/develop/code/course_design/Design_Pattern/DivergenceSystem/out/artifacts/Client_Teaver" />
+  <application name="Client_Teaver" distributionSourceDir="D:/develop/code/course_design/Design_Pattern/DivergenceSystem/out/artifacts/Client_Teaver" />
+  <executable name="Client_Teaver" wrapperType="embed" executableMode="gui" />
+  <java mainClass="com.Client.Client_TeacherLogin" minVersion="17" maxVersion="17">
+    <searchSequence>
+      <registry />
+      <envVar name="JAVA_HOME" />
+      <envVar name="JDK_HOME" />
+      <directory location="./jre" />
+    </searchSequence>
+    <classPath>
+      <archive location="D:/develop/code/course_design/Design_Pattern/DivergenceSystem/out/artifacts/Client_Teaver/DivergenceSystem.jar" failOnError="false" />
+    </classPath>
+  </java>
+</exe4j>
