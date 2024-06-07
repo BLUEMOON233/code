@@ -79,7 +79,7 @@ void solve() {
 				cout << pos0[0].second - k << '\n';
 				return;
 			} else {
-				cout << pos0[0].second << '\n';
+				cout << -1 << '\n';
 				return;
 			}
 		}
@@ -99,7 +99,7 @@ void solve() {
 				cout << pos1[0].second - k << '\n';
 				return;
 			} else {
-				cout << pos1[0].second << '\n';
+				cout << -1 << '\n';
 				return;
 			}
 		}
