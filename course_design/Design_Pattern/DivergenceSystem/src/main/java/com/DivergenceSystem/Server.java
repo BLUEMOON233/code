@@ -41,7 +41,6 @@ public class Server {
         try {
             server = new Server();
             server.startServer();
-//            server.closeServer();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

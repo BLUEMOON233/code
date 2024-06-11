@@ -14,7 +14,7 @@ public class CSVHandler {
         List<UndivertedStudent> uslist = new ArrayList<>();
 
         try {
-            CsvReader csvReader = new CsvReader(new FileReader(csvFilePath));
+            CsvReader csvReader = new CsvReader(csvFilePath, ',' ,StandardCharsets.UTF_8);
             csvReader.readHeaders();
 
             while (csvReader.readRecord()) {
