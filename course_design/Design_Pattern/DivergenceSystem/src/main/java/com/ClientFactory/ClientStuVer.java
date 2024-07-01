@@ -20,7 +20,9 @@ public class ClientStuVer implements Client{
     public boolean loginCheck(int number, String password) {
         myStreamSocket.sendObject(new UndivertedStudent(-2, "@checkStudentPassword", "", 0.0));
         myStreamSocket.sendObject(new UndivertedStudent(number, password, "", 0.0));
+        System.out.println(new UndivertedStudent(-2, "@checkStudentPassword", "", 0.0));
         UndivertedStudent us = myStreamSocket.receiveObject();
+        System.out.println(us);
         if (us.number == -2) {
             return us.name.equals("true");
         }
