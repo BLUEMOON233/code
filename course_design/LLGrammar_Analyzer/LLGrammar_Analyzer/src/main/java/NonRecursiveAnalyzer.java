@@ -1,20 +1,25 @@
 import java.util.*;
 
-public class nonRecursiveAnalyzer {
+public class NonRecursiveAnalyzer {
     HashMap<String, HashSet<String>> Follow;
     HashMap<String, HashSet<String>> First;
     LLGrammar llGrammar;
 
-    nonRecursiveAnalyzer(LLGrammar llGrammar) {
+    NonRecursiveAnalyzer(LLGrammar llGrammar) {
         this.llGrammar = llGrammar;
         Follow = new HashMap<String, HashSet<String>>();
         First = new HashMap<String, HashSet<String>>();
+    }
+
+    LLGrammar getLLGrammar() {
+        return llGrammar;
+    }
+
+    void getFirstSet() {
         for (String nonTerminal : llGrammar.Vn) {
             getFirstSet(nonTerminal);
             Follow.put(nonTerminal, new HashSet<String>());
         }
-        Follow.get(llGrammar.startSymbol).add("$");
-        getFollowSet();
     }
 
     HashSet<String> getFirstSet(String nonTerminal) {
@@ -41,6 +46,7 @@ public class nonRecursiveAnalyzer {
     }
 
     void getFollowSet() {
+        Follow.get(llGrammar.startSymbol).add("$");
         boolean flag = true;
         while (flag) {
             flag = false;
@@ -102,10 +108,10 @@ public class nonRecursiveAnalyzer {
         return analyzeTable;
     }
 
-    void Analyze(String inputString, HashMap<String, HashMap<String, Expression>> table) {
+    analyzeTableModel Analyze(String inputString, HashMap<String, HashMap<String, Expression>> table) {
         ArrayList<String> symbolList = LLGrammarTools.inputSplit(inputString);
         if (symbolList == null)
-            return;
+            return null;
         ArrayDeque<String> input = new ArrayDeque<>(symbolList);
         input.offer("$");
         Stack<String> stack = new Stack<>();
@@ -142,9 +148,10 @@ public class nonRecursiveAnalyzer {
             input.forEach(sb::append);
             logInput.add(sb.toString());
         }
-        logStack.forEach(System.out::println);
-        logInput.forEach(System.out::println);
-        logAction.forEach(System.out::println);
+//        logStack.forEach(System.out::println);
+//        logInput.forEach(System.out::println);
+//        logAction.forEach(System.out::println);
+        return new analyzeTableModel(logStack, logInput, logAction);
     }
 
     public static void main(String[] args) {
@@ -157,7 +164,7 @@ public class nonRecursiveAnalyzer {
         llGrammar.setStartSymbol("E");
         System.out.println(llGrammar.Vt);
         System.out.println(llGrammar.Vn);
-        nonRecursiveAnalyzer analyzer = new nonRecursiveAnalyzer(llGrammar);
+        NonRecursiveAnalyzer analyzer = new NonRecursiveAnalyzer(llGrammar);
         for (String val : llGrammar.Vn) {
             System.out.printf("First Set of %s: ", val);
             System.out.println(analyzer.First.get(val));
@@ -180,14 +187,14 @@ public class nonRecursiveAnalyzer {
 //        llGrammar.setStartSymbol("E");
 //        System.out.println(llGrammar.Vt);
 //        System.out.println(llGrammar.Vn);
-//        nonRecursiveAnalyzer nonRecursiveAnalyzer = new nonRecursiveAnalyzer(llGrammar);
+//        NonRecursiveAnalyzer NonRecursiveAnalyzer = new NonRecursiveAnalyzer(llGrammar);
 //        for (String val : llGrammar.Vn) {
 //            System.out.printf("First Set of %s: ", val);
-//            System.out.println(nonRecursiveAnalyzer.First.get(val));
+//            System.out.println(NonRecursiveAnalyzer.First.get(val));
 //        }
 //        for (String val : llGrammar.Vn) {
 //            System.out.printf("Follow Set of %s: ", val);
-//            System.out.println(nonRecursiveAnalyzer.Follow.get(val));
+//            System.out.println(NonRecursiveAnalyzer.Follow.get(val));
 //        }
     }
 

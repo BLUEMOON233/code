@@ -48,6 +48,16 @@ public class LLGrammar {
         return true;
     }
 
+    ArrayList<Expression> getExpressions() {
+        ArrayList<Expression> ret = new ArrayList<>();
+        for (String nonTerminal : Vn) {
+            for (ArrayList<String> right : expressions.get(nonTerminal)) {
+                ret.add(new Expression(nonTerminal, right));
+            }
+        }
+        return ret;
+    }
+
     ArrayList<ArrayList<String>> getValue(String key) {
         if (!expressions.containsKey(key))
             return null;

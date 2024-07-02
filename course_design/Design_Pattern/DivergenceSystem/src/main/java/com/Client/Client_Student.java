@@ -198,8 +198,8 @@ public class Client_Student extends JFrame {
         contentPane.add(LB_isFill);
         LB_isFill.setBounds(285, 220, 190, 40);
 
-        contentPane.setPreferredSize(new Dimension(466, 460));
-        setSize(582, 575);
+        contentPane.setPreferredSize(new Dimension(490, 474));
+        setSize(612, 592);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }

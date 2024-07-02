@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/LLGrammar_Analyzer/src/main/resources/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/LLGrammar_Analyzer/src/main/resources/lib" recursive="false" />
+  </library>
+</component>
