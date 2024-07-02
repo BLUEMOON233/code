@@ -14,23 +14,23 @@ public class analyzeTableModel extends AbstractTableModel {
         String[] headers = terminals.toArray(new String[0]);
         ArrayList<String> columns = new ArrayList<>();
         columns.add("\\");
-        for(int i = 0; i <= headers.length - 1; i++) {
+        for (int i = 0; i <= headers.length - 1; i++) {
             columns.add(headers[i]);
         }
         columns.add("$");
         columnNames = columns.toArray(new String[0]);
         table = new String[nonTerminals.length][headers.length + 2];
-        for(int i = 0; i <= nonTerminals.length - 1; i++) {
+        for (int i = 0; i <= nonTerminals.length - 1; i++) {
             String A = nonTerminals[i];
             HashMap<String, Expression> mapTer2Exp = analyzeTable.get(A);
-            for(int j = 0; j <= headers.length - 1; j++) {
-                if(mapTer2Exp.containsKey(headers[j])) {
+            for (int j = 0; j <= headers.length - 1; j++) {
+                if (mapTer2Exp.containsKey(headers[j])) {
                     Expression expression = mapTer2Exp.get(headers[j]);
                     table[i][j + 1] = expression.toString();
                 }
             }
             table[i][0] = A;
-            if(mapTer2Exp.containsKey("$")) {
+            if (mapTer2Exp.containsKey("$")) {
                 Expression expression = mapTer2Exp.get("$");
                 table[i][headers.length + 1] = expression.toString();
             }
@@ -40,7 +40,7 @@ public class analyzeTableModel extends AbstractTableModel {
     analyzeTableModel(ArrayList<String> logStack, ArrayList<String> logInput, ArrayList<String> logAction) {
         columnNames = new String[]{"栈", "输入串", "动作"};
         table = new String[logStack.size()][3];
-        for(int i = 0; i <= logStack.size() - 1; i++) {
+        for (int i = 0; i <= logStack.size() - 1; i++) {
             table[i][0] = logStack.get(i);
             table[i][1] = logInput.get(i);
             table[i][2] = logAction.get(i);

@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -22,7 +23,6 @@ import javax.swing.text.PlainDocument;
 public class AnalyzerGUI extends JFrame {
     LLGrammar llGrammar;
     NonRecursiveAnalyzer nonRecursiveAnalyzer;
-    HashMap<String, HashMap<String, Expression>> analyzeTable;
 
     public AnalyzerGUI() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,19 +43,13 @@ public class AnalyzerGUI extends JFrame {
             }
 
             private boolean isAllowedCharacters(String str) {
-                HashSet<String> allowedChars = new HashSet<>(Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i",
-                        "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B",
-                        "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
-                        "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/",
-                        "(", ")", "="));
+                HashSet<String> allowedChars = new HashSet<>(Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "(", ")", "="));
                 return allowedChars.contains(str);
             }
         });
     }
 
-
     private void BT_importGrammar(ActionEvent e) {
-        llGrammar = new LLGrammar();
         String filePath = "";
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File("."));
@@ -66,6 +60,14 @@ public class AnalyzerGUI extends JFrame {
             return;
         }
 
+        llGrammar = new LLGrammar();
+        nonRecursiveAnalyzer = null;
+        TA_Grammar.setText("");
+        TA_first.setText("");
+        TA_follow.setText("");
+        TB_analyze.setModel(new DefaultTableModel());
+        TB_process.setModel(new DefaultTableModel());
+        CB_startSymbol.removeAllItems();
         try {
             BufferedReader in = new BufferedReader(new FileReader(filePath));
             String buffer;
@@ -79,37 +81,109 @@ public class AnalyzerGUI extends JFrame {
             for (String symbol : llGrammar.Vn) {
                 CB_startSymbol.addItem(symbol);
             }
+            CB_startSymbol.addItem("");
+            CB_startSymbol.setSelectedItem("");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     private void BT_startSymbol(ActionEvent e) {
-        llGrammar.startSymbol = CB_startSymbol.getSelectedItem().toString();
+        if (llGrammar == null) {
+            JOptionPane.showMessageDialog(null, "未导入文法", "错误", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String val = CB_startSymbol.getSelectedItem().toString();
+        if (!val.equals("")) llGrammar.startSymbol = CB_startSymbol.getSelectedItem().toString();
+        else llGrammar.startSymbol = null;
         nonRecursiveAnalyzer = new NonRecursiveAnalyzer(llGrammar);
     }
 
     private void BT_disambiguation(ActionEvent e) {
-        // TODO add your code here
+        if (llGrammar == null || llGrammar.startSymbol == null) {
+            JOptionPane.showMessageDialog(null, "文法未分配开始符号, 无法进行预测分析", "错误", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!LLGrammarTools.delLeftFactor(llGrammar)) {
+            JOptionPane.showMessageDialog(null, "未识别到左因子", "错误", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        TA_Grammar.setText("");
+        CB_startSymbol.removeAllItems();
+        CB_startSymbol.setSelectedItem(llGrammar.startSymbol);
+        ArrayList<Expression> expressions = llGrammar.getExpressions();
+        for (Expression expression : expressions) {
+            TA_Grammar.append(expression.toString() + "\n");
+        }
+        for (String symbol : llGrammar.Vn) {
+            CB_startSymbol.addItem(symbol);
+        }
+        CB_startSymbol.addItem("");
+        if (llGrammar.startSymbol != null) CB_startSymbol.setSelectedItem(llGrammar.startSymbol);
+        else CB_startSymbol.setSelectedItem("");
     }
 
     private void BT_eliminateLeftRecursion(ActionEvent e) {
-        // TODO add your code here
+        if (llGrammar == null || llGrammar.startSymbol == null) {
+            JOptionPane.showMessageDialog(null, "文法未分配开始符号, 无法进行预测分析", "错误", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!LLGrammarTools.delLeftRecursion(llGrammar)) {
+            JOptionPane.showMessageDialog(null, "未识别到左递归", "错误", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        TA_Grammar.setText("");
+        CB_startSymbol.removeAllItems();
+        CB_startSymbol.setSelectedItem(llGrammar.startSymbol);
+        ArrayList<Expression> expressions = llGrammar.getExpressions();
+        for (Expression expression : expressions) {
+            TA_Grammar.append(expression.toString() + "\n");
+        }
+        for (String symbol : llGrammar.Vn) {
+            CB_startSymbol.addItem(symbol);
+        }
+        CB_startSymbol.addItem("");
+        if (llGrammar.startSymbol != null) CB_startSymbol.setSelectedItem(llGrammar.startSymbol);
+        else CB_startSymbol.setSelectedItem("");
     }
 
     private void BT_analyzeTable(ActionEvent e) {
+        if (nonRecursiveAnalyzer == null) {
+            JOptionPane.showMessageDialog(null, "文法未分配开始符号, 无法进行预测分析", "错误", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (nonRecursiveAnalyzer.First.isEmpty() || nonRecursiveAnalyzer.First.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "First集或Follow集为空", "分析失败", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         analyzeTableModel tableModel = new analyzeTableModel(nonRecursiveAnalyzer);
         TB_analyze.setModel(tableModel);
     }
 
     private void BT_analyze(ActionEvent e) {
+        if (nonRecursiveAnalyzer == null) {
+            JOptionPane.showMessageDialog(null, "文法未分配开始符号, 无法进行非递归分析", "错误", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (nonRecursiveAnalyzer.First.isEmpty() || nonRecursiveAnalyzer.First.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "First集或Follow集为空", "分析失败", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         analyzeTableModel tableModel = nonRecursiveAnalyzer.Analyze(TF_inputString.getText(), nonRecursiveAnalyzer.getAnalyzeTable());
+        if (!tableModel.getValueAt(tableModel.getRowCount() - 1, 0).equals("")) {
+            JOptionPane.showMessageDialog(null, "输入字符串不被该文法所识别", "匹配失败", JOptionPane.WARNING_MESSAGE);
+        }
         TB_process.setModel(tableModel);
     }
 
     private void BT_firstAndFollow(ActionEvent e) {
+        if (llGrammar == null || llGrammar.startSymbol == null) {
+            JOptionPane.showMessageDialog(null, "文法未分配开始符号, 无法求出Follow集", "错误", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        TA_first.setText("");
+        TA_follow.setText("");
         nonRecursiveAnalyzer.getFirstSet();
-        nonRecursiveAnalyzer.getFollowSet();
         for (String nonTerminal : llGrammar.Vn) {
             HashSet<String> first = nonRecursiveAnalyzer.First.get(nonTerminal);
             StringBuilder sb = new StringBuilder();
@@ -121,8 +195,11 @@ public class AnalyzerGUI extends JFrame {
             sb.delete(sb.length() - 2, sb.length());
             sb.append("}\n");
             TA_first.append(sb.toString());
+        }
+        nonRecursiveAnalyzer.getFollowSet();
+        for (String nonTerminal : llGrammar.Vn) {
             HashSet<String> follow = nonRecursiveAnalyzer.Follow.get(nonTerminal);
-            sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.append(String.format("FOLLOW(%s): {", nonTerminal));
             for (String symbol : follow) {
                 sb.append(symbol);
@@ -158,6 +235,7 @@ public class AnalyzerGUI extends JFrame {
         scrollPane5 = new JScrollPane();
         TA_follow = new JTextArea();
         TF_inputString = new JFormattedTextField();
+        label3 = new JLabel();
 
         //======== this ========
         setMaximumSize(new Dimension(1280, 720));
@@ -195,18 +273,18 @@ public class AnalyzerGUI extends JFrame {
         label1.setBounds(25, 80, 95, 30);
 
         //---- BT_disambiguation ----
-        BT_disambiguation.setText("\u6d88\u9664\u4e8c\u4e49\u6027");
+        BT_disambiguation.setText("\u63d0\u53d6\u5de6\u56e0\u5b50");
         BT_disambiguation.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 22));
         BT_disambiguation.addActionListener(e -> BT_disambiguation(e));
         contentPane.add(BT_disambiguation);
-        BT_disambiguation.setBounds(610, 15, 155, 55);
+        BT_disambiguation.setBounds(345, 15, 155, 55);
 
         //---- BT_eliminateLeftRecursion ----
         BT_eliminateLeftRecursion.setText("\u6d88\u9664\u5de6\u9012\u5f52");
         BT_eliminateLeftRecursion.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 22));
         BT_eliminateLeftRecursion.addActionListener(e -> BT_eliminateLeftRecursion(e));
         contentPane.add(BT_eliminateLeftRecursion);
-        BT_eliminateLeftRecursion.setBounds(775, 15, 155, 55);
+        BT_eliminateLeftRecursion.setBounds(510, 15, 155, 55);
 
         //---- BT_startSymbol ----
         BT_startSymbol.setText("\u5f00\u59cb\u7b26\u53f7");
@@ -254,6 +332,9 @@ public class AnalyzerGUI extends JFrame {
 
         //======== scrollPane3 ========
         {
+
+            //---- TB_process ----
+            TB_process.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
             scrollPane3.setViewportView(TB_process);
         }
         contentPane.add(scrollPane3);
@@ -275,7 +356,7 @@ public class AnalyzerGUI extends JFrame {
         BT_firstAndFollow.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 24));
         BT_firstAndFollow.addActionListener(e -> BT_firstAndFollow(e));
         contentPane.add(BT_firstAndFollow);
-        BT_firstAndFollow.setBounds(340, 15, 260, 55);
+        BT_firstAndFollow.setBounds(670, 15, 260, 55);
 
         //======== scrollPane5 ========
         {
@@ -287,8 +368,17 @@ public class AnalyzerGUI extends JFrame {
         }
         contentPane.add(scrollPane5);
         scrollPane5.setBounds(595, 125, 330, 225);
+
+        //---- TF_inputString ----
+        TF_inputString.setFont(new Font("Consolas", Font.PLAIN, 22));
         contentPane.add(TF_inputString);
-        TF_inputString.setBounds(350, 80, 445, TF_inputString.getPreferredSize().height);
+        TF_inputString.setBounds(420, 75, 500, 40);
+
+        //---- label3 ----
+        label3.setText("\u8f93\u5165\u4e32");
+        label3.setFont(new Font("\u5e7c\u5706", Font.BOLD, 20));
+        contentPane.add(label3);
+        label3.setBounds(345, 80, 70, 30);
 
         contentPane.setPreferredSize(new Dimension(1025, 575));
         setLocationRelativeTo(getOwner());
@@ -317,6 +407,7 @@ public class AnalyzerGUI extends JFrame {
     private JScrollPane scrollPane5;
     private JTextArea TA_follow;
     private JFormattedTextField TF_inputString;
+    private JLabel label3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
     public static void main(String[] args) {

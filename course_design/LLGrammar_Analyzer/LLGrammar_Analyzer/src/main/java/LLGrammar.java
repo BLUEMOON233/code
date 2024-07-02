@@ -12,22 +12,14 @@ public class LLGrammar {
         Vt = new HashSet<>();
     }
 
-    void setStartSymbol(String sym) {
-        startSymbol = sym;
-    }
-
     boolean input(String string) {
         string = string.replaceAll(" +", "");
         String[] key2values = string.split("->");
-        if (key2values.length != 2)
-            return false;
-        if (key2values[0].isEmpty() || key2values[0].length() > 2)
-            return false;
-        if (key2values[0].length() == 2 && key2values[0].charAt(1) != '\'')
-            return false;
+        if (key2values.length != 2) return false;
+        if (key2values[0].isEmpty() || key2values[0].length() > 2) return false;
+        if (key2values[0].length() == 2 && key2values[0].charAt(1) != '\'') return false;
         Vn.add(key2values[0]);
-        if (!expressions.containsKey(key2values[0]))
-            expressions.put(key2values[0], new ArrayList<>());
+        if (!expressions.containsKey(key2values[0])) expressions.put(key2values[0], new ArrayList<>());
         String[] values = key2values[1].split("\\|");
         for (String value : values) {
             ArrayList<String> symList = new ArrayList<String>();
@@ -58,9 +50,22 @@ public class LLGrammar {
         return ret;
     }
 
+    void calVnVt() {
+        for (String nonTerminal : expressions.keySet()) Vn.add(nonTerminal);
+        for (ArrayList<ArrayList<String>> rights : expressions.values())
+            for (ArrayList<String> right : rights)
+                for (String val : right)
+                    Vt.add(val);
+        Vt.removeAll(Vn);
+//        for (String val : Vn) System.out.printf("%s ", val);
+//        System.out.println();
+//        for (String val : Vt) System.out.printf("%s ", val);
+//        System.out.println();
+    }
+
+
     ArrayList<ArrayList<String>> getValue(String key) {
-        if (!expressions.containsKey(key))
-            return null;
+        if (!expressions.containsKey(key)) return null;
         return expressions.get(key);
     }
 }

@@ -16,9 +16,9 @@ public class NonRecursiveAnalyzer {
     }
 
     void getFirstSet() {
+        First.clear();
         for (String nonTerminal : llGrammar.Vn) {
             getFirstSet(nonTerminal);
-            Follow.put(nonTerminal, new HashSet<String>());
         }
     }
 
@@ -46,6 +46,10 @@ public class NonRecursiveAnalyzer {
     }
 
     void getFollowSet() {
+        Follow.clear();
+        for (String nonTerminal : llGrammar.Vn) {
+            Follow.put(nonTerminal, new HashSet<String>());
+        }
         Follow.get(llGrammar.startSymbol).add("$");
         boolean flag = true;
         while (flag) {
@@ -110,8 +114,6 @@ public class NonRecursiveAnalyzer {
 
     analyzeTableModel Analyze(String inputString, HashMap<String, HashMap<String, Expression>> table) {
         ArrayList<String> symbolList = LLGrammarTools.inputSplit(inputString);
-        if (symbolList == null)
-            return null;
         ArrayDeque<String> input = new ArrayDeque<>(symbolList);
         input.offer("$");
         Stack<String> stack = new Stack<>();
@@ -134,6 +136,9 @@ public class NonRecursiveAnalyzer {
                 logAction.add("匹配" + token);
             } else {
                 HashMap<String, Expression> mapTer2Exp = table.get(stack.pop());
+                if (mapTer2Exp == null || !mapTer2Exp.containsKey(input.peek())) {
+                    return new analyzeTableModel(logStack, logInput, logAction);
+                }
                 Expression expression = mapTer2Exp.get(input.peek());
                 for (int i = expression.right.size() - 1; i >= 0; i--) {
                     stack.add(expression.right.get(i));
@@ -153,49 +158,4 @@ public class NonRecursiveAnalyzer {
 //        logAction.forEach(System.out::println);
         return new analyzeTableModel(logStack, logInput, logAction);
     }
-
-    public static void main(String[] args) {
-        LLGrammar llGrammar = new LLGrammar();
-        llGrammar.input("E->TE'");
-        llGrammar.input("E'->+TE'|ε");
-        llGrammar.input("T->FT'");
-        llGrammar.input("T'->*FT'|ε");
-        llGrammar.input("F->(E)|a");
-        llGrammar.setStartSymbol("E");
-        System.out.println(llGrammar.Vt);
-        System.out.println(llGrammar.Vn);
-        NonRecursiveAnalyzer analyzer = new NonRecursiveAnalyzer(llGrammar);
-        for (String val : llGrammar.Vn) {
-            System.out.printf("First Set of %s: ", val);
-            System.out.println(analyzer.First.get(val));
-        }
-        for (String val : llGrammar.Vn) {
-            System.out.printf("Follow Set of %s: ", val);
-            System.out.println(analyzer.Follow.get(val));
-        }
-
-        analyzer.Analyze("a * a + a", analyzer.getAnalyzeTable());
-
-//        LLGrammar llGrammar = new LLGrammar();
-//        llGrammar.input("E->TE'");
-//        llGrammar.input("E'->+TE'|ε");
-//        llGrammar.input("T->FT'");
-//        llGrammar.input("T'->T|ε");
-//        llGrammar.input("F->PF'");
-//        llGrammar.input("F'->*F'|ε");
-//        llGrammar.input("P->(E)|a|b|d");
-//        llGrammar.setStartSymbol("E");
-//        System.out.println(llGrammar.Vt);
-//        System.out.println(llGrammar.Vn);
-//        NonRecursiveAnalyzer NonRecursiveAnalyzer = new NonRecursiveAnalyzer(llGrammar);
-//        for (String val : llGrammar.Vn) {
-//            System.out.printf("First Set of %s: ", val);
-//            System.out.println(NonRecursiveAnalyzer.First.get(val));
-//        }
-//        for (String val : llGrammar.Vn) {
-//            System.out.printf("Follow Set of %s: ", val);
-//            System.out.println(NonRecursiveAnalyzer.Follow.get(val));
-//        }
-    }
-
 }
