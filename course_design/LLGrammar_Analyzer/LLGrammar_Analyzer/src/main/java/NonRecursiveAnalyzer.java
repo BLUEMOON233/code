@@ -27,7 +27,6 @@ public class NonRecursiveAnalyzer {
             return new HashSet<>(First.get(nonTerminal));
         }
         HashSet<String> ret = new HashSet<String>();
-//        boolean repeat = false;
         ArrayList<ArrayList<String>> waitExpressions = new ArrayList<ArrayList<String>>();
         for (ArrayList<String> right : llGrammar.getValue(nonTerminal)) {
             for (int i = 0; i <= right.size() - 1; i++) {
