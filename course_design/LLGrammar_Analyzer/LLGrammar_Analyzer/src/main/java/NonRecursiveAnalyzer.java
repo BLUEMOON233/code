@@ -27,11 +27,17 @@ public class NonRecursiveAnalyzer {
             return new HashSet<>(First.get(nonTerminal));
         }
         HashSet<String> ret = new HashSet<String>();
+//        boolean repeat = false;
+        ArrayList<ArrayList<String>> waitExpressions = new ArrayList<ArrayList<String>>();
         for (ArrayList<String> right : llGrammar.getValue(nonTerminal)) {
             for (int i = 0; i <= right.size() - 1; i++) {
                 String val = right.get(i);
                 if (llGrammar.Vt.contains(val)) {
                     ret.add(val);
+                    break;
+                }
+                if (val.equals(nonTerminal) && First.get(nonTerminal) == null) {
+                    waitExpressions.add(right);
                     break;
                 }
                 HashSet<String> res = getFirstSet(val);
@@ -42,6 +48,23 @@ public class NonRecursiveAnalyzer {
             }
         }
         First.put(nonTerminal, ret);
+        if (ret.contains("ε")) {
+            for (ArrayList<String> right : waitExpressions) {
+                for (int i = 0; i <= right.size() - 1; i++) {
+                    String val = right.get(i);
+                    if (llGrammar.Vt.contains(val)) {
+                        ret.add(val);
+                        break;
+                    }
+                    if (val.equals(nonTerminal)) {
+                        continue;
+                    }
+                    HashSet<String> res = getFirstSet(val);
+                    ret.addAll(res);
+                    if (!res.contains("ε")) break;
+                }
+            }
+        }
         return new HashSet<>(ret);
     }
 
@@ -89,7 +112,15 @@ public class NonRecursiveAnalyzer {
         HashMap<String, HashMap<String, Expression>> analyzeTable = new HashMap<>();
         for (String A : nonTerminal) {
             HashMap<String, Expression> mapTer2Exp = new HashMap<>();
-            for (ArrayList<String> right : llGrammar.getValue(A)) {
+            ArrayList<ArrayList<String>> rights = llGrammar.getValue(A);
+            for (int i = 0; i <= rights.size() - 1; i++)
+                for (int j = i + 1; j <= rights.size() - 1; j++) {
+                    ArrayList<String> S1 = new ArrayList<>(rights.get(i));
+                    ArrayList<String> S2 = new ArrayList<>(rights.get(j));
+                    S1.retainAll(S2);
+                    if (!S1.isEmpty()) return null;
+                }
+            for (ArrayList<String> right : rights) {
                 Expression expression = new Expression(A, right);
                 String a = right.get(0);
                 HashSet<String> terminals = new HashSet<>();
