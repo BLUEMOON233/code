@@ -1,0 +1,6 @@
+\,a,(,),*,+,$
+E',null,null,E'->ε,null,E'->+TE',E'->ε
+T',null,null,T'->ε,T'->*FT',T'->ε,T'->ε
+T,T->FT',T->FT',null,null,null,null
+E,E->TE',E->TE',null,null,null,null
+F,F->a,F->(E),null,null,null,null
