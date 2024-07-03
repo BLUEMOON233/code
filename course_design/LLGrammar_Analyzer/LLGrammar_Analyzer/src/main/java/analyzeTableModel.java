@@ -26,13 +26,17 @@ public class analyzeTableModel extends AbstractTableModel {
             for (int j = 0; j <= headers.length - 1; j++) {
                 if (mapTer2Exp.containsKey(headers[j])) {
                     Expression expression = mapTer2Exp.get(headers[j]);
-                    table[i][j + 1] = expression.toString();
+                    System.out.printf("%s %s\n", A, expression);
+                    if (table[i][j + 1] == null) table[i][j + 1] = expression.toString();
+                    else table[i][j + 1] += "\n" + expression.toString();
                 }
             }
             table[i][0] = A;
             if (mapTer2Exp.containsKey("$")) {
                 Expression expression = mapTer2Exp.get("$");
-                table[i][headers.length + 1] = expression.toString();
+                System.out.printf("%s %s\n", A, expression);
+                if(table[i][headers.length + 1] == null) table[i][headers.length + 1] = expression.toString();
+                else table[i][headers.length + 1] += "\n" + expression.toString();
             }
         }
     }

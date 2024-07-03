@@ -87,7 +87,6 @@ public class NonRecursiveAnalyzer {
     HashMap<String, HashMap<String, Expression>> getAnalyzeTable() {
         String[] nonTerminal = llGrammar.Vn.toArray(new String[0]);
         HashMap<String, HashMap<String, Expression>> analyzeTable = new HashMap<>();
-
         for (String A : nonTerminal) {
             HashMap<String, Expression> mapTer2Exp = new HashMap<>();
             for (ArrayList<String> right : llGrammar.getValue(A)) {
@@ -104,6 +103,7 @@ public class NonRecursiveAnalyzer {
                     terminals.addAll(Follow.get(A));
                 }
                 for (String val : terminals) {
+                    if (mapTer2Exp.containsKey(val)) return null;
                     mapTer2Exp.put(val, expression);
                 }
             }

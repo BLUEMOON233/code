@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -156,6 +155,10 @@ public class AnalyzerGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "First集或Follow集为空", "分析失败", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        if(nonRecursiveAnalyzer.getAnalyzeTable() == null) {
+            JOptionPane.showMessageDialog(null, "该文法不是LL(1)文法，分析失败", "分析失败", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         analyzeTableModel tableModel = new analyzeTableModel(nonRecursiveAnalyzer);
         TB_analyze.setModel(tableModel);
     }
@@ -167,6 +170,10 @@ public class AnalyzerGUI extends JFrame {
         }
         if (nonRecursiveAnalyzer.First.isEmpty() || nonRecursiveAnalyzer.First.isEmpty()) {
             JOptionPane.showMessageDialog(null, "First集或Follow集为空", "分析失败", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(nonRecursiveAnalyzer.getAnalyzeTable() == null) {
+            JOptionPane.showMessageDialog(null, "该文法不是LL(1)文法，分析失败", "分析失败", JOptionPane.WARNING_MESSAGE);
             return;
         }
         analyzeTableModel tableModel = nonRecursiveAnalyzer.Analyze(TF_inputString.getText(), nonRecursiveAnalyzer.getAnalyzeTable());

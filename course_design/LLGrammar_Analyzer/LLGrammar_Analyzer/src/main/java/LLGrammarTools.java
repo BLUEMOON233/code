@@ -131,7 +131,6 @@ public class LLGrammarTools {
         if (flag == null && !checkDirectLeftRecursion(llGrammar)) return false;
         delDirectLeftRecursion(llGrammar);
         flag = checkIndirectLeftRecursion(llGrammar);
-//        System.out.println(flag);
         while (flag != null) {
             for (String nonTerminal : llGrammar.Vn) {
                 if (nonTerminal.equals(flag)) continue;
