@@ -33,6 +33,7 @@ public class LLGrammarTools {
         for (String nonTerminal : llGrammar.Vn) {
             HashSet<String> set = new HashSet<>();
             for (ArrayList<String> right : llGrammar.expressions.get(nonTerminal)) {
+                System.out.println(nonTerminal +": " + right.toString());
                 if (set.contains(right.get(0))) {
                     return true;
                 }
@@ -83,6 +84,7 @@ public class LLGrammarTools {
                             ArrayList<String> newRight = new ArrayList<>();
                             for (int j = leftFactor.size(); j < right.size(); j++)
                                 newRight.add(right.get(j));
+                            if(newRight.isEmpty()) newRight.add("ε");
                             llGrammar.expressions.get(newNonTerminal).add(newRight);
                             iterator.remove();
                         }
@@ -98,7 +100,7 @@ public class LLGrammarTools {
         return true;
     }
 
-    private static boolean checkDirectLeftRecursion(LLGrammar llGrammar) {
+    public static boolean checkDirectLeftRecursion(LLGrammar llGrammar) {
         for (String nonTerminal : llGrammar.Vn) {
             for (ArrayList<String> right : llGrammar.expressions.get(nonTerminal)) {
                 if (right.get(0).equals(nonTerminal)) {
@@ -109,7 +111,7 @@ public class LLGrammarTools {
         return false;
     }
 
-    private static String checkIndirectLeftRecursion(LLGrammar llGrammar) {
+    public static String checkIndirectLeftRecursion(LLGrammar llGrammar) {
         HashSet<String> set = new HashSet<>();
         return (dfs(set, llGrammar.startSymbol, llGrammar));
     }

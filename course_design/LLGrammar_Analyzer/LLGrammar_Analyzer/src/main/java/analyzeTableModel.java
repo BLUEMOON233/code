@@ -1,4 +1,8 @@
 import javax.swing.table.AbstractTableModel;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class analyzeTableModel extends AbstractTableModel {
@@ -26,7 +30,6 @@ public class analyzeTableModel extends AbstractTableModel {
             for (int j = 0; j <= headers.length - 1; j++) {
                 if (mapTer2Exp.containsKey(headers[j])) {
                     Expression expression = mapTer2Exp.get(headers[j]);
-                    System.out.printf("%s %s\n", A, expression);
                     if (table[i][j + 1] == null) table[i][j + 1] = expression.toString();
                     else table[i][j + 1] += "\n" + expression.toString();
                 }
@@ -34,8 +37,7 @@ public class analyzeTableModel extends AbstractTableModel {
             table[i][0] = A;
             if (mapTer2Exp.containsKey("$")) {
                 Expression expression = mapTer2Exp.get("$");
-                System.out.printf("%s %s\n", A, expression);
-                if(table[i][headers.length + 1] == null) table[i][headers.length + 1] = expression.toString();
+                if (table[i][headers.length + 1] == null) table[i][headers.length + 1] = expression.toString();
                 else table[i][headers.length + 1] += "\n" + expression.toString();
             }
         }
@@ -48,6 +50,30 @@ public class analyzeTableModel extends AbstractTableModel {
             table[i][0] = logStack.get(i);
             table[i][1] = logInput.get(i);
             table[i][2] = logAction.get(i);
+        }
+    }
+
+    void write() {
+        try (FileOutputStream fos = new FileOutputStream("./analyzeTable.txt")) {
+            StringBuilder sb = new StringBuilder();
+            for (String name : columnNames) {
+                sb.append(name).append(",");
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            sb.append("\n");
+            fos.write(sb.toString().getBytes());
+
+            for (String[] row : table) {
+                sb.setLength(0);
+                for (String cell : row) {
+                    sb.append(cell).append(",");
+                }
+                sb.deleteCharAt(sb.length() - 1);
+                sb.append("\n");
+                fos.write(sb.toString().getBytes());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

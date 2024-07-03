@@ -155,12 +155,13 @@ public class AnalyzerGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "First集或Follow集为空", "分析失败", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(nonRecursiveAnalyzer.getAnalyzeTable() == null) {
+        if (nonRecursiveAnalyzer.getAnalyzeTable() == null) {
             JOptionPane.showMessageDialog(null, "该文法不是LL(1)文法，分析失败", "分析失败", JOptionPane.WARNING_MESSAGE);
             return;
         }
         analyzeTableModel tableModel = new analyzeTableModel(nonRecursiveAnalyzer);
         TB_analyze.setModel(tableModel);
+        tableModel.write();
     }
 
     private void BT_analyze(ActionEvent e) {
@@ -172,7 +173,7 @@ public class AnalyzerGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "First集或Follow集为空", "分析失败", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(nonRecursiveAnalyzer.getAnalyzeTable() == null) {
+        if (nonRecursiveAnalyzer.getAnalyzeTable() == null) {
             JOptionPane.showMessageDialog(null, "该文法不是LL(1)文法，分析失败", "分析失败", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -186,6 +187,10 @@ public class AnalyzerGUI extends JFrame {
     private void BT_firstAndFollow(ActionEvent e) {
         if (llGrammar == null || llGrammar.startSymbol == null) {
             JOptionPane.showMessageDialog(null, "文法未分配开始符号, 无法求出Follow集", "错误", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (!LLGrammarTools.checkDirectLeftRecursion(llGrammar) && LLGrammarTools.checkIndirectLeftRecursion(llGrammar) != null) {
+            JOptionPane.showMessageDialog(null, "文法含有间接左递归", "错误", JOptionPane.WARNING_MESSAGE);
             return;
         }
         TA_first.setText("");
