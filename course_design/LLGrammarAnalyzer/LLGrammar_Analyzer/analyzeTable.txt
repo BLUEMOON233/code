@@ -1,6 +1,7 @@
-\,a,(,),*,+,$
-E',null,null,E'->ε,null,E'->+TE',E'->ε
-T',null,null,T'->ε,T'->*FT',T'->ε,T'->ε
-T,T->FT',T->FT',null,null,null,null
-E,E->TE',E->TE',null,null,null,null
-F,F->a,F->(E),null,null,null,null
+\,a,b,c,$
+A,A->aD,null,null,null
+B,null,B->bE,null,null
+C,null,null,C->cF,null
+D,null,D->B,D->C,null
+E,null,null,E->C,E->ε
+F,null,F->B,null,F->ε

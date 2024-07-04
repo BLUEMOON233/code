@@ -1,2 +1,3 @@
-S->Aa|b
-A->Sd|ε
+A->Ba|a
+B->Cb|b
+C->Ac|c

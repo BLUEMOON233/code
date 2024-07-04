@@ -33,7 +33,7 @@ public class LLGrammarTools {
         for (String nonTerminal : llGrammar.Vn) {
             HashSet<String> set = new HashSet<>();
             for (ArrayList<String> right : llGrammar.expressions.get(nonTerminal)) {
-                System.out.println(nonTerminal +": " + right.toString());
+//                System.out.println(nonTerminal +": " + right.toString());
                 if (set.contains(right.get(0))) {
                     return true;
                 }
